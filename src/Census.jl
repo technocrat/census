@@ -13,7 +13,6 @@ const _SETUP_COMPLETE = Ref(false)
 
 # Functions
 
-# set up routine
 function setup_r_environment()
     if _SETUP_COMPLETE[]
         return nothing
@@ -21,12 +20,12 @@ function setup_r_environment()
 
     R"""
     # Set the correct ARM64 path for R explicitly
-    .libPaths(c('/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library'))
+    .libPaths(c("/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library"))
     required_packages <- c("ggplot2", "tidyr", "dplyr", "tidycensus", "tigris")
 
     # R function to install missing packages
     install_if_missing <- function(pkg) {
-        if (!require(pkg, character.only = TRUE)){
+        if (!require(pkg, character.only = TRUE)) {
             install.packages(pkg, repos = "https://cran.rstudio.com/")
         }
     }
@@ -39,13 +38,12 @@ function setup_r_environment()
     print(data.frame(
         Package = required_packages,
         Installed = installed
-    ))
-    """
+))
+"""
 
     _SETUP_COMPLETE[] = true
     return nothing
 end
-
 # Run setup during module initialization
 function __init__()
     setup_r_environment()
