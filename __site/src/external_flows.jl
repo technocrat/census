@@ -4,12 +4,12 @@ using Colors
 using Compose
 using Graphs
 using GraphPlot
-using PretyTables
+using PrettyTables
 
-include("src/cons.jl")
+include("cons.jl")
 postals = STATES
 ne_states = ["Connecticut", "Maine", "Massachusetts", "New Hampshire", "Rhode Island", "Vermont"]
-df = CSV.read("data/la_migra_filtered.csv",DataFrame)
+df = CSV.read("../data/la_migra_filtered.csv",DataFrame)
 push!(postals,"PR")
 df.stusps = postals
 # First, select all columns except the ones to omit

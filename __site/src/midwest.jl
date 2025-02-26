@@ -7,19 +7,19 @@
 #include("func.jl")
 
 geo_query = """
-    SELECT ne.geoid, ne.stusps, ne.name, ST_AsText(ne.geom) as json_geom, vd.value as total_population
-    FROM census.counties ne
+    SELECT us.geoid, us.stusps, us.name, ST_AsText(us.geom) as json_geom, vd.value as total_population
+    FROM census.counties us
     LEFT JOIN census.variable_data vd
-        ON ne.geoid = vd.geoid
+        ON us.geoid = vd.geoid
         AND vd.variable_name = 'total_population'
-    WHERE ne.stusps IN ('OH', 'MI', 'IN', 'IL', 'WI')
 """
-
+target = "'OH', 'MI', 'IN', 'IL', 'WI'"
 gdp_query = """
     SELECT gdp.county, gdp.state, gdp.gdp
     FROM gdp
     WHERE gdp .state IN ('Ohio','Michigan','Indiana','Illinois', 'Wisconsin')
 """
+
 
 mw_pop                = DataFrame(q(geo_query))
 rename!(mw_pop, [:geoid, :stusps, :county, :geom, :pop])

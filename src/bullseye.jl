@@ -26,6 +26,8 @@ Capital        = "Atlanta"
 Capital_Coords = "33° 44′ 56″ N, 84° 23′ 24″ W"
 Capital        = "Charlotte"
 Capital_Coords = "35° 13′ 38″ N, 80° 50′ 35″ W"
+Capital        = "Nashville"
+Capital_Coords = "36° 09′ 44″ N, 86° 46′ 28″ W"
 
 
 include("dms_to_decimal.jl")
@@ -36,8 +38,8 @@ pal = ("'Red', 'Green', 'Yellow', 'Blue', 'Purple'",
     "'#FF5733', '#C70039', '#900C3F', '#581845', '#FFC300'")
 centerpoint = dms_to_decimal("$Capital_Coords")
 from = Capital
-file_path = "$Capital.html"
-bands = "50, 100, 200"
+file_path = "../_assets/$Capital.html"
+bands = "50, 100, 200, 400"
 band_colors = pal[4]
 bullseye = """
 <!DOCTYPE html>
