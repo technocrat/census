@@ -49,4 +49,3 @@ function query_state_ages(st::String)
     close(conn)
     return(DataFrame(result))
 end
-println("query_state.ages.jl loaded")

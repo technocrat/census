@@ -27,6 +27,7 @@ us.nation .= ifelse.(in.(us.stusps, Ref(pacific)), "pacific", us.nation)
 sonora     = ["CA","AZ","NM","NV","HI"]
 us.nation .= ifelse.(in.(us.stusps, Ref(sonora)), "sonora", us.nation)
 
+nations = ["concord","metropolis","factoria","lonestar","dixie","cumber","heartland", "desert","pacific","sonora"]
 """
     update_census_counties_schema_and_write_data(df::DataFrame, variable_name::String, conn)
     

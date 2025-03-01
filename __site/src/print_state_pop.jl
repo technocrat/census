@@ -15,14 +15,8 @@ and displays the result as an HTML table with state codes left-aligned and popul
 ```julia
 print_state_pop(["CA", "NY", "TX", "FL"])
 """
-function print_state_pop(nation::Vector{String})
-	pretty_table(
-		format_with_commas(
-			sort!(
-				filter(:stusps => x -> x ∈ nation,state_pop),
-				:pop, 
-				rev = true)
-			), 
+function output_nation_state_pop(tab::DataFrame)
+	pretty_table(t, 
 		backend = Val(:html), 
 		alignment = [:l,:r], 
 		show_subheader = false, 

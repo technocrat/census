@@ -95,14 +95,14 @@ filter(row -> row.pop > sum(ne.pop), us_pop)
 
 gdp_query = """
     SELECT gdp.county, gdp.state, gdp.gdp
-    FROM gdp
+    FROM gdp"""
     WHERE gdp         .state NOT IN ('Massachusetts','Connecticut','New Hampshire','Rhode Island','Vermont', 'Maine')
 """
 
 us_gdp = DataFrame(q(gdp_query))
 us_gdp.gdp = Float64.(us_gdp.gdp)
 us_gdp = us_gdp[in.(us_gdp.state, Ref(States)),:]
-us_gdp = combine(groupby(us_gdp, :state), :gdp => sum => :gdp)
+us_gdp = combine(groupby(us_gdp, :nation), :gdp => sum => :gdp)
 us_gdp = dropmissing(us_gdp, :gdp)
 #deleteat!(us_pop,20)
 sort!(us_gdp,:gdp)

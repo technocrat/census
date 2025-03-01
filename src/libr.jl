@@ -4,6 +4,7 @@ using CSV
 using CairoMakie
 using DataFrames
 using Dates
+using Decimals
 using Format
 using GeoInterface
 using GeoJSON

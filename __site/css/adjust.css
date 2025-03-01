@@ -150,3 +150,31 @@ span.newthought {
     padding: 5px;
   }
 }
+
+/* Table styling */
+.franklin-content table.tufte-table,
+table.tufte-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 1.5em 0;
+}
+
+.franklin-content table.tufte-table th,
+.franklin-content table.tufte-table td,
+table.tufte-table th,
+table.tufte-table td {
+  font-size: 16px !important; 
+  font-size: 1rem !important;
+  font-size: 100% !important;
+  font-size: medium !important;
+  padding: 0.5em 0.8em;
+  border: none !important;
+  vertical-align: top;
+}
+
+/* Maintain your hover effect */
+.franklin-content table.tufte-table tbody tr:hover,
+table.tufte-table tbody tr:hover {
+  background-color: rgba(17, 17, 17, 0.05);
+}

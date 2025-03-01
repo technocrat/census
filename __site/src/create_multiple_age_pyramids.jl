@@ -1,8 +1,8 @@
 """
 # Usage example:
 state_dfs = Dict(
-    state => state_query(state) 
-    for state in ["MA", "CT", "RI", "VT", "NH", "ME"]
+    state => query_state_ages(state) 
+    for state in nation
 )
 """
 function create_multiple_age_pyramids(state_dfs::Dict{String, DataFrame})

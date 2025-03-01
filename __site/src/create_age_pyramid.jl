@@ -52,13 +52,13 @@ display(pyramid)
 See also: [`Plots.plot`](@ref), [`savefig`](@ref)
 """
 
-function create_age_pyramid(df::DataFrame,title::String)
+function create_age_pyramid(df::DataFrame, title::String="Population")
     fig = Figure(size=(800, 600))
     ax = Axis(fig[1, 1])
     
     y_positions = 1:nrow(df)
-    males = df.mpct .* -1
-    females = df.fpct
+    males = df.male_percent        # Using correct column name
+    females = df.female_percent    # Using correct column name
     
     barplot!(ax, y_positions, males, 
         direction=:x, 
@@ -82,9 +82,8 @@ function create_age_pyramid(df::DataFrame,title::String)
     # Add legend
     axislegend(ax, position=:rt)
     
-    # Reverse y-axis true to have youngest at bottom
+    # Reverse y-axis to have youngest at bottom
     ax.yreversed = false
     
     return fig
 end
-
