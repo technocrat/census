@@ -24,38 +24,9 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 @@
 
 ~~~
-<table class="tufte-table">
-	<thead>
-		<tr class = "header headerLastRow">
-			<th style = "text-align: left;">State</th>
-			<th style = "text-align: right;">Population</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td style = "background: gray; color: white; text-align: left;">Texas</td>
-			<td style = "background: gray; color: white; text-align: right;">29,640,343</td>
-		</tr>
-		<tr>
-			<td style = "text-align: left;">Louisiana</td>
-			<td style = "text-align: right;">4,621,025</td>
-		</tr>
-		<tr>
-			<td style = "background: gray; color: white; text-align: left;">Oklahoma</td>
-			<td style = "background: gray; color: white; text-align: right;">3,995,260</td>
-		</tr>
-		<tr>
-			<td style = "text-align: left;">Arkansas</td>
-			<td style = "text-align: right;">3,032,651</td>
-		</tr>
-		<tr>
-			<td style = "font-weight: bold; text-align: left;">Total</td>
-			<td style = "font-weight: bold; text-align: right;">41,289,279</td>
-		</tr>
-	</tbody>
-</table>
-
+{{insert /partials/Lonestar_population_table.html}}	
 ~~~
+
 ## Population
 
 As a single state, it would be the largest, passing California by small margin. Texas is already the second largest state, while its other states lie between Mississippi and Oregon in population size.
@@ -65,6 +36,13 @@ As a single state, it would be the largest, passing California by small margin. 
 Its closest global peer nation in terms of population is Canada.
 
 ### Age Structure
+
+~~~
+{{insert /partials/Lonestar_dependency_table.html}}	
+~~~
+
+A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
+
 ### Fertility
 ### Growth
 ## Economy

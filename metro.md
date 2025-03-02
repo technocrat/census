@@ -24,44 +24,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 @@
 
 ~~~
-<table class="tufte-table">
-	<thead>
-		<tr class = "header headerLastRow">
-			<th style = "text-align: left;">State</th>
-			<th style = "text-align: right;">Population</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td style = "background: gray; color: white; text-align: left;">New York</td>
-			<td style = "background: gray; color: white; text-align: right;">19,872,319</td>
-		</tr>
-		<tr>
-			<td style = "text-align: left;">New Jersey</td>
-			<td style = "text-align: right;">9,267,014</td>
-		</tr>
-		<tr>
-			<td style = "background: gray; color: white; text-align: left;">Virginia</td>
-			<td style = "background: gray; color: white; text-align: right;">8,657,499</td>
-		</tr>
-		<tr>
-			<td style = "text-align: left;">Maryland</td>
-			<td style = "text-align: right;">6,170,738</td>
-		</tr>
-		<tr>
-			<td style = "background: gray; color: white; text-align: left;">Delaware</td>
-			<td style = "background: gray; color: white; text-align: right;">1,005,872</td>
-		</tr>
-		<tr>
-			<td style = "text-align: left;">District of Columbia</td>
-			<td style = "text-align: right;">672,079</td>
-		</tr>
-		<tr>
-			<td style = "font-weight: bold; text-align: left;">Total</td>
-			<td style = "font-weight: bold; text-align: right;">45,645,521</td>
-		</tr>
-	</tbody>
-</table>
+{{insert /partials/Metropolis_population_table.html}}	
 ~~~
 
 Its population is concentrated along the Northeast Corridor from Boston to New York. 
@@ -70,6 +33,11 @@ Its population is concentrated along the Northeast Corridor from Boston to New Y
 Its closest global peer nation in terms of population is Argentina. Its population would be larger than Canada.
 
 ### Age Structure
+
+~~~
+{{insert /partials/Metropolis_dependency_table.html}}	
+~~~
+
 ### Fertility
 ### Growth
 ## Economy

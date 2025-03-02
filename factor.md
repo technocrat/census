@@ -22,45 +22,9 @@ All of Factoria lies within 425 miles of Chicago. It is bordered by Ontario, Can
 @@marginnote
 Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 @@
+
 ~~~
-<table class="tufte-table">
-	<thead>
-		<tr class = "header headerLastRow">
-			<th style = "text-align: left;">State</th>
-			<th style = "text-align: right;">Population</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td style = "background: gray; color: white; text-align: left;">Pennsylvania</td>
-			<td style = "background: gray; color: white; text-align: right;">12,986,518</td>
-		</tr>
-		<tr>
-			<td style = "text-align: left;">Illinois</td>
-			<td style = "text-align: right;">12,692,653</td>
-		</tr>
-		<tr>
-			<td style = "background: gray; color: white; text-align: left;">Ohio</td>
-			<td style = "background: gray; color: white; text-align: right;">11,780,046</td>
-		</tr>
-		<tr>
-			<td style = "text-align: left;">Michigan</td>
-			<td style = "text-align: right;">10,051,595</td>
-		</tr>
-		<tr>
-			<td style = "background: gray; color: white; text-align: left;">Indiana</td>
-			<td style = "background: gray; color: white; text-align: right;">6,811,752</td>
-		</tr>
-		<tr>
-			<td style = "text-align: left;">Wisconsin</td>
-			<td style = "text-align: right;">5,892,023</td>
-		</tr>
-		<tr>
-			<td style = "font-weight: bold; text-align: left;">Total</td>
-			<td style = "font-weight: bold; text-align: right;">60,214,587</td>
-		</tr>
-	</tbody>
-</table>
+{{insert /partials/Factoria_population_table.html}}	
 ~~~
 
 Its combined population would make it the largest state in the existing union. Pennsylvania, Illinois and Ohio are already the fifth, sixth, seventh and eighth largest states. 
@@ -71,6 +35,13 @@ Its closest global peer nation in terms of population is Italy.
 
 
 ### Age Structure
+
+~~~
+{{insert /partials/Factoria_dependency_table.html}}	
+~~~
+
+A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
+
 ### Fertility
 ### Growth
 ## Economy
