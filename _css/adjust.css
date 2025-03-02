@@ -151,7 +151,7 @@ span.newthought {
   }
 }
 
-/* Table styling */
+/* Table Styling */
 .franklin-content table.tufte-table,
 table.tufte-table {
   width: 100%;
@@ -164,17 +164,22 @@ table.tufte-table {
 .franklin-content table.tufte-table td,
 table.tufte-table th,
 table.tufte-table td {
-  font-size: 16px !important; 
-  font-size: 1rem !important;
-  font-size: 100% !important;
-  font-size: medium !important;
+  font-size: 16px !important; /* Fallback font size */
+  font-size: 1rem !important; /* Relative font size */
+  font-size: 100% !important; /* Percentage-based font size */
+  font-size: medium !important; /* Browser default medium size */
   padding: 0.5em 0.8em;
   border: none !important;
   vertical-align: top;
 }
 
-/* Maintain your hover effect */
-.franklin-content table.tufte-table tbody tr:hover,
-table.tufte-table tbody tr:hover {
-  background-color: rgba(17, 17, 17, 0.05);
+/* Bold Header Text */
+.franklin-content table.tufte-table th,
+table.tufte-table th {
+  font-weight: bold !important;
+}
+/* Styling for Odd Rows */
+table.tufte-table tr.odd-row,
+.franklin-content table.tufte-table tr.odd-row {
+  background-color: #d4ffcc !important; /* Light green background */
 }

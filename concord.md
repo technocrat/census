@@ -25,45 +25,9 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 @@
 
 ~~~
-<table class="tufte-table">
-		<thead>
-			<tr class = "header headerLastRow">
-				<th style = "text-align: left;">State</th>
-				<th style = "text-align: right;">Population</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td style = "background: gray; color: white; text-align: left;">Massachusetts</td>
-				<td style = "background: gray; color: white; text-align: right;">6,992,395</td>
-			</tr>
-			<tr>
-				<td style = "text-align: left;">Connecticut</td>
-				<td style = "text-align: right;">3,598,348</td>
-			</tr>
-			<tr>
-				<td style = "background: gray; color: white; text-align: left;">New Hampshire</td>
-				<td style = "background: gray; color: white; text-align: right;">1,387,834</td>
-			</tr>
-			<tr>
-				<td style = "text-align: left;">Maine</td>
-				<td style = "text-align: right;">1,377,400</td>
-			</tr>
-			<tr>
-				<td style = "background: gray; color: white; text-align: left;">Rhode Island</td>
-				<td style = "background: gray; color: white; text-align: right;">1,095,371</td>
-			</tr>
-			<tr>
-				<td style = "text-align: left;">Vermont</td>
-				<td style = "text-align: right;">645,254</td>
-			</tr>
-			<tr>
-				<td style = "font-weight: bold; text-align: left;">Total</td>
-				<td style = "font-weight: bold; text-align: right;">15,096,602</td>
-			</tr>
-		</tbody>
-	</table>
+{{insert /partials/Concordia_population_table.html}}	
 ~~~
+
 
 Its population is concentrated along the Northeast Corridor from Boston to New York. Massachusetts has a population size similar to Indiana and Tennessee. Connecticut falls between Utah and Oklahoma. Maine and New Hampshire are both comparable to Hawaii. Rhode Island has the approximate population of Delaware and Montana. Vermont has a larger population than Wyoming and a smaller population than the District of Columbia.
 
@@ -82,7 +46,7 @@ Compared to the United States as a whole, Concordia has a younger population, al
 The age distribution differences are reflected in the dependency ratios for the  Concordia states.
 
 ~~~
-{{insert ../src/concord_dependency_table.html}}	
+{{insert /partials/Concordia_dependency_table.html}}	
 ~~~
 
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.

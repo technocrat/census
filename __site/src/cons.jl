@@ -15,21 +15,7 @@ metropolis = ["DE", "MD","NY","NJ","VA","DC"]
 pacific    = ["WA","OR","AK"]
 sonora     = ["CA","AZ","NM","NV","HI"]
 
-# Define named color constants
-const SALMON_PINK = "#fd7e7e"
-const COTTON_CANDY = "#f8c8dc"
-const SLATE_GREY = "#74909a"
-const SKY_BLUE = "#a0ced9"
-const SAGE_GREEN = "#b6d1ba"
-
-# Create a mapping of tiers to colors that's easy to modify
-const TIER_COLORS = Dict(
-    "Very Low" => SALMON_PINK,
-    "Low" => COTTON_CANDY,
-    "Medium" => SLATE_GREY,
-    "High" => SKY_BLUE,
-    "Very High" => SAGE_GREEN
-)
+nations    = [concord,cumber,desert,dixie,factoria,heartland,lonestar,metropolis,pacific,sonora]
 
 # Generate colorscale in the order of TIERS
 const COLORSCALE = [

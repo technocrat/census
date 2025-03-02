@@ -63,7 +63,7 @@
 </url>
 <url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/concord/index.html</loc>
-    <lastmod>2025-03-01</lastmod>
+    <lastmod>2025-03-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -87,12 +87,6 @@
 </url>
 <url>
     <loc>https://tlienart.github.io/FranklinTemplates.jl/src/table/</loc>
-    <lastmod>2025-03-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://tlienart.github.io/FranklinTemplates.jl/src/concorddependency/</loc>
     <lastmod>2025-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
