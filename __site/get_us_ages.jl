@@ -1,0 +1,10 @@
+function get_us_ages()
+	us_age = df = CSV.read("../data/us_age_table.csv",DataFrame)
+	us_age = us_age[:,[1,6,10]]
+	us_age = us_age[3:18,:]
+	rename!(us_age, [:age_group,:male,:female])
+	transform!(us_age, :age_group => ByRow(x -> lstrip(x)) => :age_group)
+	transform!(us_age, :male => ByRow(x -> parse(Int64, replace(x, "," => ""))) => :male)
+	transform!(us_age, :female => ByRow(x -> parse(Int64, replace(x, "," => ""))) => :female)
+	return us_age
+end

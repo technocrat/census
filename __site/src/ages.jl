@@ -1,17 +1,18 @@
-include("libr.jl")
-include("cons.jl")
-include("func.jl")
-include("dict.jl")
-include("highlighters.jl")
+include("setup.jl")
 
+dependency_dfs 	   = collect_state_ages(nations,state_names)
+state_age_dfs 	   = collect_state_age_dataframes(nations)
 
-v = collect_state_ages(nations)
-concord_ages 	= v[1]
-cumber_ages 	 	= v[2]
-desert_ages  	= v[3]
-factoria_ages 	= v[4]
-heartland_ages 	= v[5]
-lonestar_ages 	= v[6]
-metropolis_ages = v[7]
-pacific_ages 	= v[8]
-sonoma_ages 		= v[9]
+output_dependency_ratio_tables(dependency_dfs,Titles)
+
+base_df 		   = get_us_ages()
+base_df.male_pct   = base_df.male ./ sum(base_df.male) .* -1
+base_df.female_pct = base_df.female ./ sum(base_df.female) 
+top_dfs 		   = query_all_nation_ages(nations)
+
+output_dependency_ratio_tables(dependency_dfs,Titles)
+overlay_age_pyramids(base_df,top_df,Titles)
+create_nation_age_pyramids(state_age_dfs, nations, Titles)
+create_birth_table()
+collect_and_output_birth_tables(births, nations, state_names, Titles, "../_layout/partials/")
+births.TFR = births.Rate .* 30 ./ 1000

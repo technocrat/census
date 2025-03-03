@@ -34,9 +34,16 @@ Its closest global peer nation in terms of population is Argentina. Its populati
 
 ### Age Structure
 
+![Metropolis regional age pyramid](/img/Metropolis Age Pyramid.png)
+
+Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+
+![Metropolis state age pyramids](/img/Metropolis_states_age_pyramids.png)
+
 ~~~
 {{insert /partials/Metropolis_dependency_table.html}}	
 ~~~
+
 
 ### Fertility
 ### Growth

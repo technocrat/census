@@ -1,5 +1,5 @@
 # Function to output table with PrettyTables
-function output_nation_state_pop_table(tab::DataFrame,
+function output_nation_state_pop_tables(tab::DataFrame,
  output_file::String="../_layout/partials/$the_nation" * "_population_table" * ".html")
 	# Get the HTML output as a string
 	html_output = sprint() do io
@@ -9,8 +9,8 @@ function output_nation_state_pop_table(tab::DataFrame,
 			backend = Val(:html),
 			alignment = [:l, :r],
 			show_subheader = false,
-			header = ["State", "Dependency Ratio"],
-			maximum_columns_width = "50"        )
+			header = ["State", "Population"],
+			maximum_columns_width = "50")
 	end
 	
 	# Replace the opening table tag

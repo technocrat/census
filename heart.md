@@ -24,7 +24,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 
 
 ~~~
-{{insert /partials/Hearlandia_population_table.html}}	
+{{insert /partials/Heartlandia_population_table.html}}	
 ~~~
 
 Its largest state, Missouri, has a population between Wisconsin and Maryland, and its smallest state, North Dakota, has a size between Alaska and South Dakota. As a single state, it would rank just behind Florida, displacing New York from the fourth place.
@@ -35,12 +35,22 @@ Its closest global peer nation in terms of population is Malawi. It is slightly 
 
 ### Age Structure
 
-~~~
+![Heartlandia regional age pyramid](/img/Heartlandia Age Pyramid.png)
 
+
+Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+
+![Heartlandia state age pyramids](/img/Heartlandia_states_age_pyramids.png)
+
+The age distribution differences are reflected in the dependency ratios for the  Concordia states.
+
+~~~
 {{insert /partials/Heartlandia_dependency_table.html}}	
 ~~~
 
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
+
+
 ### Fertility
 ### Growth
 ## Economy

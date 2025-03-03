@@ -36,11 +36,20 @@ Its closest global peer nation in terms of population is Burundi.
 
 ### Age Structure
 
+![Deseret regional age pyramid](/img/Deseret Age Pyramid.png)
+
+Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+
+![Deseret state age pyramids](/img/Deseret_states_age_pyramids.png)
+
+The age distribution differences are reflected in the dependency ratios for the  Concordia states.
 ~~~
 {{insert /partials/Deseret_dependency_table.html}}	
 ~~~
 
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
+
+![Deseret regional age pyramid](/img/Deseret Age Pyramid.png)
 
 ### Fertility
 ### Growth

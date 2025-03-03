@@ -31,6 +31,8 @@ function format_with_commas(df::DataFrame)
       formatted_df[!, col] = map(formatted_df[!, col]) do x
         if ismissing(x)
           "missing"
+        elseif x <= 99  # Only format numbers > 99 with commas
+          string(x)
         else
           # Convert number to string, reverse it, split into chunks of 3
           str = reverse(string(x))

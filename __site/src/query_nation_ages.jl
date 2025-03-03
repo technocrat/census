@@ -1,4 +1,3 @@
-
 function query_nation_ages(nation::Vector{String})
     # Join the states array into a SQL-friendly string format
     states_str = join(["'$state'" for state in nation], ", ")

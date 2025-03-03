@@ -22,7 +22,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 @@
 
 ~~~
-{{insert /partials/NewDixie_population_table.html}}	
+{{insert /partials/New_Dixie_population_table.html}}	
 ~~~
 
 
@@ -35,10 +35,19 @@ Its closest global peer nation in terms of population is Kenya, and it is nearly
 ### Age Structure
 
 ~~~
-{{insert /partials/NewDixie_dependency_table.html}}	
+{{insert /partials/New_Dixie_dependency_table.html}}	
 ~~~
 
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
+
+![New Dixie regional age pyramid](/img/New Dixie Age Pyramid.png)
+
+Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+
+![New Dixie state age pyramids](/img/New Dixie_states_age_pyramids.png)
+
+The age distribution differences are reflected in the dependency ratios for the  Concordia states.
+
 
 ### Fertility
 ### Growth

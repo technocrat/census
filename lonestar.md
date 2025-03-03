@@ -24,7 +24,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 @@
 
 ~~~
-{{insert /partials/Lonestar_population_table.html}}	
+{{insert /partials/The_Lonestar_population_table.html}}	
 ~~~
 
 ## Population
@@ -38,10 +38,16 @@ Its closest global peer nation in terms of population is Canada.
 ### Age Structure
 
 ~~~
-{{insert /partials/Lonestar_dependency_table.html}}	
+{{insert /partials/The_Lonestar_dependency_table.html}}	
 ~~~
 
+![The Lone Star Republic regional age pyramid](/img/The Lonestar Republic Age Pyramid.png)
+
+![The Long Star Republic state age pyramids](/img/The Lonestar Republic_states_age_pyramids.png)
+
+
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
+
 
 ### Fertility
 ### Growth

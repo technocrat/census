@@ -1,5 +1,5 @@
 # Function to output table with PrettyTables
-function output_nation_state_pop_table(tab::DataFrame,
+function output_nation_state_pop_tables(tab::DataFrame,
  output_file::String="../_layout/partials/$the_nation" * "_population_table" * ".html")
 	# Get the HTML output as a string
 	html_output = sprint() do io

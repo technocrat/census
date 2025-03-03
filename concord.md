@@ -37,7 +37,7 @@ Its closest global peer nation in terms of population is Guinea. It is roughly t
 
 ### Age Structure
 
-![Concordia regional age pyramid](/img/concordia_age.png)
+![Concordia regional age pyramid](/img/Concordia Age Pyramid.png)
 
 Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
 
@@ -46,15 +46,23 @@ Compared to the United States as a whole, Concordia has a younger population, al
 The age distribution differences are reflected in the dependency ratios for the  Concordia states.
 
 ~~~
-{{insert /partials/Concordia_dependency_table.html}}	
+{{insert /partials/Concordia_dependency_table.html}}	 
 ~~~
 
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
 
+@@marginnote Sources: [Hamilton BE, Martin JA, Osterman MJK. Births: provisional data for 2023. Vital Statistics Rapid Release; no 35. April 2024](https://www.cdc.gov/nchs/data/vsrr/vsrr035.pdf); Gokhale, Jagadeesh, [U.S. Demographic Projections: With and Without Immigration, 2024](https://budgetmodel.wharton.upenn.edu/issues/2024/3/22/us-demographic-projections-with-and-without-immigration)@@
+
+## Birth Rates
+
+~~~
+{{insert /partials/Concordia_births_table.html}}	 
+~~~
+
+The 2023 . The general fertility rate in the United States as a whole was 54.4 births per 1,000 females ages 15–44.
+
 ### Fertility
 The estimated total fertility rate per thousand women for the United State is approximately 1.62, which is less than the 2.1 rate to maintain population levels in the absence of migration.
-
-@@marginnote Sources: [Hamilton BE, Martin JA, Osterman MJK. Births: provisional data for 2023. Vital Statistics Rapid Release; no 35. April 2024](https://dx.doi.org/10.15620/%20cdc/151797); Gokhale, Jagadeesh, [U.S. Demographic Projections: With and Without Immigration, 2024](https://budgetmodel.wharton.upenn.edu/issues/2024/3/22/us-demographic-projections-with-and-without-immigration)@@
 
 Together with the District of Columbia and Oregon, the New England states have the lowest total fertility rates in the United States. Massachusetts and Connecticut have death rates below the national average, while the other New England states have rates that are higher.
 @@marginnote Sources: Sources: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics System, Mortality 2018-2023 on CDC WONDER Online Database, released in 2024. Data are from the [Multiple Cause of Death Files, 2018-2023](Multiple Cause of Death Files, 2018-2023, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program.), as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program.@@

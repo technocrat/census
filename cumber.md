@@ -34,6 +34,14 @@ Its closest global peer nation in terms of population is Burundi.
 
 ### Age Structure
 
+![Cumberland regional age pyramid](/img/Cumberland Age Pyramid.png)
+
+Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+
+![Cumberland state age pyramids](/img/Cumberland_states_age_pyramids.png)
+
+The age distribution differences are reflected in the dependency ratios for the  Concordia states.
+
 ~~~
 {{insert /partials/Cumberland_dependency_table.html}}	
 ~~~

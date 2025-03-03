@@ -35,6 +35,12 @@ Its closest global peer nation in terms of population is Guinea.
 
 ### Age Structure
 
+![Pacifica regional age pyramid](/img/Pacifica Age Pyramid.png)
+
+Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+
+![Pacifica state age pyramids](/img/Pacifica_states_age_pyramids.png)
+
 ~~~
 {{insert /partials/Pacifica_dependency_table.html}}	
 ~~~

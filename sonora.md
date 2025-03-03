@@ -17,14 +17,14 @@
 
 All of New Sonora lies within 200 miles of Los Angeles except for the eastern half of Arizona. It is bordered by Oregon, Nevada, Utah and Colorado on the north, by Oklahoma and Texas on the east and by Mexico on the south.
 
-## Population
-
 @@marginnote
 Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 @@
 
+## Population
+
 ~~~
-{{insert /partials/Sonora_population_table.html}}	
+{{insert /partials/New_Sonora_population_table.html}}	
 ~~~
 
 As a single state it would be the largest, just as its principal component, California, is already the largest. Arizona ranks between Massachusetts and Washington, while the remaining states all fall between New Hampshire and Iowa.
@@ -35,8 +35,14 @@ Its closest global peer nation in terms of population is Columbia, and it is sli
 
 ### Age Structure
 
+![New Sonora regional age pyramid](/img/New Sonora Age Pyramid.png)
+
+Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+
+![New Sonora state age pyramids](/img/New Sonora_states_age_pyramids.png)
+
 ~~~
-{{insert /partials/Sonora_dependency_table.html}}	
+{{insert /partials/New_Sonora_dependency_table.html}}	
 ~~~
 
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.

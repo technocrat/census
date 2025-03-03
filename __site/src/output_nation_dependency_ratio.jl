@@ -1,4 +1,4 @@
-function output_nation_dependency_ratio(tab::DataFrame, output_file::String="../_layout/partials/$the_nation" * "_dependency_table" * ".html")
+function output_nation_dependency_ratio_tables(tab::DataFrame, output_file::String="../_layout/partials/$the_nation" * "_dependency_table" * ".html")
     # Get the HTML output as a string
     html_output = sprint() do io
         pretty_table(
