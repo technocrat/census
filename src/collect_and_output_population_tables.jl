@@ -18,10 +18,20 @@ function collect_and_output_population_tables(pop_df::DataFrame,
         nation_table = DataFrame(
             state_name = [state_names[code] for code in nation_data.stusps],
             population = nation_data.pop
-        )
+            )
         
-        # Sort by state name for consistency
+        # Sort by state name for consistency (BEFORE adding the total)
         sort!(nation_table, :state_name)
+        
+        # Add total line AFTER sorting
+        total_line = DataFrame(
+          state_name = "Total", 
+          population = sum(nation_data.pop)
+          )
+        nation_table = vcat(nation_table, total_line)
+        
+        # Format numbers with commas
+        formatted_table = format_with_commas(nation_table)
         
         # Create the output file path
         output_file = joinpath(base_path, "$(nation_title)_population_table.html")
@@ -30,12 +40,13 @@ function collect_and_output_population_tables(pop_df::DataFrame,
         html_output = sprint() do io
             pretty_table(
                 io,
-                nation_table,
+                formatted_table,
                 backend = Val(:html),
                 alignment = [:l, :r],
                 show_subheader = false,
                 header = ["State", "Population"],
-                maximum_columns_width = "50"
+                maximum_columns_width = "50",
+                highlighters = (hl_last_row_bold,)
             )
         end
         

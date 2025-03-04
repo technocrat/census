@@ -21,7 +21,8 @@ function collect_and_output_birth_tables(births::DataFrame,
         nation_table = DataFrame(
             state  = nation_data.State,
             births = nation_data.Births,
-            rate   = nation_data.Rate
+            rate   = round.(nation_data.Rate,digits = 2),
+            TFR    = round.(nation_data.Rate .* 30 ./ 1000, digits = 2)
         )
         
         # Sort by state name for consistency
@@ -39,9 +40,9 @@ function collect_and_output_birth_tables(births::DataFrame,
                 io,
                 nation_table,
                 backend = Val(:html),
-                alignment = [:l, :r, :r],
+                alignment = [:l, :r, :r, :r],
                 show_subheader = false,
-                header = ["State", "Births","Rate"],
+                header = ["State", "Births","Rate","TFR"],
                 maximum_columns_width = "50"
             )
         end

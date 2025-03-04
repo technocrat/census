@@ -15,4 +15,3 @@ overlay_age_pyramids(base_df,top_df,Titles)
 create_nation_age_pyramids(state_age_dfs, nations, Titles)
 create_birth_table()
 collect_and_output_birth_tables(births, nations, state_names, Titles, "../_layout/partials/")
-births.TFR = births.Rate .* 30 ./ 1000

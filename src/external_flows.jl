@@ -5,7 +5,13 @@ using Compose
 using Graphs
 using GraphPlot
 using PrettyTables
-
+# https://www.census.gov/data/tables/time-series/demo/geographic-mobility/state-to-state-migration.html
+# https://wonder.cdc.gov/controller/datarequest/D176
+# deaths
+#"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics"
+#"System, Mortality 2018-2023 on CDC WONDER Online Database, released in 2024. Data are from the Multiple Cause of Death Files,"
+#"2018-2023, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative"
+# "Program. Accessed at http://wonder.cdc.gov/ucd-icd10-expanded.html on Feb 11, 2025 8:30:16 AM"
 include("cons.jl")
 postals = STATES
 ne_states = ["Connecticut", "Maine", "Massachusetts", "New Hampshire", "Rhode Island", "Vermont"]

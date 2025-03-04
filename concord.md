@@ -59,20 +59,26 @@ A lower dependency ratio indicates a higher proportion of the population in the 
 {{insert /partials/Concordia_births_table.html}}	 
 ~~~
 
-The 2023 . The general fertility rate in the United States as a whole was 54.4 births per 1,000 females ages 15–44.
+The general fertility rate in the United States as a whole was 54.4 births per 1,000 females ages 15–44, and the estimated total fertility rate per thousand women for the United State is approximately 1.62, which is less than the 2.1 rate to maintain population levels in the absence of migration.
 
-### Fertility
-The estimated total fertility rate per thousand women for the United State is approximately 1.62, which is less than the 2.1 rate to maintain population levels in the absence of migration.
+Together with the District of Columbia and Oregon, the Concordia  states have the lowest total fertility rates in the United States. Massachusetts and Connecticut have death rates below the national average, while the other New England states have rates that are higher.
 
-Together with the District of Columbia and Oregon, the New England states have the lowest total fertility rates in the United States. Massachusetts and Connecticut have death rates below the national average, while the other New England states have rates that are higher.
 @@marginnote Sources: Sources: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics System, Mortality 2018-2023 on CDC WONDER Online Database, released in 2024. Data are from the [Multiple Cause of Death Files, 2018-2023](Multiple Cause of Death Files, 2018-2023, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program.), as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program.@@
 
-In the New England States
 
-total fertility table here
+### Growth
+
+@@marginnote
+Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023. Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics System, Mortality 2018-2023 on CDC WONDER Online Database, released in 2024. Data are from the Multiple Cause of Death Files, 2018-2023, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program. Accessed on Feb 11, 2025 8:30:16 AM at [CDC WONDER](http://wonder.cdc.gov/ucd-icd10-expanded.html). Deaths were estimated by applying the 2018-2023 crude rate of deaths per 100,000 population to the ACS 2023 population estimates.
+@@
+
+~~~
+{{insert /partials/Concordia_growth_table.html}}	 
+~~~
+
+When birthrates are below the 2.1 rate, immigration is needed to prevent population decline (and with it economic decline). Either domestic or international, or a combination, immigration is required to make up the numbers.
 
 @@marginnote Source: [Maine State of Domestic Trade Annual Report 2024](https://www.maine.gov/decd/sites/maine.gov.decd/files/inline-files/Final%20Report%20-%202024%20Annual%20Macro%20Update%20-%20Maine%20DECD.pdf)@@
-### Growth
 ## Economy
 
 	

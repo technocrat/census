@@ -31,17 +31,18 @@ function format_with_commas(df::DataFrame)
       formatted_df[!, col] = map(formatted_df[!, col]) do x
         if ismissing(x)
           "missing"
-        elseif x <= 99  # Only format numbers > 99 with commas
+        elseif abs(x) <= 99  # Only format numbers > 99 or < -99 with commas
           string(x)
         else
-          # Convert number to string, reverse it, split into chunks of 3
-          str = reverse(string(x))
-          chunks = [str[i:min(i+2, end)] for i in 1:3:length(str)]
-          # Join chunks with commas and reverse back
-          reverse(join(chunks, ","))
+          sign_str = x < 0 ? "-" : ""  # Extract sign for negative numbers
+          num_str = reverse(string(abs(x)))  # Convert number to string and reverse
+          chunks = [num_str[i:min(i+2, end)] for i in 1:3:length(num_str)]
+          formatted_num = reverse(join(chunks, ","))  # Add commas and reverse back
+          sign_str * formatted_num  # Prepend sign if negative
         end
       end
     end
   end
+  
   return formatted_df
 end
