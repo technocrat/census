@@ -69,6 +69,17 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023. Ce
 {{insert /partials/Heartlandia_growth_table.html}}	 
 ~~~
 
+### Education
+
+@@marginnote
+Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and_territories_by_educational_attainment)
+@@
+
+~~~
+{{insert /partials/Heartlandia_education_sentence.html}}	 
+~~~
+
+
 ## Economy
 6 │ heartland   1.38823e12
 Between Indonesia and Spain a g20 country

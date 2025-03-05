@@ -11,7 +11,7 @@ sonora     = ["CA","AZ","NM","NV","HI"]
 
 nations    = [concord,cumber,desert,dixie,factoria,heartland,lonestar,metropolis,pacific,sonora]
 
-Titles = ["Concordia","Cumberland","Deseret","New Dixie","Factoria","Heartlandia", "The Lonestar Republic", "Metropolis", "Pacifica", "New Sonora"]
+Titles = ["Concordia","Cumberland","Deseret","New Dixie","Factoria","Heartlandia", "The Lone Star Republic", "Metropolis", "Pacifica", "New Sonora"]
 
 postals = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"]
 # Generate colorscale in the order of TIERS

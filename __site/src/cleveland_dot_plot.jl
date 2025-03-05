@@ -28,32 +28,25 @@ p = cleveland_dot_plot(ne_pop, :total_population, :name,
 """
 function cleveland_dot_plot(df::DataFrame, 
                           value_col::Symbol, 
-                          label_col::Symbol;  
+                          label_col::Symbol,
                           xlabel::String="",
                           title::String="Cleveland Dot Plot")
-    
     # Drop any rows with missing values and sort
     df_clean  = dropmissing(df, [value_col, label_col])
     df_sorted = sort(df_clean, value_col, rev=true)
-    
     # Calculate 80% threshold using non-missing values
     value_threshold = sum(skipmissing(df_clean[:, value_col])) * 0.8
-    
     # Create positions array for curve fitting
     positions = 1:nrow(df_sorted)
     values    = collect(df_sorted[:, value_col])
-    
     # Fit polynomial curve
     poly_fit  = Polynomials.fit(positions, Float64.(values), 3)
-    
     # Create interpolated points for smoother curve
     x_smooth  = range(1, nrow(df_sorted), length=100)
     y_smooth  = poly_fit.(x_smooth)
-    
     # Fixed x-axis limits
     x_min = 0
     x_max = 1_600_000
-    
     p = Plots.plot(
         values,
         positions,
@@ -73,7 +66,6 @@ function cleveland_dot_plot(df::DataFrame,
         formatter  = :plain,
         xformatter = x -> string(round(Int, x/1000), "K")
     )
-    
     # Add the fitted curve
     Plots.plot!(y_smooth, x_smooth, 
         color     = :red, 
@@ -81,7 +73,6 @@ function cleveland_dot_plot(df::DataFrame,
         alpha     = 0.6,
         label     = "Trend"
     )
-    
     # Add vertical line at 80% threshold
     Plots.vline!([value_threshold], 
         color     = :green, 
@@ -89,7 +80,6 @@ function cleveland_dot_plot(df::DataFrame,
         linestyle = :dash,
         label     = "80% of Total"
     )
-    
     # Add reference lines connecting to y-axis
     for i in 1:nrow(df_sorted)
         Plots.plot!(
@@ -100,6 +90,5 @@ function cleveland_dot_plot(df::DataFrame,
             linewidth = 0.5
         )
     end
-    
     return p
 end

@@ -63,6 +63,17 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023. Ce
 {{insert /partials/Metropolis_growth_table.html}}	 
 ~~~
 
+### Education
+
+@@marginnote
+Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and_territories_by_educational_attainment)
+@@
+
+~~~
+{{insert /partials/Metropolis_education_sentence.html}}	 
+~~~
+
+
 ## Economy
 8 │ metropolis  3.55461e12
 Between UK and India would be 5th largest economy

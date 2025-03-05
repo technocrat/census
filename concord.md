@@ -78,6 +78,18 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023. Ce
 
 When birthrates are below the 2.1 rate, immigration is needed to prevent population decline (and with it economic decline). Either domestic or international, or a combination, immigration is required to make up the numbers.
 
+### Education
+
+
+@@marginnote
+Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and_territories_by_educational_attainment)
+@@
+
+~~~
+{{insert /partials/Concordia_education_sentence.html}}	 
+~~~
+
+
 @@marginnote Source: [Maine State of Domestic Trade Annual Report 2024](https://www.maine.gov/decd/sites/maine.gov.decd/files/inline-files/Final%20Report%20-%202024%20Annual%20Macro%20Update%20-%20Maine%20DECD.pdf)@@
 ## Economy
 

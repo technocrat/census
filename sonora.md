@@ -65,6 +65,18 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023. Ce
 {{insert /partials/New_Sonora_growth_table.html}}	 
 ~~~
 
+### Education
+
+@@marginnote
+Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and_territories_by_educational_attainment)
+@@
+
+~~~
+{{insert /partials/New_Sonora_education_sentence.html}}	 
+~~~
+
+
+
 ## Economy
 
 10 │ sonora      4.06972e12

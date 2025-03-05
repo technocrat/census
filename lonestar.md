@@ -24,7 +24,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 @@
 
 ~~~
-{{insert /partials/The_Lonestar_population_table.html}}	
+{{insert /partials/The_Lonestar_Republic_population_table.html}}	
 ~~~
 
 ## Population
@@ -38,7 +38,7 @@ Its closest global peer nation in terms of population is Canada.
 ### Age Structure
 
 ~~~
-{{insert /partials/The_Lonestar_dependency_table.html}}	
+{{insert /partials/The_Lonestar_Republic_dependency_table.html}}	
 ~~~
 
 ![The Lone Star Republic regional age pyramid](/img/The_Lonestar Republic Age Pyramid.png)
@@ -65,6 +65,17 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023. Ce
 ~~~
 {{insert /partials/The_Lonestar_Republic_growth_table.html}}	 
 ~~~
+
+### Education
+
+@@marginnote
+Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and_territories_by_educational_attainment)
+@@
+
+~~~
+{{insert /partials/The_Lone_Star_Republic_education_sentence.html}}	 
+~~~
+
 
 ## Economy
 7 │ lonestar    2.68478e12

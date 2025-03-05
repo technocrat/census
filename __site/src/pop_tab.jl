@@ -1,5 +1,3 @@
-include("setup.jl")
-
 collect_and_output_population_tables(get_state_pop(),nations,state_names,Titles)
 dependency_dfs 	   = collect_state_ages(nations,state_names)
 state_age_dfs 	   = collect_state_age_dataframes(nations)
@@ -17,6 +15,5 @@ overlay_age_pyramids(state_age_dfs, nations, Titles)
 births = create_birth_table()
 collect_and_output_birth_tables(births, nations, state_names, Titles, "../_layout/partials/")
 growth = make_growth_table()
-
-
-	
+include("educ.jl") # returns nations_stats
+report_education() # create sentence inserts

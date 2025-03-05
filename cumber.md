@@ -65,6 +65,15 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023. Ce
 ~~~
 {{insert /partials/Cumberland_growth_table.html}}	 
 ~~~
+### Educational Attainment
+
+@@marginnote
+Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and_territories_by_educational_attainment)
+@@
+
+~~~
+{{insert /partials/Cumberland_education_sentence.html}}	 
+~~~
 
 ## Economy
 
