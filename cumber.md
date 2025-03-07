@@ -30,7 +30,11 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 Tennessee has a population comparable to Massachusetts, and Kentucky has a population size between Louisiana and Oregon. to Indiana and Tennessee. West Virginia falls between Idaho and Oklahoma. A single state it would be the fifth largest behind New York and ahead of Pennsylvania.
 ![Cumberland at night](/img/cumber_at_night.png)
 
-Its closest global peer nation in terms of population is Burundi. 
+The following table shows the population of Cumberland in relation to the European Union member states.
+
+~~~
+{{insert /partials/Cumberland_eu_compare_table.html}}	 
+~~~
 
 ### Age Structure
 

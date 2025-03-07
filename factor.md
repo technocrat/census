@@ -31,7 +31,11 @@ Its combined population would make it the largest state in the existing union. P
 
 ![Factoria at night](/img/factoria_at_night.png)
 
-Its closest global peer nation in terms of population is Italy. 
+The following table shows the population of Factoria in relation to the European Union member states.
+
+~~~
+{{insert /partials/Factoria_eu_compare_table.html}}	 
+~~~
 
 
 ### Age Structure

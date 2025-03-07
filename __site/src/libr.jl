@@ -5,6 +5,7 @@ using CairoMakie
 using DataFrames
 using Dates
 using Decimals
+using DrWatson
 using Format
 using GeoInterface
 using GeoJSON

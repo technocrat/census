@@ -1,0 +1,2705 @@
+from,to,movers
+Alabama,Alabama, 
+Alaska,Alabama,780
+Arizona,Alabama,4470
+Arkansas,Alabama,1584
+California,Alabama,4921
+Colorado,Alabama,1601
+Connecticut,Alabama,283
+Delaware,Alabama,330
+District of Columbia ,Alabama,273
+Florida,Alabama,17515
+Georgia,Alabama,19270
+Hawaii,Alabama,775
+Idaho,Alabama,105
+Illinois,Alabama,3362
+Indiana,Alabama,1488
+Iowa,Alabama,151
+Kansas,Alabama,373
+Kentucky,Alabama,1806
+Louisiana,Alabama,2410
+Maine,Alabama,0
+Maryland,Alabama,457
+Massachusetts,Alabama,504
+Michigan,Alabama,1858
+Minnesota,Alabama,1224
+Mississippi,Alabama,8391
+Missouri,Alabama,1983
+Montana,Alabama,347
+Nebraska,Alabama,295
+Nevada,Alabama,1456
+New Hampshire,Alabama,152
+New Jersey,Alabama,548
+New Mexico,Alabama,600
+New York,Alabama,2701
+North Carolina,Alabama,3656
+North Dakota,Alabama,128
+Ohio,Alabama,1993
+Oklahoma,Alabama,481
+Oregon,Alabama,1416
+Pennsylvania,Alabama,1341
+Rhode Island,Alabama,213
+South Carolina,Alabama,1642
+South Dakota,Alabama,62
+Tennessee,Alabama,12640
+Texas,Alabama,7504
+Utah,Alabama,497
+Vermont,Alabama,0
+Virginia,Alabama,3171
+Washington,Alabama,1586
+West Virginia,Alabama,311
+Wisconsin,Alabama,718
+Wyoming,Alabama,49
+Puerto Rico,Alabama,415
+Alabama,Alaska,204
+Alaska,Alaska,
+Arizona,Alaska,618
+Arkansas,Alaska,159
+California,Alaska,4697
+Colorado,Alaska,1087
+Connecticut,Alaska,0
+Delaware,Alaska,258
+District of Columbia ,Alaska,220
+Florida,Alaska,1380
+Georgia,Alaska,411
+Hawaii,Alaska,1023
+Idaho,Alaska,803
+Illinois,Alaska,73
+Indiana,Alaska,486
+Iowa,Alaska,33
+Kansas,Alaska,1200
+Kentucky,Alaska,781
+Louisiana,Alaska,198
+Maine,Alaska,0
+Maryland,Alaska,201
+Massachusetts,Alaska,353
+Michigan,Alaska,152
+Minnesota,Alaska,611
+Mississippi,Alaska,174
+Missouri,Alaska,107
+Montana,Alaska,936
+Nebraska,Alaska,387
+Nevada,Alaska,98
+New Hampshire,Alaska,18
+New Jersey,Alaska,513
+New Mexico,Alaska,22
+New York,Alaska,1232
+North Carolina,Alaska,1410
+North Dakota,Alaska,156
+Ohio,Alaska,601
+Oklahoma,Alaska,275
+Oregon,Alaska,3187
+Pennsylvania,Alaska,213
+Rhode Island,Alaska,0
+South Carolina,Alaska,211
+South Dakota,Alaska,94
+Tennessee,Alaska,340
+Texas,Alaska,980
+Utah,Alaska,561
+Vermont,Alaska,45
+Virginia,Alaska,1331
+Washington,Alaska,2283
+West Virginia,Alaska,0
+Wisconsin,Alaska,34
+Wyoming,Alaska,520
+Puerto Rico,Alaska,192
+Alabama,Arizona,1373
+Alaska,Arizona,2017
+Arizona,Arizona,
+Arkansas,Arizona,1896
+California,Arizona,54222
+Colorado,Arizona,8344
+Connecticut,Arizona,1085
+Delaware,Arizona,514
+District of Columbia ,Arizona,74
+Florida,Arizona,12762
+Georgia,Arizona,6326
+Hawaii,Arizona,2226
+Idaho,Arizona,5132
+Illinois,Arizona,9030
+Indiana,Arizona,2974
+Iowa,Arizona,6805
+Kansas,Arizona,3383
+Kentucky,Arizona,1666
+Louisiana,Arizona,2514
+Maine,Arizona,350
+Maryland,Arizona,1972
+Massachusetts,Arizona,3316
+Michigan,Arizona,6740
+Minnesota,Arizona,5582
+Mississippi,Arizona,816
+Missouri,Arizona,7390
+Montana,Arizona,2261
+Nebraska,Arizona,2694
+Nevada,Arizona,6341
+New Hampshire,Arizona,612
+New Jersey,Arizona,2082
+New Mexico,Arizona,6397
+New York,Arizona,7627
+North Carolina,Arizona,3646
+North Dakota,Arizona,424
+Ohio,Arizona,3091
+Oklahoma,Arizona,2925
+Oregon,Arizona,10465
+Pennsylvania,Arizona,4780
+Rhode Island,Arizona,145
+South Carolina,Arizona,1186
+South Dakota,Arizona,1892
+Tennessee,Arizona,4498
+Texas,Arizona,16779
+Utah,Arizona,5766
+Vermont,Arizona,242
+Virginia,Arizona,4441
+Washington,Arizona,12844
+West Virginia,Arizona,40
+Wisconsin,Arizona,4015
+Wyoming,Arizona,2501
+Puerto Rico,Arizona,0
+Alabama,Arkansas,1056
+Alaska,Arkansas,17
+Arizona,Arkansas,1112
+Arkansas,Arkansas,
+California,Arkansas,6320
+Colorado,Arkansas,3878
+Connecticut,Arkansas,3
+Delaware,Arkansas,0
+District of Columbia ,Arkansas,49
+Florida,Arkansas,4555
+Georgia,Arkansas,2117
+Hawaii,Arkansas,319
+Idaho,Arkansas,170
+Illinois,Arkansas,1591
+Indiana,Arkansas,462
+Iowa,Arkansas,1077
+Kansas,Arkansas,2343
+Kentucky,Arkansas,137
+Louisiana,Arkansas,2321
+Maine,Arkansas,30
+Maryland,Arkansas,109
+Massachusetts,Arkansas,220
+Michigan,Arkansas,210
+Minnesota,Arkansas,1051
+Mississippi,Arkansas,1129
+Missouri,Arkansas,8714
+Montana,Arkansas,1334
+Nebraska,Arkansas,251
+Nevada,Arkansas,1183
+New Hampshire,Arkansas,0
+New Jersey,Arkansas,806
+New Mexico,Arkansas,396
+New York,Arkansas,452
+North Carolina,Arkansas,2433
+North Dakota,Arkansas,0
+Ohio,Arkansas,463
+Oklahoma,Arkansas,3904
+Oregon,Arkansas,122
+Pennsylvania,Arkansas,498
+Rhode Island,Arkansas,0
+South Carolina,Arkansas,288
+South Dakota,Arkansas,539
+Tennessee,Arkansas,2959
+Texas,Arkansas,13652
+Utah,Arkansas,362
+Vermont,Arkansas,0
+Virginia,Arkansas,659
+Washington,Arkansas,3093
+West Virginia,Arkansas,78
+Wisconsin,Arkansas,661
+Wyoming,Arkansas,0
+Puerto Rico,Arkansas,210
+Alabama,California,2123
+Alaska,California,1210
+Arizona,California,21152
+Arkansas,California,2092
+California,California,
+Colorado,California,14784
+Connecticut,California,3113
+Delaware,California,772
+District of Columbia ,California,4590
+Florida,California,19149
+Georgia,California,11229
+Hawaii,California,8094
+Idaho,California,2646
+Illinois,California,21982
+Indiana,California,4531
+Iowa,California,4250
+Kansas,California,3207
+Kentucky,California,2308
+Louisiana,California,4522
+Maine,California,1003
+Maryland,California,10107
+Massachusetts,California,10101
+Michigan,California,12054
+Minnesota,California,2705
+Mississippi,California,3133
+Missouri,California,6400
+Montana,California,656
+Nebraska,California,2606
+Nevada,California,22218
+New Hampshire,California,1202
+New Jersey,California,12458
+New Mexico,California,4784
+New York,California,35062
+North Carolina,California,8924
+North Dakota,California,10
+Ohio,California,7434
+Oklahoma,California,2541
+Oregon,California,22162
+Pennsylvania,California,8730
+Rhode Island,California,1050
+South Carolina,California,5346
+South Dakota,California,629
+Tennessee,California,5343
+Texas,California,38732
+Utah,California,10939
+Vermont,California,1012
+Virginia,California,15837
+Washington,California,32218
+West Virginia,California,1125
+Wisconsin,California,2634
+Wyoming,California,1166
+Puerto Rico,California,1119
+Alabama,Colorado,3745
+Alaska,Colorado,1452
+Arizona,Colorado,12378
+Arkansas,Colorado,1435
+California,Colorado,26148
+Colorado,Colorado,
+Connecticut,Colorado,1875
+Delaware,Colorado,120
+District of Columbia ,Colorado,1319
+Florida,Colorado,12786
+Georgia,Colorado,6522
+Hawaii,Colorado,3347
+Idaho,Colorado,3480
+Illinois,Colorado,8941
+Indiana,Colorado,2612
+Iowa,Colorado,3407
+Kansas,Colorado,4387
+Kentucky,Colorado,1015
+Louisiana,Colorado,2227
+Maine,Colorado,628
+Maryland,Colorado,3553
+Massachusetts,Colorado,2885
+Michigan,Colorado,2922
+Minnesota,Colorado,3830
+Mississippi,Colorado,590
+Missouri,Colorado,4858
+Montana,Colorado,2294
+Nebraska,Colorado,4126
+Nevada,Colorado,1896
+New Hampshire,Colorado,252
+New Jersey,Colorado,1154
+New Mexico,Colorado,6030
+New York,Colorado,6295
+North Carolina,Colorado,10351
+North Dakota,Colorado,582
+Ohio,Colorado,6289
+Oklahoma,Colorado,2980
+Oregon,Colorado,3690
+Pennsylvania,Colorado,5109
+Rhode Island,Colorado,0
+South Carolina,Colorado,1813
+South Dakota,Colorado,1190
+Tennessee,Colorado,4670
+Texas,Colorado,32150
+Utah,Colorado,4336
+Vermont,Colorado,327
+Virginia,Colorado,9719
+Washington,Colorado,6010
+West Virginia,Colorado,77
+Wisconsin,Colorado,2698
+Wyoming,Colorado,2163
+Puerto Rico,Colorado,335
+Alabama,Connecticut,788
+Alaska,Connecticut,11
+Arizona,Connecticut,657
+Arkansas,Connecticut,80
+California,Connecticut,4972
+Colorado,Connecticut,591
+Connecticut,Connecticut,
+Delaware,Connecticut,32
+District of Columbia ,Connecticut,327
+Florida,Connecticut,7435
+Georgia,Connecticut,2514
+Hawaii,Connecticut,725
+Idaho,Connecticut,0
+Illinois,Connecticut,1522
+Indiana,Connecticut,446
+Iowa,Connecticut,0
+Kansas,Connecticut,363
+Kentucky,Connecticut,397
+Louisiana,Connecticut,357
+Maine,Connecticut,601
+Maryland,Connecticut,1412
+Massachusetts,Connecticut,13428
+Michigan,Connecticut,975
+Minnesota,Connecticut,681
+Mississippi,Connecticut,364
+Missouri,Connecticut,110
+Montana,Connecticut,101
+Nebraska,Connecticut,252
+Nevada,Connecticut,781
+New Hampshire,Connecticut,878
+New Jersey,Connecticut,5379
+New Mexico,Connecticut,53
+New York,Connecticut,28181
+North Carolina,Connecticut,1220
+North Dakota,Connecticut,0
+Ohio,Connecticut,414
+Oklahoma,Connecticut,170
+Oregon,Connecticut,0
+Pennsylvania,Connecticut,4858
+Rhode Island,Connecticut,4299
+South Carolina,Connecticut,1146
+South Dakota,Connecticut,0
+Tennessee,Connecticut,2508
+Texas,Connecticut,2678
+Utah,Connecticut,84
+Vermont,Connecticut,557
+Virginia,Connecticut,1947
+Washington,Connecticut,654
+West Virginia,Connecticut,0
+Wisconsin,Connecticut,42
+Wyoming,Connecticut,0
+Puerto Rico,Connecticut,486
+Alabama,Delaware,12
+Alaska,Delaware,59
+Arizona,Delaware,476
+Arkansas,Delaware,372
+California,Delaware,516
+Colorado,Delaware,212
+Connecticut,Delaware,369
+Delaware,Delaware,
+District of Columbia ,Delaware,430
+Florida,Delaware,1763
+Georgia,Delaware,249
+Hawaii,Delaware,0
+Idaho,Delaware,33
+Illinois,Delaware,193
+Indiana,Delaware,0
+Iowa,Delaware,212
+Kansas,Delaware,0
+Kentucky,Delaware,0
+Louisiana,Delaware,0
+Maine,Delaware,174
+Maryland,Delaware,7829
+Massachusetts,Delaware,465
+Michigan,Delaware,82
+Minnesota,Delaware,180
+Mississippi,Delaware,70
+Missouri,Delaware,105
+Montana,Delaware,235
+Nebraska,Delaware,0
+Nevada,Delaware,118
+New Hampshire,Delaware,0
+New Jersey,Delaware,4041
+New Mexico,Delaware,214
+New York,Delaware,2552
+North Carolina,Delaware,1563
+North Dakota,Delaware,0
+Ohio,Delaware,0
+Oklahoma,Delaware,0
+Oregon,Delaware,0
+Pennsylvania,Delaware,13350
+Rhode Island,Delaware,187
+South Carolina,Delaware,385
+South Dakota,Delaware,0
+Tennessee,Delaware,629
+Texas,Delaware,400
+Utah,Delaware,33
+Vermont,Delaware,0
+Virginia,Delaware,882
+Washington,Delaware,274
+West Virginia,Delaware,0
+Wisconsin,Delaware,342
+Wyoming,Delaware,0
+Puerto Rico,Delaware,0
+Alabama,District of Columbia,423
+Alaska,District of Columbia,0
+Arizona,District of Columbia,242
+Arkansas,District of Columbia,0
+California,District of Columbia,2976
+Colorado,District of Columbia,376
+Connecticut,District of Columbia,760
+Delaware,District of Columbia,111
+District of Columbia ,District of Columbia,
+Florida,District of Columbia,1856
+Georgia,District of Columbia,1537
+Hawaii,District of Columbia,53
+Idaho,District of Columbia,0
+Illinois,District of Columbia,770
+Indiana,District of Columbia,1010
+Iowa,District of Columbia,0
+Kansas,District of Columbia,0
+Kentucky,District of Columbia,168
+Louisiana,District of Columbia,1130
+Maine,District of Columbia,1190
+Maryland,District of Columbia,12647
+Massachusetts,District of Columbia,2685
+Michigan,District of Columbia,1490
+Minnesota,District of Columbia,394
+Mississippi,District of Columbia,130
+Missouri,District of Columbia,365
+Montana,District of Columbia,22
+Nebraska,District of Columbia,58
+Nevada,District of Columbia,56
+New Hampshire,District of Columbia,14
+New Jersey,District of Columbia,2071
+New Mexico,District of Columbia,48
+New York,District of Columbia,4766
+North Carolina,District of Columbia,1423
+North Dakota,District of Columbia,126
+Ohio,District of Columbia,1248
+Oklahoma,District of Columbia,476
+Oregon,District of Columbia,794
+Pennsylvania,District of Columbia,3085
+Rhode Island,District of Columbia,369
+South Carolina,District of Columbia,514
+South Dakota,District of Columbia,0
+Tennessee,District of Columbia,622
+Texas,District of Columbia,2631
+Utah,District of Columbia,207
+Vermont,District of Columbia,86
+Virginia,District of Columbia,7085
+Washington,District of Columbia,443
+West Virginia,District of Columbia,100
+Wisconsin,District of Columbia,303
+Wyoming,District of Columbia,0
+Puerto Rico,District of Columbia,226
+Alabama,Florida,13789
+Alaska,Florida,2280
+Arizona,Florida,8361
+Arkansas,Florida,4025
+California,Florida,39052
+Colorado,Florida,13264
+Connecticut,Florida,15743
+Delaware,Florida,1739
+District of Columbia ,Florida,1691
+Florida,Florida,
+Georgia,Florida,44469
+Hawaii,Florida,3294
+Idaho,Florida,913
+Illinois,Florida,27109
+Indiana,Florida,14939
+Iowa,Florida,4367
+Kansas,Florida,5297
+Kentucky,Florida,9814
+Louisiana,Florida,6194
+Maine,Florida,3831
+Maryland,Florida,17439
+Massachusetts,Florida,24002
+Michigan,Florida,26512
+Minnesota,Florida,8274
+Mississippi,Florida,4750
+Missouri,Florida,7814
+Montana,Florida,1030
+Nebraska,Florida,1317
+Nevada,Florida,5632
+New Hampshire,Florida,5012
+New Jersey,Florida,33226
+New Mexico,Florida,2416
+New York,Florida,71138
+North Carolina,Florida,25290
+North Dakota,Florida,1189
+Ohio,Florida,18543
+Oklahoma,Florida,5488
+Oregon,Florida,2310
+Pennsylvania,Florida,27770
+Rhode Island,Florida,3400
+South Carolina,Florida,14066
+South Dakota,Florida,555
+Tennessee,Florida,15663
+Texas,Florida,37781
+Utah,Florida,3733
+Vermont,Florida,1739
+Virginia,Florida,28226
+Washington,Florida,9009
+West Virginia,Florida,4044
+Wisconsin,Florida,9232
+Wyoming,Florida,162
+Puerto Rico,Florida,12534
+Alabama,Georgia,17506
+Alaska,Georgia,1028
+Arizona,Georgia,2706
+Arkansas,Georgia,2912
+California,Georgia,20191
+Colorado,Georgia,5154
+Connecticut,Georgia,3380
+Delaware,Georgia,747
+District of Columbia ,Georgia,1475
+Florida,Georgia,55250
+Georgia,Georgia,
+Hawaii,Georgia,482
+Idaho,Georgia,2056
+Illinois,Georgia,9133
+Indiana,Georgia,3422
+Iowa,Georgia,1482
+Kansas,Georgia,3418
+Kentucky,Georgia,2671
+Louisiana,Georgia,6264
+Maine,Georgia,1141
+Maryland,Georgia,6244
+Massachusetts,Georgia,1739
+Michigan,Georgia,3945
+Minnesota,Georgia,2803
+Mississippi,Georgia,3070
+Missouri,Georgia,3814
+Montana,Georgia,237
+Nebraska,Georgia,506
+Nevada,Georgia,2822
+New Hampshire,Georgia,670
+New Jersey,Georgia,6339
+New Mexico,Georgia,2936
+New York,Georgia,21998
+North Carolina,Georgia,17310
+North Dakota,Georgia,57
+Ohio,Georgia,7590
+Oklahoma,Georgia,2067
+Oregon,Georgia,1060
+Pennsylvania,Georgia,8763
+Rhode Island,Georgia,1508
+South Carolina,Georgia,16635
+South Dakota,Georgia,771
+Tennessee,Georgia,17332
+Texas,Georgia,20923
+Utah,Georgia,2184
+Vermont,Georgia,0
+Virginia,Georgia,6866
+Washington,Georgia,6050
+West Virginia,Georgia,1146
+Wisconsin,Georgia,2649
+Wyoming,Georgia,0
+Puerto Rico,Georgia,1667
+Alabama,Hawaii,346
+Alaska,Hawaii,1135
+Arizona,Hawaii,1932
+Arkansas,Hawaii,152
+California,Hawaii,11200
+Colorado,Hawaii,3359
+Connecticut,Hawaii,702
+Delaware,Hawaii,277
+District of Columbia ,Hawaii,773
+Florida,Hawaii,2061
+Georgia,Hawaii,1276
+Hawaii,Hawaii,
+Idaho,Hawaii,1042
+Illinois,Hawaii,907
+Indiana,Hawaii,0
+Iowa,Hawaii,0
+Kansas,Hawaii,243
+Kentucky,Hawaii,489
+Louisiana,Hawaii,1150
+Maine,Hawaii,0
+Maryland,Hawaii,2699
+Massachusetts,Hawaii,182
+Michigan,Hawaii,463
+Minnesota,Hawaii,893
+Mississippi,Hawaii,0
+Missouri,Hawaii,996
+Montana,Hawaii,111
+Nebraska,Hawaii,0
+Nevada,Hawaii,1393
+New Hampshire,Hawaii,70
+New Jersey,Hawaii,59
+New Mexico,Hawaii,986
+New York,Hawaii,1776
+North Carolina,Hawaii,2816
+North Dakota,Hawaii,0
+Ohio,Hawaii,674
+Oklahoma,Hawaii,177
+Oregon,Hawaii,1443
+Pennsylvania,Hawaii,498
+Rhode Island,Hawaii,59
+South Carolina,Hawaii,820
+South Dakota,Hawaii,99
+Tennessee,Hawaii,968
+Texas,Hawaii,3742
+Utah,Hawaii,1884
+Vermont,Hawaii,0
+Virginia,Hawaii,3388
+Washington,Hawaii,4092
+West Virginia,Hawaii,0
+Wisconsin,Hawaii,1149
+Wyoming,Hawaii,58
+Puerto Rico,Hawaii,29
+Alabama,Idaho,380
+Alaska,Idaho,1117
+Arizona,Idaho,4026
+Arkansas,Idaho,533
+California,Idaho,17338
+Colorado,Idaho,1851
+Connecticut,Idaho,436
+Delaware,Idaho,0
+District of Columbia ,Idaho,0
+Florida,Idaho,921
+Georgia,Idaho,78
+Hawaii,Idaho,1089
+Idaho,Idaho,
+Illinois,Idaho,571
+Indiana,Idaho,830
+Iowa,Idaho,479
+Kansas,Idaho,1229
+Kentucky,Idaho,434
+Louisiana,Idaho,0
+Maine,Idaho,43
+Maryland,Idaho,111
+Massachusetts,Idaho,260
+Michigan,Idaho,404
+Minnesota,Idaho,485
+Mississippi,Idaho,136
+Missouri,Idaho,349
+Montana,Idaho,2754
+Nebraska,Idaho,324
+Nevada,Idaho,2025
+New Hampshire,Idaho,0
+New Jersey,Idaho,780
+New Mexico,Idaho,1566
+New York,Idaho,77
+North Carolina,Idaho,1187
+North Dakota,Idaho,256
+Ohio,Idaho,703
+Oklahoma,Idaho,670
+Oregon,Idaho,7458
+Pennsylvania,Idaho,394
+Rhode Island,Idaho,113
+South Carolina,Idaho,97
+South Dakota,Idaho,388
+Tennessee,Idaho,369
+Texas,Idaho,5526
+Utah,Idaho,5537
+Vermont,Idaho,0
+Virginia,Idaho,1290
+Washington,Idaho,14655
+West Virginia,Idaho,395
+Wisconsin,Idaho,229
+Wyoming,Idaho,1815
+Puerto Rico,Idaho,41
+Alabama,Illinois,1375
+Alaska,Illinois,30
+Arizona,Illinois,4417
+Arkansas,Illinois,2189
+California,Illinois,16460
+Colorado,Illinois,5827
+Connecticut,Illinois,863
+Delaware,Illinois,60
+District of Columbia ,Illinois,1790
+Florida,Illinois,19100
+Georgia,Illinois,4895
+Hawaii,Illinois,1168
+Idaho,Illinois,354
+Illinois,Illinois,
+Indiana,Illinois,11555
+Iowa,Illinois,8326
+Kansas,Illinois,1468
+Kentucky,Illinois,3162
+Louisiana,Illinois,1497
+Maine,Illinois,265
+Maryland,Illinois,2512
+Massachusetts,Illinois,1938
+Michigan,Illinois,10345
+Minnesota,Illinois,3641
+Mississippi,Illinois,1894
+Missouri,Illinois,14982
+Montana,Illinois,224
+Nebraska,Illinois,1229
+Nevada,Illinois,2181
+New Hampshire,Illinois,524
+New Jersey,Illinois,2755
+New Mexico,Illinois,1096
+New York,Illinois,8394
+North Carolina,Illinois,5531
+North Dakota,Illinois,252
+Ohio,Illinois,4914
+Oklahoma,Illinois,2408
+Oregon,Illinois,3381
+Pennsylvania,Illinois,3394
+Rhode Island,Illinois,170
+South Carolina,Illinois,2084
+South Dakota,Illinois,140
+Tennessee,Illinois,4005
+Texas,Illinois,15227
+Utah,Illinois,1496
+Vermont,Illinois,1057
+Virginia,Illinois,4876
+Washington,Illinois,3100
+West Virginia,Illinois,968
+Wisconsin,Illinois,14135
+Wyoming,Illinois,104
+Puerto Rico,Illinois,1354
+Alabama,Indiana,2206
+Alaska,Indiana,818
+Arizona,Indiana,2123
+Arkansas,Indiana,754
+California,Indiana,7740
+Colorado,Indiana,3164
+Connecticut,Indiana,427
+Delaware,Indiana,121
+District of Columbia ,Indiana,0
+Florida,Indiana,14798
+Georgia,Indiana,1606
+Hawaii,Indiana,81
+Idaho,Indiana,0
+Illinois,Indiana,29426
+Indiana,Indiana,
+Iowa,Indiana,854
+Kansas,Indiana,701
+Kentucky,Indiana,12257
+Louisiana,Indiana,784
+Maine,Indiana,24
+Maryland,Indiana,668
+Massachusetts,Indiana,1033
+Michigan,Indiana,8137
+Minnesota,Indiana,1579
+Mississippi,Indiana,529
+Missouri,Indiana,2691
+Montana,Indiana,83
+Nebraska,Indiana,7
+Nevada,Indiana,1022
+New Hampshire,Indiana,340
+New Jersey,Indiana,2661
+New Mexico,Indiana,974
+New York,Indiana,8782
+North Carolina,Indiana,2634
+North Dakota,Indiana,353
+Ohio,Indiana,12493
+Oklahoma,Indiana,644
+Oregon,Indiana,492
+Pennsylvania,Indiana,3117
+Rhode Island,Indiana,47
+South Carolina,Indiana,1221
+South Dakota,Indiana,338
+Tennessee,Indiana,3310
+Texas,Indiana,9485
+Utah,Indiana,1804
+Vermont,Indiana,86
+Virginia,Indiana,4401
+Washington,Indiana,1635
+West Virginia,Indiana,461
+Wisconsin,Indiana,1738
+Wyoming,Indiana,0
+Puerto Rico,Indiana,54
+Alabama,Iowa,130
+Alaska,Iowa,209
+Arizona,Iowa,3078
+Arkansas,Iowa,114
+California,Iowa,4406
+Colorado,Iowa,3642
+Connecticut,Iowa,33
+Delaware,Iowa,168
+District of Columbia ,Iowa,186
+Florida,Iowa,4186
+Georgia,Iowa,965
+Hawaii,Iowa,52
+Idaho,Iowa,703
+Illinois,Iowa,11780
+Indiana,Iowa,678
+Iowa,Iowa,
+Kansas,Iowa,2302
+Kentucky,Iowa,448
+Louisiana,Iowa,1605
+Maine,Iowa,154
+Maryland,Iowa,595
+Massachusetts,Iowa,465
+Michigan,Iowa,1496
+Minnesota,Iowa,4755
+Mississippi,Iowa,563
+Missouri,Iowa,3238
+Montana,Iowa,421
+Nebraska,Iowa,7341
+Nevada,Iowa,906
+New Hampshire,Iowa,0
+New Jersey,Iowa,169
+New Mexico,Iowa,20
+New York,Iowa,845
+North Carolina,Iowa,1812
+North Dakota,Iowa,99
+Ohio,Iowa,409
+Oklahoma,Iowa,630
+Oregon,Iowa,460
+Pennsylvania,Iowa,669
+Rhode Island,Iowa,0
+South Carolina,Iowa,299
+South Dakota,Iowa,2209
+Tennessee,Iowa,1324
+Texas,Iowa,3634
+Utah,Iowa,99
+Vermont,Iowa,99
+Virginia,Iowa,1094
+Washington,Iowa,1022
+West Virginia,Iowa,0
+Wisconsin,Iowa,3321
+Wyoming,Iowa,343
+Puerto Rico,Iowa,0
+Alabama,Kansas,881
+Alaska,Kansas,174
+Arizona,Kansas,2365
+Arkansas,Kansas,884
+California,Kansas,3160
+Colorado,Kansas,4591
+Connecticut,Kansas,92
+Delaware,Kansas,61
+District of Columbia ,Kansas,0
+Florida,Kansas,2737
+Georgia,Kansas,1737
+Hawaii,Kansas,0
+Idaho,Kansas,925
+Illinois,Kansas,1906
+Indiana,Kansas,846
+Iowa,Kansas,1648
+Kansas,Kansas,
+Kentucky,Kansas,969
+Louisiana,Kansas,1643
+Maine,Kansas,0
+Maryland,Kansas,443
+Massachusetts,Kansas,97
+Michigan,Kansas,1369
+Minnesota,Kansas,1478
+Mississippi,Kansas,326
+Missouri,Kansas,18573
+Montana,Kansas,75
+Nebraska,Kansas,3841
+Nevada,Kansas,2049
+New Hampshire,Kansas,320
+New Jersey,Kansas,543
+New Mexico,Kansas,267
+New York,Kansas,1505
+North Carolina,Kansas,494
+North Dakota,Kansas,689
+Ohio,Kansas,2050
+Oklahoma,Kansas,3534
+Oregon,Kansas,248
+Pennsylvania,Kansas,1176
+Rhode Island,Kansas,21
+South Carolina,Kansas,218
+South Dakota,Kansas,354
+Tennessee,Kansas,1480
+Texas,Kansas,7229
+Utah,Kansas,131
+Vermont,Kansas,0
+Virginia,Kansas,1827
+Washington,Kansas,980
+West Virginia,Kansas,96
+Wisconsin,Kansas,609
+Wyoming,Kansas,497
+Puerto Rico,Kansas,574
+Alabama,Kentucky,1496
+Alaska,Kentucky,549
+Arizona,Kentucky,2484
+Arkansas,Kentucky,373
+California,Kentucky,5838
+Colorado,Kentucky,1858
+Connecticut,Kentucky,138
+Delaware,Kentucky,0
+District of Columbia ,Kentucky,133
+Florida,Kentucky,5243
+Georgia,Kentucky,3491
+Hawaii,Kentucky,1020
+Idaho,Kentucky,610
+Illinois,Kentucky,4407
+Indiana,Kentucky,8310
+Iowa,Kentucky,577
+Kansas,Kentucky,502
+Kentucky,Kentucky,
+Louisiana,Kentucky,2343
+Maine,Kentucky,160
+Maryland,Kentucky,633
+Massachusetts,Kentucky,245
+Michigan,Kentucky,3619
+Minnesota,Kentucky,229
+Mississippi,Kentucky,94
+Missouri,Kentucky,1734
+Montana,Kentucky,758
+Nebraska,Kentucky,93
+Nevada,Kentucky,1445
+New Hampshire,Kentucky,3667
+New Jersey,Kentucky,388
+New Mexico,Kentucky,0
+New York,Kentucky,2370
+North Carolina,Kentucky,2452
+North Dakota,Kentucky,0
+Ohio,Kentucky,13249
+Oklahoma,Kentucky,1451
+Oregon,Kentucky,396
+Pennsylvania,Kentucky,2282
+Rhode Island,Kentucky,0
+South Carolina,Kentucky,1126
+South Dakota,Kentucky,841
+Tennessee,Kentucky,14444
+Texas,Kentucky,5471
+Utah,Kentucky,259
+Vermont,Kentucky,0
+Virginia,Kentucky,2754
+Washington,Kentucky,4273
+West Virginia,Kentucky,1565
+Wisconsin,Kentucky,1427
+Wyoming,Kentucky,0
+Puerto Rico,Kentucky,0
+Alabama,Louisiana,2558
+Alaska,Louisiana,229
+Arizona,Louisiana,669
+Arkansas,Louisiana,3228
+California,Louisiana,2424
+Colorado,Louisiana,777
+Connecticut,Louisiana,778
+Delaware,Louisiana,0
+District of Columbia ,Louisiana,0
+Florida,Louisiana,4686
+Georgia,Louisiana,2407
+Hawaii,Louisiana,313
+Idaho,Louisiana,1306
+Illinois,Louisiana,1289
+Indiana,Louisiana,854
+Iowa,Louisiana,104
+Kansas,Louisiana,789
+Kentucky,Louisiana,207
+Louisiana,Louisiana,
+Maine,Louisiana,0
+Maryland,Louisiana,1289
+Massachusetts,Louisiana,1025
+Michigan,Louisiana,257
+Minnesota,Louisiana,1262
+Mississippi,Louisiana,7272
+Missouri,Louisiana,977
+Montana,Louisiana,458
+Nebraska,Louisiana,0
+Nevada,Louisiana,2865
+New Hampshire,Louisiana,166
+New Jersey,Louisiana,945
+New Mexico,Louisiana,88
+New York,Louisiana,532
+North Carolina,Louisiana,2261
+North Dakota,Louisiana,1345
+Ohio,Louisiana,453
+Oklahoma,Louisiana,846
+Oregon,Louisiana,550
+Pennsylvania,Louisiana,533
+Rhode Island,Louisiana,0
+South Carolina,Louisiana,338
+South Dakota,Louisiana,830
+Tennessee,Louisiana,1883
+Texas,Louisiana,18446
+Utah,Louisiana,179
+Vermont,Louisiana,0
+Virginia,Louisiana,1188
+Washington,Louisiana,752
+West Virginia,Louisiana,56
+Wisconsin,Louisiana,50
+Wyoming,Louisiana,0
+Puerto Rico,Louisiana,339
+Alabama,Maine,124
+Alaska,Maine,274
+Arizona,Maine,375
+Arkansas,Maine,56
+California,Maine,1553
+Colorado,Maine,1178
+Connecticut,Maine,948
+Delaware,Maine,226
+District of Columbia ,Maine,0
+Florida,Maine,4008
+Georgia,Maine,81
+Hawaii,Maine,140
+Idaho,Maine,16
+Illinois,Maine,1223
+Indiana,Maine,0
+Iowa,Maine,0
+Kansas,Maine,77
+Kentucky,Maine,48
+Louisiana,Maine,18
+Maine,Maine,
+Maryland,Maine,700
+Massachusetts,Maine,5670
+Michigan,Maine,162
+Minnesota,Maine,422
+Mississippi,Maine,654
+Missouri,Maine,2
+Montana,Maine,15
+Nebraska,Maine,30
+Nevada,Maine,592
+New Hampshire,Maine,5715
+New Jersey,Maine,1137
+New Mexico,Maine,116
+New York,Maine,2330
+North Carolina,Maine,609
+North Dakota,Maine,126
+Ohio,Maine,755
+Oklahoma,Maine,0
+Oregon,Maine,469
+Pennsylvania,Maine,1454
+Rhode Island,Maine,528
+South Carolina,Maine,741
+South Dakota,Maine,0
+Tennessee,Maine,467
+Texas,Maine,1925
+Utah,Maine,91
+Vermont,Maine,706
+Virginia,Maine,1022
+Washington,Maine,689
+West Virginia,Maine,586
+Wisconsin,Maine,31
+Wyoming,Maine,0
+Puerto Rico,Maine,0
+Alabama,Maryland,431
+Alaska,Maryland,142
+Arizona,Maryland,2202
+Arkansas,Maryland,128
+California,Maryland,10051
+Colorado,Maryland,1276
+Connecticut,Maryland,1908
+Delaware,Maryland,5245
+District of Columbia ,Maryland,20296
+Florida,Maryland,8205
+Georgia,Maryland,3790
+Hawaii,Maryland,1352
+Idaho,Maryland,270
+Illinois,Maryland,1213
+Indiana,Maryland,1052
+Iowa,Maryland,1054
+Kansas,Maryland,217
+Kentucky,Maryland,603
+Louisiana,Maryland,486
+Maine,Maryland,428
+Maryland,Maryland,
+Massachusetts,Maryland,4455
+Michigan,Maryland,1079
+Minnesota,Maryland,1073
+Mississippi,Maryland,0
+Missouri,Maryland,1221
+Montana,Maryland,242
+Nebraska,Maryland,16
+Nevada,Maryland,147
+New Hampshire,Maryland,368
+New Jersey,Maryland,7170
+New Mexico,Maryland,1401
+New York,Maryland,14439
+North Carolina,Maryland,6501
+North Dakota,Maryland,0
+Ohio,Maryland,5145
+Oklahoma,Maryland,1204
+Oregon,Maryland,913
+Pennsylvania,Maryland,16851
+Rhode Island,Maryland,1253
+South Carolina,Maryland,3369
+South Dakota,Maryland,0
+Tennessee,Maryland,724
+Texas,Maryland,5592
+Utah,Maryland,1801
+Vermont,Maryland,228
+Virginia,Maryland,21670
+Washington,Maryland,1526
+West Virginia,Maryland,3739
+Wisconsin,Maryland,0
+Wyoming,Maryland,198
+Puerto Rico,Maryland,231
+Alabama,Massachusetts,97
+Alaska,Massachusetts,0
+Arizona,Massachusetts,1427
+Arkansas,Massachusetts,50
+California,Massachusetts,12160
+Colorado,Massachusetts,2017
+Connecticut,Massachusetts,10437
+Delaware,Massachusetts,397
+District of Columbia ,Massachusetts,2214
+Florida,Massachusetts,12758
+Georgia,Massachusetts,2897
+Hawaii,Massachusetts,109
+Idaho,Massachusetts,201
+Illinois,Massachusetts,3187
+Indiana,Massachusetts,1014
+Iowa,Massachusetts,227
+Kansas,Massachusetts,667
+Kentucky,Massachusetts,0
+Louisiana,Massachusetts,762
+Maine,Massachusetts,2391
+Maryland,Massachusetts,4214
+Massachusetts,Massachusetts,
+Michigan,Massachusetts,1209
+Minnesota,Massachusetts,772
+Mississippi,Massachusetts,96
+Missouri,Massachusetts,703
+Montana,Massachusetts,395
+Nebraska,Massachusetts,125
+Nevada,Massachusetts,1249
+New Hampshire,Massachusetts,11508
+New Jersey,Massachusetts,6272
+New Mexico,Massachusetts,1123
+New York,Massachusetts,16247
+North Carolina,Massachusetts,5217
+North Dakota,Massachusetts,0
+Ohio,Massachusetts,3804
+Oklahoma,Massachusetts,78
+Oregon,Massachusetts,386
+Pennsylvania,Massachusetts,9392
+Rhode Island,Massachusetts,7264
+South Carolina,Massachusetts,1367
+South Dakota,Massachusetts,64
+Tennessee,Massachusetts,3996
+Texas,Massachusetts,6165
+Utah,Massachusetts,380
+Vermont,Massachusetts,1430
+Virginia,Massachusetts,5186
+Washington,Massachusetts,1523
+West Virginia,Massachusetts,234
+Wisconsin,Massachusetts,752
+Wyoming,Massachusetts,858
+Puerto Rico,Massachusetts,1605
+Alabama,Michigan,718
+Alaska,Michigan,119
+Arizona,Michigan,4049
+Arkansas,Michigan,603
+California,Michigan,9765
+Colorado,Michigan,3698
+Connecticut,Michigan,1192
+Delaware,Michigan,0
+District of Columbia ,Michigan,262
+Florida,Michigan,14236
+Georgia,Michigan,3394
+Hawaii,Michigan,780
+Idaho,Michigan,658
+Illinois,Michigan,11766
+Indiana,Michigan,11338
+Iowa,Michigan,719
+Kansas,Michigan,1077
+Kentucky,Michigan,2013
+Louisiana,Michigan,1759
+Maine,Michigan,270
+Maryland,Michigan,1565
+Massachusetts,Michigan,989
+Michigan,Michigan,
+Minnesota,Michigan,1388
+Mississippi,Michigan,395
+Missouri,Michigan,1956
+Montana,Michigan,301
+Nebraska,Michigan,176
+Nevada,Michigan,1412
+New Hampshire,Michigan,404
+New Jersey,Michigan,2352
+New Mexico,Michigan,1056
+New York,Michigan,4383
+North Carolina,Michigan,4514
+North Dakota,Michigan,444
+Ohio,Michigan,8851
+Oklahoma,Michigan,1881
+Oregon,Michigan,2051
+Pennsylvania,Michigan,3835
+Rhode Island,Michigan,0
+South Carolina,Michigan,1608
+South Dakota,Michigan,869
+Tennessee,Michigan,2693
+Texas,Michigan,10011
+Utah,Michigan,1610
+Vermont,Michigan,218
+Virginia,Michigan,2521
+Washington,Michigan,3409
+West Virginia,Michigan,517
+Wisconsin,Michigan,5261
+Wyoming,Michigan,29
+Puerto Rico,Michigan,349
+Alabama,Minnesota,404
+Alaska,Minnesota,832
+Arizona,Minnesota,4770
+Arkansas,Minnesota,920
+California,Minnesota,4505
+Colorado,Minnesota,3884
+Connecticut,Minnesota,794
+Delaware,Minnesota,72
+District of Columbia ,Minnesota,687
+Florida,Minnesota,5844
+Georgia,Minnesota,1898
+Hawaii,Minnesota,531
+Idaho,Minnesota,450
+Illinois,Minnesota,6089
+Indiana,Minnesota,1370
+Iowa,Minnesota,5689
+Kansas,Minnesota,1436
+Kentucky,Minnesota,1142
+Louisiana,Minnesota,221
+Maine,Minnesota,19
+Maryland,Minnesota,716
+Massachusetts,Minnesota,952
+Michigan,Minnesota,2884
+Minnesota,Minnesota,
+Mississippi,Minnesota,416
+Missouri,Minnesota,1950
+Montana,Minnesota,537
+Nebraska,Minnesota,2343
+Nevada,Minnesota,443
+New Hampshire,Minnesota,352
+New Jersey,Minnesota,299
+New Mexico,Minnesota,832
+New York,Minnesota,1502
+North Carolina,Minnesota,1350
+North Dakota,Minnesota,6062
+Ohio,Minnesota,1063
+Oklahoma,Minnesota,842
+Oregon,Minnesota,2320
+Pennsylvania,Minnesota,1702
+Rhode Island,Minnesota,381
+South Carolina,Minnesota,733
+South Dakota,Minnesota,2867
+Tennessee,Minnesota,1309
+Texas,Minnesota,4400
+Utah,Minnesota,862
+Vermont,Minnesota,0
+Virginia,Minnesota,1716
+Washington,Minnesota,3400
+West Virginia,Minnesota,158
+Wisconsin,Minnesota,15404
+Wyoming,Minnesota,925
+Puerto Rico,Minnesota,503
+Alabama,Mississippi,6151
+Alaska,Mississippi,223
+Arizona,Mississippi,1356
+Arkansas,Mississippi,1451
+California,Mississippi,2921
+Colorado,Mississippi,106
+Connecticut,Mississippi,99
+Delaware,Mississippi,611
+District of Columbia ,Mississippi,0
+Florida,Mississippi,5839
+Georgia,Mississippi,4016
+Hawaii,Mississippi,260
+Idaho,Mississippi,394
+Illinois,Mississippi,1365
+Indiana,Mississippi,426
+Iowa,Mississippi,1090
+Kansas,Mississippi,49
+Kentucky,Mississippi,938
+Louisiana,Mississippi,4518
+Maine,Mississippi,89
+Maryland,Mississippi,330
+Massachusetts,Mississippi,478
+Michigan,Mississippi,181
+Minnesota,Mississippi,0
+Mississippi,Mississippi,
+Missouri,Mississippi,855
+Montana,Mississippi,0
+Nebraska,Mississippi,1199
+Nevada,Mississippi,1168
+New Hampshire,Mississippi,0
+New Jersey,Mississippi,288
+New Mexico,Mississippi,0
+New York,Mississippi,467
+North Carolina,Mississippi,1717
+North Dakota,Mississippi,0
+Ohio,Mississippi,1021
+Oklahoma,Mississippi,0
+Oregon,Mississippi,124
+Pennsylvania,Mississippi,402
+Rhode Island,Mississippi,0
+South Carolina,Mississippi,985
+South Dakota,Mississippi,89
+Tennessee,Mississippi,13818
+Texas,Mississippi,6880
+Utah,Mississippi,0
+Vermont,Mississippi,0
+Virginia,Mississippi,1028
+Washington,Mississippi,1135
+West Virginia,Mississippi,0
+Wisconsin,Mississippi,543
+Wyoming,Mississippi,0
+Puerto Rico,Mississippi,126
+Alabama,Missouri,852
+Alaska,Missouri,676
+Arizona,Missouri,5699
+Arkansas,Missouri,7548
+California,Missouri,8146
+Colorado,Missouri,5846
+Connecticut,Missouri,667
+Delaware,Missouri,189
+District of Columbia ,Missouri,57
+Florida,Missouri,5471
+Georgia,Missouri,5555
+Hawaii,Missouri,643
+Idaho,Missouri,780
+Illinois,Missouri,15326
+Indiana,Missouri,3104
+Iowa,Missouri,4155
+Kansas,Missouri,20692
+Kentucky,Missouri,2603
+Louisiana,Missouri,1978
+Maine,Missouri,148
+Maryland,Missouri,960
+Massachusetts,Missouri,596
+Michigan,Missouri,1714
+Minnesota,Missouri,1701
+Mississippi,Missouri,1600
+Missouri,Missouri,
+Montana,Missouri,579
+Nebraska,Missouri,636
+Nevada,Missouri,1656
+New Hampshire,Missouri,214
+New Jersey,Missouri,488
+New Mexico,Missouri,969
+New York,Missouri,3534
+North Carolina,Missouri,3214
+North Dakota,Missouri,398
+Ohio,Missouri,2885
+Oklahoma,Missouri,4633
+Oregon,Missouri,687
+Pennsylvania,Missouri,3178
+Rhode Island,Missouri,256
+South Carolina,Missouri,1226
+South Dakota,Missouri,429
+Tennessee,Missouri,4548
+Texas,Missouri,9322
+Utah,Missouri,1901
+Vermont,Missouri,104
+Virginia,Missouri,2006
+Washington,Missouri,1615
+West Virginia,Missouri,89
+Wisconsin,Missouri,1455
+Wyoming,Missouri,960
+Puerto Rico,Missouri,763
+Alabama,Montana,73
+Alaska,Montana,549
+Arizona,Montana,823
+Arkansas,Montana,416
+California,Montana,5577
+Colorado,Montana,2118
+Connecticut,Montana,0
+Delaware,Montana,0
+District of Columbia ,Montana,31
+Florida,Montana,628
+Georgia,Montana,460
+Hawaii,Montana,90
+Idaho,Montana,2361
+Illinois,Montana,539
+Indiana,Montana,23
+Iowa,Montana,438
+Kansas,Montana,232
+Kentucky,Montana,218
+Louisiana,Montana,5
+Maine,Montana,431
+Maryland,Montana,189
+Massachusetts,Montana,111
+Michigan,Montana,322
+Minnesota,Montana,1439
+Mississippi,Montana,36
+Missouri,Montana,36
+Montana,Montana,
+Nebraska,Montana,620
+Nevada,Montana,531
+New Hampshire,Montana,31
+New Jersey,Montana,51
+New Mexico,Montana,649
+New York,Montana,58
+North Carolina,Montana,0
+North Dakota,Montana,799
+Ohio,Montana,79
+Oklahoma,Montana,257
+Oregon,Montana,2713
+Pennsylvania,Montana,847
+Rhode Island,Montana,0
+South Carolina,Montana,797
+South Dakota,Montana,135
+Tennessee,Montana,79
+Texas,Montana,2417
+Utah,Montana,2246
+Vermont,Montana,143
+Virginia,Montana,678
+Washington,Montana,5214
+West Virginia,Montana,0
+Wisconsin,Montana,158
+Wyoming,Montana,1128
+Puerto Rico,Montana,0
+Alabama,Nebraska,666
+Alaska,Nebraska,107
+Arizona,Nebraska,1367
+Arkansas,Nebraska,937
+California,Nebraska,1904
+Colorado,Nebraska,5254
+Connecticut,Nebraska,0
+Delaware,Nebraska,0
+District of Columbia ,Nebraska,51
+Florida,Nebraska,2296
+Georgia,Nebraska,955
+Hawaii,Nebraska,162
+Idaho,Nebraska,1128
+Illinois,Nebraska,2336
+Indiana,Nebraska,867
+Iowa,Nebraska,4860
+Kansas,Nebraska,2179
+Kentucky,Nebraska,370
+Louisiana,Nebraska,114
+Maine,Nebraska,0
+Maryland,Nebraska,371
+Massachusetts,Nebraska,80
+Michigan,Nebraska,454
+Minnesota,Nebraska,1233
+Mississippi,Nebraska,32
+Missouri,Nebraska,2886
+Montana,Nebraska,250
+Nebraska,Nebraska,
+Nevada,Nebraska,560
+New Hampshire,Nebraska,493
+New Jersey,Nebraska,49
+New Mexico,Nebraska,1007
+New York,Nebraska,711
+North Carolina,Nebraska,943
+North Dakota,Nebraska,445
+Ohio,Nebraska,841
+Oklahoma,Nebraska,225
+Oregon,Nebraska,162
+Pennsylvania,Nebraska,954
+Rhode Island,Nebraska,0
+South Carolina,Nebraska,445
+South Dakota,Nebraska,2767
+Tennessee,Nebraska,373
+Texas,Nebraska,2475
+Utah,Nebraska,301
+Vermont,Nebraska,0
+Virginia,Nebraska,2977
+Washington,Nebraska,825
+West Virginia,Nebraska,0
+Wisconsin,Nebraska,438
+Wyoming,Nebraska,740
+Puerto Rico,Nebraska,48
+Alabama,Nevada,218
+Alaska,Nevada,1565
+Arizona,Nevada,7972
+Arkansas,Nevada,835
+California,Nevada,41997
+Colorado,Nevada,8064
+Connecticut,Nevada,642
+Delaware,Nevada,102
+District of Columbia ,Nevada,63
+Florida,Nevada,5935
+Georgia,Nevada,997
+Hawaii,Nevada,4441
+Idaho,Nevada,2057
+Illinois,Nevada,970
+Indiana,Nevada,292
+Iowa,Nevada,288
+Kansas,Nevada,639
+Kentucky,Nevada,188
+Louisiana,Nevada,1157
+Maine,Nevada,0
+Maryland,Nevada,633
+Massachusetts,Nevada,767
+Michigan,Nevada,1035
+Minnesota,Nevada,743
+Mississippi,Nevada,252
+Missouri,Nevada,891
+Montana,Nevada,820
+Nebraska,Nevada,886
+Nevada,Nevada,
+New Hampshire,Nevada,155
+New Jersey,Nevada,1077
+New Mexico,Nevada,1666
+New York,Nevada,2582
+North Carolina,Nevada,1072
+North Dakota,Nevada,197
+Ohio,Nevada,3475
+Oklahoma,Nevada,1672
+Oregon,Nevada,3604
+Pennsylvania,Nevada,1868
+Rhode Island,Nevada,0
+South Carolina,Nevada,1233
+South Dakota,Nevada,30
+Tennessee,Nevada,600
+Texas,Nevada,5939
+Utah,Nevada,3776
+Vermont,Nevada,54
+Virginia,Nevada,2246
+Washington,Nevada,5516
+West Virginia,Nevada,0
+Wisconsin,Nevada,853
+Wyoming,Nevada,155
+Puerto Rico,Nevada,154
+Alabama,New Hampshire,1530
+Alaska,New Hampshire,103
+Arizona,New Hampshire,702
+Arkansas,New Hampshire,0
+California,New Hampshire,1718
+Colorado,New Hampshire,543
+Connecticut,New Hampshire,1776
+Delaware,New Hampshire,0
+District of Columbia ,New Hampshire,80
+Florida,New Hampshire,1320
+Georgia,New Hampshire,321
+Hawaii,New Hampshire,0
+Idaho,New Hampshire,583
+Illinois,New Hampshire,95
+Indiana,New Hampshire,103
+Iowa,New Hampshire,283
+Kansas,New Hampshire,118
+Kentucky,New Hampshire,0
+Louisiana,New Hampshire,564
+Maine,New Hampshire,1604
+Maryland,New Hampshire,705
+Massachusetts,New Hampshire,16362
+Michigan,New Hampshire,136
+Minnesota,New Hampshire,115
+Mississippi,New Hampshire,477
+Missouri,New Hampshire,0
+Montana,New Hampshire,0
+Nebraska,New Hampshire,0
+Nevada,New Hampshire,35
+New Hampshire,New Hampshire,
+New Jersey,New Hampshire,395
+New Mexico,New Hampshire,346
+New York,New Hampshire,1777
+North Carolina,New Hampshire,273
+North Dakota,New Hampshire,0
+Ohio,New Hampshire,127
+Oklahoma,New Hampshire,371
+Oregon,New Hampshire,0
+Pennsylvania,New Hampshire,1914
+Rhode Island,New Hampshire,333
+South Carolina,New Hampshire,61
+South Dakota,New Hampshire,0
+Tennessee,New Hampshire,586
+Texas,New Hampshire,1473
+Utah,New Hampshire,560
+Vermont,New Hampshire,1890
+Virginia,New Hampshire,201
+Washington,New Hampshire,110
+West Virginia,New Hampshire,0
+Wisconsin,New Hampshire,5
+Wyoming,New Hampshire,0
+Puerto Rico,New Hampshire,84
+Alabama,New Jersey,178
+Alaska,New Jersey,54
+Arizona,New Jersey,1140
+Arkansas,New Jersey,165
+California,New Jersey,9431
+Colorado,New Jersey,2332
+Connecticut,New Jersey,2483
+Delaware,New Jersey,1291
+District of Columbia ,New Jersey,639
+Florida,New Jersey,9635
+Georgia,New Jersey,1865
+Hawaii,New Jersey,820
+Idaho,New Jersey,29
+Illinois,New Jersey,3183
+Indiana,New Jersey,1114
+Iowa,New Jersey,42
+Kansas,New Jersey,442
+Kentucky,New Jersey,284
+Louisiana,New Jersey,935
+Maine,New Jersey,418
+Maryland,New Jersey,3877
+Massachusetts,New Jersey,4851
+Michigan,New Jersey,679
+Minnesota,New Jersey,354
+Mississippi,New Jersey,80
+Missouri,New Jersey,1217
+Montana,New Jersey,114
+Nebraska,New Jersey,12
+Nevada,New Jersey,200
+New Hampshire,New Jersey,102
+New Jersey,New Jersey,
+New Mexico,New Jersey,187
+New York,New Jersey,55926
+North Carolina,New Jersey,3461
+North Dakota,New Jersey,465
+Ohio,New Jersey,1267
+Oklahoma,New Jersey,906
+Oregon,New Jersey,723
+Pennsylvania,New Jersey,29564
+Rhode Island,New Jersey,660
+South Carolina,New Jersey,2619
+South Dakota,New Jersey,0
+Tennessee,New Jersey,611
+Texas,New Jersey,4360
+Utah,New Jersey,901
+Vermont,New Jersey,302
+Virginia,New Jersey,3918
+Washington,New Jersey,1456
+West Virginia,New Jersey,704
+Wisconsin,New Jersey,194
+Wyoming,New Jersey,145
+Puerto Rico,New Jersey,662
+Alabama,New Mexico,837
+Alaska,New Mexico,345
+Arizona,New Mexico,3535
+Arkansas,New Mexico,477
+California,New Mexico,8126
+Colorado,New Mexico,5853
+Connecticut,New Mexico,305
+Delaware,New Mexico,0
+District of Columbia ,New Mexico,1261
+Florida,New Mexico,1207
+Georgia,New Mexico,1110
+Hawaii,New Mexico,449
+Idaho,New Mexico,1510
+Illinois,New Mexico,1129
+Indiana,New Mexico,81
+Iowa,New Mexico,276
+Kansas,New Mexico,1500
+Kentucky,New Mexico,181
+Louisiana,New Mexico,1443
+Maine,New Mexico,106
+Maryland,New Mexico,14
+Massachusetts,New Mexico,577
+Michigan,New Mexico,1383
+Minnesota,New Mexico,275
+Mississippi,New Mexico,4
+Missouri,New Mexico,501
+Montana,New Mexico,1146
+Nebraska,New Mexico,325
+Nevada,New Mexico,1243
+New Hampshire,New Mexico,62
+New Jersey,New Mexico,641
+New Mexico,New Mexico,
+New York,New Mexico,184
+North Carolina,New Mexico,522
+North Dakota,New Mexico,362
+Ohio,New Mexico,1216
+Oklahoma,New Mexico,296
+Oregon,New Mexico,733
+Pennsylvania,New Mexico,678
+Rhode Island,New Mexico,0
+South Carolina,New Mexico,627
+South Dakota,New Mexico,323
+Tennessee,New Mexico,523
+Texas,New Mexico,16975
+Utah,New Mexico,1701
+Vermont,New Mexico,0
+Virginia,New Mexico,530
+Washington,New Mexico,3591
+West Virginia,New Mexico,0
+Wisconsin,New Mexico,304
+Wyoming,New Mexico,206
+Puerto Rico,New Mexico,0
+Alabama,New York,1389
+Alaska,New York,445
+Arizona,New York,3934
+Arkansas,New York,649
+California,New York,31097
+Colorado,New York,5110
+Connecticut,New York,15165
+Delaware,New York,1867
+District of Columbia ,New York,3271
+Florida,New York,24749
+Georgia,New York,8013
+Hawaii,New York,1615
+Idaho,New York,214
+Illinois,New York,8628
+Indiana,New York,1347
+Iowa,New York,1184
+Kansas,New York,2816
+Kentucky,New York,2678
+Louisiana,New York,1574
+Maine,New York,3190
+Maryland,New York,8119
+Massachusetts,New York,21001
+Michigan,New York,2606
+Minnesota,New York,1321
+Mississippi,New York,503
+Missouri,New York,1433
+Montana,New York,660
+Nebraska,New York,432
+Nevada,New York,1844
+New Hampshire,New York,1859
+New Jersey,New York,40474
+New Mexico,New York,840
+New York,New York,
+North Carolina,New York,9000
+North Dakota,New York,18
+Ohio,New York,7648
+Oklahoma,New York,458
+Oregon,New York,1157
+Pennsylvania,New York,27603
+Rhode Island,New York,2073
+South Carolina,New York,3192
+South Dakota,New York,100
+Tennessee,New York,4360
+Texas,New York,18956
+Utah,New York,3081
+Vermont,New York,3926
+Virginia,New York,11930
+Washington,New York,6261
+West Virginia,New York,507
+Wisconsin,New York,2217
+Wyoming,New York,321
+Puerto Rico,New York,3539
+Alabama,North Carolina,5582
+Alaska,North Carolina,606
+Arizona,North Carolina,6443
+Arkansas,North Carolina,891
+California,North Carolina,21084
+Colorado,North Carolina,4393
+Connecticut,North Carolina,4284
+Delaware,North Carolina,1745
+District of Columbia ,North Carolina,862
+Florida,North Carolina,39931
+Georgia,North Carolina,23519
+Hawaii,North Carolina,1927
+Idaho,North Carolina,1425
+Illinois,North Carolina,5380
+Indiana,North Carolina,2819
+Iowa,North Carolina,2629
+Kansas,North Carolina,4842
+Kentucky,North Carolina,4783
+Louisiana,North Carolina,3978
+Maine,North Carolina,1575
+Maryland,North Carolina,12649
+Massachusetts,North Carolina,8935
+Michigan,North Carolina,5380
+Minnesota,North Carolina,3030
+Mississippi,North Carolina,881
+Missouri,North Carolina,2914
+Montana,North Carolina,1227
+Nebraska,North Carolina,678
+Nevada,North Carolina,1907
+New Hampshire,North Carolina,1347
+New Jersey,North Carolina,9290
+New Mexico,North Carolina,1152
+New York,North Carolina,29175
+North Carolina,North Carolina,
+North Dakota,North Carolina,28
+Ohio,North Carolina,5637
+Oklahoma,North Carolina,1886
+Oregon,North Carolina,1467
+Pennsylvania,North Carolina,13040
+Rhode Island,North Carolina,1154
+South Carolina,North Carolina,31358
+South Dakota,North Carolina,659
+Tennessee,North Carolina,7905
+Texas,North Carolina,17335
+Utah,North Carolina,3032
+Vermont,North Carolina,796
+Virginia,North Carolina,25555
+Washington,North Carolina,4976
+West Virginia,North Carolina,2038
+Wisconsin,North Carolina,5106
+Wyoming,North Carolina,20
+Puerto Rico,North Carolina,496
+Alabama,North Dakota,1019
+Alaska,North Dakota,252
+Arizona,North Dakota,1325
+Arkansas,North Dakota,0
+California,North Dakota,1158
+Colorado,North Dakota,1389
+Connecticut,North Dakota,0
+Delaware,North Dakota,0
+District of Columbia ,North Dakota,0
+Florida,North Dakota,1775
+Georgia,North Dakota,264
+Hawaii,North Dakota,0
+Idaho,North Dakota,134
+Illinois,North Dakota,2370
+Indiana,North Dakota,0
+Iowa,North Dakota,317
+Kansas,North Dakota,480
+Kentucky,North Dakota,0
+Louisiana,North Dakota,11
+Maine,North Dakota,0
+Maryland,North Dakota,440
+Massachusetts,North Dakota,0
+Michigan,North Dakota,147
+Minnesota,North Dakota,11738
+Mississippi,North Dakota,182
+Missouri,North Dakota,284
+Montana,North Dakota,2032
+Nebraska,North Dakota,185
+Nevada,North Dakota,376
+New Hampshire,North Dakota,0
+New Jersey,North Dakota,307
+New Mexico,North Dakota,415
+New York,North Dakota,572
+North Carolina,North Dakota,47
+North Dakota,North Dakota,
+Ohio,North Dakota,89
+Oklahoma,North Dakota,69
+Oregon,North Dakota,229
+Pennsylvania,North Dakota,516
+Rhode Island,North Dakota,124
+South Carolina,North Dakota,0
+South Dakota,North Dakota,2238
+Tennessee,North Dakota,431
+Texas,North Dakota,1823
+Utah,North Dakota,750
+Vermont,North Dakota,0
+Virginia,North Dakota,0
+Washington,North Dakota,492
+West Virginia,North Dakota,0
+Wisconsin,North Dakota,302
+Wyoming,North Dakota,133
+Puerto Rico,North Dakota,30
+Alabama,Ohio,1421
+Alaska,Ohio,547
+Arizona,Ohio,4352
+Arkansas,Ohio,929
+California,Ohio,12197
+Colorado,Ohio,3393
+Connecticut,Ohio,1361
+Delaware,Ohio,65
+District of Columbia ,Ohio,388
+Florida,Ohio,18740
+Georgia,Ohio,6616
+Hawaii,Ohio,330
+Idaho,Ohio,194
+Illinois,Ohio,5652
+Indiana,Ohio,12068
+Iowa,Ohio,1051
+Kansas,Ohio,1545
+Kentucky,Ohio,11176
+Louisiana,Ohio,2475
+Maine,Ohio,499
+Maryland,Ohio,3200
+Massachusetts,Ohio,2324
+Michigan,Ohio,15795
+Minnesota,Ohio,681
+Mississippi,Ohio,838
+Missouri,Ohio,1600
+Montana,Ohio,258
+Nebraska,Ohio,951
+Nevada,Ohio,712
+New Hampshire,Ohio,425
+New Jersey,Ohio,3521
+New Mexico,Ohio,704
+New York,Ohio,6238
+North Carolina,Ohio,6930
+North Dakota,Ohio,432
+Ohio,Ohio,
+Oklahoma,Ohio,1731
+Oregon,Ohio,1471
+Pennsylvania,Ohio,12809
+Rhode Island,Ohio,26
+South Carolina,Ohio,3647
+South Dakota,Ohio,478
+Tennessee,Ohio,4671
+Texas,Ohio,8647
+Utah,Ohio,551
+Vermont,Ohio,19
+Virginia,Ohio,6598
+Washington,Ohio,4239
+West Virginia,Ohio,7856
+Wisconsin,Ohio,2816
+Wyoming,Ohio,174
+Puerto Rico,Ohio,1521
+Alabama,Oklahoma,860
+Alaska,Oklahoma,156
+Arizona,Oklahoma,3093
+Arkansas,Oklahoma,5286
+California,Oklahoma,10940
+Colorado,Oklahoma,6786
+Connecticut,Oklahoma,346
+Delaware,Oklahoma,176
+District of Columbia ,Oklahoma,105
+Florida,Oklahoma,3830
+Georgia,Oklahoma,1796
+Hawaii,Oklahoma,647
+Idaho,Oklahoma,1211
+Illinois,Oklahoma,1603
+Indiana,Oklahoma,1572
+Iowa,Oklahoma,405
+Kansas,Oklahoma,4908
+Kentucky,Oklahoma,1837
+Louisiana,Oklahoma,1031
+Maine,Oklahoma,0
+Maryland,Oklahoma,1064
+Massachusetts,Oklahoma,413
+Michigan,Oklahoma,2153
+Minnesota,Oklahoma,250
+Mississippi,Oklahoma,931
+Missouri,Oklahoma,2695
+Montana,Oklahoma,475
+Nebraska,Oklahoma,1035
+Nevada,Oklahoma,678
+New Hampshire,Oklahoma,211
+New Jersey,Oklahoma,561
+New Mexico,Oklahoma,1097
+New York,Oklahoma,3401
+North Carolina,Oklahoma,843
+North Dakota,Oklahoma,85
+Ohio,Oklahoma,1261
+Oklahoma,Oklahoma,
+Oregon,Oklahoma,710
+Pennsylvania,Oklahoma,901
+Rhode Island,Oklahoma,50
+South Carolina,Oklahoma,1013
+South Dakota,Oklahoma,971
+Tennessee,Oklahoma,1092
+Texas,Oklahoma,31506
+Utah,Oklahoma,768
+Vermont,Oklahoma,120
+Virginia,Oklahoma,3431
+Washington,Oklahoma,2329
+West Virginia,Oklahoma,0
+Wisconsin,Oklahoma,934
+Wyoming,Oklahoma,113
+Puerto Rico,Oklahoma,313
+Alabama,Oregon,642
+Alaska,Oregon,3236
+Arizona,Oregon,7144
+Arkansas,Oregon,292
+California,Oregon,33807
+Colorado,Oregon,6038
+Connecticut,Oregon,605
+Delaware,Oregon,0
+District of Columbia ,Oregon,944
+Florida,Oregon,2265
+Georgia,Oregon,1774
+Hawaii,Oregon,2050
+Idaho,Oregon,4122
+Illinois,Oregon,1754
+Indiana,Oregon,2151
+Iowa,Oregon,17
+Kansas,Oregon,1335
+Kentucky,Oregon,173
+Louisiana,Oregon,709
+Maine,Oregon,0
+Maryland,Oregon,260
+Massachusetts,Oregon,2298
+Michigan,Oregon,428
+Minnesota,Oregon,255
+Mississippi,Oregon,0
+Missouri,Oregon,696
+Montana,Oregon,3017
+Nebraska,Oregon,226
+Nevada,Oregon,3051
+New Hampshire,Oregon,0
+New Jersey,Oregon,345
+New Mexico,Oregon,398
+New York,Oregon,3818
+North Carolina,Oregon,1607
+North Dakota,Oregon,78
+Ohio,Oregon,2217
+Oklahoma,Oregon,680
+Oregon,Oregon,
+Pennsylvania,Oregon,927
+Rhode Island,Oregon,230
+South Carolina,Oregon,414
+South Dakota,Oregon,188
+Tennessee,Oregon,1088
+Texas,Oregon,3766
+Utah,Oregon,5690
+Vermont,Oregon,57
+Virginia,Oregon,998
+Washington,Oregon,22169
+West Virginia,Oregon,0
+Wisconsin,Oregon,1036
+Wyoming,Oregon,251
+Puerto Rico,Oregon,214
+Alabama,Pennsylvania,1733
+Alaska,Pennsylvania,595
+Arizona,Pennsylvania,3773
+Arkansas,Pennsylvania,776
+California,Pennsylvania,11590
+Colorado,Pennsylvania,3234
+Connecticut,Pennsylvania,3619
+Delaware,Pennsylvania,6612
+District of Columbia ,Pennsylvania,1208
+Florida,Pennsylvania,13412
+Georgia,Pennsylvania,3768
+Hawaii,Pennsylvania,728
+Idaho,Pennsylvania,629
+Illinois,Pennsylvania,4430
+Indiana,Pennsylvania,3419
+Iowa,Pennsylvania,370
+Kansas,Pennsylvania,1129
+Kentucky,Pennsylvania,1266
+Louisiana,Pennsylvania,410
+Maine,Pennsylvania,1187
+Maryland,Pennsylvania,20654
+Massachusetts,Pennsylvania,6379
+Michigan,Pennsylvania,1856
+Minnesota,Pennsylvania,1012
+Mississippi,Pennsylvania,878
+Missouri,Pennsylvania,1164
+Montana,Pennsylvania,338
+Nebraska,Pennsylvania,445
+Nevada,Pennsylvania,1548
+New Hampshire,Pennsylvania,665
+New Jersey,Pennsylvania,41215
+New Mexico,Pennsylvania,370
+New York,Pennsylvania,42637
+North Carolina,Pennsylvania,5741
+North Dakota,Pennsylvania,30
+Ohio,Pennsylvania,11277
+Oklahoma,Pennsylvania,533
+Oregon,Pennsylvania,1150
+Pennsylvania,Pennsylvania,
+Rhode Island,Pennsylvania,1005
+South Carolina,Pennsylvania,2807
+South Dakota,Pennsylvania,782
+Tennessee,Pennsylvania,2617
+Texas,Pennsylvania,11680
+Utah,Pennsylvania,665
+Vermont,Pennsylvania,494
+Virginia,Pennsylvania,10019
+Washington,Pennsylvania,2624
+West Virginia,Pennsylvania,1879
+Wisconsin,Pennsylvania,718
+Wyoming,Pennsylvania,456
+Puerto Rico,Pennsylvania,3091
+Alabama,Rhode Island,0
+Alaska,Rhode Island,74
+Arizona,Rhode Island,79
+Arkansas,Rhode Island,0
+California,Rhode Island,2008
+Colorado,Rhode Island,484
+Connecticut,Rhode Island,1324
+Delaware,Rhode Island,0
+District of Columbia ,Rhode Island,720
+Florida,Rhode Island,3277
+Georgia,Rhode Island,665
+Hawaii,Rhode Island,326
+Idaho,Rhode Island,0
+Illinois,Rhode Island,904
+Indiana,Rhode Island,129
+Iowa,Rhode Island,144
+Kansas,Rhode Island,98
+Kentucky,Rhode Island,158
+Louisiana,Rhode Island,1226
+Maine,Rhode Island,145
+Maryland,Rhode Island,688
+Massachusetts,Rhode Island,9208
+Michigan,Rhode Island,535
+Minnesota,Rhode Island,141
+Mississippi,Rhode Island,185
+Missouri,Rhode Island,11
+Montana,Rhode Island,0
+Nebraska,Rhode Island,0
+Nevada,Rhode Island,0
+New Hampshire,Rhode Island,535
+New Jersey,Rhode Island,1126
+New Mexico,Rhode Island,0
+New York,Rhode Island,2089
+North Carolina,Rhode Island,513
+North Dakota,Rhode Island,0
+Ohio,Rhode Island,146
+Oklahoma,Rhode Island,87
+Oregon,Rhode Island,243
+Pennsylvania,Rhode Island,1192
+Rhode Island,Rhode Island,
+South Carolina,Rhode Island,393
+South Dakota,Rhode Island,0
+Tennessee,Rhode Island,485
+Texas,Rhode Island,761
+Utah,Rhode Island,0
+Vermont,Rhode Island,55
+Virginia,Rhode Island,1068
+Washington,Rhode Island,102
+West Virginia,Rhode Island,0
+Wisconsin,Rhode Island,61
+Wyoming,Rhode Island,214
+Puerto Rico,Rhode Island,285
+Alabama,South Carolina,3422
+Alaska,South Carolina,842
+Arizona,South Carolina,2578
+Arkansas,South Carolina,1633
+California,South Carolina,7108
+Colorado,South Carolina,3444
+Connecticut,South Carolina,2047
+Delaware,South Carolina,1103
+District of Columbia ,South Carolina,225
+Florida,South Carolina,16206
+Georgia,South Carolina,17378
+Hawaii,South Carolina,133
+Idaho,South Carolina,1696
+Illinois,South Carolina,6046
+Indiana,South Carolina,2228
+Iowa,South Carolina,192
+Kansas,South Carolina,171
+Kentucky,South Carolina,1740
+Louisiana,South Carolina,686
+Maine,South Carolina,1633
+Maryland,South Carolina,8853
+Massachusetts,South Carolina,5444
+Michigan,South Carolina,4808
+Minnesota,South Carolina,1725
+Mississippi,South Carolina,662
+Missouri,South Carolina,1929
+Montana,South Carolina,403
+Nebraska,South Carolina,892
+Nevada,South Carolina,1882
+New Hampshire,South Carolina,1894
+New Jersey,South Carolina,9772
+New Mexico,South Carolina,1144
+New York,South Carolina,12224
+North Carolina,South Carolina,28109
+North Dakota,South Carolina,69
+Ohio,South Carolina,5710
+Oklahoma,South Carolina,359
+Oregon,South Carolina,862
+Pennsylvania,South Carolina,13419
+Rhode Island,South Carolina,713
+South Carolina,South Carolina,
+South Dakota,South Carolina,646
+Tennessee,South Carolina,5304
+Texas,South Carolina,7228
+Utah,South Carolina,2894
+Vermont,South Carolina,0
+Virginia,South Carolina,10020
+Washington,South Carolina,2125
+West Virginia,South Carolina,1825
+Wisconsin,South Carolina,1712
+Wyoming,South Carolina,536
+Puerto Rico,South Carolina,155
+Alabama,South Dakota,155
+Alaska,South Dakota,33
+Arizona,South Dakota,908
+Arkansas,South Dakota,219
+California,South Dakota,3368
+Colorado,South Dakota,1559
+Connecticut,South Dakota,54
+Delaware,South Dakota,0
+District of Columbia ,South Dakota,0
+Florida,South Dakota,634
+Georgia,South Dakota,37
+Hawaii,South Dakota,0
+Idaho,South Dakota,70
+Illinois,South Dakota,938
+Indiana,South Dakota,968
+Iowa,South Dakota,913
+Kansas,South Dakota,161
+Kentucky,South Dakota,240
+Louisiana,South Dakota,358
+Maine,South Dakota,0
+Maryland,South Dakota,331
+Massachusetts,South Dakota,0
+Michigan,South Dakota,153
+Minnesota,South Dakota,7142
+Mississippi,South Dakota,0
+Missouri,South Dakota,74
+Montana,South Dakota,680
+Nebraska,South Dakota,3622
+Nevada,South Dakota,139
+New Hampshire,South Dakota,0
+New Jersey,South Dakota,0
+New Mexico,South Dakota,168
+New York,South Dakota,604
+North Carolina,South Dakota,672
+North Dakota,South Dakota,769
+Ohio,South Dakota,56
+Oklahoma,South Dakota,102
+Oregon,South Dakota,456
+Pennsylvania,South Dakota,244
+Rhode Island,South Dakota,25
+South Carolina,South Dakota,0
+South Dakota,South Dakota,
+Tennessee,South Dakota,392
+Texas,South Dakota,2059
+Utah,South Dakota,30
+Vermont,South Dakota,0
+Virginia,South Dakota,100
+Washington,South Dakota,772
+West Virginia,South Dakota,0
+Wisconsin,South Dakota,137
+Wyoming,South Dakota,713
+Puerto Rico,South Dakota,0
+Alabama,Tennessee,6537
+Alaska,Tennessee,536
+Arizona,Tennessee,3907
+Arkansas,Tennessee,2485
+California,Tennessee,23961
+Colorado,Tennessee,6148
+Connecticut,Tennessee,2170
+Delaware,Tennessee,601
+District of Columbia ,Tennessee,0
+Florida,Tennessee,21195
+Georgia,Tennessee,12600
+Hawaii,Tennessee,35
+Idaho,Tennessee,1301
+Illinois,Tennessee,9588
+Indiana,Tennessee,4848
+Iowa,Tennessee,414
+Kansas,Tennessee,958
+Kentucky,Tennessee,9175
+Louisiana,Tennessee,3407
+Maine,Tennessee,315
+Maryland,Tennessee,1347
+Massachusetts,Tennessee,2916
+Michigan,Tennessee,2924
+Minnesota,Tennessee,916
+Mississippi,Tennessee,6480
+Missouri,Tennessee,3370
+Montana,Tennessee,777
+Nebraska,Tennessee,307
+Nevada,Tennessee,773
+New Hampshire,Tennessee,222
+New Jersey,Tennessee,2214
+New Mexico,Tennessee,1043
+New York,Tennessee,11363
+North Carolina,Tennessee,8004
+North Dakota,Tennessee,380
+Ohio,Tennessee,6397
+Oklahoma,Tennessee,268
+Oregon,Tennessee,2601
+Pennsylvania,Tennessee,3900
+Rhode Island,Tennessee,184
+South Carolina,Tennessee,3580
+South Dakota,Tennessee,331
+Tennessee,Tennessee,
+Texas,Tennessee,14618
+Utah,Tennessee,2744
+Vermont,Tennessee,967
+Virginia,Tennessee,7309
+Washington,Tennessee,3517
+West Virginia,Tennessee,1633
+Wisconsin,Tennessee,1690
+Wyoming,Tennessee,200
+Puerto Rico,Tennessee,533
+Alabama,Texas,7781
+Alaska,Texas,4688
+Arizona,Texas,19900
+Arkansas,Texas,10833
+California,Texas,93970
+Colorado,Texas,25369
+Connecticut,Texas,2645
+Delaware,Texas,876
+District of Columbia ,Texas,1553
+Florida,Texas,50513
+Georgia,Texas,17398
+Hawaii,Texas,5273
+Idaho,Texas,5764
+Illinois,Texas,24181
+Indiana,Texas,5369
+Iowa,Texas,6140
+Kansas,Texas,8547
+Kentucky,Texas,5410
+Louisiana,Texas,28458
+Maine,Texas,585
+Maryland,Texas,16116
+Massachusetts,Texas,10162
+Michigan,Texas,10855
+Minnesota,Texas,7959
+Mississippi,Texas,7170
+Missouri,Texas,10883
+Montana,Texas,1106
+Nebraska,Texas,5567
+Nevada,Texas,8557
+New Hampshire,Texas,569
+New Jersey,Texas,7553
+New Mexico,Texas,14704
+New York,Texas,29610
+North Carolina,Texas,10793
+North Dakota,Texas,2515
+Ohio,Texas,13463
+Oklahoma,Texas,29743
+Oregon,Texas,10131
+Pennsylvania,Texas,8438
+Rhode Island,Texas,1184
+South Carolina,Texas,8072
+South Dakota,Texas,1978
+Tennessee,Texas,12068
+Texas,Texas,
+Utah,Texas,9731
+Vermont,Texas,554
+Virginia,Texas,14137
+Washington,Texas,20423
+West Virginia,Texas,1194
+Wisconsin,Texas,8581
+Wyoming,Texas,2873
+Puerto Rico,Texas,6349
+Alabama,Utah,647
+Alaska,Utah,704
+Arizona,Utah,6639
+Arkansas,Utah,683
+California,Utah,15848
+Colorado,Utah,5787
+Connecticut,Utah,473
+Delaware,Utah,0
+District of Columbia ,Utah,69
+Florida,Utah,2832
+Georgia,Utah,1093
+Hawaii,Utah,620
+Idaho,Utah,6791
+Illinois,Utah,2628
+Indiana,Utah,1106
+Iowa,Utah,169
+Kansas,Utah,153
+Kentucky,Utah,438
+Louisiana,Utah,289
+Maine,Utah,319
+Maryland,Utah,662
+Massachusetts,Utah,3449
+Michigan,Utah,1332
+Minnesota,Utah,791
+Mississippi,Utah,1004
+Missouri,Utah,3355
+Montana,Utah,659
+Nebraska,Utah,319
+Nevada,Utah,6808
+New Hampshire,Utah,529
+New Jersey,Utah,0
+New Mexico,Utah,544
+New York,Utah,1605
+North Carolina,Utah,1863
+North Dakota,Utah,144
+Ohio,Utah,630
+Oklahoma,Utah,175
+Oregon,Utah,1674
+Pennsylvania,Utah,2146
+Rhode Island,Utah,0
+South Carolina,Utah,526
+South Dakota,Utah,23
+Tennessee,Utah,1133
+Texas,Utah,7276
+Utah,Utah,
+Vermont,Utah,1030
+Virginia,Utah,1439
+Washington,Utah,2389
+West Virginia,Utah,0
+Wisconsin,Utah,785
+Wyoming,Utah,1287
+Puerto Rico,Utah,195
+Alabama,Vermont,556
+Alaska,Vermont,22
+Arizona,Vermont,419
+Arkansas,Vermont,0
+California,Vermont,855
+Colorado,Vermont,1446
+Connecticut,Vermont,1655
+Delaware,Vermont,30
+District of Columbia ,Vermont,181
+Florida,Vermont,1316
+Georgia,Vermont,235
+Hawaii,Vermont,68
+Idaho,Vermont,394
+Illinois,Vermont,0
+Indiana,Vermont,184
+Iowa,Vermont,26
+Kansas,Vermont,0
+Kentucky,Vermont,32
+Louisiana,Vermont,0
+Maine,Vermont,542
+Maryland,Vermont,966
+Massachusetts,Vermont,3965
+Michigan,Vermont,70
+Minnesota,Vermont,793
+Mississippi,Vermont,28
+Missouri,Vermont,11
+Montana,Vermont,207
+Nebraska,Vermont,267
+Nevada,Vermont,0
+New Hampshire,Vermont,2781
+New Jersey,Vermont,710
+New Mexico,Vermont,0
+New York,Vermont,3279
+North Carolina,Vermont,280
+North Dakota,Vermont,0
+Ohio,Vermont,516
+Oklahoma,Vermont,0
+Oregon,Vermont,770
+Pennsylvania,Vermont,1529
+Rhode Island,Vermont,225
+South Carolina,Vermont,110
+South Dakota,Vermont,0
+Tennessee,Vermont,300
+Texas,Vermont,981
+Utah,Vermont,133
+Vermont,Vermont,
+Virginia,Vermont,627
+Washington,Vermont,161
+West Virginia,Vermont,0
+Wisconsin,Vermont,0
+Wyoming,Vermont,73
+Puerto Rico,Vermont,0
+Alabama,Virginia,3475
+Alaska,Virginia,796
+Arizona,Virginia,4091
+Arkansas,Virginia,142
+California,Virginia,21771
+Colorado,Virginia,4924
+Connecticut,Virginia,3179
+Delaware,Virginia,2450
+District of Columbia ,Virginia,13010
+Florida,Virginia,24733
+Georgia,Virginia,10449
+Hawaii,Virginia,3680
+Idaho,Virginia,1269
+Illinois,Virginia,7940
+Indiana,Virginia,2023
+Iowa,Virginia,1042
+Kansas,Virginia,1417
+Kentucky,Virginia,2011
+Louisiana,Virginia,2088
+Maine,Virginia,1240
+Maryland,Virginia,28203
+Massachusetts,Virginia,3789
+Michigan,Virginia,3748
+Minnesota,Virginia,885
+Mississippi,Virginia,1993
+Missouri,Virginia,3330
+Montana,Virginia,332
+Nebraska,Virginia,264
+Nevada,Virginia,792
+New Hampshire,Virginia,2004
+New Jersey,Virginia,8120
+New Mexico,Virginia,1237
+New York,Virginia,15048
+North Carolina,Virginia,23197
+North Dakota,Virginia,281
+Ohio,Virginia,5931
+Oklahoma,Virginia,1044
+Oregon,Virginia,1698
+Pennsylvania,Virginia,13285
+Rhode Island,Virginia,1242
+South Carolina,Virginia,11905
+South Dakota,Virginia,422
+Tennessee,Virginia,8915
+Texas,Virginia,11470
+Utah,Virginia,2105
+Vermont,Virginia,227
+Virginia,Virginia,
+Washington,Virginia,4758
+West Virginia,Virginia,7199
+Wisconsin,Virginia,1007
+Wyoming,Virginia,0
+Puerto Rico,Virginia,1031
+Alabama,Washington,926
+Alaska,Washington,3098
+Arizona,Washington,10675
+Arkansas,Washington,1093
+California,Washington,40858
+Colorado,Washington,7250
+Connecticut,Washington,620
+Delaware,Washington,89
+District of Columbia ,Washington,1949
+Florida,Washington,7185
+Georgia,Washington,3761
+Hawaii,Washington,6548
+Idaho,Washington,7513
+Illinois,Washington,4950
+Indiana,Washington,1741
+Iowa,Washington,2386
+Kansas,Washington,2468
+Kentucky,Washington,1344
+Louisiana,Washington,1720
+Maine,Washington,185
+Maryland,Washington,2602
+Massachusetts,Washington,1797
+Michigan,Washington,2054
+Minnesota,Washington,2081
+Mississippi,Washington,1693
+Missouri,Washington,1646
+Montana,Washington,3372
+Nebraska,Washington,437
+Nevada,Washington,7131
+New Hampshire,Washington,285
+New Jersey,Washington,1513
+New Mexico,Washington,1958
+New York,Washington,5371
+North Carolina,Washington,6383
+North Dakota,Washington,77
+Ohio,Washington,1878
+Oklahoma,Washington,1716
+Oregon,Washington,29960
+Pennsylvania,Washington,2416
+Rhode Island,Washington,796
+South Carolina,Washington,1274
+South Dakota,Washington,375
+Tennessee,Washington,2341
+Texas,Washington,13788
+Utah,Washington,4830
+Vermont,Washington,482
+Virginia,Washington,6092
+Washington,Washington,
+West Virginia,Washington,0
+Wisconsin,Washington,1412
+Wyoming,Washington,497
+Puerto Rico,Washington,183
+Alabama,West Virginia,438
+Alaska,West Virginia,78
+Arizona,West Virginia,897
+Arkansas,West Virginia,0
+California,West Virginia,552
+Colorado,West Virginia,587
+Connecticut,West Virginia,0
+Delaware,West Virginia,56
+District of Columbia ,West Virginia,132
+Florida,West Virginia,3585
+Georgia,West Virginia,391
+Hawaii,West Virginia,0
+Idaho,West Virginia,7
+Illinois,West Virginia,596
+Indiana,West Virginia,70
+Iowa,West Virginia,0
+Kansas,West Virginia,0
+Kentucky,West Virginia,2049
+Louisiana,West Virginia,10
+Maine,West Virginia,0
+Maryland,West Virginia,6587
+Massachusetts,West Virginia,54
+Michigan,West Virginia,120
+Minnesota,West Virginia,0
+Mississippi,West Virginia,579
+Missouri,West Virginia,128
+Montana,West Virginia,76
+Nebraska,West Virginia,0
+Nevada,West Virginia,198
+New Hampshire,West Virginia,60
+New Jersey,West Virginia,485
+New Mexico,West Virginia,275
+New York,West Virginia,1764
+North Carolina,West Virginia,1056
+North Dakota,West Virginia,70
+Ohio,West Virginia,7164
+Oklahoma,West Virginia,84
+Oregon,West Virginia,233
+Pennsylvania,West Virginia,4360
+Rhode Island,West Virginia,0
+South Carolina,West Virginia,518
+South Dakota,West Virginia,0
+Tennessee,West Virginia,753
+Texas,West Virginia,1291
+Utah,West Virginia,208
+Vermont,West Virginia,0
+Virginia,West Virginia,5498
+Washington,West Virginia,866
+West Virginia,West Virginia,
+Wisconsin,West Virginia,145
+Wyoming,West Virginia,0
+Puerto Rico,West Virginia,181
+Alabama,Wisconsin,69
+Alaska,Wisconsin,736
+Arizona,Wisconsin,3304
+Arkansas,Wisconsin,865
+California,Wisconsin,6339
+Colorado,Wisconsin,2723
+Connecticut,Wisconsin,506
+Delaware,Wisconsin,0
+District of Columbia ,Wisconsin,710
+Florida,Wisconsin,8391
+Georgia,Wisconsin,1609
+Hawaii,Wisconsin,161
+Idaho,Wisconsin,372
+Illinois,Wisconsin,26943
+Indiana,Wisconsin,2465
+Iowa,Wisconsin,4630
+Kansas,Wisconsin,723
+Kentucky,Wisconsin,494
+Louisiana,Wisconsin,630
+Maine,Wisconsin,314
+Maryland,Wisconsin,748
+Massachusetts,Wisconsin,1569
+Michigan,Wisconsin,6032
+Minnesota,Wisconsin,17067
+Mississippi,Wisconsin,221
+Missouri,Wisconsin,2084
+Montana,Wisconsin,824
+Nebraska,Wisconsin,741
+Nevada,Wisconsin,1972
+New Hampshire,Wisconsin,66
+New Jersey,Wisconsin,768
+New Mexico,Wisconsin,595
+New York,Wisconsin,2252
+North Carolina,Wisconsin,1757
+North Dakota,Wisconsin,723
+Ohio,Wisconsin,1121
+Oklahoma,Wisconsin,1339
+Oregon,Wisconsin,1103
+Pennsylvania,Wisconsin,2252
+Rhode Island,Wisconsin,129
+South Carolina,Wisconsin,939
+South Dakota,Wisconsin,732
+Tennessee,Wisconsin,1120
+Texas,Wisconsin,2782
+Utah,Wisconsin,319
+Vermont,Wisconsin,99
+Virginia,Wisconsin,1415
+Washington,Wisconsin,1471
+West Virginia,Wisconsin,422
+Wisconsin,Wisconsin,
+Wyoming,Wisconsin,292
+Puerto Rico,Wisconsin,1084
+Alabama,Wyoming,341
+Alaska,Wyoming,252
+Arizona,Wyoming,1526
+Arkansas,Wyoming,35
+California,Wyoming,1181
+Colorado,Wyoming,4777
+Connecticut,Wyoming,0
+Delaware,Wyoming,8
+District of Columbia ,Wyoming,38
+Florida,Wyoming,791
+Georgia,Wyoming,680
+Hawaii,Wyoming,99
+Idaho,Wyoming,1149
+Illinois,Wyoming,61
+Indiana,Wyoming,142
+Iowa,Wyoming,110
+Kansas,Wyoming,432
+Kentucky,Wyoming,261
+Louisiana,Wyoming,1001
+Maine,Wyoming,0
+Maryland,Wyoming,81
+Massachusetts,Wyoming,0
+Michigan,Wyoming,266
+Minnesota,Wyoming,7
+Mississippi,Wyoming,132
+Missouri,Wyoming,572
+Montana,Wyoming,1643
+Nebraska,Wyoming,596
+Nevada,Wyoming,353
+New Hampshire,Wyoming,0
+New Jersey,Wyoming,404
+New Mexico,Wyoming,28
+New York,Wyoming,69
+North Carolina,Wyoming,62
+North Dakota,Wyoming,151
+Ohio,Wyoming,0
+Oklahoma,Wyoming,3
+Oregon,Wyoming,969
+Pennsylvania,Wyoming,285
+Rhode Island,Wyoming,0
+South Carolina,Wyoming,13
+South Dakota,Wyoming,1037
+Tennessee,Wyoming,118
+Texas,Wyoming,1699
+Utah,Wyoming,599
+Vermont,Wyoming,0
+Virginia,Wyoming,323
+Washington,Wyoming,621
+West Virginia,Wyoming,0
+Wisconsin,Wyoming,42
+Wyoming,Wyoming,
+Puerto Rico,Wyoming,0
+Alabama,Puerto Rico,133
+Alaska,Puerto Rico,158
+Arizona,Puerto Rico,365
+Arkansas,Puerto Rico,0
+California,Puerto Rico,375
+Colorado,Puerto Rico,533
+Connecticut,Puerto Rico,304
+Delaware,Puerto Rico,0
+District of Columbia ,Puerto Rico,231
+Florida,Puerto Rico,3334
+Georgia,Puerto Rico,2448
+Hawaii,Puerto Rico,282
+Idaho,Puerto Rico,0
+Illinois,Puerto Rico,760
+Indiana,Puerto Rico,0
+Iowa,Puerto Rico,0
+Kansas,Puerto Rico,176
+Kentucky,Puerto Rico,0
+Louisiana,Puerto Rico,435
+Maine,Puerto Rico,0
+Maryland,Puerto Rico,485
+Massachusetts,Puerto Rico,1350
+Michigan,Puerto Rico,193
+Minnesota,Puerto Rico,0
+Mississippi,Puerto Rico,308
+Missouri,Puerto Rico,92
+Montana,Puerto Rico,0
+Nebraska,Puerto Rico,0
+Nevada,Puerto Rico,233
+New Hampshire,Puerto Rico,0
+New Jersey,Puerto Rico,1490
+New Mexico,Puerto Rico,0
+New York,Puerto Rico,1979
+North Carolina,Puerto Rico,521
+North Dakota,Puerto Rico,0
+Ohio,Puerto Rico,0
+Oklahoma,Puerto Rico,0
+Oregon,Puerto Rico,0
+Pennsylvania,Puerto Rico,3040
+Rhode Island,Puerto Rico,0
+South Carolina,Puerto Rico,314
+South Dakota,Puerto Rico,0
+Tennessee,Puerto Rico,293
+Texas,Puerto Rico,2252
+Utah,Puerto Rico,37
+Vermont,Puerto Rico,0
+Virginia,Puerto Rico,443
+Washington,Puerto Rico,519
+West Virginia,Puerto Rico,0
+Wisconsin,Puerto Rico,505
+Wyoming,Puerto Rico,0
+Puerto Rico,Puerto Rico,

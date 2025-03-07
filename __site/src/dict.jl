@@ -53,3 +53,5 @@ state_names = Dict(
 	"Total" => "Total"
 )
 
+# First, create the reverse lookup dictionary
+reverse_state_names = Dict(value => key for (key, value) in state_names)

@@ -30,7 +30,11 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 Its population is concentrated along the Northeast Corridor from Boston to New York. 
 ![Metropolis at night](/img/metropolis_at_night.png)
 
-Its closest global peer nation in terms of population is Argentina. Its population would be larger than Canada.
+The following table shows the population of Metropolis in relation to the European Union member states.
+
+~~~
+{{insert /partials/Metropolis_eu_compare_table.html}}	 
+~~~
 
 ### Age Structure
 

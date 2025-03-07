@@ -33,7 +33,11 @@ As a single state, it would be the largest, passing California by small margin. 
 
 ![The Lone Star Republic at night](/img/lonestar_at_night.png)
 
-Its closest global peer nation in terms of population is Canada.
+The following table shows the population of The Lone Star Republic in relation to the European Union member states.
+
+~~~
+{{insert /partials/The_Lone_Star_Republic_eu_compare_table.html}}	 
+~~~
 
 ### Age Structure
 

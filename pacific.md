@@ -31,7 +31,11 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 Its population is concentrated along the I-5 corridor from Seattle to Portland. As a single state, it would rank sixth, behind Pennsylvania, ahead of Illinois.
 ![Pacifica at night](/img/pacific_at_night.png)
 
-Its closest global peer nation in terms of population is Guinea. 
+The following table shows the population of Pacifica in relation to the European Union member states.
+
+~~~
+{{insert /partials/Pacifica_eu_compare_table.html}}	 
+~~~
 
 ### Age Structure
 

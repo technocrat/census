@@ -5,10 +5,10 @@ function process_education_by_nation(educ, nations)
     state_abbrev = create_state_abbrev_map()
     
     # Create a copy of the dataframe to avoid modifying the original
-    edu_data = copy(educ)
-    
+    edu_data               = copy(educ)
+    edu_data.Pop_w_College = edu_data.Pop_w_BA .+ edu_data.Pop_w_GRAD
     # Add nation column
-    edu_data.Nation = map(state -> state_to_nation[state_abbrev[state]], edu_data.State)
+    edu_data.Nation        = map(state -> state_to_nation[state_abbrev[state]], edu_data.State)
     
     # Group by nation and calculate statistics
     nation_stats = combine(groupby(edu_data, :Nation), 

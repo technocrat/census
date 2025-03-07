@@ -31,7 +31,11 @@ Colorado has a population size that lies between Minnesota and Wisconsin. Utah's
 
 ![Deseret at night](/img/desert_at_night.png)
 
-Its closest global peer nation in terms of population is Burundi.
+The following table shows the population of Deseret in relation to the European Union member states.
+
+~~~
+{{insert /partials/Deseret_eu_compare_table.html}}	 
+~~~
 
 
 ### Age Structure

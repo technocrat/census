@@ -1,3 +1,47 @@
+Capital        = "Boston"
+Capital_Coords = "42° 21′ 37″ N, 71° 3′ 28″ W"
+Capital        = "New York"
+Capital_Coords = "40° 42′ 46″ N, 74° 0′ 22″ W"
+Capital        = "Detroit"
+Capital_Coords = "42° 20′ 00″ N, 83° 03′ 00″ W"
+Capital        = "Chicago"
+Capital_Coords = "41° 52′ 55″ N, 87° 37′ 40″ W"
+Capital        = "Minneapolis"
+Capital_Coords = "44° 58′ 55″ N, 93° 16′ 09″ W"
+Capital        = "Denver"
+Capital_Coords = "39° 44′ 42″ N, 104° 57′ 52″ W"
+Capital        = "Houston"
+Capital_Coords = "29° 45′ 46″ N, 95° 22′ 59″ W"
+Capital        = "Seattle"
+Capital_Coords = "47° 36′ 00″ N, 122° 20′ 00″ W"
+Capital        = "San Francisco"
+Capital_Coords = "37° 47′ 00″ N, 122° 25′ 00″ W"
+Capital        = "Los Angeles"
+Capital_Coords = "34° 03′ 00″ N, 118° 15′ 00″ W"
+Capital        = "Phoenix"
+Capital_Coords = "33° 26′ 54″ N, 112° 04′ 26″ W"
+Capital        = "Salt Lake City"
+Capital_Coords = "40° 45′ 39″ N, 111° 53′ 28″ W"
+Capital        = "Atlanta"
+Capital_Coords = "33° 44′ 56″ N, 84° 23′ 24″ W"
+Capital        = "Charlotte"
+Capital_Coords = "35° 13′ 38″ N, 80° 50′ 35″ W"
+Capital        = "Nashville"
+Capital_Coords = "36° 09′ 44″ N, 86° 46′ 28″ W"
+
+
+include("dms_to_decimal.jl")
+pal = ("'Red', 'Green', 'Yellow', 'Blue', 'Purple'",
+    "'#E74C3C', '#2ECC71', '#3498DB', '#F1C40F', '#9B59B6'",
+    "'#FF4136', '#2ECC40', '#0074D9', '#FFDC00', '#B10DC9'",
+    "'#D32F2F', '#388E3C', '#1976D2', '#FBC02D', '#7B1FA2'",
+    "'#FF5733', '#C70039', '#900C3F', '#581845', '#FFC300'")
+centerpoint = dms_to_decimal("$Capital_Coords")
+from = Capital
+file_path = "../_assets/$Capital.html"
+bands = "50, 100, 200, 400"
+band_colors = pal[4]
+bullseye = """
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +100,7 @@
 </div>
 <script>
 var mapOptions = {
-   center: [42.36027777777778, -71.05777777777777],
+   center: [$centerpoint],
    zoom: 7
 };
 var map = new L.map('map', mapOptions);
@@ -66,19 +110,19 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19
 }).addTo(map);
 
-var marker = L.marker([42.36027777777778, -71.05777777777777]);
+var marker = L.marker([$centerpoint]);
 marker.addTo(map);
-marker.bindPopup('Boston').openPopup();
+marker.bindPopup('$from').openPopup();
 
 function milesToMeters(miles) {
    return miles * 1609.34;
 }
 
-var colors = ['#D32F2F', '#388E3C', '#1976D2', '#FBC02D', '#7B1FA2'];
-var radii = [50, 100, 200].map(Number);
+var colors = [$band_colors];
+var radii = [$bands].map(Number);
 
 radii.forEach(function(radius, index) {
-    var circle = L.circle([42.36027777777778, -71.05777777777777], {
+    var circle = L.circle([$centerpoint], {
         radius: milesToMeters(radius),
         color: colors[index],
         weight: 2,
@@ -110,3 +154,9 @@ window.addEventListener('resize', function() {
 </script>
 </body>
 </html>
+"""
+
+open(file_path, "w") do file
+    write(file, bullseye)
+end
+run(`open $file_path`)

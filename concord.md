@@ -33,11 +33,15 @@ Its population is concentrated along the Northeast Corridor from Boston to New Y
 
 ![Concordia at night](/img/concord_night.png)
 
-Its closest global peer nation in terms of population is Guinea. It is roughly the same size as Denmark, Norway and Finland combined or Sweden and one of those other Scandinavian states.
+The following table shows the population of Concordia in relation to the European Union member states.
+
+~~~
+{{insert /partials/Concordia_eu_compare_table.html}}	 
+~~~
 
 ### Age Structure
 
-![Concordia regional age pyramid](/img/Concordia Age Pyramid.png)
+![Concordia regional age pyramid](/img/Concordia_Age_Pyramid.png)
 
 Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
 
@@ -72,11 +76,12 @@ Together with the District of Columbia and Oregon, the Concordia  states have th
 Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023. Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics System, Mortality 2018-2023 on CDC WONDER Online Database, released in 2024. Data are from the Multiple Cause of Death Files, 2018-2023, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program. Accessed on Feb 11, 2025 8:30:16 AM at [CDC WONDER](http://wonder.cdc.gov/ucd-icd10-expanded.html). Deaths were estimated by applying the 2018-2023 crude rate of deaths per 100,000 population to the ACS 2023 population estimates.
 @@
 
+
+When birthrates are below the 2.1 rate, immigration is needed to prevent population decline (and with it economic decline). Either domestic or international, or a combination, immigration is required to make up the numbers.
+
 ~~~
 {{insert /partials/Concordia_growth_table.html}}	 
 ~~~
-
-When birthrates are below the 2.1 rate, immigration is needed to prevent population decline (and with it economic decline). Either domestic or international, or a combination, immigration is required to make up the numbers.
 
 ### Education
 

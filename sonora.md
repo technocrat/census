@@ -31,7 +31,11 @@ As a single state it would be the largest, just as its principal component, Cali
 
 ![New Sonora at night](/img/sonora_at_night.png)
 
-Its closest global peer nation in terms of population is Columbia, and it is slightly larger than South Korea.
+The following table shows the population of New Sonora in relation to the European Union member states.
+
+~~~
+{{insert /partials/New_Sonora_eu_compare_table.html}}	 
+~~~
 
 ### Age Structure
 

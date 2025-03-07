@@ -10,6 +10,7 @@ pacific    = ["WA","OR","AK"]
 sonora     = ["CA","AZ","NM","NV","HI"]
 
 nations    = [concord,cumber,desert,dixie,factoria,heartland,lonestar,metropolis,pacific,sonora]
+EU = ["Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovak Republic", "Slovenia", "Spain", "Sweden"]
 
 Titles = ["Concordia","Cumberland","Deseret","New Dixie","Factoria","Heartlandia", "The Lone Star Republic", "Metropolis", "Pacifica", "New Sonora"]
 
@@ -25,4 +26,6 @@ map_colors = [
    colorant"#a0ced9",  # SKY_BLUE
    colorant"#486ab2"   # BRIGHT_BLUE
 ]
+
+partialsdir(args...) = projectdir("_layout/partials", args...)
 

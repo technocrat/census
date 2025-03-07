@@ -31,7 +31,11 @@ Its largest state, Missouri, has a population between Wisconsin and Maryland, an
 
 ![Heartlandia at night](/img/heartland_at_night.png)
 
-Its closest global peer nation in terms of population is Malawi. It is slightly smaller than Taiwan.
+The following table shows the population of Heartlandia in relation to the European Union member states.
+
+~~~
+{{insert /partials/Heartlandia_eu_compare_table.html}}	 
+~~~
 
 ### Age Structure
 

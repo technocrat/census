@@ -30,7 +30,11 @@ As a single state, it would be the largest by far with a population nearly more 
 
 ![New Dixie at night](/img/dixie_at_night.png)
 
-Its closest global peer nation in terms of population is Kenya, and it is nearly the size of Italy.
+The following table shows the population of New Dixie in relation to the European Union member states.
+
+~~~
+{{insert /partials/New_Dixie_eu_compare_table.html}}	 
+~~~
 
 ### Age Structure
 
