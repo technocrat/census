@@ -38,13 +38,13 @@ The following table shows the population of Cumberland in relation to the Europe
 
 ### Age Structure
 
-![Cumberland regional age pyramid](/img/Cumberland Age Pyramid.png)
+Compared to the United States as a whole, Cumberland has an older population.
 
-Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+![Cumberland regional age pyramid](/img/Cumberland_Age_Pyramid.png)
 
 ![Cumberland state age pyramids](/img/Cumberland_states_age_pyramids.png)
 
-The age distribution differences are reflected in the dependency ratios for the  Concordia states.
+The age distribution differences are reflected in the dependency ratios for the Cumberland states.
 
 ~~~
 {{insert /partials/Cumberland_dependency_table.html}}	
@@ -79,12 +79,27 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 {{insert /partials/Cumberland_education_sentence.html}}	 
 ~~~
 
+
 ## Economy
 
-2 │ cumber      7.27639e11
+## Gross Domestic Product
 
-between Argentina and Poland
-G20
+@@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
+
+Cumberland has a gross domestic product that ranks seventh, behind Pennsylvania, in the United States. It accounts for about 3.2% of the national gross domestic product. 
+
+~~~
+{{insert /partials/Cumberland_eu_gdp_compare_table.html}}	 
+~~~
+
+@@marginnote Sources: [Kentucky](https://ustr.gov/map/state-benefits/ky), [Tennessee](https://ustr.gov/map/state-benefits/tn), [West Virginia](https://ustr.gov/map/state-benefits/wv)@@
+
+In 2024, Kentucky goods exports were \$47.8 billion. The state's largest manufacturing export category is transportation equipment, followed by chemicals, computer and electronic products, machinery and fabricated metal products.
+
+In 2024, Tennessee goods exports were \$38.9 billion. The state's largest manufacturing export category is computer and electronic products, followed by  transportation equipment, chemicals, miscellaneous manufactured commodities and machinery.
+
+In 2024, West Virginia exported \$4.9 billion of goods to the world. The state's largest manufacturing export category is chemicals, followed by transportation equipment, machinery, primary metal manufacturing and petroleum and coal products.
+
 ### Manufacturing
 ### Food
 ### Resource Extraction

@@ -38,9 +38,9 @@ The following table shows the population of Metropolis in relation to the Europe
 
 ### Age Structure
 
-![Metropolis regional age pyramid](/img/Metropolis Age Pyramid.png)
+![Metropolis regional age pyramid](/img/Metropolis_Age_Pyramid.png)
 
-Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+Compared to the United States as a whole, Metropolis has an older population, although that varies by state.
 
 ![Metropolis state age pyramids](/img/Metropolis_states_age_pyramids.png)
 
@@ -48,6 +48,7 @@ Compared to the United States as a whole, Concordia has a younger population, al
 {{insert /partials/Metropolis_dependency_table.html}}	
 ~~~
 
+A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
 
 ## Birth Rates
 
@@ -78,9 +79,21 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 ~~~
 
 
+
 ## Economy
-8 │ metropolis  3.55461e12
-Between UK and India would be 5th largest economy
+
+## Gross Domestic Product
+
+@@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
+
+Metropolis has a gross domestic product that ranks first, ahead of California, in the United States. It accounts for about 15.7% of the national gross domestic product. 
+
+
+~~~
+{{insert /partials/Metropolis_eu_gdp_compare_table.html}}	 
+~~~
+
+
 ### Manufacturing
 ### Food
 ### Resource Extraction

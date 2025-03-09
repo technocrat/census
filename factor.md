@@ -40,13 +40,13 @@ The following table shows the population of Factoria in relation to the European
 
 ### Age Structure
 
-![Factoriaia regional age pyramid](/img/Factoria Age Pyramid.png)
+Compared to the United States as a whole, Factoria, and each of its states, has an older population.
 
-Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+![Factoria regional age pyramid](/img/Factoria_Age_Pyramid.png)
 
 ![Factoria state age pyramids](/img/Factoria_states_age_pyramids.png)
 
-The age distribution differences are reflected in the dependency ratios for the  Concordia states.
+The age distribution differences are reflected in the dependency ratios for the Factoria states.
 
 ~~~
 {{insert /partials/Factoria_dependency_table.html}}	
@@ -87,9 +87,21 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 
 
 
+
 ## Economy
-5 │ factoria    3.69823e12
-Between India and Japan fourth largest
+
+## Gross Domestic Product
+
+@@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
+
+Factoria has a gross domestic product that ranks first, ahead of California, in the United States. It accounts for about 16.3% of the national gross domestic product. 
+
+
+~~~
+{{insert /partials/Factoria_eu_gdp_compare_table.html}}	 
+~~~
+
+
 ### Manufacturing
 ### Food
 ### Resource Extraction

@@ -41,13 +41,15 @@ The following table shows the population of The Lone Star Republic in relation t
 
 ### Age Structure
 
+Compared to the United States as a whole, The Lone Star Republic has a younger population, although that is due solely to the influence of Texas, which is both larger and younger than the other member states.
+
 ~~~
 {{insert /partials/The_Lonestar_Republic_dependency_table.html}}	
 ~~~
 
-![The Lone Star Republic regional age pyramid](/img/The_Lonestar Republic Age Pyramid.png)
+![The Lone Star Republic regional age pyramid](/img/The_Lonestar_Republic_Age_Pyramid.png)
 
-![The Long Star Republic state age pyramids](/img/The Lonestar Republic_states_age_pyramids.png)
+![The Long Star Republic state age pyramids](/img/The_Lonestar_Republic_states_age_pyramids.png)
 
 
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
@@ -81,9 +83,20 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 ~~~
 
 
+
 ## Economy
-7 │ lonestar    2.68478e12
-Between Italy and France, part of G7
+
+## Gross Domestic Product
+
+@@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
+
+The Lone Star Republic has a gross domestic product that ranks second, behind California, in the United States. It accounts for about 11.8% of the national gross domestic product. 
+
+~~~
+{{insert /partials/The_Lone_Star_Republic_eu_gdp_compare_table.html}}	 
+~~~
+
+
 ### Manufacturing
 ### Food
 ### Resource Extraction

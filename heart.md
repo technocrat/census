@@ -39,10 +39,10 @@ The following table shows the population of Heartlandia in relation to the Europ
 
 ### Age Structure
 
-![Heartlandia regional age pyramid](/img/Heartlandia Age Pyramid.png)
+Compared to the United States as a whole, Heartlandia has a younger population, although that varies by state.
 
+![Heartlandia regional age pyramid](/img/Heartlandia_Age_Pyramid.png)
 
-Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
 
 ![Heartlandia state age pyramids](/img/Heartlandia_states_age_pyramids.png)
 
@@ -84,9 +84,21 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 ~~~
 
 
+
 ## Economy
-6 │ heartland   1.38823e12
-Between Indonesia and Spain a g20 country
+
+## Gross Domestic Product
+
+@@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
+
+Heartlandia has a gross domestic product that ranks fourth, behind New York, in the United States. It accounts for about 6.1% of the national gross domestic product. 
+
+
+~~~
+{{insert /partials/Heartlandia_eu_gdp_compare_table.html}}	 
+~~~
+
+
 ### Manufacturing
 ### Food
 ### Resource Extraction

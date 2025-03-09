@@ -39,9 +39,10 @@ The following table shows the population of Pacifica in relation to the European
 
 ### Age Structure
 
-![Pacifica regional age pyramid](/img/Pacifica Age Pyramid.png)
 
-Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+Compared to the United States as a whole, Pacifica has a younger population, although that varies by state.
+
+![Pacifica regional age pyramid](/img/Pacifica_Age_Pyramid.png)
 
 ![Pacifica state age pyramids](/img/Pacifica_states_age_pyramids.png)
 
@@ -80,8 +81,21 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 
 
 ## Economy
-9 │ pacifica    9.94536e11
-Between Switzerland and Saudi Arabia, would be a G20 country
+
+## Gross Domestic Product
+
+@@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
+
+Pacifica has a gross domestic product that ranks fifth, behind Florida, in the United States. It accounts for about 4.9% of the national gross domestic product. 
+
+~~~
+{{insert /partials/Pacifica_eu_gdp_compare_table.html}}	 
+~~~
+
+
+
+
+
 ### Manufacturing
 ### Food
 ### Resource Extraction

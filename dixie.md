@@ -38,19 +38,20 @@ The following table shows the population of New Dixie in relation to the Europea
 
 ### Age Structure
 
+Compared to the United States as a whole, New Dixie has a younger population, although that varies by state.
+
 ~~~
 {{insert /partials/New_Dixie_dependency_table.html}}	
 ~~~
 
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
 
-![New Dixie regional age pyramid](/img/New Dixie Age Pyramid.png)
+![New Dixie regional age pyramid](/img/New_Dixie_Age_Pyramid.png)
 
-Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
 
-![New Dixie state age pyramids](/img/New Dixie_states_age_pyramids.png)
+![New Dixie state age pyramids](/img/New_Dixie_states_age_pyramids.png)
 
-The age distribution differences are reflected in the dependency ratios for the  Concordia states.
+The age distribution differences are reflected in the dependency ratios for the New Dixie states.
 
 
 ## Birth Rates
@@ -81,9 +82,20 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 ~~~
 
 
+
 ## Economy
-4 │ dixie       3.2368e12
-Between France and the UK 6th
+
+## Gross Domestic Product
+
+@@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
+
+New Dixie has a gross domestic product that ranks second, behind California, in the United States. It accounts for about 14.3% of the national gross domestic product. 
+
+~~~
+{{insert /partials/New_Dixie_eu_gdp_compare_table.html}}	 
+~~~
+
+
 ### Manufacturing
 ### Food
 ### Resource Extraction

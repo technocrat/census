@@ -15,7 +15,7 @@
 </iframe>
 ~~~
 
-All of New Sonora lies within 200 miles of Los Angeles except for the eastern half of Arizona. It is bordered by Oregon, Nevada, Utah and Colorado on the north, by Oklahoma and Texas on the east and by Mexico on the south.
+All of New Sonora lies within 200 miles of Los Angeles except for the eastern half of Arizona and all of Hawaii. It is bordered by Oregon, Nevada, Utah and Colorado on the north, by Oklahoma and Texas on the east and by Mexico on the south.
 
 @@marginnote
 Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
@@ -39,11 +39,11 @@ The following table shows the population of New Sonora in relation to the Europe
 
 ### Age Structure
 
-![New Sonora regional age pyramid](/img/New Sonora Age Pyramid.png)
+![New Sonora regional age pyramid](/img/New_Sonora_Age_Pyramid.png)
 
-Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+Compared to the United States as a whole, New Sonora has a younger population, although that varies by state.
 
-![New Sonora state age pyramids](/img/New Sonora_states_age_pyramids.png)
+![New Sonora state age pyramids](/img/New_Sonora_states_age_pyramids.png)
 
 ~~~
 {{insert /partials/New_Sonora_dependency_table.html}}	
@@ -80,11 +80,19 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 ~~~
 
 
-
 ## Economy
 
-10 │ sonora      4.06972e12
-Between India and Japan, world's fourth largest economy after China, Germany and Japan
+## Gross Domestic Product
+
+@@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
+
+New Sonora has a gross domestic product that ranks first, ahead of California, in the United States. It accounts for about 18.0% of the national gross domestic product. 
+
+~~~
+{{insert /partials/New_Sonora_eu_gdp_compare_table.html}}	 
+~~~
+
+
 ### Manufacturing
 ### Food
 ### Resource Extraction

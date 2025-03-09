@@ -95,21 +95,60 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 ~~~
 
 
-@@marginnote Source: [Maine State of Domestic Trade Annual Report 2024](https://www.maine.gov/decd/sites/maine.gov.decd/files/inline-files/Final%20Report%20-%202024%20Annual%20Macro%20Update%20-%20Maine%20DECD.pdf)@@
 ## Economy
 
-	
-	─────┼────────────────────────
-	1 │ concord     1.45634e12
-G20
-	
-gdp between Netherlands and Indonesia\
+### Gross Domestic Product
+
+@@marginnote Sources: [Connecticut](https://ustr.gov/map/state-benefits/ct), [Maine](https://ustr.gov/map/state-benefits/me), [Massachusetts](https://ustr.gov/map/state-benefits/ma), [New Hampsire](https://ustr.gov/map/state-benefits/nh), [Rhode Island](https://ustr.gov/map/state-benefits/ri), [Vermont](https://ustr.gov/map/state-benefits/vt)@@
+
+Concordia has a gross domestic product that ranks fourth, behind New York, ahead of Florida, in the United States. It accounts for about 6.4% of the national gross domestic product. 
+
+The following table shows how Concordia's gross domestic product compares to the 27 nations of the European Union.
+
+@@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
+
+~~~
+{{insert /partials/Concordia_eu_gdp_compare_table.html}}	 
+~~~
 
 ### Manufacturing
-### Food
+
+Concordia’s industries include high-value specialty chemicals specialty polymers, pharmaceutical intermediates, and advanced materials used in electronics, healthcare, and other high-tech sectors. Its aerospace industry includes propulsion, avionics, and systems engineering for unmanned systems, advanced sensor technologies, satellite components, and precision-engineered aerospace parts. General Dynamics Electric Boat division designs, manufactures, maintains and retrofits submarines for the U.S. Navy.
+
+The six Concordia states collectively exported \$67.5 billion in goods to the world in 2024, with Massachusetts leading at \$34.9 billion, followed by Connecticut at \$17.4 billion, New Hampshire at \$7.1 billion and Rhode Island at \$3.1 billion. Maine at \$3.1 billion and Vermont at \$1.9 billion. The region’s economic strength in trade goods lies in sectors such as chemical manufacturing, aerospace, computer and electronic products and precision machinery. However, most states face trade deﬁcits due to reliance on imports for raw materials and consumer goods. Services exports, particularly in education, digital trade, and management consulting, play a signiﬁcant role in offsetting goods deficits, with Massachusetts and Connecticut each exporting \$15 billion in 2023. 
+
+
+### Foods
+
+Concordia's agriculture is a diversified mix of livestock, dairy, fruits, vegetables, and specialty crops. The principal monoculture farming is the potato fields of Arostook County in Maine. Fishing and aquaculture activity includes lobster, cod, haddock and clams.
+
 ### Resource Extraction
+
+Maine has a timber and paper industry and Vermont, New Hampshire and Massachusetts quarry dimension stone.
+
 ### Services
-### Balance of Trade
+
+Financial services, education, healthcare, intellectual property licensing, information technology, and professional consulting, together with tourism, are the leading components of exports in services.
+
+### Balance of trade
+
+Massachusetts and Connecticut, despite high export values, have international trade deficits of \$16.3 billion and \$5.6 billion respectively in goods. New Hampshire maintains a smaller deficit of \$1.9 billion, while Rhode Island experiences a substantial \$12.4 billion shortfall. Maine’s international trade deficit reaches \$15.0 billion, primarily due to petroleum imports. Vermont, with limited data available, shows an estimated \$500 million deficit.
+
+
+~~~
+{{insert /partials/concordia_trade_table.html}}	 
+~~~
+
+@@marginnote Sources: [Top regional exports](https://www.bls.gov/mxp/publications/regional-publications/charts/new-england-top-6-exports.htm) [Regional exports](https://www.bls.gov/mxp/publications/regional-publications/new-england-exports.htm) [Maine trade balances](https://www.maine.gov/decd/sites/maine.gov.decd/files/inline-files/Final%20Report%20-%202024%20Annual%20Macro%20Update%20-%20Maine%20DECD.pdf) [Massachusetts](https://donahue.umass.edu/documents/Treasury_SocioEconomic_Report_Summer2023_Final.pdf)@@
+
+Domestically, Maine has a \$79.3 billion trade surplus with other U.S. states, driven by forest products and seafood exports. Massachusetts and Connecticut leverage their tech and aerospace sectors for positive domestic balances of \$12.9 billion and \$3.8 billion respectively. New Hampshire and Vermont also maintain modest domestic surpluses, while Rhode Island is the only state with a negative balance in both international and domestic trade.
+
+## Political polarization
+
+@@Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
+
+Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority.
 
 ## Assessment
-	
+
+Assuming that US markets remain open to Concordia, it would be a viable standalone nation if it continues to absorb foreign immigration and can meet challenges in housing costs.

@@ -40,13 +40,13 @@ The following table shows the population of Deseret in relation to the European 
 
 ### Age Structure
 
-![Deseret regional age pyramid](/img/Deseret Age Pyramid.png)
+![Deseret regional age pyramid](/img/Deseret_Age_Pyramid.png)
 
-Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
+Compared to the United States as a whole, Deserest has a younger population, although that varies by state.
 
 ![Deseret state age pyramids](/img/Deseret_states_age_pyramids.png)
 
-The age distribution differences are reflected in the dependency ratios for the  Concordia states.
+The age distribution differences are reflected in the dependency ratios for the Deseret states.
 ~~~
 {{insert /partials/Deseret_dependency_table.html}}	
 ~~~
@@ -82,10 +82,20 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 ~~~
 
 
+
 ## Economy
-3 │ desert      8.56006e11
-between Switzerland and Saudi Arabia
-G20
+
+## Gross Domestic Product
+
+@@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
+
+Deseret has a gross domestic product that ranks sixth, behind Illinois, in the United States. It accounts for about 3.8% of the national gross domestic product. 
+
+~~~
+{{insert /partials/Deseret_eu_gdp_compare_table.html}}	 
+~~~
+
+
 ### Manufacturing
 ### Food
 ### Resource Extraction

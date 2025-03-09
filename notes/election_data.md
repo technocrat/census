@@ -1,0 +1,62 @@
+Notes on processing of 2024 county level election results from
+[United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)
+
+# Conversation 1: Importing CSV Data into PostgreSQL
+
+## My Actions
+1. Checked the existence of 2024_gop.csv and 2024_dem.csv files
+2. Examined the structure of the CSV files
+3. Verified PostgreSQL was running using pg_isready
+4. Checked the structure of the census.variable_data table
+5. Imported Republican data from 2024_gop.csv:
+sql
+   BEGIN;
+   CREATE TEMP TABLE temp_gop (geoid varchar(5), value bigint);
+   COPY temp_gop FROM '/Users/ro/projects/census/data/2024_gop.csv' WITH (FORMAT csv, HEADER true);
+   INSERT INTO census.variable_data (geoid, variable_name, value)
+   SELECT t.geoid, 'republican', t.value
+   FROM temp_gop t
+   WHERE EXISTS (SELECT 1 FROM census.counties c WHERE c.geoid = t.geoid);
+   DROP TABLE temp_gop;
+   COMMIT;
+   BEGIN;
+   CREATE TEMP TABLE temp_dem (geoid varchar(5), value bigint);
+   COPY temp_dem FROM '/Users/ro/projects/census/data/2024_dem.csv' WITH (FORMAT csv, HEADER true);
+   INSERT INTO census.variable_data (geoid, variable_name, value)
+   SELECT t.geoid, 'democratic', t.value
+   FROM temp_dem t
+   WHERE EXISTS (SELECT 1 FROM census.counties c WHERE c.geoid = t.geoid);
+   DROP TABLE temp_dem;
+   COMMIT;
+   Result: Imported 3,160 rows, inserted 3,116 rows
+6. Imported Democratic data from 2024_dem.csv using the same approach:
+sql
+   Result: Imported 3,160 rows, inserted 3,116 rows
+
+## Summary
+- Successfully imported data from both CSV files into the PostgreSQL table census.variable_data
+- Data from 2024_gop.csv was imported with variable_name='republican'
+- Data from 2024_dem.csv was imported with variable_name='democratic'
+- 44 rows from each file were skipped because their geoid values weren't in the census.counties table
+
+# Conversation 2: Finding Missing GEOIDs
+
+## My Actions
+1. Created a query to identify the missing geoids:
+   BEGIN;
+   CREATE TEMP TABLE temp_gop (geoid varchar(5), value bigint);
+   COPY temp_gop FROM '/Users/ro/projects/census/data/2024_gop.csv' WITH (FORMAT csv, HEADER true);
+   SELECT t.geoid FROM temp_gop t LEFT JOIN census.counties c ON t.geoid = c.geoid WHERE c.geoid IS NULL ORDER BY t.geoid;
+   DROP TABLE temp_gop;
+   COMMIT;
+## Result
+Found 44 missing geoids that weren't inserted into the database:
+02001   02002   02003   02004   02005   02006   02007   02008   02009   02010
+02011   02012   02014   02015   02017   02018   02019   02021   02022   02023
+02024   02025   02026   02027   02028   02029   02030   02031   02032   02033
+02034   02035   02036   02037   02038   02039   02040   11002   11003   11004
+11005   11006   11007   11008
+## Analysis
+- Most missing geoids start with "02" (Alaska's FIPS state code)
+- A few start with "11" (District of Columbia's FIPS state code)
+- These likely represent boroughs/census areas in Alaska and wards in DC that aren't defined as counties in the census.counties table

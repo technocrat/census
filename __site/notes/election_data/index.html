@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/tufte.css">
+<link rel="stylesheet" href="/css/latex.css">
+<link rel="stylesheet" href="/css/adjust.css"> <!-- sheet to overwrite some clashing styles -->
+<link rel="icon" href="/assets/favicon.png">
+
+   <title>Conversation 1: Importing CSV Data into PostgreSQL</title>  
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="layout">
+  <div id="menu">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/concord/">Concordia</a></li>
+      <li><a href="/metro/">Metropolis</a></li>
+      <li><a href="/factor/">Factoria</a></li>
+      <li><a href="/lonestar/">The Lone Star Republic</a></li>
+      <li><a href="/dixie/">New Dixie</a></li>
+      <li><a href="/cumber/">Cumberland</a></li>
+      <li><a href="/heart/">Heartlandia</a></li>
+      <li><a href="/desert/">Deseret</a></li>
+      <li><a href="/sonora/">New Sonora</a></li>
+      <li><a href="/pacific/">Pacifica</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><p>Notes on processing of 2024 county level election results from <a href="https://tonmcg.github.io/US_County_Level_Election_Results_08-24/">United States General Election Presidential Results by District, Ward, or County from 2008 to 2024</a></p>
+<h1 id="conversation_1_importing_csv_data_into_postgresql"><a href="#conversation_1_importing_csv_data_into_postgresql" class="header-anchor">Conversation 1: Importing CSV Data into PostgreSQL</a></h1>
+<h2 id="my_actions"><a href="#my_actions" class="header-anchor">My Actions</a></h2>
+<ol>
+<li><p>Checked the existence of 2024<em>gop.csv and 2024</em>dem.csv files</p>
+</li>
+<li><p>Examined the structure of the CSV files</p>
+</li>
+<li><p>Verified PostgreSQL was running using pg_isready</p>
+</li>
+<li><p>Checked the structure of the census.variable_data table</p>
+</li>
+<li><p>Imported Republican data from 2024_gop.csv:</p>
+</li>
+</ol>
+<p>sql    BEGIN;    CREATE TEMP TABLE temp<em>gop &#40;geoid varchar&#40;5&#41;, value bigint&#41;;    COPY temp</em>gop FROM &#39;/Users/ro/projects/census/data/2024<em>gop.csv&#39; WITH &#40;FORMAT csv, HEADER true&#41;;    INSERT INTO census.variable</em>data &#40;geoid, variable<em>name, value&#41;    SELECT t.geoid, &#39;republican&#39;, t.value    FROM temp</em>gop t    WHERE EXISTS &#40;SELECT 1 FROM census.counties c WHERE c.geoid &#61; t.geoid&#41;;    DROP TABLE temp<em>gop;    COMMIT;    BEGIN;    CREATE TEMP TABLE temp</em>dem &#40;geoid varchar&#40;5&#41;, value bigint&#41;;    COPY temp<em>dem FROM &#39;/Users/ro/projects/census/data/2024</em>dem.csv&#39; WITH &#40;FORMAT csv, HEADER true&#41;;    INSERT INTO census.variable<em>data &#40;geoid, variable</em>name, value&#41;    SELECT t.geoid, &#39;democratic&#39;, t.value    FROM temp<em>dem t    WHERE EXISTS &#40;SELECT 1 FROM census.counties c WHERE c.geoid &#61; t.geoid&#41;;    DROP TABLE temp</em>dem;    COMMIT;    Result: Imported 3,160 rows, inserted 3,116 rows</p>
+<ol start="6">
+<li><p>Imported Democratic data from 2024_dem.csv using the same approach:</p>
+</li>
+</ol>
+<p>sql    Result: Imported 3,160 rows, inserted 3,116 rows</p>
+<h2 id="summary"><a href="#summary" class="header-anchor">Summary</a></h2>
+<ul>
+<li><p>Successfully imported data from both CSV files into the PostgreSQL table census.variable_data</p>
+</li>
+<li><p>Data from 2024<em>gop.csv was imported with variable</em>name&#61;&#39;republican&#39;</p>
+</li>
+<li><p>Data from 2024<em>dem.csv was imported with variable</em>name&#61;&#39;democratic&#39;</p>
+</li>
+<li><p>44 rows from each file were skipped because their geoid values weren&#39;t in the census.counties table</p>
+</li>
+</ul>
+<h1 id="conversation_2_finding_missing_geoids"><a href="#conversation_2_finding_missing_geoids" class="header-anchor">Conversation 2: Finding Missing GEOIDs</a></h1>
+<h2 id="my_actions__2"><a href="#my_actions__2" class="header-anchor">My Actions</a></h2>
+<ol>
+<li><p>Created a query to identify the missing geoids: BEGIN; CREATE TEMP TABLE temp<em>gop &#40;geoid varchar&#40;5&#41;, value bigint&#41;; COPY temp</em>gop FROM &#39;/Users/ro/projects/census/data/2024<em>gop.csv&#39; WITH &#40;FORMAT csv, HEADER true&#41;; SELECT t.geoid FROM temp</em>gop t LEFT JOIN census.counties c ON t.geoid &#61; c.geoid WHERE c.geoid IS NULL ORDER BY t.geoid; DROP TABLE temp_gop; COMMIT;</p>
+</li>
+</ol>
+<h2 id="result"><a href="#result" class="header-anchor">Result</a></h2>
+<p>Found 44 missing geoids that weren&#39;t inserted into the database: 02001   02002   02003   02004   02005   02006   02007   02008   02009   02010 02011   02012   02014   02015   02017   02018   02019   02021   02022   02023 02024   02025   02026   02027   02028   02029   02030   02031   02032   02033 02034   02035   02036   02037   02038   02039   02040   11002   11003   11004 11005   11006   11007   11008</p>
+<h2 id="analysis"><a href="#analysis" class="header-anchor">Analysis</a></h2>
+<ul>
+<li><p>Most missing geoids start with &quot;02&quot; &#40;Alaska&#39;s FIPS state code&#41;</p>
+</li>
+<li><p>A few start with &quot;11&quot; &#40;District of Columbia&#39;s FIPS state code&#41;</p>
+</li>
+<li><p>These likely represent boroughs/census areas in Alaska and wards in DC that aren&#39;t defined as counties in the census.counties table</p>
+</li>
+</ul>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg"  
+            style="width:44px;height:15px;">
+    </a>
+     Richard Careaga. Last modified: March 09, 2025.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+        </div> <!-- end of id=main -->
+    </div> <!-- end of id=layout -->
+    
+    
+  </body>
+</html>
