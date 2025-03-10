@@ -60,3 +60,9 @@ Found 44 missing geoids that weren't inserted into the database:
 - Most missing geoids start with "02" (Alaska's FIPS state code)
 - A few start with "11" (District of Columbia's FIPS state code)
 - These likely represent boroughs/census areas in Alaska and wards in DC that aren't defined as counties in the census.counties table
+
+Mar 9, 2025 at 12:55:36 PM HI & AK state election results missing from county returns:
+[2024 United States presidential election](https://en.wikipedia.org/wiki/2024_United_States_presidential_election)
+AK GOP 184458 DEM 140026
+HI GOP 193661 DEM 313044
++++++++++++++++++++++++++++++++++++++++

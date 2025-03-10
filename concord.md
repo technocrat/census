@@ -118,7 +118,7 @@ Concordia’s industries include high-value specialty chemicals specialty polyme
 The six Concordia states collectively exported \$67.5 billion in goods to the world in 2024, with Massachusetts leading at \$34.9 billion, followed by Connecticut at \$17.4 billion, New Hampshire at \$7.1 billion and Rhode Island at \$3.1 billion. Maine at \$3.1 billion and Vermont at \$1.9 billion. The region’s economic strength in trade goods lies in sectors such as chemical manufacturing, aerospace, computer and electronic products and precision machinery. However, most states face trade deﬁcits due to reliance on imports for raw materials and consumer goods. Services exports, particularly in education, digital trade, and management consulting, play a signiﬁcant role in offsetting goods deficits, with Massachusetts and Connecticut each exporting \$15 billion in 2023. 
 
 
-### Foods
+### Agriculture
 
 Concordia's agriculture is a diversified mix of livestock, dairy, fruits, vegetables, and specialty crops. The principal monoculture farming is the potato fields of Arostook County in Maine. Fishing and aquaculture activity includes lobster, cod, haddock and clams.
 

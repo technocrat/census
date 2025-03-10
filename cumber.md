@@ -94,16 +94,30 @@ Cumberland has a gross domestic product that ranks seventh, behind Pennsylvania,
 
 @@marginnote Sources: [Kentucky](https://ustr.gov/map/state-benefits/ky), [Tennessee](https://ustr.gov/map/state-benefits/tn), [West Virginia](https://ustr.gov/map/state-benefits/wv)@@
 
-In 2024, Kentucky goods exports were \$47.8 billion. The state's largest manufacturing export category is transportation equipment, followed by chemicals, computer and electronic products, machinery and fabricated metal products.
 
-In 2024, Tennessee goods exports were \$38.9 billion. The state's largest manufacturing export category is computer and electronic products, followed by  transportation equipment, chemicals, miscellaneous manufactured commodities and machinery.
+
+### Manufacturing
+
+
+In 2024, Kentucky goods exports were \$47.8 billion. The state's largest manufacturing export category is transportation equipment, followed by chemicals, computer and electronic products, machinery and fabricated metal products. In 2024, Tennessee goods exports were \$38.9 billion. The state's largest manufacturing export category is computer and electronic products, followed by  transportation equipment, chemicals, miscellaneous manufactured commodities and machinery.
 
 In 2024, West Virginia exported \$4.9 billion of goods to the world. The state's largest manufacturing export category is chemicals, followed by transportation equipment, machinery, primary metal manufacturing and petroleum and coal products.
 
-### Manufacturing
-### Food
+
+### Agriculture
+
+Kentucky produces soybeans, chicken, cattle, horses and corn. Tennessee production of agricultural commodities is smaller—none of its products is has as large a value as the Kentucky produce. The total value of all of West Virginia's crops is smaller than any of the leading crops of the other two states.
+
 ### Resource Extraction
+
+West Virginia and Tennessee produce bituminous coal, and all three states produce natural gas.
+
 ### Services
+
+Tennessee has a significant services sector, with \$12 billion in total services exports in 2022 including insurance services and financial transactions, telecom, computer and information services and logistics (Federal Express has a major presence in Tennessee). Information for Kentucky and West Virginia is limited. Kentucky provides race horse training and West Virginia has flight training and aircraft maintenance services.
+
 ### Balance of Trade
+
+Insufficient information was found to estimate balance of payments.
 
 ## Assessment

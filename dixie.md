@@ -95,8 +95,21 @@ New Dixie has a gross domestic product that ranks second, behind California, in 
 {{insert /partials/New_Dixie_eu_gdp_compare_table.html}}	 
 ~~~
 
-
 ### Manufacturing
+
+In 2024, Florida goods exports were \$72.2 billion. In 2024, Florida exported \$65.7 billion of manufactured products. The state's largest manufacturing export category is computer and electronic products, followed by transportation equipment, chemicals, machinery and food and kindred products.
+
+In 2024, Georgia goods exports were \$53.1 billion. In 2024, Georgia exported \$48.0 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by computer and electronic products, machinery, chemicals and paper.
+
+In 2024, North Carolina goods exports were \$42.8 billion. In 2024, North Carolina exported \$40.2 billion of manufactured products. The state's largest manufacturing export category is chemicals, followed by machinery, transportation equipment, computer and electronic products and electrical equipment, appliances and components.
+
+In 2024, South Carolina goods exports were $38.0 billion. In 2024, South Carolina exported $37.2 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by chemicals, plastics and rubber products, machinery and fabricated metal products.
+
+In 2024, Alabama exported \$26.8 billion of goods. In 2024, Alabama exported \$23.4 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by primary metal manufacturing, chemicals, machinery and paper.
+
+In 2024, Mississippi goods exports were \$13.7 billion. In 2024, Mississippi exported \$13.0 billion of manufactured products. The state's largest manufacturing export category is petroleum and coal products, followed by computer and electronic products, miscellaneous manufactured commodities, chemicals and transportation equipment.
+
+
 ### Food
 ### Resource Extraction
 ### Services

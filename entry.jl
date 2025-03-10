@@ -2,47 +2,27 @@
 
 include("scripts/setup.jl")
 
-df = get_state_pop()
+df           = get_state_pop()
+gop          = get_gop_votes()
+dem          = get_dem_votes()
+df           = leftjoin(df,gop,on = :stusps)
+df           = leftjoin(df,dem,on = :stusps)
+sort!(df,:stusps)
+df[1,3]      = 184458    # Alaska county-level returns missing from source data
+df[1,4]      = 140026
+df[12,3]     = 193661    # Hawaii county-level returns missing from source data
+df[12,4]     = 313044
+df.nation    = [get_nation_title(state, nations, Titles) for state in df.stusps]
 
-function get_gop_votes()
-    geo_query = """
-        SELECT us.geoid, us.stusps, us.name, us.nation, ST_AsText(us.geom) as geom, vd.value as gop
-        FROM census.counties us
-        LEFT JOIN census.variable_data vd
-            ON us.geoid = vd.geoid
-            AND vd.variable_name = 'republican'
-    """
-    us = q(geo_query)
-    
-    us = dropmissing(us, :nation)
-    sort!(us,[:nation,:stusps])
-    mask = [s ∉ ["PR","VI","AS","GU","MP"] for s ∈ us.stusps]
+nation_votes = combine(groupby(df, :nation), 
+    :pop    => sum,
+    :gop    => sum,
+    :dem    => sum
+)
 
-    us = us[mask,:] 
-    return(combine(groupby(us, :stusps), :gop => sum => :gop))
-end
+nation_votes.participation = (nation_votes.gop_sum .+ nation_votes.dem_sum) ./ nation_vote.pop_sum
+nation_votes.gop_pct       =  nation_votes.gop_sum ./ (nation_votes.gop_sum .+ nation_votes.dem_sum)
+nation_votes.dem_pct       =  nation_votes.dem_sum ./ (nation_votes.gop_sum .+ nation_votes.dem_sum)
+nation_votes.margin        =  abs.(nation_votes.gop_pct .- nation_votes.dem_pct)
 
-function get_dem_votes()
-    geo_query = """
-        SELECT us.geoid, us.stusps, us.name, us.nation, ST_AsText(us.geom) as geom, vd.value as dem
-        FROM census.counties us
-        LEFT JOIN census.variable_data vd
-            ON us.geoid = vd.geoid
-            AND vd.variable_name = 'democratic'
-    """
-    us = q(geo_query)
-    
-    us = dropmissing(us, :nation)
-    sort!(us,[:nation,:stusps])
-    mask = [s ∉ ["PR","VI","AS","GU","MP"] for s ∈ us.stusps]
-
-    us = us[mask,:] 
-    return(combine(groupby(us, :stusps), :dem => sum => :dem))
-end
-
-df = leftjoin(df,gop,on = :stusps)
-df = leftjoin(df,dem,on = :stusps)
-
-"""
-TODO: Get HI/AK state election results to insert into gop & dem tables
-"""
+sort!(nation_votes,:nation)
