@@ -86,7 +86,7 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 
 ## Economy
 
-## Gross Domestic Product
+### Gross Domestic Product
 
 @@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
 
@@ -98,9 +98,25 @@ The Lone Star Republic has a gross domestic product that ranks second, behind Ca
 
 
 ### Manufacturing
+
+@@marginnote Sources: [Texas](https://ustr.gov/map/state-benefits/tx), [Louisiana](https://ustr.gov/map/state-benefits/la), [Arkansas](https://ustr.gov/map/state-benefits/ar), [Oklahoma](https://ustr.gov/map/state-benefits/ok)@@
+
+In 2024, Texas exported \$455.0 billion of goods to the world. In 2024, Texas goods exports were \$455.0 billion. In 2024, Texas exported \$293.2 billion of manufactured products. The state's largest manufacturing export category is petroleum and coal products, followed by computer and electronic products, chemicals, transportation equipment and machinery. 
+
+In 2024, Louisiana exported \$87.0 billion of goods to the world. In 2024, Louisiana exported \$42.8 billion of manufactured products. The state's largest manufacturing export category is petroleum and coal products followed by chemicals, food and kindred products, machinery and wood products.
+
+In 2024, Arkansas exported \$6.9 billion of goods to the world. In 2024, Arkansas exported \$6.1 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by food and kindred products, chemicals, machinery and paper. 
+
+In 2024, Oklahoma exported \$7.7 billion of goods to the world. In 2024, Oklahoma exported \$7.4 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by machinery, chemicals, computer and electronic products and fabricated metal products.
+
+
 ### Food
+
+
 ### Resource Extraction
+
 ### Services
+
 ### Balance of Trade
 
 ## Assessment

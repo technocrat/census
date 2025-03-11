@@ -82,7 +82,7 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 
 ## Economy
 
-## Gross Domestic Product
+### Gross Domestic Product
 
 @@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
 
@@ -94,12 +94,13 @@ Cumberland has a gross domestic product that ranks seventh, behind Pennsylvania,
 
 @@marginnote Sources: [Kentucky](https://ustr.gov/map/state-benefits/ky), [Tennessee](https://ustr.gov/map/state-benefits/tn), [West Virginia](https://ustr.gov/map/state-benefits/wv)@@
 
-
+The three states of Cumberland export \$91.6 billion in goods.
 
 ### Manufacturing
 
+In 2024, Kentucky goods exports were \$47.8 billion. The state's largest manufacturing export category is transportation equipment, followed by chemicals, computer and electronic products, machinery and fabricated metal products. 
 
-In 2024, Kentucky goods exports were \$47.8 billion. The state's largest manufacturing export category is transportation equipment, followed by chemicals, computer and electronic products, machinery and fabricated metal products. In 2024, Tennessee goods exports were \$38.9 billion. The state's largest manufacturing export category is computer and electronic products, followed by  transportation equipment, chemicals, miscellaneous manufactured commodities and machinery.
+In 2024, Tennessee goods exports were \$38.9 billion. The state's largest manufacturing export category is computer and electronic products, followed by  transportation equipment, chemicals, miscellaneous manufactured commodities and machinery.
 
 In 2024, West Virginia exported \$4.9 billion of goods to the world. The state's largest manufacturing export category is chemicals, followed by transportation equipment, machinery, primary metal manufacturing and petroleum and coal products.
 

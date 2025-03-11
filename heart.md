@@ -100,6 +100,24 @@ Heartlandia has a gross domestic product that ranks fourth, behind New York, in 
 
 
 ### Manufacturing
+
+@@marginnote Sources: [Minnesota](https://ustr.gov/map/state-benefits/mn), [Iowa](https://ustr.gov/map/state-benefits/ia), [Missouri](https://ustr.gov/map/state-benefits/mo), [North Dakota](https://ustr.gov/map/state-benefits/nd), [South Dakota](https://ustr.gov/map/state-benefits/sd), [Nebraska](https://ustr.gov/map/state-benefits/ne), [Kansas](https://ustr.gov/map/state-benefits/ks)@@
+
+In 2024, Minnesota goods exports were \$26.6 billion, In 2024, Minnesota exported \$24.6 billion of manufactured products. The state's largest manufacturing export category is computer & electronic products, followed by machinery, transportation equipment, petroleum and coal products and miscellaneous manufactured commodities. 
+
+In 2024, Iowa exported \$17.0 billion of goods to the world. In 2024, Iowa goods exports were \$17.0 billion. In 2024, Iowa exported \$14.8 billion of manufactured products. The state's largest manufacturing export category is food & kindred products, followed by machinery, chemicals, transportation equipment and computer and electronic products. 
+
+Missouri goods exports were \$19.4 billion. In 2024, Missouri exported \$17.0 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by chemicals, machinery, food and kindred products and computer and electronic products. 
+
+In 2024, North Dakota exported \$5.5 billion of goods to the world. In 2024, North Dakota exported \$4.0 billion of manufactured products. The state's largest manufacturing export category is petroleum and coal products, followed by machinery, chemicals, food and kindred products and transportation equipment.
+
+In 2024, South Dakota exported \$2.1 billion of goods to the world. In 2024, South Dakota goods exports were \$2.1 billion, In 2024, South Dakota exported \$1.9 billion of manufactured products. The state's largest manufacturing export category is food and kindred products, followed by chemicals, machinery, beverages and tobacco product and transportation equipment.
+
+In 2024, Nebraska exported \$8.2 billion of goods to the world. In 2024, Nebraska exported \$6.9 billion of manufactured products. The state's largest manufacturing export category is food and kindred products, followed by machinery, chemicals, transportation equipment and computer and electronic products.
+
+In 2024, Kansas exported \$14.4 billion of goods to the world. In 2024, Kansas exported \$12.6 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by food and kindred products, computer and electronic products, machinery and chemicals.
+
+
 ### Food
 ### Resource Extraction
 ### Services

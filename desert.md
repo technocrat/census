@@ -84,7 +84,7 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 
 ## Economy
 
-## Gross Domestic Product
+### Gross Domestic Product
 
 @@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
 
@@ -96,15 +96,18 @@ Deseret has a gross domestic product that ranks sixth, behind Illinois, in the U
 
 @@marginnote Sources: [Colorado](https://ustr.gov/map/state-benefits/co), [Utah](https://ustr.gov/map/state-benefits/ut), [Montana](https://ustr.gov/map/state-benefits/mt), [Idado](https://ustr.gov/map/state-benefits/id), [Wyoming](https://ustr.gov/map/state-benefits/wy)@@
 
-### Manufacturing
+The states of Desert export \$37.3 billion in goods.
 
-In 2024, Colorado goods exports were \$10.5 billion. The state's largest manufacturing export category is food & kindred products, followed by computer and electronic products, machinery, chemicals and transportation equipment. 
+### Manufacturing
 
 In 2024, Utah goods exports were \$18.2 billion. The state's largest manufacturing export category is primary metal manufacturing, followed by computer and electronic products, chemicals, miscellaneous manufactured commodities and transportation equipment.
 
-In 2024, Montana goods exports were \$2.4 billion. The state's largest manufacturing export category is chemicals, followed by machinery, transportation equipment, primary metal manufacturing and nonmetallic mineral products.
+In 2024, Colorado goods exports were \$10.5 billion. The state's largest manufacturing export category is food & kindred products, followed by computer and electronic products, machinery, chemicals and transportation equipment. 
+
 
 In 2024, Idaho exported \$4.2 billion of goods to the world. The state's largest manufacturing export category is food and kindred products, followed by computer and electronic products, chemicals, machinery and primary metal manufacturing.
+
+In 2024, Montana goods exports were \$2.4 billion. The state's largest manufacturing export category is chemicals, followed by machinery, transportation equipment, primary metal manufacturing and nonmetallic mineral products.
 
 In 2024, Wyoming goods exports were \$2.1 billion. The state's largest manufacturing export category is chemicals, followed by computer and electronic products, machinery, petroleum and coal products and transportation equipment.
 

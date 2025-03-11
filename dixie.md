@@ -85,17 +85,21 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 
 ## Economy
 
-## Gross Domestic Product
+### Gross Domestic Product
 
 @@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
 
 New Dixie has a gross domestic product that ranks second, behind California, in the United States. It accounts for about 14.3% of the national gross domestic product. 
 
 ~~~
-{{insert /partials/New_Dixie_eu_gdp_compare_table.html}}	 
+{{insert /partials/New_Dixie_eu_gdp_compare_table.html}}
 ~~~
 
+The New Dixie state export \$246.6 billion in goods annually.
+
 ### Manufacturing
+
+@@marginnote Sources: [Florida](https://ustr.gov/map/state-benefits/fl), [Georgia](https://ustr.gov/map/state-benefits/ga), [North Carolina](https://ustr.gov/map/state-benefits/nc), [South Carolina](https://ustr.gov/map/state-benefits/sc), [Alabama](https://ustr.gov/map/state-benefits/al), [Mississippi](https://ustr.gov/map/state-benefits/ms)@@
 
 In 2024, Florida goods exports were \$72.2 billion. In 2024, Florida exported \$65.7 billion of manufactured products. The state's largest manufacturing export category is computer and electronic products, followed by transportation equipment, chemicals, machinery and food and kindred products.
 
@@ -103,17 +107,24 @@ In 2024, Georgia goods exports were \$53.1 billion. In 2024, Georgia exported \$
 
 In 2024, North Carolina goods exports were \$42.8 billion. In 2024, North Carolina exported \$40.2 billion of manufactured products. The state's largest manufacturing export category is chemicals, followed by machinery, transportation equipment, computer and electronic products and electrical equipment, appliances and components.
 
-In 2024, South Carolina goods exports were $38.0 billion. In 2024, South Carolina exported $37.2 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by chemicals, plastics and rubber products, machinery and fabricated metal products.
+In 2024, South Carolina goods exports were \$38.0 billion. In 2024, South Carolina exported \$37.2 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by chemicals, plastics and rubber products, machinery and fabricated metal products.
 
 In 2024, Alabama exported \$26.8 billion of goods. In 2024, Alabama exported \$23.4 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by primary metal manufacturing, chemicals, machinery and paper.
 
 In 2024, Mississippi goods exports were \$13.7 billion. In 2024, Mississippi exported \$13.0 billion of manufactured products. The state's largest manufacturing export category is petroleum and coal products, followed by computer and electronic products, miscellaneous manufactured commodities, chemicals and transportation equipment.
 
-
 ### Food
+
+Florida's primary food crop historically has been citrus, accounting for about \$9 billion in economic output. However, current production is down by 70% from peak levels due to citrus greening disease, adverse weather events, foreign competition, declining acreage lost to urban development, uncertain labor market due to pending immigration measures and changing consumer preferences.
+
+Georgia produces grapes, berries, nuts, citrus fruits, and grains. North Carolina  produces tobacco, cotton, and sweet potatoes. Alabama is the top producer of cotton. South Carolina and Mississippi have many farms producing commodity row crops.
+
 ### Resource Extraction
+
+Alabama and Mississippi fossil fuel production, including a large coal industry in Alabama. Florida mines, phosphate, used in fertilizer. The other states produce a variety of industrial minerals, such as silica.
+
 ### Services
-### Balance of Trade
+
+Except for Florida, data was not found regarding exported services. Florida exports approximately \$47 billion in services, including insuranace and other financial services, telecom and data processing and transportation and logistics.
 
 ## Assessment
-	

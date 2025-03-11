@@ -82,7 +82,7 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 
 ## Economy
 
-## Gross Domestic Product
+### Gross Domestic Product
 
 @@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
 
@@ -95,6 +95,23 @@ Metropolis has a gross domestic product that ranks first, ahead of California, i
 
 
 ### Manufacturing
+
+@@marginnote Sources: [New York](https://ustr.gov/map/state-benefits/ny), [Pennsylvania](https://ustr.gov/map/state-benefits/pa), [Virginia](https://ustr.gov/map/state-benefits/va), [Maryland](https://ustr.gov/map/state-benefits/md), [Delaware](https://ustr.gov/map/state-benefits/de), [New Jersey](https://ustr.gov/map/state-benefits/nj)@@
+
+In 2024, New York exported \$91.2 billion of goods to the world. In 2024, New York exported \$72.7 billion of manufactured products. The state's largest manufacturing export category is miscellaneous manufactured commodities, followed by primary metal manufacturing, computer and electronic products, chemicals and machinery. 
+
+In 2024, Pennsylvania goods exports were \$53.2 billion. In 2024, Pennsylvania exported \$45.9 billion of manufactured products. The state's largest manufacturing export category is chemicals, followed by computer and electronic products, machinery, primary metal manufacturing and transportation equipment.
+
+In 2024, New Jersey goods exports were \$42.9 billion. In 2024, New Jersey exported \$37.7 billion of manufactured products. The state's largest manufacturing export category is chemicals, followed by computer and electronic products, primary metal manufacturing, miscellaneous manufactured commodities and petroleum and coal products.
+
+In 2024, Virginia goods exports were \$21.8 billion. In 2024, Virginia exported \$15.4 billion of manufactured products. The state's largest manufacturing export category is chemicals, followed by computer and electronic products, transportation equipment, machinery, and food and kindred products.
+
+In 2024, Maryland goods exports were \$17.9 billion. In 2024, Maryland exported \$13.2 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by chemicals, machinery, computer and  electronic products and electrical equipment, appliances and components.
+
+In 2024, Delaware goods exports were \$4.7 billion. In 2024, Delaware exported \$4.4 billion of manufactured products. The state's largest manufacturing export category is chemicals, followed by computer and electronic products, machinery, transportation equipment and plastics and rubber products.
+
+
+
 ### Food
 ### Resource Extraction
 ### Services

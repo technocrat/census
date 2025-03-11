@@ -85,12 +85,9 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 {{insert /partials/Factoria_education_sentence.html}}	 
 ~~~
 
-
-
-
 ## Economy
 
-## Gross Domestic Product
+### Gross Domestic Product
 
 @@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
 
@@ -101,12 +98,34 @@ Factoria has a gross domestic product that ranks first, ahead of California, in 
 {{insert /partials/Factoria_eu_gdp_compare_table.html}}	 
 ~~~
 
+The Factoria states export \$286.4 in goods each year.
 
 ### Manufacturing
+
+@@marginnote Sources: [Illinois](https://ustr.gov/map/state-benefits/il), [Michigan](https://ustr.gov/map/state-benefits/mi), [Ohio](https://ustr.gov/map/state-benefits/oh), [Indiana](https://ustr.gov/map/state-benefits/in), [Wisconsin](https://ustr.gov/map/state-benefits/wi)@@
+
+In 2024, Illinois exported a record \$80.8 billion of goods to the world. In 2024, Illinois exported \$72.8 billion of manufactured products. The state's largest manufacturing export category is chemicals,followed by machinery,computer and electronic products, transportation equipment and food and kindred products.
+
+In 2024, Michigan exported \$61.6 billion of goods to the world. In 2024, Michigan exported \$58.9 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by machinery, chemicals, electrical equipment, appliances and components and computer and electronic products.
+
+In 2024, Indiana exported a record \$59.9 billion of goods to the world. In 2024, Indiana exported \$59.0 billion of manufactured products. The state's largest manufacturing export category is chemicals, followed by transportation equipment, machinery, miscellaneous manufactured commodities and computer and electronic products.
+
+In 2024, Ohio exported \$56.6 billion of goods to the world. In 2024, Ohio exported \$52.8 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by chemicals, machinery, fabricated metal products and primary metal manufacturing.
+
+In 2024, Wisconsin exported \$27.5 billion of goods to the world. In 2024, Wisconsin exported \$26.3 billion of manufactured products. The state's largest manufacturing export category is machinery, followed by computer and electronic products, transportation equipment, chemicals and food and kindred products.
+
+
 ### Food
+
+The states of Factoria produce soybean, corn and wheat, as well as livestock. In addition, Wisconsin is a major producer of dairy products.
+
 ### Resource Extraction
+
+Illinois and Indiana produce coal and Ohio produces natural gas.
+
 ### Services
-### Balance of Trade
+
+ In 2022, Illinois exported \$43 billion in services, with digitally tradable services accounting for \$28 billion. Key sectors include financial services, insurance services, and telecom, computer, and information services. Michigan's services exports totaled \$14 billion in 2022, with digitally tradable services at \$7.8 billion. Key sectors include financial services, insurance services, and telecom, computer, and information services. In 2022, Indiana exported nearly \$8 billion in services, with digitally tradable services at \$6.6 billion. Key sectors include financial services, insurance services, and telecom, computer, and information services.  Ohio exported \$23 billion in services in 2022, with digitally tradable services at \$15 billion. Key sectors include financial services, insurance services, and telecom, computer, and information services. Wisconsin exported \$8.4 billion in services in 2023.
 
 ## Assessment
 	
