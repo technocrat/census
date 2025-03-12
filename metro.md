@@ -110,12 +110,18 @@ In 2024, Maryland goods exports were \$17.9 billion. In 2024, Maryland exported 
 
 In 2024, Delaware goods exports were \$4.7 billion. In 2024, Delaware exported \$4.4 billion of manufactured products. The state's largest manufacturing export category is chemicals, followed by computer and electronic products, machinery, transportation equipment and plastics and rubber products.
 
-
-
 ### Food
+
+New York has a large dairy industry, and has over a million acres planted in sweet and field corn. Pennsylvania also has a large dairy industry and is the leading producer of mushrooms in the United States. Both New York and Pennsylvania are significant producers of apples. New Jersey is known for producing over 100 types of fruits and vegetables, including blueberries, cranberries, peaches, and tomatoes. The poultry industry, including broilers, turkeys, and eggs, is Virginia's leading agricultural sector.
+
 ### Resource Extraction
+
+Pennsylvania is a major producer of coal, oil, and natural gas, particularly from the Marcellus shale. Maryland has significant coal mining in its western counties.
+
 ### Services
-### Balance of Trade
+
+New York is a global hub for financial services, with significant exports in management and advisory services (\$25 billion) and other financial services and digitally tradable services.
+
 
 ## Assessment
 	

@@ -82,7 +82,7 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 
 ## Economy
 
-## Gross Domestic Product
+### Gross Domestic Product
 
 @@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
 
@@ -92,11 +92,31 @@ New Sonora has a gross domestic product that ranks first, ahead of California, i
 {{insert /partials/New_Sonora_eu_gdp_compare_table.html}}	 
 ~~~
 
-
 ### Manufacturing
-### Food
-### Resource Extraction
-### Services
-### Balance of Trade
 
-## Assessment
+@@marginnote Sources: [California](https://ustr.gov/map/state-benefits/ca), [Arizona](https://ustr.gov/map/state-benefits/az), [New Mexico](https://ustr.gov/map/state-benefits/nm), [Nevada](https://ustr.gov/map/node/7244), [Hawaii](https://ustr.gov/map/state-benefits/hi)@@
+
+In 2024, California goods exports were \$183.3 billion. In 2024, California exported \$158.7 billion of manufactured products. The state's largest manufacturing export category is computer and electronic products, followed by machinery, transportation equipment, chemicals and miscellaneous manufactured commodities.
+
+In 2024, Arizona goods exports were \$32.2 billion. In 2024, Arizona exported \$27.8 billion of manufactured products. The state's largest manufacturing export category is computer and electronic products, followed by transportation equipment, machinery, electrical equipment, appliances and components and miscellaneous manufactured commodities. 
+
+In 2024, New Mexico goods exports were \$12.0 billion, In 2024, New Mexico exported \$11.6 billion of manufactured products. The state's largest manufacturing export category is computer and electronic products, followed by electrical equipment, appliances and components, chemicals, food and kindred products and machinery.
+
+In 2018, Nevada goods exports were \$11.1 billion. In 2018, Nevada exported \$10.4 billion of manufactured products. The state's largest manufacturing export category is primary metal manufacturing, followed by computer and electronic products, miscellaneous manufactured commodities, electrical equipment, appliances and components and machinery.
+
+In 2024, Hawaii goods exports were \$461 million. In 2024, Hawaii exported \$305 million of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by petroleum and coal products, food and kindred products, computer and electronic products and electrical equipment, appliances and components.
+
+### Food
+
+California is the leading farm-export state in the U.S., with agricultural exports totaling about \$24 billion. The state's top agricultural exports include almonds, dairy and dairy products, pistachios and win. Arizona's top agricultural export is cotton. Major world exports from New Mexico include tree nuts, dairy, wheat and wheat products, and grain and grain products.
+
+
+### Resource Extraction
+
+California is a significant producer of crude oil and natural gas. Arizona is a leading copper-producing state in the U.S. Arizona also produces molybdenum. New Mexico is also a major producer of copper and potash. Nevada is the top gold-producing state in the U.S.
+
+### Services
+
+California is a leader in service exports, with total service exports reaching \$162 billion in 2019. Key sectors include, business, professional, and technical services, financial and insurance services, royalties ands license fees, telecommunications, computer and information services, travel and tourism and educational services, particularly to countries like China, Canada, and Mexico.
+
+Nevada service exports are dominated by tourism and entertainment as are Hawaii's service exports

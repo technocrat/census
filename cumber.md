@@ -117,8 +117,4 @@ West Virginia and Tennessee produce bituminous coal, and all three states produc
 
 Tennessee has a significant services sector, with \$12 billion in total services exports in 2022 including insurance services and financial transactions, telecom, computer and information services and logistics (Federal Express has a major presence in Tennessee). Information for Kentucky and West Virginia is limited. Kentucky provides race horse training and West Virginia has flight training and aircraft maintenance services.
 
-### Balance of Trade
-
-Insufficient information was found to estimate balance of payments.
-
 ## Assessment

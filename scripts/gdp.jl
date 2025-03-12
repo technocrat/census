@@ -18,7 +18,7 @@ us_gdp.nation     .= ifelse.(in.(:state, Ref(sonora)), "sonora", us_gdp.nation)
 
 us_gdp.nation = map(state -> begin
     # Get the abbreviation
-    abbr = get(reverse_state_names, state, nothing)
+    abbr = get(reverse_state_dict, state, nothing)
     # Return the nation
     abbr === nothing ? "Unknown" : get_nation(abbr)
 end, us_gdp.state)

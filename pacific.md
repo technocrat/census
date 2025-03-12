@@ -82,7 +82,7 @@ Source: [Wikipedia](https://www.wikiwand.com/en/articles/List_of_U.S._states_and
 
 ## Economy
 
-## Gross Domestic Product
+### Gross Domestic Product
 
 @@marginnote Source: [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)@@
 
@@ -92,15 +92,32 @@ Pacifica has a gross domestic product that ranks fifth, behind Florida, in the U
 {{insert /partials/Pacifica_eu_gdp_compare_table.html}}	 
 ~~~
 
-
-
-
-
 ### Manufacturing
+
+@@marginnote Sources: [Washington](https://ustr.gov/map/state-benefits/wa), [Oregon](https://ustr.gov/map/state-benefits/or), [Alaska](https://ustr.gov/map/state-benefits/ak)@@
+
+In 2024, Washington goods exports were \$57.8 billion In 2024, Washington exported \$40.7 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by computer and electronic products, petroleum and coal products and machinery.
+
+In 2024, Oregon goods exports were \$34.1 billion. In 2024, Oregon exported \$31.8 billion of manufactured products. The state's largest manufacturing export category is computer and electronic products, followed by transportation equipment, machinery, chemicals, and electrical equipment, appliances & components.
+
+In 2024, Alaska goods exports were \$5.9 billion. In 2024, Alaska exported \$1.4 billion of manufactured products. The state's largest manufacturing export category is primary metal manufacturing, followed by transportation equipment, petroleum and coal products, computer and electronic products and food and kindred products.
+
 ### Food
+
+
+Washington is a major agricultural exporter, with \$7.5 billion in food and agriculture exports in 2023 potatoes, fish and seafood, wheat, apples, dairy and hay. Washington is the leading U.S. producer of hops, apples, and blueberries.
+
+Oregon exported over \$2 billion in agricultural goods exported including seeds, cut flowers, and other horticulture. Oregon is the number one U.S. producer of blackberries, hazelnuts, peppermint, cranberries, rhubarb, grass seed, florist azaleas, and Christmas trees.
+
+Alaska's agricultural exports are more limited compared to Washington and Oregon, totaled \$20.6 million in 2022.
+
 ### Resource Extraction
+
+Washington exports \$1.1 billion in fish and seafood and \$3.06 billion in forest products in 2021. Oregon is also a significant exporter of forest products. Alaska exports zinc and lead ores and concentrates and frozen seafood.
+
 ### Services
-### Balance of Trade
+
+Washington's service exports are primarily dominated by the technology sector including software development and cloud computing services. Oregon also exports technology services and has a tourist industry. Alaska's service exports are largely centered around its unique geographical and natural features for tourism and international freight operations.
 
 ## Assessment
 	

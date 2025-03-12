@@ -112,12 +112,73 @@ In 2024, Oklahoma exported \$7.7 billion of goods to the world. In 2024, Oklahom
 
 ### Food
 
-
+The Texas agricultural export section is dominated by cattle. It is the top U.S. exporter of cotton. Oklahoma is the second ranking cattle export state, behind Texas. Soybeans are the largest agricultural export for Arkansas, and the state is also the top exporter of rice in the U.S. Louisiana exports soybeans, rice and sugarcane.
 ### Resource Extraction
+
+Texas is a leading producer and exporter of crude oil, dry natural gas and liquified national gas. Oklahoma also produces and exports natural gas. Louisiana is a major hub for natural gas exports, and is a significant producer and exporter of crude oil.
+
+Louisiana and Texas combined accounted for \$267.2 billion in energy export trade dollar value in 2024, representing 83.4% of U.S. energy exports
 
 ### Services
 
+Texas
+Technology services: Texas is a hub for IT and software development, with significant exports of tech-related services.
+
+Energy-related services: Expertise in oil and gas exploration and production is a major export.
+
+Financial and professional services: Texas hosts numerous multinational corporations offering consulting, legal, and financial services internationally.
+
+Oklahoma
+Energy services: Services related to oil and natural gas extraction are key exports.
+
+Aerospace engineering: Oklahoma's aerospace industry supports international clients through maintenance, repair, and overhaul (MRO) services.
+
+Arkansas
+Logistics and supply chain management: Arkansas is home to Walmart, which drives expertise in logistics services.
+
+Agricultural technology services: Support for farming and food production globally.
+
+Louisiana
+Port and logistics services: Louisiana's ports handle a large volume of U.S. exports, providing critical logistics services.
+
+Energy infrastructure services: Expertise in LNG terminal operations and energy distribution is exported globally.
+
 ### Balance of Trade
+
+Texas
+Total Exports (2024): $455.0 billion
+
+Total Imports: Not explicitly provided in the results, but Texas is a major importer due to its large ports and industries.
+
+Trade Balance: Likely positive, given its massive export volume, particularly in energy and manufacturing.
+
+Oklahoma
+Total Exports (2023): $5.5 billion
+
+Total Imports: Not specified in the results.
+
+Trade Balance: Likely negative or balanced, as Oklahoma’s export volume is relatively modest compared to larger states.
+
+Arkansas
+Total Exports (2021): $11.6 billion
+
+Total Imports (2021): $19.8 billion
+
+Trade Balance (2021): -$8.2 billion (negative trade balance).
+
+Louisiana
+Total Exports (2024): $87.0 billion
+
+Total Imports (2023): $38.2 billion
+
+Trade Balance: +$48.8 billion (positive trade balance), driven by strong exports in liquefied natural gas (LNG), petroleum products, and agricultural goods.
+
+In summary:
+
+Texas and Louisiana have strong positive trade balances due to their dominant energy exports.
+
+Arkansas has a significant trade deficit.
+
 
 ## Assessment
 

@@ -134,7 +134,6 @@ Financial services, education, healthcare, intellectual property licensing, info
 
 Massachusetts and Connecticut, despite high export values, have international trade deficits of \$16.3 billion and \$5.6 billion respectively in goods. New Hampshire maintains a smaller deficit of \$1.9 billion, while Rhode Island experiences a substantial \$12.4 billion shortfall. Maine’s international trade deficit reaches \$15.0 billion, primarily due to petroleum imports. Vermont, with limited data available, shows an estimated \$500 million deficit.
 
-
 ~~~
 {{insert /partials/concordia_trade_table.html}}	 
 ~~~
@@ -145,9 +144,9 @@ Domestically, Maine has a \$79.3 billion trade surplus with other U.S. states, d
 
 ## Political polarization
 
-@@Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
+@@marginnote Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
 
-Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority.
+Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority. 
 
 ## Assessment
 
