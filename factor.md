@@ -127,5 +127,25 @@ Illinois and Indiana produce coal and Ohio produces natural gas.
 
  In 2022, Illinois exported \$43 billion in services, with digitally tradable services accounting for \$28 billion. Key sectors include financial services, insurance services, and telecom, computer, and information services. Michigan's services exports totaled \$14 billion in 2022, with digitally tradable services at \$7.8 billion. Key sectors include financial services, insurance services, and telecom, computer, and information services. In 2022, Indiana exported nearly \$8 billion in services, with digitally tradable services at \$6.6 billion. Key sectors include financial services, insurance services, and telecom, computer, and information services.  Ohio exported \$23 billion in services in 2022, with digitally tradable services at \$15 billion. Key sectors include financial services, insurance services, and telecom, computer, and information services. Wisconsin exported \$8.4 billion in services in 2023.
 
+### Productivity
+
+Trails the nation in gross domestic product per capita; it is the third lowest.
+~~~
+{{insert /partials/factoria_per_capita_table.html}}	 
+~~~
+
+## Political polarization
+
+@@marginnote Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
+
+Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority. 
+
+~~~
+{{insert /partials/Factoria_polarization_sentence.html}}	 
+~~~
+
+Neither the current nor the historical electoral margins hold much promise of political stability.
+
+
 ## Assessment
 	

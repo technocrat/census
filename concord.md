@@ -142,11 +142,23 @@ Massachusetts and Connecticut, despite high export values, have international tr
 
 Domestically, Maine has a \$79.3 billion trade surplus with other U.S. states, driven by forest products and seafood exports. Massachusetts and Connecticut leverage their tech and aerospace sectors for positive domestic balances of \$12.9 billion and \$3.8 billion respectively. New Hampshire and Vermont also maintain modest domestic surpluses, while Rhode Island is the only state with a negative balance in both international and domestic trade.
 
+### Productivity
+
+Concordia leads the nation in gross domestic product per capita.
+~~~
+{{insert /partials/concordia_per_capita_table.html}}	 
+~~~
+
 ## Political polarization
 
 @@marginnote Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
 
 Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority. 
+
+~~~
+{{insert /partials/Concordia_polarization_sentence.html}}	 
+~~~
+Even should the recent marked difference between the two parties should revert to the long-term mean, there appears to be a stable political majority for Concordia.
 
 ## Assessment
 

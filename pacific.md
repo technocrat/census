@@ -119,5 +119,23 @@ Washington exports \$1.1 billion in fish and seafood and \$3.06 billion in fores
 
 Washington's service exports are primarily dominated by the technology sector including software development and cloud computing services. Oregon also exports technology services and has a tourist industry. Alaska's service exports are largely centered around its unique geographical and natural features for tourism and international freight operations.
 
+### Productivity
+
+Pacifica has greater per capita gross domestic product than the U.S. average by over  \$10,000.
+~~~
+{{insert /partials/pacifica_per_capita_table.html}}	 
+~~~
+
+## Political polarization
+
+@@marginnote Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
+
+Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority. 
+
+~~~
+{{insert /partials/Pacifica_polarization_sentence.html}}	 
+~~~
+Even should the recent marked difference between the two parties should revert to the long-term mean, there appears to be a stable political majority for Pacifica.
+
 ## Assessment
 	

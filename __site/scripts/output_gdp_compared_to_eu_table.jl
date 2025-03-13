@@ -10,8 +10,8 @@ sort!(eu, :gdp)
 
 
 function output_gdp_compared_to_eu_table(nations::Vector{Vector{String}}, 
-                                             titles::Vector{String},
-                                             base_path::String=partialsdir())
+                                        titles::Vector{String},
+                                        base_path::String=partialsdir())
     
     @assert length(nations) == length(titles) "Number of nation groups must match number of titles"
     

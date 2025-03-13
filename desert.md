@@ -126,4 +126,26 @@ The Coeur d'Alene District of Idaho has produced over a billion ounces of silver
 
 Wyoming leads the nation in coal production with large-scale surface mining operations in the Powder River Basin. It accounts for nearly two-fifths of all U.S. coal mined annually. Wyoming produces crude oil and natural gas and also has vast oil shale reserves. Wyoming contains one-third of U.S. uranium reserves. Wyoming has significant deposits critical for electric vehicle batteries and renewable energy technologies.
 
+### Productivity
+
+Deseret is slightly below the rest of the U.S. in gross domestic product per capita.
+~~~
+{{insert /partials/deseret_per_capita_table.html}}	 
+~~~
+
+## Political polarization
+
+@@marginnote Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
+
+Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority. 
+
+~~~
+{{insert /partials/Deseret_polarization_sentence.html}}	 
+~~~
+Even should the recent marked difference between the two parties should revert to the long-term mean, there may be a stable political majority for Deseret.
+
+
+
+
+
 ## Assessment

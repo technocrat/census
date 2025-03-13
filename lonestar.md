@@ -121,63 +121,31 @@ Louisiana and Texas combined accounted for \$267.2 billion in energy export trad
 
 ### Services
 
-Texas
-Technology services: Texas is a hub for IT and software development, with significant exports of tech-related services.
+Texas is a hub for IT and software development, with significant exports of tech-related services.Expertise in oil and gas exploration and production is a major export. Texas hosts corporations offering consulting, legal, and financial services internationally.
 
-Energy-related services: Expertise in oil and gas exploration and production is a major export.
+Oklahoma's szservices related to oil and natural gas extraction are key exports. Oklahoma's aerospace industry supports international clients through maintenance, repair, and overhaul (MRO) services.
 
-Financial and professional services: Texas hosts numerous multinational corporations offering consulting, legal, and financial services internationally.
+Arkansas is home to Walmart, which has expertise in logistics services.
 
-Oklahoma
-Energy services: Services related to oil and natural gas extraction are key exports.
+Louisiana's ports handle a large volume of U.S. exports, providing critical logistics services. Louisiana has expertise in LNG terminal operations and energy distribution is exported globally.
 
-Aerospace engineering: Oklahoma's aerospace industry supports international clients through maintenance, repair, and overhaul (MRO) services.
+### Productivity
 
-Arkansas
-Logistics and supply chain management: Arkansas is home to Walmart, which drives expertise in logistics services.
+The Lone Star Republic trails the nation in gross domestic product per capita by approximately \$3,000.
+~~~
+{{insert /partials/the_lone_star_republic_per_capita_table.html}}	 
+~~~
 
-Agricultural technology services: Support for farming and food production globally.
+## Political polarization
 
-Louisiana
-Port and logistics services: Louisiana's ports handle a large volume of U.S. exports, providing critical logistics services.
+@@marginnote Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
 
-Energy infrastructure services: Expertise in LNG terminal operations and energy distribution is exported globally.
+Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority. 
 
-### Balance of Trade
-
-Texas
-Total Exports (2024): $455.0 billion
-
-Total Imports: Not explicitly provided in the results, but Texas is a major importer due to its large ports and industries.
-
-Trade Balance: Likely positive, given its massive export volume, particularly in energy and manufacturing.
-
-Oklahoma
-Total Exports (2023): $5.5 billion
-
-Total Imports: Not specified in the results.
-
-Trade Balance: Likely negative or balanced, as Oklahoma’s export volume is relatively modest compared to larger states.
-
-Arkansas
-Total Exports (2021): $11.6 billion
-
-Total Imports (2021): $19.8 billion
-
-Trade Balance (2021): -$8.2 billion (negative trade balance).
-
-Louisiana
-Total Exports (2024): $87.0 billion
-
-Total Imports (2023): $38.2 billion
-
-Trade Balance: +$48.8 billion (positive trade balance), driven by strong exports in liquefied natural gas (LNG), petroleum products, and agricultural goods.
-
-In summary:
-
-Texas and Louisiana have strong positive trade balances due to their dominant energy exports.
-
-Arkansas has a significant trade deficit.
+~~~
+{{insert /partials/The_Lone_Star_Republic_polarization_sentence.html}}	 
+~~~
+If the recent marked difference between the two parties reverts to the long-term mean, there appears to be a stable political majority for The Lone Star Republic.
 
 
 ## Assessment

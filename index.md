@@ -11,4 +11,4 @@ How that will play out will take more years to unfold than I have to observe the
 
 Here are my initial thoughts. Some states will have counties peeled off to join different nations, but the number and approximate locations will probably not much change.
 
-![America Refound](img/refound.png)
+![America Refound](img/us_basemap.png)

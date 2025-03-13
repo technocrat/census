@@ -117,4 +117,22 @@ West Virginia and Tennessee produce bituminous coal, and all three states produc
 
 Tennessee has a significant services sector, with \$12 billion in total services exports in 2022 including insurance services and financial transactions, telecom, computer and information services and logistics (Federal Express has a major presence in Tennessee). Information for Kentucky and West Virginia is limited. Kentucky provides race horse training and West Virginia has flight training and aircraft maintenance services.
 
+### Productivity
+
+Cumberland has the lowest gross domestic product per capita of the United States.
+~~~
+{{insert /partials/Cumberland_per_capita_table.html}}	 
+~~~
+
+## Political polarization
+
+@@marginnote Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
+
+Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority. 
+
+~~~
+{{insert /partials/Cumberland_polarization_sentence.html}}	 
+~~~
+Even should the recent narrowed difference between the two parties does not revert to the long-term mean, there appears to be a stable political majority for Cumberland.
+
 ## Assessment

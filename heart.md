@@ -118,17 +118,23 @@ In 2024, Nebraska exported \$8.2 billion of goods to the world. In 2024, Nebrask
 In 2024, Kansas exported \$14.4 billion of goods to the world. In 2024, Kansas exported \$12.6 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by food and kindred products, computer and electronic products, machinery and chemicals.
 
 
-### Food
+### Productivity
 
-New York has a large dairy industry, and has over a million acres planted in sweet and field corn. Pennsylvania also has a large dairy industry and is the leading producer of mushrooms in the United States. Both New York and Pennsylvania are significant producers of apples. New Jersey is known for producing over 100 types of fruits and vegetables, including blueberries, cranberries, peaches, and tomatoes. The poultry industry, including broilers, turkeys, and eggs, is Virginia's leading agricultural sector.
+Heartlandia trails the nation in gross domestic product per capita by approximately \$4,000.
+~~~
+{{insert /partials/heartlandia_per_capita_table.html}}	 
+~~~
 
-### Resource Extraction
+## Political polarization
 
-Pennsylvania is a major producer of coal, oil, and natural gas, particularly from the Marcellus shale. Maryland has significant coal mining in its western counties.
+@@marginnote Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
 
-### Services
+Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority. 
 
-New York is a global hub for financial services, with significant exports in management and advisory services (\$25 billion) and other financial services and digitally tradable services.
+~~~
+{{insert /partials/Heartlandia_polarization_sentence.html}}	 
+~~~
+There appears to be a stable political majority for Hearlandia.
 
 ## Assessment
 	

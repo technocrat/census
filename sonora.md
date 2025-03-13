@@ -120,3 +120,22 @@ California is a significant producer of crude oil and natural gas. Arizona is a 
 California is a leader in service exports, with total service exports reaching \$162 billion in 2019. Key sectors include, business, professional, and technical services, financial and insurance services, royalties ands license fees, telecommunications, computer and information services, travel and tourism and educational services, particularly to countries like China, Canada, and Mexico.
 
 Nevada service exports are dominated by tourism and entertainment as are Hawaii's service exports
+
+### Productivity
+
+New Sonora has greater per capita gross domestic product than the U.S. average by over  \$8,000.
+~~~
+{{insert /partials/new_sonora_per_capita_table.html}}	 
+~~~
+
+
+## Political polarization
+
+@@marginnote Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
+
+Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority. 
+
+~~~
+{{insert /partials/New_Sonora_polarization_sentence.html}}	 
+~~~
+If the recent narrow difference between the two parties reverts to the long-term mean, there appears to be a stable political majority for New Sonora.

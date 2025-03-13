@@ -127,4 +127,23 @@ Alabama and Mississippi fossil fuel production, including a large coal industry 
 
 Except for Florida, data was not found regarding exported services. Florida exports approximately \$47 billion in services, including insuranace and other financial services, telecom and data processing and transportation and logistics.
 
+### Productivity
+
+New Dixie trails the nation in gross domestic product per capita; it has the second-lowest levels.
+
+~~~
+{{insert /partials/new_dixie_per_capita_table.html}}	 
+~~~
+
+## Political polarization
+
+@@marginnote Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
+
+Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority. 
+
+~~~
+{{insert /partials/New_Dixie_polarization_sentence.html}}	 
+~~~
+The recent and historical margins for New Dixie show a consistent political majority.
+
 ## Assessment

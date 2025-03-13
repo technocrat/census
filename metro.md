@@ -122,6 +122,24 @@ Pennsylvania is a major producer of coal, oil, and natural gas, particularly fro
 
 New York is a global hub for financial services, with significant exports in management and advisory services (\$25 billion) and other financial services and digitally tradable services.
 
+### Productivity
+
+Metropolis has greater per capita gross domestic product than the U.S. average by almost \$10,000.
+~~~
+{{insert /partials/metropolis_per_capita_table.html}}	 
+~~~
+
+## Political polarization
+
+@@marginnote Source: [United States General Election Presidential Results by District, Ward, or County from 2008 to 2024](https://tonmcg.github.io/US_County_Level_Election_Results_08-24/)@@
+
+Replicating the same unstable political dichotomy of the past decade is to be avoided. Taking the 2024 presidential vote as a proxy for political values, each nation should have a clear majority. 
+
+~~~
+{{insert /partials/Metropolis_polarization_sentence.html}}	 
+~~~
+On both a current and historical basis, there appears to be a stable political majority for Metropolis.
+
 
 ## Assessment
 	
