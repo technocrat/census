@@ -14,7 +14,7 @@
 	scrolling="yes">
 </iframe>
 ~~~
-All of New Dixie lies within 400 miles of Alanta except for Florida south of Orlando and eastern North Carolina. Maine, which is sparsely settled. It is bordered by the Mississippi River on the west and Virginia and Tennessee on the north.
+All of New Dixie lies within 400 miles of Alanta except for Florida south of Orlando and eastern North Carolina. It is bordered by the Mississippi River on the west and Virginia and Tennessee on the north.
 
 ## Population
 @@marginnote
@@ -26,7 +26,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 ~~~
 
 
-As a single state, it would be the largest by far with a population nearly more than twice that of California. Florida is already the third largest state, while Georgia and North Carolina rank seventh and eighth.
+As a single state, it would be the largest by far with a population nearly a quarter more than that of California. Florida is already the third largest state, while Georgia and North Carolina rank seventh and eighth.
 
 ![New Dixie at night](/img/dixie_at_night.png)
 
@@ -147,3 +147,5 @@ Replicating the same unstable political dichotomy of the past decade is to be av
 The recent and historical margins for New Dixie show a consistent political majority.
 
 ## Assessment
+
+With its long shoreline of low-lying areas, New Dixie will be affected by sea level rise as well as hotter temperatures, droughts and extreme weather events. Alabama, Mississippi, Florida and South Carolina rely entirely on immigration for population growth, and only Georgia has a substantial excess of births over deaths. New Dixie's global foreign policy will be oriented toward the Caribbean and South America. 

@@ -54,7 +54,6 @@ The age distribution differences are reflected in the dependency ratios for the 
 
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
 
-![Deseret regional age pyramid](/img/Deseret Age Pyramid.png)
 
 ## Birth Rates
 
@@ -144,8 +143,6 @@ Replicating the same unstable political dichotomy of the past decade is to be av
 ~~~
 Even should the recent marked difference between the two parties should revert to the long-term mean, there may be a stable political majority for Deseret.
 
-
-
-
-
 ## Assessment
+
+Climate change will challenge the states in Deseret as warmer winters result in less snowpack and reduced availability of water during the rest of the year because of the difficulty in capturing runoff. Idaho, Montana and Wyoming rely on immigration for growth while Colorado and Utah have sufficient natural growth that immigration is less urgent. As a landlocked nation, Deseret may have little need of a global foreign policy.

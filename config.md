@@ -2,12 +2,13 @@
 Add here global page variables to use throughout your website.
 -->
 +++
-author = "Richard Careaga"
+author 		= "Richard Careaga"
+title  		= "America Refounded"
 mintoclevel = 2
 
 # uncomment and adjust the following line if the expected base URL of your website is something like [www.thebase.com/yourproject/]
 # please do read the docs on deployment to avoid common issues: https://franklinjl.org/workflow/deploy/#deploying_your_website
-prepath = "https://technocrat.site/refounding/"
+prepath = "https://technocrat.site/refoundws/"
 
 # Add here files or directories that should be ignored by Franklin, otherwise
 # these files might be copied and, if markdown, processed by Franklin which

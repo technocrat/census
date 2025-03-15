@@ -1,8 +1,8 @@
 function collect_and_output_growth_tables(growth::DataFrame, 
-                                         nations::Vector{Vector{String}}, 
-                                         state_names::Dict{String,String}, 
-                                         titles::Vector{String},
-                                         base_path::String="../_layout/partials/")
+                                          nations::Vector{Vector{String}}, 
+                                          state_names::Dict{String,String}, 
+                                          titles::Vector{String},
+                                          base_path::String=partialsdir())
     
     @assert length(nations) == length(titles) "Number of nation groups must match number of titles"
     
@@ -16,25 +16,22 @@ function collect_and_output_growth_tables(growth::DataFrame,
         
         # Sort by state name
         sort!(nation_data, :State)
-        
         # Create a DataFrame for the totals
         total_line = DataFrame(
-            State = "Total",
-            Births = sum(nation_data.Births),
-            Deaths = sum(nation_data.Deaths),
-            natural = sum(nation_data.natural),
-            net_domestic = sum(nation_data.net_domestic),
+            State              = "Total",
+            Births             = sum(nation_data.Births),
+            Deaths             = sum(nation_data.Deaths),
+            natural            = sum(nation_data.natural),
+            net_domestic       = sum(nation_data.net_domestic),
             foreign_immigrants = sum(nation_data.foreign_immigrants),
-            net = sum(nation_data.net)
+            growth             = sum(nation_data.growth)
         )
-        
         # Add the total line
         nation_table = vcat(nation_data, total_line)
-        
         # Format numbers with commas
         formatted_table = format_with_commas(nation_table)
-        
         # Create the output file path
+        print(base_path)
         output_file = joinpath(base_path, "$(nation_title)_growth_table.html")
         
         # Create an HtmlHighlighter to make the last row bold

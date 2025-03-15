@@ -3,7 +3,7 @@
 
 # The American Project at Age 249
 
-Lincoln would say that we are again a house divided that cannot stand. He ended the division of his day by pulling down half the house, and his successors rebuilt that half along similar lines as the original. Johnson took a backhoe to that successor version, and Trump is busy building it back while undermining the foundations supporting the remainder.
+Lincoln would say that we are again a house divided that cannot stand. He ended the division of his day by pulling down half the house, and his successors rebuilt that half along similar lines as the original. Johnson took a backhoe to that successor version, and Trump is busy finishing building it back while undermining the foundations supporting the remainder.
 
 It’s unlikely that the rest of the United States would let its parts go their own ways unless it was part of a general plan of reorganization. If that were to occur many thorny problems, such as defense, currency, inter-regional commerce and the like, would need to be addressed. However, if 37 states agree on amending the Constitution on the fundamental question of allowing for dissolution—a big if—I am assuming those problems away.
 

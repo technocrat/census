@@ -54,8 +54,6 @@ The age distribution differences are reflected in the dependency ratios for the 
 
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
 
-![Factoria regional age pyramid](/img/Factoria Age Pyramid.png)
-
 
 ## Birth Rates
 
@@ -104,7 +102,7 @@ The Factoria states export \$286.4 in goods each year.
 
 @@marginnote Sources: [Illinois](https://ustr.gov/map/state-benefits/il), [Michigan](https://ustr.gov/map/state-benefits/mi), [Ohio](https://ustr.gov/map/state-benefits/oh), [Indiana](https://ustr.gov/map/state-benefits/in), [Wisconsin](https://ustr.gov/map/state-benefits/wi)@@
 
-In 2024, Illinois exported a record \$80.8 billion of goods to the world. In 2024, Illinois exported \$72.8 billion of manufactured products. The state's largest manufacturing export category is chemicals,followed by machinery,computer and electronic products, transportation equipment and food and kindred products.
+In 2024, Illinois exported \$80.8 billion of goods to the world. In 2024, Illinois exported \$72.8 billion of manufactured products. The state's largest manufacturing export category is chemicals,followed by machinery,computer and electronic products, transportation equipment and food and kindred products.
 
 In 2024, Michigan exported \$61.6 billion of goods to the world. In 2024, Michigan exported \$58.9 billion of manufactured products. The state's largest manufacturing export category is transportation equipment, followed by machinery, chemicals, electrical equipment, appliances and components and computer and electronic products.
 

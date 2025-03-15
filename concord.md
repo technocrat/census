@@ -162,4 +162,32 @@ Even should the recent marked difference between the two parties should revert t
 
 ## Assessment
 
+### Demographics
+
+Concordia has a slight demographic advantage over other nations due to its absorption of immigrants. Maine and Vermont, however, have aging populations and limited occupational opportunities for immigrants
+
+### Economics
+
 Assuming that US markets remain open to Concordia, it would be a viable standalone nation if it continues to absorb foreign immigration and can meet challenges in housing costs.
+
+### Diversity
+
+Concordia has diverse landscapes—coastal, mountains and valleys. 
+
+### Climate change
+
+@@marginnote [Climate Impacts – New England and Northern New York](https://forestadaptation.org/sites/default/files/2019-06/New-England-Northern-New-York-Climate-Impacts.pdf)@@
+
+The concentration of population in coastal areas makes Concordia vulnerable to sea level rise, which may reach 23 inches by the end of the century. In conjunction with increased storm activity, investments in urban runoff control will be required. Foresty impacts will slowly develop as existing species mixes give way to species better adapted to warmer, drier climates. Meterological winter will be shorter and drier. Natural landscape adaptation to changed conditions will require decades and the human landscape will also take time to adjust. Most of Concordia's economy is not directly vulnerable to climate change.                          
+
+### Economics
+
+Concordia has low dependence on natural resources, and its economy won't be directly affect by depletion of such commodities as oil and minerals. Concordia's knowledge based economy will continue to rely on investment in primary and secondary education.
+
+### Geopolitics
+
+Concordia can be expected to cultivate friendly relations with Canada to its north and Metropolis to its west. It has no obvious reasons to come into conflict with China, as it emerges as the global hemegon. It will continue to look to Europe as a major trade partner.
+
+## Governance
+
+Because Concordia's state have diverse demographic and economic profiles, its constitution will have to strike a balance between democratic majority rule, which favors urban Massachusetts and Connecticut, and place-based autonomy. It should be cautious not to bake in geographic divisions in political power, however, so that as political and social differences and commonalities develop that power dynamic can adjust accordingly.

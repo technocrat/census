@@ -27,7 +27,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 {{insert /partials/Cumberland_population_table.html}}	
 ~~~
 
-Tennessee has a population comparable to Massachusetts, and Kentucky has a population size between Louisiana and Oregon. to Indiana and Tennessee. West Virginia falls between Idaho and Oklahoma. A single state it would be the fifth largest behind New York and ahead of Pennsylvania.
+Tennessee has a population comparable to Massachusetts, and Kentucky has a population size between Louisiana and Oregon. West Virginia falls between Idaho and Oklahoma. A single state Cumberland would be the fifth largest behind New York and ahead of Pennsylvania.
 ![Cumberland at night](/img/cumber_at_night.png)
 
 The following table shows the population of Cumberland in relation to the European Union member states.
@@ -107,7 +107,7 @@ In 2024, West Virginia exported \$4.9 billion of goods to the world. The state's
 
 ### Agriculture
 
-Kentucky produces soybeans, chicken, cattle, horses and corn. Tennessee production of agricultural commodities is smaller—none of its products is has as large a value as the Kentucky produce. The total value of all of West Virginia's crops is smaller than any of the leading crops of the other two states.
+Kentucky produces soybeans, chicken, cattle, horses and corn. Tennessee production of agricultural commodities is smaller—none of its products has as large a value as Kentucky products. The total value of all of West Virginia's crops is smaller than any of the leading crops of the other two states.
 
 ### Resource Extraction
 
@@ -136,3 +136,7 @@ Replicating the same unstable political dichotomy of the past decade is to be av
 Even should the recent narrowed difference between the two parties does not revert to the long-term mean, there appears to be a stable political majority for Cumberland.
 
 ## Assessment
+
+Cumberland is a hard case, beginning with West Virginia, which has a dying economic base (coal), a poor road network, low educational attainment, a high dependency ratio, low birthrate and low immigration. None of the mountainous regions of Cumberland are suitable for industrial agriculture. Forestry resources are threatened by a combination of factors associated with climate change. These include drought, wildfires, flooding and invasive species. Climate change does provide a potential source of population growth, however, if effects on states to the north lead to immigration. This, however, will put a strain on infrastructure, including transportation, water supply and the electricity grid.
+
+Cumberland's governance framework lacks a concentrated political core. No metropolitan area dominates the region the way Boston commands Concordia. This may leave the region without a strong central authority able to handle common issues at scale. Cumberland will have little need for a global foreign policy due to its inland insulation. 
