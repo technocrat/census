@@ -146,4 +146,5 @@ Neither the current nor the historical electoral margins hold much promise of po
 
 
 ## Assessment
-	
+
+Besides the doubtful political prospects, all of Factoria's recent growth is due to international migration. It's ability to assimilate a more diverse population will be important socially, politically and economically. Factoria's economy is heavily reliant on the automotive industry, which is vulnerable to foreign competition.

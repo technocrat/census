@@ -123,7 +123,7 @@ Louisiana and Texas combined accounted for \$267.2 billion in energy export trad
 
 Texas is a hub for IT and software development, with significant exports of tech-related services.Expertise in oil and gas exploration and production is a major export. Texas hosts corporations offering consulting, legal, and financial services internationally.
 
-Oklahoma's szservices related to oil and natural gas extraction are key exports. Oklahoma's aerospace industry supports international clients through maintenance, repair, and overhaul (MRO) services.
+Oklahoma's services related to oil and natural gas extraction are key exports. Oklahoma's aerospace industry supports international clients through maintenance, repair, and overhaul (MRO) services.
 
 Arkansas is home to Walmart, which has expertise in logistics services.
 
@@ -150,4 +150,4 @@ If the recent marked difference between the two parties reverts to the long-term
 
 ## Assessment
 
-	
+Texas has robust natural growth combined with strong immigration. Even with immigration, Louisiana is losing population. Arkansas and Oklahoma both depend on immigration to maintain population levels. The regional economy is heavily dependent on oil and gas, which are vulnerable to both depletion and trends toward carbon-neutral energy sources. It does, however, have vast expanses of flat land with low agricultural productivity that is suitable for solar power. This will require, however, in the case of Texas electricity grid infrastructure improvements to connect to markets outside of Texas.	

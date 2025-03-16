@@ -135,7 +135,8 @@ Replicating the same unstable political dichotomy of the past decade is to be av
 ~~~
 {{insert /partials/Pacifica_polarization_sentence.html}}	 
 ~~~
-Even should the recent marked difference between the two parties should revert to the long-term mean, there appears to be a stable political majority for Pacifica.
+Even should the recent marked difference between the two parties should revert to the long-term mean, there appears to be a stable political majority for Pacifica. It may be less vulnerable than other portions of the United States to climate change. Its well educated population and concentration of tech and other knowledge-based industries provide a firm foundation for continued economic success.
 
 ## Assessment
 	
+Pacifica, in common with others of the new nations, relies on international immigration for growth.

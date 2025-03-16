@@ -143,3 +143,4 @@ On both a current and historical basis, there appears to be a stable political m
 
 ## Assessment
 	
+Metropolis is experiencing high domestic emmigration. Positive natural growth makes up part of the difference, but international immigration is mainly responsible for growth. New York City will probably remain a major center of finance, even without a continent-wide currency union. The District of Columbia and Northern Virginia will experience major dislocation as the services provided to the former federal government will not be replaced in total by the needs of Metropolis. Some of the defence related establishments may find export markets.

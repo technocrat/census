@@ -139,3 +139,7 @@ Replicating the same unstable political dichotomy of the past decade is to be av
 {{insert /partials/New_Sonora_polarization_sentence.html}}	 
 ~~~
 If the recent narrow difference between the two parties reverts to the long-term mean, there appears to be a stable political majority for New Sonora.
+
+## Assessment
+
+New Sonora as a whole has positive natural growth, mainly from California. Strong internation immigration accounts for most of the growth. Climate change may leave New Sonora with inadequate water supply for both urban and agricultural requirements. Extensive portions of desert may need to be devoted to solar electricity generation to provide the power for water desalination.
