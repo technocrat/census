@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 function create_state_to_nation_map(nations)
 	state_to_nation = Dict{String, Int}()
 	for (i, states) in enumerate(nations)

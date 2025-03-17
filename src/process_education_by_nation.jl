@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # Process the education data by nations
 function process_education_by_nation(educ, nations)
     # Create the mappings

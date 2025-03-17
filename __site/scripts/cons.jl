@@ -1,5 +1,3 @@
-
-
 # SPDX-License-Identifier: MIT
 
 const partialsdir(args...) = projectdir("_layout/partials", args...)
@@ -33,4 +31,6 @@ map_colors = [
    colorant"#486ab2"   # BRIGHT_BLUE
 ]
 
+# R environment flag
 
+const _SETUP_COMPLETE = Ref(false)

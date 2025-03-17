@@ -1,4 +1,8 @@
+# SPDX-License-Identifier: MIT
+
 """
+    create_multiple_age_pyramids(state_dfs::Dict{String, DataFrame})
+
 # Usage example:
 state_dfs = Dict(
     state => query_state_ages(state) 

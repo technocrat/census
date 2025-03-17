@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 function get_nation_title(state_code, nations, titles)
     for (i, nation_states) in enumerate(nations)
         if state_code in nation_states

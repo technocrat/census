@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 function get_state_gdp()
     gdp_query = """
         SELECT gdp.county, gdp.state, gdp.gdp

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
     r_get_acs_data(; geography::String, variables::Dict{String, String}, state::String,
                  year::Union{Integer, Nothing} = nothing, survey::Union{String, Nothing} = nothing)

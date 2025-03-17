@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: MIT
+
+# takes a vector of vectors of state name two-letter abbreviations and
+# returns a vector of dataframes containing age data
 function collect_state_age_dataframes(nations::Vector{Vector{String}})
     # Initialize an empty dictionary to store the results
     state_age_dfs = Dict{String, DataFrame}()

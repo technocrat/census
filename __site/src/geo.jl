@@ -1,7 +1,6 @@
+# SPDX-License-Identifier: MIT
+
 # this is the model for doing a thematic map
-include("libr.jl")
-include("cons.jl")
-include("func.jl")
 
 # First, let's get the joined data directly from postgres
 geo_query = """

@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: MIT
+
 """
-    fill_state!(df::DataFrame) -> DataFrame
+    fill_state!(df)
 
 Add a new column 'state' to the input DataFrame where each row contains either:
 - The value of `locale` from the same row if `is_county` is false (indicating the row represents a state)

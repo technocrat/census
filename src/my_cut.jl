@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
    customcut(x::Vector{Float64}, breaks::Vector{Float64}) -> Vector{Int}
 

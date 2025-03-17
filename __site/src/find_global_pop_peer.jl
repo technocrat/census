@@ -1,4 +1,6 @@
- using DataFrames
+# SPDX-License-Identifier: MIT
+
+using DataFrames
 
 """
     find_global_pop_peer(df::DataFrame, field::Symbol)

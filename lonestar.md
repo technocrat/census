@@ -15,7 +15,7 @@
 </iframe>
 ~~~
 
-All of the Lone Star Republic lies within 400 miles of Dallas. Colorado, Kansas and Missouri on the north, the Mississippi river on the east, Mexico and the Gulf of Mexico on the south, and New Mexico on the west.
+All of the Lone Star Republic lies within 400 miles of Dallas. It is borderedcd by Colorado, Kansas and Missouri on the north, the Mississippi river on the east, Mexico and the Gulf of Mexico on the south, and New Mexico on the west.
 
 # Population
 

@@ -1,4 +1,8 @@
+# SPDX-License-Identifier: MIT
+
 """
+    format_with_commas(df::DataFrame)
+
   format_with_commas(df::DataFrame) -> DataFrame
 
 Convert numeric columns in a DataFrame to strings with comma separators for thousands.

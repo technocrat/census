@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: MIT
+
 """
-    dms_to_decimal(coords::AbstractString) -> AbstractString
+    dms_to_decimal(coords::AbstractString)
 
 Convert latitude and longitude coordinates from degrees, minutes, seconds (DMS) format
 to decimal degrees (DD) format as a string.

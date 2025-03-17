@@ -28,7 +28,14 @@ Capital        = "Charlotte"
 Capital_Coords = "35° 13′ 38″ N, 80° 50′ 35″ W"
 Capital        = "Nashville"
 Capital_Coords = "36° 09′ 44″ N, 86° 46′ 28″ W"
-
+Capital        = "Miami"
+Capital_Coords = "25° 46′ 00″ N, 80° 12′ 00″ W"
+Capital        = "Orlando"
+Capital_Coords = "28° 32′ 24″ N, 81° 22′ 48″ W"
+Capital        = "Jacksonville"
+Capital_Coords = "30° 20′ 13″ N, 81° 39′ 41″ W"
+Capital        = "Talahassee"
+Capital_Coords = "30° 26′ 18″ N, 84° 16′ 50″W"
 
 include("dms_to_decimal.jl")
 pal = ("'Red', 'Green', 'Yellow', 'Blue', 'Purple'",

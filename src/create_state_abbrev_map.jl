@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # State name to abbreviation mapping
 function create_state_abbrev_map()
 	return Dict(

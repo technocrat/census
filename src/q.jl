@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
     q(query::String) -> DataFrame
 

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 function query_state_ages(st::String)
     query = """
     WITH age_totals AS (

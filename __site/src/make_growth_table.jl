@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 function make_growth_table()
 	pop 	  	  	= get_state_pop()
 	pop.State 	  	= [state_names[code] for code in pop.stusps]

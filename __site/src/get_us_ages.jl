@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 function get_us_ages()
 	us_age = df = CSV.read("../data/us_age_table.csv",DataFrame)
 	us_age = us_age[:,[1,6,10]]

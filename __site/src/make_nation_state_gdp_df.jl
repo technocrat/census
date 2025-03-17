@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 function make_nation_state_gdp_df(nation::Vector{String})	
 	state_gdp 		 = get_state_gdp()
 	state_gdp.gdp 	 = round.(state_gdp.gdp, digits = 0)

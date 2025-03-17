@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 function get_dem_vote()
     geo_query = """
         SELECT us.geoid, us.stusps, us.name, us.nation, ST_AsText(us.geom) as geom, vd.value as dem

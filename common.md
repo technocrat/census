@@ -16,12 +16,12 @@ Populations with a higher degree of diversity are better equipped to deal with c
 
 ## Economics
 
-Concordia has low dependence on natural resources, and its economy won't be directly affect by depletion of such commodities as oil and minerals. Concordia's knowledge based economy will continue to rely on investment in primary and secondary education.
+Some nations have low dependence on natural resources, and their economy won't be directly affected by depletion of such commodities as oil and minerals. Knowledge based economies will continue to rely on investment in primary and secondary education.
 
 ## Geopolitics
 
-Concordia can be expected to cultivate friendly relations with Canada to its north and Metropolis to its west. It has no obvious reasons to come into conflict with China, as it emerges as the global hemegon. It will continue to look to Europe as a major trade partner.
+Nations in the northern tier can  be expected to cultivate friendly relations with Canada. There are no obvious reasons for the new nations to come into conflict with each other. As China emerges as the global hemegon, the nations will have to adjust. Each would do well to continue to look to Europe as a major trade partner.
 
 ## Governance
 
-Because Concordia's state have diverse demographic and economic profiles, its constitution will have to strike a balance between democratic majority rule, which favors urban Massachusetts and Connecticut and place-based autonomy. It should be cautious not to bake in geographic divisions in political power, however, so that as political and social differences and commonalities develop that power dynamic can adjust accordingly.
+New nations with diverse demographic and economic profiles, will need constitutions  to strike a balance between democratic majority rule, which favors urban concentrations, and place-based autonomy for rural regions. Nations should be cautious to not bake in geographic divisions in political power, however, so that as political and social differences and commonalities develop that power dynamic can adjust accordingly.

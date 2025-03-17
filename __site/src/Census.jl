@@ -1,153 +1,39 @@
+# SPDX-License-Identifier: MIT
 module Census
 
-# Libraries
-using CSV
-using DataFrames
-using Dates
-using RCall
+using DrWatson
+@quickactivate "Census"  # Use your actual project name
 
-# Constants
+# Define paths directly
+const SCRIPT_DIR   = projectdir("scripts")
+const OBJ_DIR      = projectdir("obj")
+const PARTIALS_DIR = projectdir("_layout/partials")
 
-# Flag to track if setup has been completed
-const _SETUP_COMPLETE = Ref(false)
+# Wrapper functions
+scriptdir()        = SCRIPT_DIR
+objdir()           = OBJ_DIR
+partialsdir()      = PARTIALS_DIR
 
-# Functions
+# Export path functions
+export scriptdir, objdir, partialsdir
 
-function setup_r_environment()
-    if _SETUP_COMPLETE[]
-        return nothing
-    end
+# Include files with absolute paths to avoid potential issues
+include(joinpath(SCRIPT_DIR, "libr.jl"))
+include(joinpath(SCRIPT_DIR, "cons.jl"))
+include(joinpath(SCRIPT_DIR, "dict.jl"))
+include(joinpath(SCRIPT_DIR, "func.jl"))
+include(joinpath(SCRIPT_DIR, "highlighters.jl"))
+include(joinpath(SCRIPT_DIR, "stru.jl"))
 
-    R"""
-    # Set the correct ARM64 path for R explicitly
-    .libPaths(c("/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library"))
-    required_packages <- c("ggplot2", "tidyr", "dplyr", "tidycensus", "tigris")
+export calculate_dependency_ratio, cleveland_dot_plot, create_birth_table
+export create_state_abbrev_map, create_state_to_nation_map, collect_state_ages
+export collect_state_age_dataframes, convert_decimals_to_int64!
+export create_age_pyramid, create_multiple_age_pyramids, dms_to_decimal
+export expand_state_codes, fill_state, format_with_commas
+export get_childbearing_population, get_nation_state, get_state_pop
+export get_dem_vote, get_gop_vote, get_us_ages
+export make_nation_state_gdp_df, make_nation_state_pop_df, make_growth_table
+export process_education_by_nation, q, query_all_nation_ages
+export query_nation_ages, query_state_ages
 
-    # R function to install missing packages
-    install_if_missing <- function(pkg) {
-        if (!require(pkg, character.only = TRUE)) {
-            install.packages(pkg, repos = "https://cran.rstudio.com/")
-        }
-    }
-
-    # Install missing packages
-    invisible(sapply(required_packages, install_if_missing))
-
-    # Verify installations
-    installed <- sapply(required_packages, require, character.only = TRUE)
-    print(data.frame(
-        Package = required_packages,
-        Installed = installed
-))
-"""
-
-    _SETUP_COMPLETE[] = true
-    return nothing
-end
-# Run setup during module initialization
-function __init__()
-    setup_r_environment()
-end
-
-"""
-    get_acs_data(; geography::String, variables::Dict{String, String}, state::String,
-                 year::Union{Integer, Nothing} = nothing, survey::Union{String, Nothing} = nothing)
-
-Retrieve American Community Survey (ACS) data through R's tidycensus package.
-
-# Arguments
-- `geography::String`: Geographic level for data collection (e.g., "county", "tract", "block group")
-- `variables::Dict{String, String}`: Dictionary mapping desired variable names to Census variable codes
-- `state::String`: State abbreviation (e.g., "MA", "NY")
-- `year::Union{Integer, Nothing} = nothing`: Survey year. Defaults based on current date and survey type
-- `survey::Union{String, Nothing} = nothing`: Type of ACS survey. Use "acs1" for 1-year estimates,
-   nothing for 5-year estimates
-
-# Details
-Year defaults are determined by current date and survey type:
-- For 1-year ACS (`survey="acs1"`): after September, uses previous year
-- For 5-year ACS: after December, uses previous year
-- Otherwise uses two years prior
-
-ACS availability notes:
-- 1-year estimates (`survey="acs1"`) are only available for geographies with populations ≥ 65,000
-- 2020 data is not available for ACS (use get_decennial() instead)
-- 1-year and 5-year surveys are published in September and December respectively
-
-# Returns
-DataFrame containing requested ACS data
-
-# Examples
-```julia
-# Get 5-year estimates for counties in Massachusetts
-vars = Dict("median_income" => "B19013_001")
-df = get_acs_data(geography="county", variables=vars, state="MA")
-
-# Get 1-year estimates for 2022
-df = get_acs_data(geography="county", variables=vars, state="MA",
-                  survey="acs1", year=2022)
-"""
-function get_acs_data(; geography::String,
-                      variables::Dict{String, String},
-                      state::String,
-                      year::Union{Integer, Nothing} = nothing,
-                      survey::Union{String, Nothing} = nothing)
-
-    # Determine current date for default year logic
-    current_date = Dates.now()
-    current_year = Dates.year(current_date)
-    current_month = Dates.month(current_date)
-
-    # Calculate default year based on current date
-    if isnothing(year)
-        # After September, 1-year ACS for previous year becomes available
-        # After December, 5-year ACS for previous year becomes available
-        if current_month >= 9 && !isnothing(survey) && survey == "acs1"
-            year = current_year - 1
-        elseif current_month >= 12
-            year = current_year - 1
-        else
-            year = current_year - 2
-        end
-    end
-
-    # Check for 2020 restriction
-    if year == 2020
-        throw(ArgumentError("ACS is not available for 2020. Use get_decennial() or pick a later year."))
-    end
-
-    # Convert Julia Dict to R named vector
-    var_names = collect(keys(variables))
-    var_codes = collect(values(variables))
-    r_vars = R"setNames("$"(var_codes), $(var_names))"
-
-    # Build R function call, conditionally including survey parameter
-    if isnothing(survey)
-        R"""
-        # Call R get_acs() with the provided parameters
-        data <- get_acs(geography = $geography,
-                       variables = $r_vars,
-                       state = $state,
-                       year = $year)
-        """
-    else
-        R"""
-        # Call R get_acs() with the provided parameters including survey
-        data <- get_acs(geography = $geography,
-                       variables = $r_vars,
-                       state = $state,
-                       year = $year,
-                       survey = $survey)
-        """
-    end
-
-    # Convert R data frame to Julia DataFrame
-    return rcopy(R"data")
-end
-
-
-# Export the setup function in case manual rerun is needed
-export setup_r_environment
-
-# module Census
 end

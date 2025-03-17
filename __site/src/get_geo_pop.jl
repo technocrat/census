@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
         get_geo_pop(target_states::Vector{String})
 

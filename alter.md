@@ -8,7 +8,7 @@ Maine, byond Bangor might be ceded to Quebec and New Brunswick, Canada. The New 
 
 ## Metropolis
 
-Besides spinning off the Lake Champlain region, Metropolis would not lose much by ceding the drainage into the Great Lakes, including Rochester and Buffalo. It could acquire the Delaware River basin of Pennsylvania along with its portion of the Susquehana and Potomoc River Basins The Alleghany River basin drainage would become part of a nation organized around the Ohio River basin. This would bring Philadelphia from Factoria into Metropolis. The southern boundary of Metropolis could be terminated at the Cheasapeake River basin rather than further south at the Virginia-North Carolina state line.
+Besides spinning off the Lake Champlain region, Metropolis would not lose much by ceding the drainage into the Great Lakes, including Rochester and Buffalo. It could acquire the Delaware River basin of Pennsylvania along with its portion of the Susquehana and Potomoc River Basins. The Alleghany River basin drainage would become part of a nation organized around the Ohio River basin. This would bring Philadelphia from Factoria into Metropolis. The southern boundary of Metropolis could be terminated at the Cheasapeake River basin rather than further south at the Virginia-North Carolina state line.
 
 ## Factoria
 
@@ -20,7 +20,7 @@ Most of Cumberland would be absorbed into the Ohio River basin based Factoria.
 
 ## Heartlandia
 
- Heartlandia could be reconfigured to take in the Upper Mississippi Basin, including Chicago, Minneapolis-St. Paul and Milwaukee and the Michigan Upper Penninsula. The northern most portions of Minneapolis and North Dakota might be ceded to Manitoba and Ontario. The Missouri River basin portion of the Dakotas, Montana, Wyoming Colorado, Kansas and Missouri would form a new nation, The Plains.
+ Heartlandia could be reconfigured to take in the Upper Mississippi Basin, including Chicago, Minneapolis-St. Paul and Milwaukee and the Michigan Upper Penninsula. The northern most portions of Minnesota and North Dakota might be ceded to Manitoba and Ontario. The Missouri River basin portion of the Dakotas, Montana, Wyoming Colorado, Kansas and Missouri would form a new nation, The Plains.
 
 ## The Lone Star Republic
 

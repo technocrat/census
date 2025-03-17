@@ -1,4 +1,9 @@
-function collect_state_ages(state_vectors, state_names)
+# SPDX-License-Identifier: MIT
+
+# takes a vector of vectors of state two-letter postal code abbreviations and
+# a dictionary nation using those abbreviations as a key with values of the
+# fully spelled out name and produces a vector of dataframes
+function collect_state_ages(state_vectors::Vector{Strings}, state_names::Dict)
     # Create a dictionary mapping state abbreviations to their DataFrames
     # Flatten all vectors and process each state once
     all_states = vcat(state_vectors...)
@@ -25,4 +30,4 @@ end
 # concord = ["CT", "MA", "ME", "NH", "RI", "VT"]
 # nations = [concord, cumber, desert, dixie, factoria, heartland, lonestar, metropolis, pacific, sonora]
 # state_names = Dict("CT" => "Connecticut", "MA" => "Massachusetts", ...)
-# result_dfs = process_states(nations, state_names)
+# result_dfs = collect_state_ages(nations, state_names)

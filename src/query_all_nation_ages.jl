@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 function query_all_nation_ages(nations::Vector{Vector{String}})
     # Create an array to hold all DataFrames
     nation_dfs = Vector{DataFrame}(undef, length(nations))

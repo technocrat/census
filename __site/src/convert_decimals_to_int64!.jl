@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: MIT
+
+# takes a dataframe and coverts any type Decimal columns to type Int64
 function convert_decimals_to_int64!(df::DataFrame)
     for col_name in names(df)
         col_type = eltype(df[!, col_name])
