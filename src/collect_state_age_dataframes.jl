@@ -2,6 +2,29 @@
 
 # takes a vector of vectors of state name two-letter abbreviations and
 # returns a vector of dataframes containing age data
+"""
+    collect_state_age_dataframes(nations::Vector{Vector{String}}) -> Dict{String, DataFrame}
+
+Collect age demographic data for all states across provided nations and return as DataFrames.
+
+# Arguments
+- `nations::Vector{Vector{String}}`: A vector of vectors, where each inner vector contains
+  state codes belonging to a particular nation.
+
+# Returns
+- `Dict{String, DataFrame}`: A dictionary mapping state codes to DataFrames containing
+  age demographic data for that state.
+
+# Notes
+- Skips states that have already been processed to avoid duplicates
+- Includes a small delay (0.5s) between queries to avoid overwhelming the database
+- Errors for individual states are logged but don't stop the entire collection process
+
+# Examples
+```julia
+nations = [["US-NY", "US-CA", "US-TX"], ["CA-ON", "CA-BC"]]
+state_data = collect_state_age_dataframes(nations)
+"""
 function collect_state_age_dataframes(nations::Vector{Vector{String}})
     # Initialize an empty dictionary to store the results
     state_age_dfs = Dict{String, DataFrame}()

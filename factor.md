@@ -1,7 +1,9 @@
 # Factoria
 
 @@marginnote
-~~~<img src="/img/factor.png" style="width: 100%; display: block;">~~~
+~~~
+<img src="https://technocrat.site/refounded/img/factor.png" style="width: 100%; display: block;">
+~~~
 @@
 
 ~~~
@@ -29,7 +31,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 
 Its combined population would make it the largest state in the existing union. Pennsylvania, Illinois and Ohio are already the fifth, sixth, seventh and eighth largest states. 
 
-![Factoria at night](/img/factoria_at_night.png)
+![Factoria at night](https://technocrat.site/refounded/img/factoria_at_night.png)
 
 The following table shows the population of Factoria in relation to the European Union member states.
 
@@ -42,9 +44,9 @@ The following table shows the population of Factoria in relation to the European
 
 Compared to the United States as a whole, Factoria, and each of its states, has an older population.
 
-![Factoria regional age pyramid](/img/Factoria_Age_Pyramid.png)
+![Factoria regional age pyramid](https://technocrat.site/refounded/img/Factoria_Age_Pyramid.png)
 
-![Factoria state age pyramids](/img/Factoria_states_age_pyramids.png)
+![Factoria state age pyramids](https://technocrat.site/refounded/img/Factoria_states_age_pyramids.png)
 
 The age distribution differences are reflected in the dependency ratios for the Factoria states.
 

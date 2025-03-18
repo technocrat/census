@@ -31,9 +31,11 @@ export collect_state_age_dataframes, convert_decimals_to_int64!
 export create_age_pyramid, create_multiple_age_pyramids, dms_to_decimal
 export expand_state_codes, fill_state, format_with_commas
 export get_childbearing_population, get_nation_state, get_state_pop
-export get_dem_vote, get_gop_vote, get_us_ages
+export get_dem_vote, get_gop_vote, get_us_ages, get_geo_pop
 export make_nation_state_gdp_df, make_nation_state_pop_df, make_growth_table
-export process_education_by_nation, q, query_all_nation_ages
-export query_nation_ages, query_state_ages
+export process_education_by_nation, q, query_all_nation_ages, make_postal_codes
+export query_nation_ages, query_state_ages, ga, map_poly, methods
+
+valid_codes() = sort(collect(VALID_POSTAL_CODES))
 
 end

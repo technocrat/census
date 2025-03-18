@@ -1,7 +1,7 @@
 # New Sonora
 
 @@marginnote
-~~~<img src="/img/sonora.png" style="width: 100%; display: block;">~~~
+~~~<img src="https://technocrat.site/refounded/img/sonora.png" style="width: 100%; display: block;">~~~
 @@
 
 ~~~

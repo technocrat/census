@@ -1,7 +1,9 @@
 # Pacifica
 
 @@marginnote
-~~~<img src="/img/pacific.png" style="width: 100%; display: block;">~~~
+~~~
+<img src="https://technocrat.site/refounded/img/pacific.png" style="width: 100%; display: block;">
+~~~
 @@
 
 ~~~
@@ -17,7 +19,6 @@
 
 All of Pacifica lies within 400 miles of Seattle except for the southeastern corner of Oregon and all of Alaska. It is bordered by British Columbia, Canada on the north and by the Yukon Territory, Canada and Idaho on the east. It borders California and Nevada on the south.
 
-
 @@marginnote
 Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 @@
@@ -29,7 +30,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 ## Population
 
 Its population is concentrated along the I-5 corridor from Seattle to Portland. As a single state, it would rank sixth, behind Pennsylvania, ahead of Illinois.
-![Pacifica at night](/img/pacific_at_night.png)
+![Pacifica at night](https://technocrat.site/refounded/img/pacific_at_night.png)
 
 The following table shows the population of Pacifica in relation to the European Union member states.
 
@@ -42,9 +43,9 @@ The following table shows the population of Pacifica in relation to the European
 
 Compared to the United States as a whole, Pacifica has a younger population, although that varies by state.
 
-![Pacifica regional age pyramid](/img/Pacifica_Age_Pyramid.png)
+![Pacifica regional age pyramid](https://technocrat.site/refounded/img/Pacifica_Age_Pyramid.png)
 
-![Pacifica state age pyramids](/img/Pacifica_states_age_pyramids.png)
+![Pacifica state age pyramids](https://technocrat.site/refounded/img/Pacifica_states_age_pyramids.png)
 
 ~~~
 {{insert /partials/Pacifica_dependency_table.html}}	

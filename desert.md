@@ -1,7 +1,9 @@
 # Deseret
 
 @@marginnote
-~~~<img src="/img/desert.png" style="width: 100%; display: block;">~~~
+~~~
+<img src="https://technocrat.site/refounded/img/desert.png" style="width: 100%; display: block;">
+~~~
 @@
 
 ~~~
@@ -29,7 +31,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 
 Colorado has a population size that lies between Minnesota and Wisconsin. Utah's population lies between Iowa and Connecticut. Idaho and Montana each lie between Rhode Island and Nebraska. As a single state, it would rank sixth, between Illinois and Pennsylvania.
 
-![Deseret at night](/img/desert_at_night.png)
+![Deseret at night](https://technocrat.site/refounded/img/desert_at_night.png)
 
 The following table shows the population of Deseret in relation to the European Union member states.
 
@@ -40,11 +42,11 @@ The following table shows the population of Deseret in relation to the European 
 
 ### Age Structure
 
-![Deseret regional age pyramid](/img/Deseret_Age_Pyramid.png)
+![Deseret regional age pyramid](https://technocrat.site/refounded/img/Deseret_Age_Pyramid.png)
 
 Compared to the United States as a whole, Deserest has a younger population, although that varies by state.
 
-![Deseret state age pyramids](/img/Deseret_states_age_pyramids.png)
+![Deseret state age pyramids](https://technocrat.site/refounded/img/Deseret_states_age_pyramids.png)
 
 The age distribution differences are reflected in the dependency ratios for the Deseret states.
 

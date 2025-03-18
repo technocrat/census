@@ -1,7 +1,9 @@
 # Cumberland
 
 @@marginnote
-~~~<img src="/img/cumber.png" style="width: 100%; display: block;">~~~
+~~~
+<img src="https://technocrat.site/refounded/img/cumber.png" style="width: 100%; display: block;">
+å~~~
 @@
 
 ~~~
@@ -28,7 +30,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 ~~~
 
 Tennessee has a population comparable to Massachusetts, and Kentucky has a population size between Louisiana and Oregon. West Virginia falls between Idaho and Oklahoma. A single state Cumberland would be the fifth largest behind New York and ahead of Pennsylvania.
-![Cumberland at night](/img/cumber_at_night.png)
+![Cumberland at night](https://technocrat.site/refounded/img/cumber_at_night.png)
 
 The following table shows the population of Cumberland in relation to the European Union member states.
 
@@ -40,9 +42,9 @@ The following table shows the population of Cumberland in relation to the Europe
 
 Compared to the United States as a whole, Cumberland has an older population.
 
-![Cumberland regional age pyramid](/img/Cumberland_Age_Pyramid.png)
+![Cumberland regional age pyramid](https://technocrat.site/refounded/img/Cumberland_Age_Pyramid.png)
 
-![Cumberland state age pyramids](/img/Cumberland_states_age_pyramids.png)
+![Cumberland state age pyramids](https://technocrat.site/refounded/img/Cumberland_states_age_pyramids.png)
 
 The age distribution differences are reflected in the dependency ratios for the Cumberland states.
 

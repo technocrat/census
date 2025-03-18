@@ -1,7 +1,9 @@
 # New Dixie
 
 @@marginnote
-~~~<img src="/img/dixie.png" style="width: 100%; display: block;">~~~
+~~~
+<img src="https://technocrat.site/refounded/img/dixie.png" style="width: 100%; display: block;">
+~~~
 @@
 
 ~~~
@@ -28,7 +30,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 
 As a single state, it would be the largest by far with a population nearly a quarter more than that of California. Florida is already the third largest state, while Georgia and North Carolina rank seventh and eighth.
 
-![New Dixie at night](/img/dixie_at_night.png)
+![New Dixie at night](https://technocrat.site/refounded/img/dixie_at_night.png)
 
 The following table shows the population of New Dixie in relation to the European Union member states.
 
@@ -46,10 +48,10 @@ Compared to the United States as a whole, New Dixie has a younger population, al
 
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.
 
-![New Dixie regional age pyramid](/img/New_Dixie_Age_Pyramid.png)
+![New Dixie regional age pyramid](https://technocrat.site/refounded/img/New_Dixie_Age_Pyramid.png)
 
 
-![New Dixie state age pyramids](/img/New_Dixie_states_age_pyramids.png)
+![New Dixie state age pyramids](https://technocrat.site/refounded/img/New_Dixie_states_age_pyramids.png)
 
 The age distribution differences are reflected in the dependency ratios for the New Dixie states.
 

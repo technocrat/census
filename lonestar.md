@@ -1,7 +1,9 @@
 # The Lone Star Republic
 
 @@marginnote
-~~~<img src="/img/lonestar.png" style="width: 100%; display: block;">~~~
+~~~
+<img src="https://technocrat.site/refounded/img/lonestar.png" style="width: 100%; display: block;">
+~~~
 @@
 
 ~~~
@@ -31,7 +33,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 
 As a single state, it would be the largest, passing California by small margin. Texas is already the second largest state, while its other states lie between Mississippi and Oregon in population size.
 
-![The Lone Star Republic at night](/img/lonestar_at_night.png)
+![The Lone Star Republic at night](https://technocrat.site/refounded/img/lonestar_at_night.png)
 
 The following table shows the population of The Lone Star Republic in relation to the European Union member states.
 
@@ -47,9 +49,9 @@ Compared to the United States as a whole, The Lone Star Republic has a younger p
 {{insert /partials/The_Lonestar_Republic_dependency_table.html}}	
 ~~~
 
-![The Lone Star Republic regional age pyramid](/img/The_Lonestar_Republic_Age_Pyramid.png)
+![The Lone Star Republic regional age pyramid](https://technocrat.site/refounded/img/The_Lonestar_Republic_Age_Pyramid.png)
 
-![The Long Star Republic state age pyramids](/img/The_Lonestar_Republic_states_age_pyramids.png)
+![The Long Star Republic state age pyramids](https://technocrat.site/refounded/img/The_Lonestar_Republic_states_age_pyramids.png)
 
 
 A lower dependency ratio indicates a higher proportion of the population in the 16-65 age group. For the US as a whole, the ratio is 52.86.

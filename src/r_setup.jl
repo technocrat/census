@@ -155,7 +155,7 @@ function check_r_packages()
 
     R"""
     .libPaths(c("/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library"))
-    required_packages <- c("ggplot2", "tidyr", "dplyr", "tidycensus", "tigris")
+    required_packages <- c("classInt","ggplot2", "tidyr", "dplyr", "tidycensus", "tigris")
     installed <- sapply(required_packages, require, character.only = TRUE)
     print(data.frame(
         Package = required_packages,

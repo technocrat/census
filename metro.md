@@ -1,7 +1,9 @@
 # Metropolis
 
 @@marginnote
-~~~<img src="/img/metro.png" style="width: 100%; display: block;">~~~
+~~~
+<img src="https://technocrat.site/refounded/img/metro.png" style="width: 100%; display: block;">
+~~~
 @@
 
 ~~~
@@ -28,7 +30,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 ~~~
 
 Its population is concentrated along the Northeast Corridor from Boston to New York. 
-![Metropolis at night](/img/metropolis_at_night.png)
+![Metropolis at night](https://technocrat.site/refounded/img/metropolis_at_night.png)
 
 The following table shows the population of Metropolis in relation to the European Union member states.
 
@@ -38,11 +40,11 @@ The following table shows the population of Metropolis in relation to the Europe
 
 ### Age Structure
 
-![Metropolis regional age pyramid](/img/Metropolis_Age_Pyramid.png)
+![Metropolis regional age pyramid](https://technocrat.site/refounded/img/Metropolis_Age_Pyramid.png)
 
 Compared to the United States as a whole, Metropolis has an older population, although that varies by state.
 
-![Metropolis state age pyramids](/img/Metropolis_states_age_pyramids.png)
+![Metropolis state age pyramids](https://technocrat.site/refounded/img/Metropolis_states_age_pyramids.png)
 
 ~~~
 {{insert /partials/Metropolis_dependency_table.html}}	

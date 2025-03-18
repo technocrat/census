@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: MIT
-
 """
-        get_geo_pop(target_states::Vector{String})
-
+    get_geo_pop(target_states::Vector{PostalCode})
 Query geographic and population data for counties in the specified states.
+
 Dependencies: DataFrame, LibPQ
+
 # Arguments
-- `target_states::Vector{String}`: A vector of two-letter state codes (e.g., ["OH", "MI"])
+- `target_states::Vector{PostalCode}`: A vector of valid state postal codes (e.g., [PostalCode("OH"), PostalCode("MI")])
 
 # Returns
 - `DataFrame`: A DataFrame containing county geographic and population data with columns:
@@ -18,15 +18,21 @@ Dependencies: DataFrame, LibPQ
 
 # Example
 ```julia
-target_states = ["OH", "MI", "IN", "IL", "WI"]
+target_states = [PostalCode("OH"), PostalCode("MI"), PostalCode("IN"), PostalCode("IL"), PostalCode("WI")]
 midwest_counties = get_geo_pop(target_states)
+```
+"""
 function get_geo_pop(target_states::Vector{String})
+    target_states = make_postal_codes(target_states)
     # Connect to database
     conn = LibPQ.Connection("dbname=geocoder")
     
+    # Convert PostalCode objects to their string values for the query
+    state_codes = [pc.code for pc in target_states]
+    
     # Prepare the query with parameter placeholder
     geo_query = """
-        SELECT q.geoid, q.stusps, q.name, ST_AsText(q.geom) as json_geom, vd.value as total_population
+        SELECT q.geoid, q.stusps, q.name, ST_AsText(q.geom) as geom, vd.value as total_population
         FROM census.counties q
         LEFT JOIN census.variable_data vd
             ON q.geoid = vd.geoid
@@ -35,7 +41,7 @@ function get_geo_pop(target_states::Vector{String})
     """
     
     # Execute the query with parameters
-    result = execute(conn, geo_query, [target_states])
+    result = execute(conn, geo_query, [state_codes])
     
     # Process the result
     df = DataFrame(result)
@@ -44,4 +50,8 @@ function get_geo_pop(target_states::Vector{String})
     close(conn)
     
     return df
+end
+
+function make_postal_codes(nation::Vector{String})
+    return [PostalCode(state) for state in nation]
 end

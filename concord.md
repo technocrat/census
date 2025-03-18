@@ -1,10 +1,11 @@
 # Concordia
 
-@@marginnote
-~~~<img src="/img/concord.png" style="width: 100%; display: block;">~~~
-@@
 
-All of Concordia lies within 200 miles of Boston except for northeastern Maine, which is sparsely settled. It is bordered by Quebec, Canada on the north and by New Brunswick, Canada on the east. It borders New York on the west and south. Approximately 75% of the region is forested.
+@@marginnote
+~~~
+<img src="https://technocrat.site/refounded/img/concord.png" style="width: 100%; display: block;">
+~~~
+@@
 
 ~~~
 <iframe 
@@ -17,7 +18,10 @@ All of Concordia lies within 200 miles of Boston except for northeastern Maine, 
 </iframe>
 ~~~
 
+All of Concordia lies within 200 miles of Boston except for northeastern Maine, which is sparsely settled. It is bordered by Quebec, Canada on the north and by New Brunswick, Canada on the east. It borders New York on the west and south. Approximately 75% of the region is forested.
+
 ## Population
+
 Concordia is home to approximately 15.1 million in the six states of Connecticut, New Hampshire, Maine, Massachusetts, Rhode Island and Vermont. As a single state, it would be the fifth largest, behind New York and ahead of Pennsylvania. It has about 4.5% of the total population of the United States.
 
 @@marginnote
@@ -31,7 +35,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 
 Its population is concentrated along the Northeast Corridor from Boston to New York. Massachusetts has a population size similar to Indiana and Tennessee. Connecticut falls between Utah and Oklahoma. Maine and New Hampshire are both comparable to Hawaii. Rhode Island has the approximate population of Delaware and Montana. Vermont has a larger population than Wyoming and a smaller population than the District of Columbia.
 
-![Concordia at night](/img/concord_night.png)
+![Concordia at night](https://technocrat.site/refounded/img/concord_night.png)
 
 The following table shows the population of Concordia in relation to the European Union member states.
 
@@ -41,7 +45,7 @@ The following table shows the population of Concordia in relation to the Europea
 
 ### Age Structure
 
-![Concordia regional age pyramid](/img/Concordia_Age_Pyramid.png)
+![Concordia regional age pyramid](https://technocrat.site/refounded/img/Concordia_Age_Pyramid.png)
 
 Compared to the United States as a whole, Concordia has a younger population, although that varies by state.
 

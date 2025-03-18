@@ -1,7 +1,9 @@
 # Heartlandia
 
 @@marginnote
-~~~<img src="/img/heart.png" style="width: 100%; display: block;">~~~
+~~~
+<img src="https://technocrat.site/refounded/img/heart.png" style="width: 100%; display: block;">
+~~~
 @@
 
 ~~~
@@ -29,7 +31,7 @@ Source: American Community Survey, ACS 5-Year Estimates Detailed Tables 2023
 
 Its largest state, Missouri, has a population between Wisconsin and Maryland, and its smallest state, North Dakota, has a size between Alaska and South Dakota. As a single state, it would rank just behind Florida, displacing New York from the fourth place.
 
-![Heartlandia at night](/img/heartland_at_night.png)
+![Heartlandia at night](https://technocrat.site/refounded/img/heartland_at_night.png)
 
 The following table shows the population of Heartlandia in relation to the European Union member states.
 
@@ -41,10 +43,10 @@ The following table shows the population of Heartlandia in relation to the Europ
 
 Compared to the United States as a whole, Heartlandia has a younger population, although that varies by state.
 
-![Heartlandia regional age pyramid](/img/Heartlandia_Age_Pyramid.png)
+![Heartlandia regional age pyramid](https://technocrat.site/refounded/img/Heartlandia_Age_Pyramid.png)
 
 
-![Heartlandia state age pyramids](/img/Heartlandia_states_age_pyramids.png)
+![Heartlandia state age pyramids](https://technocrat.site/refounded/img/Heartlandia_states_age_pyramids.png)
 
 The age distribution differences are reflected in the dependency ratios for the  Concordia states.
 
