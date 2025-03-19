@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: MIT
 
+include(srcdir()*"/add_labels.jl")
 include(srcdir()*"/calculate_dependency_ratio.jl")
 include(srcdir()*"/cleveland_dot_plot.jl")
 include(srcdir()*"/create_birth_table.jl")
