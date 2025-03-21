@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 
-# assumes parsed_geometries is in namespace, along
+# assumes parsed_geoms is in namespace, along
 # with map_colors—see CRUCIAL/debris.ne.jl
 
 function map_poly(df::DataFrame, the_axis::GeoAxis, characteristic::String)
@@ -12,7 +12,7 @@ function map_poly(df::DataFrame, the_axis::GeoAxis, characteristic::String)
     
     # For each feature, manually extract properly typed points
     for i in 1:nrow(df)
-        multi_poly = df.parsed_geometries[i]
+        multi_poly = df.parsed_geoms[i]
         n_polys = ArchGDAL.ngeom(multi_poly)
         
         for p_idx in 0:(n_polys-1)
