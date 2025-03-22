@@ -32,6 +32,7 @@ df.pop_bins    = my_cut(df.pop, breaks[:kmeans][:brks])
 # Convert WKT strings to geometric objects
 df.parsed_geoms = parse_geoms(df)
 
+ohio_basin_in  = setdiff(get_geo_pop(["IN"]).geoid,gl_in)
 ohio_basin_ky  = setdiff(get_geo_pop(["KY"]).geoid,miss_basin_ky)
 ohio_basin_tn  = setdiff(get_geo_pop(["TN"]).geoid,miss_basin_tn)
 exclude_al     = setdiff(get_geo_pop(["AL"]).geoid,ohio_basin_al)

@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: MIT
+
 using Census
 using DrWatson
 @quickactivate "Census"  
@@ -22,31 +23,32 @@ include(joinpath(SCRIPT_DIR, "highlighters.jl"))
 include(joinpath(SCRIPT_DIR, "stru.jl"))
 include(joinpath(SCRIPT_DIR, "setup.jl"))
 
-ny          = get_geo_pop(["NY"])
-pa          = get_geo_pop(["PA"])
-oh          = get_geo_pop(["OH"])
-ind         = get_geo_pop(["IN"])
-mi          = get_geo_pop(["MI"])
-il          = get_geo_pop(["IL"])
-df          = vcat(ny,pa,oh,ind,mi,il)
+tx          = get_geo_pop(["TX"])
+nm          = get_geo_pop(["NM"])
+ar          = get_geo_pop(["AR"])
+la          = get_geo_pop(["LA"])
+co          = get_geo_pop(["CO"])
+
+df          = vcat(tx,ok,ar,la,nm,co)
 rename!(df, [:geoid, :stusps, :county, :geom, :pop])
 setup_r_environment()
 breaks      = rcopy(get_breaks(df,5))
 df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
 df.parsed_geoms = parse_geoms(df)
 
-ny          = filter(:geoid  => x -> x ∈ metro_to_gl,df)
-pa          = filter(:geoid  => x -> x ∈ gl_pa,df)
-oh          = filter(:stusps => x -> x == "OH",df)
-oh          = filter(:geoid  => x -> x ∈ gl_oh,oh)
-ind         = filter(:stusps => x -> x == "IN",df)
-ind         = filter(:geoid  => x -> x ∈ gl_in,ind)
-mi          = filter(:stusps => x -> x == "MI",df)
-mi          = filter(:geoid  => x -> x ∉ peninsula,mi)
-il          = filter(:geoid => x -> x ∈ ohio_basin_il,df)
-
-
-df          = vcat(ny,pa,oh,ind,mi,il)
+tx           = filter(:stusps  => x -> x == "TX",df)           
+tx           = filter(:geoid   => x -> x ∈ rio_basin_tx,tx)
+co           = filter(:stusps  => x -> x == "CO",df)           
+co           = filter(:geoid   => x -> x ∈ rio_basin_co,co)
+nm           = filter(:stusps  => x -> x == "NM",df)
+nm           = filter(:geoid   => x -> x ∈ rio_basin_nm,nm)
+mo           = filter(:stusps  => x -> x == "MO",df)
+mo           = filter(:geoid  => x -> x ∈ ms_basin_mo,mo)
+mn           = filter(:stusps  => x -> x == "MN",df)
+mn           = filter(:geoid  => x -> x ∉ mo_basin_mn,mn)   
+ia           = filter(:stusps  => x -> x == "IA",df)
+ia           = filter(:geoid  => x -> x ∈ ms_basin_ia,ia)
+df           = vcat(tx,co,nm)
 
 fig   = Figure(size=(1200, 800), fontsize=22)
 title = Label(fig[0, 2], "Erie", fontsize=20)
