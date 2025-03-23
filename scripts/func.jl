@@ -36,4 +36,8 @@ include(srcdir()*"/query_all_nation_ages.jl")
 include(srcdir()*"/query_nation_ages.jl")
 include(srcdir()*"/query_state_ages.jl")
 include(srcdir()*"/r_setup.jl")
+include(srcdir()*"/get_colorado_basin.jl")
+include(srcdir()*"/get_western_geoids.jl")
+include(srcdir()*"/get_eastern_geoids.jl")
+include(srcdir()*"/get_colorado_basin_geoids.jl")
 
