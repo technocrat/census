@@ -33,59 +33,33 @@ df.pop_bins     = my_cut(df.pop, breaks[:kmeans][:brks])
 df.parsed_geoms = parse_geoms(df)
 western_geoids  = get_western_geoids().geoid
 eastern_geoids  = get_eastern_geoids().geoid
-const colorado_basin_geoids = get_colorado_basin_geoids()
 
 
-tx = subset(df, :stusps => ByRow(==("TX")))           
-tx = subset(tx, :geoid => ByRow(x -> x ∉ rio_basin_tx && x ∈ eastern_geoids))
+ar = subset(df, :stusps => ByRow(==("AR")))
+ar = subset(ar, :geoid => ByRow(x -> x ∈ ar_basin_mo))
 
-ok = subset(df, :stusps => ByRow(==("OK")))
-ok = subset(ok, :geoid => ByRow(x -> x ∈ eastern_geoids))
+mn= subset(df, :stusps => ByRow(==("MN")))
+mn = subset(mn, :geoid => ByRow(x -> x ∈ mo_basin_mn))
 
-la = subset(df, :stusps => ByRow(==("LA")))
-la = subset(la, :geoid => ByRow(x -> x ∉ ms_basin_la))
+ia = subset(df, :stusps => ByRow(==("IA")))
+ia = subset(ia, :geoid => ByRow(x -> x ∈ mo_basin_ia))
 
+mo = subset(df, :stusps => ByRow(==("MO")))
+mo = subset(mo, :geoid => ByRow(x -> x ∈ mo_basin_mo))  
 
-co = subset(df, :stusps => ByRow(==("CO")))           
-co = subset(co, :geoid => ByRow(x -> x ∈ rio_basin_co))
+ks = subset(df, :stusps => ByRow(==("KS")))
+ks = subset(ks, :geoid => ByRow(x -> x ∉ ks_south.geoid && x ∉ western_geoids))
 
-nm = subset(df, :stusps => ByRow(==("NM")))
-nm = subset(nm, :geoid => ByRow(x -> x ∈ rio_basin_nm))
+ne = subset(df, :stusps => ByRow(==("NE")))
+ne = subset(ne, :geoid => ByRow(x -> x ∉ western_geoids))
 
-mt = subset(df, :stusps => ByRow(==("MT")))
-mt = subset(mt, :geoid => ByRow(x -> x ∉ columbia_river_basin && x ∉ colorado_basin_geoids))
-
-ut = subset(df, :stusps => ByRow(==("UT")))
-ut = subset(ut, :geoid => ByRow(x -> x ∉ columbia_river_basin && x ∉ colorado_basin_geoids))
+nd = subset(df, :stusps => ByRow(==("ND")))
+nd = subset(nd, :geoid => ByRow(x -> x ∉ western_geoids))
 
 sd = subset(df, :stusps => ByRow(==("SD")))
-sd = subset(sd, :geoid => ByRow(x -> x ∈ western_geoids))
+sd = subset(sd, :geoid => ByRow(x -> x ∉ western_geoids))   
 
-id = subset(df, :stusps => ByRow(==("ID")))
-id = subset(id, :geoid => ByRow(x -> x ∈ columbia_river_basin))
-
-or = subset(df, :stusps => ByRow(==("OR")))
-or = subset(or, :geoid => ByRow(x -> x ∈ columbia_river_basin))
-
-wa = subset(df, :stusps => ByRow(==("WA")))
-wa = subset(wa, :geoid => ByRow(x -> x ∈ columbia_river_basin))
-
-nv = subset(df, :stusps => ByRow(==("NV")))
-nv = subset(nv, :geoid => ByRow(x -> x ∈ colorado_basin_geoids))
-
-wy = subset(df, :stusps => ByRow(==("WY")))
-wy = subset(wy, :geoid => ByRow(x -> x ∉ columbia_river_basin && x ∉ colorado_basin_geoids))
-
-
-
-wst = subset(df, :geoid => ByRow(x -> x ∈ western_geoids && x ∈ colorado_basin_geoids))
-crb = subset(df, :geoid => ByRow(x -> x ∈ colorado_basin_geoids))
-rio = subset(df, :geoid => ByRow(x -> (x ∈ rio_basin_tx || 
-                                      x ∈ rio_basin_co || 
-                                      x ∈ rio_basin_nm || 
-                                      (x ∈ western_geoids && x ∉ colorado_basin_geoids))))
-
-df = vcat(tx,ar,ok,la,mo)
+df = vcat(mn,ia,mo,ks,ne,nd,sd) 
 fig   = Figure(size=(1200, 800), fontsize=22)
 title = Label(fig[0, 2], "Erie", fontsize=20)
 ga1   = ga(1, 1, "Population")

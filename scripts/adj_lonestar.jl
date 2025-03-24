@@ -24,7 +24,6 @@ include(joinpath(SCRIPT_DIR, "highlighters.jl"))
 include(joinpath(SCRIPT_DIR, "stru.jl"))
 include(joinpath(SCRIPT_DIR, "setup.jl"))
 
-
 df              = get_geo_pop(postals)
 
 rename!(df, [:geoid, :stusps, :county, :geom, :pop])
@@ -33,7 +32,6 @@ breaks          = rcopy(get_breaks(df,5))
 df.pop_bins     = my_cut(df.pop, breaks[:kmeans][:brks])
 df.parsed_geoms = parse_geoms(df)
 western_geoids  = get_western_geoids().geoid
-
 
 ar = subset(df, :stusps => ByRow(==("AR")))
 mo = subset(df, :stusps => ByRow(==("MO")))
