@@ -6,9 +6,11 @@ using DataFrames
 using Dates
 using Decimals
 using DrWatson
+using FixedPointNumbers
 using Format
 using GeoInterface
 using GeoJSON
+using GeometryBasics
 using GeoMakie
 using HTTP
 using JSON3

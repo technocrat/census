@@ -1,0 +1,192 @@
+{
+  "name": "Julia Expert Assistant",
+  "version": "1.0.0",
+  "description": "Expert AI programming assistant for Julia development",
+  "publisher": "vscode-extensions",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "activationEvents": [
+    "onLanguage:julia"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "juliaExpert.getHelp",
+        "title": "Get Julia coding assistance"
+      },
+      {
+        "command": "juliaExpert.explainCode",
+        "title": "Explain selected Julia code"
+      },
+      {
+        "command": "juliaExpert.refactorCode",
+        "title": "Refactor selected Julia code"
+      },
+      {
+        "command": "juliaExpert.packageStructure",
+        "title": "Suggest package structure improvements"
+      },
+      {
+        "command": "juliaExpert.dbInteraction",
+        "title": "Generate Postgres interaction code"
+      }
+    ],
+    "configuration": {
+      "title": "Julia Expert Assistant",
+      "properties": {
+        "juliaExpert.model": {
+          "type": "string",
+          "default": "claude-3-7-sonnet-20250219",
+          "description": "The AI model to use for code assistance"
+        },
+        "juliaExpert.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for the AI service"
+        },
+        "juliaExpert.codeStyle": {
+          "type": "string",
+          "enum": ["functional", "procedural", "mixed"],
+          "default": "functional",
+          "description": "Preferred code style for suggestions"
+        },
+        "juliaExpert.packageName": {
+          "type": "string",
+          "default": "Census",
+          "description": "Name of the Julia package being developed"
+        },
+        "juliaExpert.databaseDetails": {
+          "type": "object",
+          "properties": {
+            "host": {
+              "type": "string",
+              "default": "localhost"
+            },
+            "port": {
+              "type": "number",
+              "default": 5432
+            },
+            "database": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          "description": "PostgreSQL connection details"
+        },
+        "juliaExpert.projectContext": {
+          "type": "string",
+          "default": "Analysis of alternatives for nation states to replace the existing United States",
+          "description": "Brief description of the project context"
+        },
+        "juliaExpert.includeTesting": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include unit tests with code suggestions"
+        },
+        "juliaExpert.includeDocumentation": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include documentation with code suggestions"
+        },
+        "juliaExpert.suggestRefactoring": {
+          "type": "boolean",
+          "default": true,
+          "description": "Proactively suggest code refactoring"
+        },
+        "juliaExpert.maxTokens": {
+          "type": "number",
+          "default": 16000,
+          "description": "Maximum tokens for API responses"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "juliaExpert.getHelp",
+        "key": "ctrl+shift+j",
+        "mac": "cmd+shift+j"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorLangId == julia",
+          "command": "juliaExpert.getHelp",
+          "group": "juliaExpert"
+        },
+        {
+          "when": "editorLangId == julia && editorHasSelection",
+          "command": "juliaExpert.explainCode",
+          "group": "juliaExpert"
+        },
+        {
+          "when": "editorLangId == julia && editorHasSelection",
+          "command": "juliaExpert.refactorCode",
+          "group": "juliaExpert"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "test": "node ./out/test/runTest.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.7.0",
+    "vscode-languageclient": "^8.0.2"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.70.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.3",
+    "@vscode/test-electron": "^2.2.0"
+  },
+  "assistant": {
+    "prompt": {
+      "role": "Expert Julia programming assistant",
+      "expertise": "Writing clear, readable Julia code with a functional programming approach",
+      "user": {
+        "background": "Lawyer with 45 years of programming experience",
+        "languages": ["FORTRAN", "BASIC", "Pascal", "C", "Perl", "Ruby", "Python", "R", "Go", "Rust", "Haskell", "SQL", "bash"],
+        "expertise": "R programming",
+        "current": "Learning Julia with good grasp of basics",
+        "preferences": "Functional programming approach and UNIX philosophy"
+      },
+      "project": {
+        "description": "Analysis of alternatives for nation states to replace the existing United States",
+        "aspects": ["population characteristics", "economics", "politics", "history", "natural geography"],
+        "output": "HTML publication using Franklin.jl",
+        "goal": "Complete Julia Package",
+        "database": "PostgreSQL"
+      },
+      "requirements": [
+        "No human persona, first/second person acceptable",
+        "No apologies or congratulations",
+        "Thoughtful, nuanced, factual answers",
+        "Follow requirements precisely, ask questions when ambiguous",
+        "Step-by-step reasoning and planning",
+        "Confirm before writing code",
+        "Write correct, bug-free, secure, performant code",
+        "Prioritize readability over performance",
+        "Complete implementation of all functionality",
+        "No TODOs or placeholders",
+        "Complete code with required imports",
+        "Concise prose",
+        "Admit uncertainty",
+        "Suggest codebase improvements for package uniformity"
+      ]
+    }
+  }
+}

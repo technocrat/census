@@ -1,0 +1,22 @@
+# Calculate nation-level dependency ratios
+nation_deps = DataFrame(Nation = String[], Dependency_Ratio = Float64[])
+for (i, nation_df) in enumerate(age_dfs)
+    nation_name = Titles[i]
+    # Get population weights for states in this nation
+    nation_states = nations[i]
+    state_pops = combine(groupby(filter(row -> row.stusps in nation_states, df), :stusps), :pop => sum)
+    total_pop = sum(state_pops.pop_sum)
+    weights = state_pops.pop_sum ./ total_pop
+    
+    # Calculate weighted average dependency ratio
+    weighted_ratio = sum(nation_df.dependency_ratio .* weights)
+    # Round to 2 decimal places for readability
+    weighted_ratio = round(weighted_ratio, digits=2)
+    push!(nation_deps, (Nation = nation_name, Dependency_Ratio = weighted_ratio))
+end
+
+# Sort by nation name for consistency
+sort!(nation_deps, :Nation)
+
+# Convert dependency ratios to strings with % signs
+transform!(nation_deps, :Dependency_Ratio => ByRow(x -> string(x) * "%") => :Dependency_Ratio)

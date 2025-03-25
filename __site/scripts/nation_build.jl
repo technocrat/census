@@ -1,4 +1,6 @@
-include("libr.jl)
+using CSV, DataFrames
+include(srcdir()*"/fill_state.jl")
+include("libr.jl")
 include("q.jl")
 
 us         = q(geo_query)
@@ -6,7 +8,7 @@ postals    = unique(sort!(us.stusps))
 outliers   = ["PR","VI","GU","AS","MP"]
 us         = filter(:stusps => x -> !(x in outliers), us)
 conus      = filter(:stusps => x -> !(x in ["AK","HI"]), us)
-concord    = ["CT", "MA", "ME", "NH", "RI", "VT"]
+concord    = ["CT","MA","ME","NH","RI","VT"]
 us.nation  = ifelse.(in.(us.stusps, Ref(concord)), "concord", missing)
 metropolis = ["DE", "MD","NY","NJ","VA","DC"]
 us.nation .= ifelse.(in.(us.stusps, Ref(metropolis)), "metropolis", us.nation)

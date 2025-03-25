@@ -62,6 +62,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://technocrat.site/league/index.html</loc>
+    <lastmod>2025-03-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://technocrat.site/common/index.html</loc>
     <lastmod>2025-03-17</lastmod>
     <changefreq>monthly</changefreq>
@@ -88,6 +94,12 @@
 <url>
     <loc>https://technocrat.site/alter/index.html</loc>
     <lastmod>2025-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://technocrat.site/data/MTContDivide2003/ContDivide2003_metadata/</loc>
+    <lastmod>2014-01-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>

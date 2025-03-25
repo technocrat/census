@@ -3,7 +3,7 @@
 # takes a vector of vectors of state two-letter postal code abbreviations and
 # a dictionary nation using those abbreviations as a key with values of the
 # fully spelled out name and produces a vector of dataframes
-function collect_state_ages(state_vectors::Vector{String}, state_names::Dict)
+function collect_state_ages(state_vectors::Vector{Vector{String}}, state_names::Dict)
     # Create a dictionary mapping state abbreviations to their DataFrames
     # Flatten all vectors and process each state once
     all_states = vcat(state_vectors...)

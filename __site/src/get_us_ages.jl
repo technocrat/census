@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 function get_us_ages()
-	us_age = df = CSV.read("../data/us_age_table.csv",DataFrame)
+	us_age = df = CSV.read(datadir() * "/us_age_table.csv",DataFrame)
 	us_age = us_age[:,[1,6,10]]
 	us_age = us_age[3:20,:]
 	rename!(us_age, [:age_group,:male,:female])

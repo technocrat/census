@@ -1,4 +1,6 @@
-include("libr.jl)
+using CSV, DataFrames
+include(srcdir()*"/fill_state.jl")
+include("libr.jl")
 include("q.jl")
 
 us         = q(geo_query)

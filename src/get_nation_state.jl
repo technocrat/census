@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 # Create a function to determine which region a state belongs to
-function get_nation(state_abbr)
+function get_nation_state(state_abbr)
     if state_abbr in concord
         return "concord"
     elseif state_abbr in metropolis

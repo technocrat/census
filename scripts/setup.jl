@@ -11,7 +11,7 @@ function partialsdir()
 	return projectdir()*"/_layout/partials"
 end
 include(scriptdir()*"/libr.jl")
-include(scriptdir()*"/cons.jl")
+include(scriptdir()*"/func.jl")
 include(scriptdir()*"/dict.jl")
 include(scriptdir()*"/highlighters.jl")
 include(scriptdir()*"/stru.jl")
