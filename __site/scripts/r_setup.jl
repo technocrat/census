@@ -13,6 +13,40 @@ This module manages R package dependencies and environment setup for Census data
 # Functions
 """
 
+# Flag to track if setup has been completed
+const SETUP_COMPLETE = Ref(false)
+
+const R_LIBPATH = """
+.libPaths(c("/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library"))
+"""
+
+const R_PACKAGES = ["classInt","ggplot2", "tidyr", "dplyr", "tidycensus", "tigris"]
+
+const R_CHECK_CODE = """
+pkg_status <- data.frame(
+    Package = c($(join(map(x -> "\"$x\"", R_PACKAGES), ", "))),
+    Installed = sapply(c($(join(map(x -> "\"$x\"", R_PACKAGES), ", "))),
+                      function(x) as.character(require(x, character.only = TRUE)))
+)
+print(pkg_status)
+pkg_status
+"""
+
+const R_INSTALL_CODE = """
+packages <- c($(join(map(x -> "\"$x\"", R_PACKAGES), ", ")))
+for(pkg in packages) {
+    if (!require(pkg, character.only = TRUE)) {
+        message(sprintf("Installing %s...", pkg))
+        install.packages(pkg, repos = "https://cran.rstudio.com/")
+        if (!require(pkg, character.only = TRUE)) {
+            warning(sprintf("Failed to install or load %s", pkg))
+        }
+    } else {
+        message(sprintf("%s is already installed and loaded", pkg))
+    }
+}
+"""
+
 """
     check_r_packages()
 
@@ -30,6 +64,14 @@ Returns `nothing`. Outputs package status to console.
 - If `SETUP_COMPLETE` is true, returns immediately
 - Requires RCall to be properly configured
 """
+function check_r_packages()
+    if SETUP_COMPLETE[]
+        return nothing
+    end
+
+    R"$(R_LIBPATH)"
+    R"$(R_CHECK_CODE)"
+end
 
 """
     install_r_packages()
@@ -49,6 +91,10 @@ Returns `nothing`. Installation progress is printed to console.
 - Will attempt to install even if packages are present
 - May require internet connection
 """
+function install_r_packages()
+    R"$(R_LIBPATH)"
+    R"$(R_INSTALL_CODE)"
+end
 
 """
     setup_r_environment()
@@ -85,97 +131,6 @@ end
 
 See also: [`check_r_packages`](@ref), [`install_r_packages`](@ref), [`RCall`](@ref)
 """
-# Flag to track if setup has been completed
-const SETUP_COMPLETE = Ref(false)
-
-const R_LIBPATH = """
-.libPaths(c("/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library"))
-"""
-
-const R_PACKAGES = ["classInt","ggplot2", "tidyr", "dplyr", "tidycensus", "tigris"]
-
-const R_CHECK_CODE = """
-pkg_status <- data.frame(
-    Package = c($(join(map(x -> "\"$x\"", R_PACKAGES), ", "))),
-    Installed = sapply(c($(join(map(x -> "\"$x\"", R_PACKAGES), ", "))),
-                      function(x) as.character(require(x, character.only = TRUE)))
-)
-print(pkg_status)
-pkg_status
-"""
-
-const R_INSTALL_CODE = """
-packages <- c($(join(map(x -> "\"$x\"", R_PACKAGES), ", ")))
-for(pkg in packages) {
-    if (!require(pkg, character.only = TRUE)) {
-        message(sprintf("Installing %s...", pkg))
-        install.packages(pkg, repos = "https://cran.rstudio.com/")
-        if (!require(pkg, character.only = TRUE)) {
-            warning(sprintf("Failed to install or load %s", pkg))
-        }
-    } else {
-        message(sprintf("%s is already installed and loaded", pkg))
-    }
-}
-"""
-
-# Then modify the functions to use these constants
-function check_r_packages()
-    R"$(R_LIBPATH)"
-    R"$(R_CHECK_CODE)"
-end
-
-function install_r_packages()
-    R"$(R_LIBPATH)"
-    R"$(R_INSTALL_CODE)"
-end
-
-function setup_r_environment()
-    if SETUP_COMPLETE[]
-        return nothing
-    end
-
-    R"$(R_LIBPATH)"
-    for pkg in R_PACKAGES
-        R"""
-        if (!require($pkg, character.only = TRUE)) {
-            stop(paste("Package", $pkg, "is not available"))
-        }
-        """
-    end
-
-    SETUP_COMPLETE[] = true
-    return nothing
-end
-
-function check_r_packages()
-    if SETUP_COMPLETE[]
-        return nothing
-    end
-
-    R"""
-    .libPaths(c("/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library"))
-    required_packages <- c("ggplot2", "tidyr", "dplyr", "tidycensus", "tigris")
-    installed <- sapply(required_packages, require, character.only = TRUE)
-    print(data.frame(
-        Package = required_packages,
-        Installed = installed
-    ))
-    """
-end
-
-function install_r_packages()
-    R"""
-    required_packages <- c("classInt","ggplot2", "tidyr", "dplyr", "tidycensus", "tigris")
-    install_if_missing <- function(pkg) {
-        if (!require(pkg, character.only = TRUE)) {
-            install.packages(pkg, repos = "https://cran.rstudio.com/")
-        }
-    }
-    invisible(sapply(required_packages, install_if_missing))
-    """
-end
-
 function setup_r_environment()
     if SETUP_COMPLETE[]
         return nothing

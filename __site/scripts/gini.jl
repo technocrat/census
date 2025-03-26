@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 function gini(v::Vector{Int})
     # Ensure the input vector is sorted
     sorted_v = sort(v)

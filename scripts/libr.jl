@@ -5,7 +5,6 @@ using CairoMakie
 using DataFrames
 using Dates
 using Decimals
-using DrWatson
 using FixedPointNumbers
 using Format
 using GeoInterface
@@ -21,6 +20,6 @@ using Plots
 using Polynomials
 using PrettyTables
 using RCall
-#using RDatasets
+using RDatasets
 using StatsBase
 using URIs

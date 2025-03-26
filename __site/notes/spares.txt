@@ -1,0 +1,15 @@
+pop = combine(groupby(df, :nation), :pop => sum => :total)
+sort!(pop, :nation)
+
+gdp_state 		 = make_nation_state_gdp_df(postals)
+gdp_stusps 		 = [reverse_state_dict[state] for state in gdp_state.state]
+gdp_state.nation = [get_nation_state(state) for state in gdp_stusps]
+
+gdp = combine(groupby(gdp_state, :nation), :gdp => sum => :total)
+gdp = gdp[1:end-1, :]
+sort!(gdp, :nation)
+rename!(gdp, :total => :GDP)	
+
+df = leftjoin(pop, gdp, on=:nation)
+rename!(df, [:nation => :Nation, :total => :Population, :GDP => :GDP])	
+df.per_capita = df.GDP ./ df.Population

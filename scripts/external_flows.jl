@@ -1,10 +1,10 @@
 using CSV
-using DataFrames
 using Colors
-using Compose
+using DataFrames
 using Graphs
 using GraphPlot
 using PrettyTables
+using Census
 # https://www.census.gov/data/tables/time-series/demo/geographic-mobility/state-to-state-migration.html
 # https://wonder.cdc.gov/controller/datarequest/D176
 # deaths

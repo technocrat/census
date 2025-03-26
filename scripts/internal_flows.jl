@@ -1,7 +1,6 @@
 using CSV
-using DataFrames
 using Colors
-using Compose
+using DataFrames
 using Graphs
 using GraphPlot
 using PretyTables

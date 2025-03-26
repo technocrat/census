@@ -1,4 +1,5 @@
 using CSV, DataFrames
+using Census
 include(srcdir()*"/fill_state.jl")
 include("libr.jl")
 include("q.jl")

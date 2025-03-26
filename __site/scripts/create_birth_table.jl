@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 function create_birth_table()
     births = CSV.read("../data/births.csv",DataFrame)
     state_age_dfs 	   = collect_state_age_dataframes(nations)

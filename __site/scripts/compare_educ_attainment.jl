@@ -1,6 +1,5 @@
-using Plots
-using DataFrames
-using StatsPlots
+# SPDX-License-Identifier: MIT
+using Census
 
 # Create a heatmap visualization
 function plot_education_heatmap(df)
@@ -101,3 +100,17 @@ end
 # plot_education_heatmap(nation_stats)
 # plot_cleveland_dots(nation_stats)
 # table_vis(nation_stats)
+
+# Get education data for all nations
+df = process_education_by_nation()
+
+# Create figure
+fig = Figure(size=(1200, 800), fontsize=22)
+title = Label(fig[0, 2], "Education Attainment by Nation", fontsize=20)
+
+# Plot data
+ga1 = ga(1, 1, "Bachelor's Degree or Higher")
+poly1 = map_poly(df, ga1, "bachelors_or_higher")
+add_labels!(df, ga1, :geoid, fontsize=6)
+
+display(fig)

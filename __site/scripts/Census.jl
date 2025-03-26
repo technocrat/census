@@ -1,153 +1,195 @@
+# SPDX-License-Identifier: MIT
 module Census
 
-# Libraries
+# All dependencies
+using ArchGDAL
+using BSON
+using CairoMakie
+using Colors
 using CSV
 using DataFrames
 using Dates
+using Decimals
+using DrWatson
+using FixedPointNumbers
+using Format
+using GeoInterface
+using GeoJSON
+using GeoMakie
+using GeometryBasics
+using HTTP
+using JSON3
+using LibPQ
+using Measures
+using PlotlyJS
+using Plots
+using Polynomials
+using PrettyTables
 using RCall
+using RDatasets
+using StatsBase
+using URIs
 
-# Constants
+# Define paths directly
+const SCRIPT_DIR   = joinpath(@__DIR__, "..", "scripts")
+const OBJ_DIR      = joinpath(@__DIR__, "..", "obj")
+const PARTIALS_DIR = joinpath(@__DIR__, "..", "_layout", "partials")
 
-# Flag to track if setup has been completed
-const _SETUP_COMPLETE = Ref(false)
+# Wrapper functions
+scriptdir()        = SCRIPT_DIR
+objdir()           = OBJ_DIR
+partialsdir()      = PARTIALS_DIR
+srcdir()           = @__DIR__
 
-# Functions
+# Export path functions
+export scriptdir, objdir, partialsdir, srcdir
 
-function setup_r_environment()
-    if _SETUP_COMPLETE[]
-        return nothing
-    end
+# Include files in dependency order
+include(joinpath(SCRIPT_DIR, "cons.jl"))  # Constants and basic definitions
+include(joinpath(SCRIPT_DIR, "dict.jl"))  # Dictionary definitions
+include(joinpath(SCRIPT_DIR, "stru.jl"))  # Structure definitions
+include(joinpath(SCRIPT_DIR, "highlighters.jl"))  # Syntax highlighting
 
-    R"""
-    # Set the correct ARM64 path for R explicitly
-    .libPaths(c("/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library"))
-    required_packages <- c("ggplot2", "tidyr", "dplyr", "tidycensus", "tigris")
+# Include all function files
+include(joinpath(SCRIPT_DIR, "add_labels.jl"))
+include(joinpath(SCRIPT_DIR, "calculate_dependency_ratio.jl"))
+include(joinpath(SCRIPT_DIR, "cleveland_dot_plot.jl"))
+include(joinpath(SCRIPT_DIR, "collect_state_age_dataframes.jl"))
+include(joinpath(SCRIPT_DIR, "collect_state_ages.jl"))
+include(joinpath(SCRIPT_DIR, "convert_decimals_to_int64!.jl"))
+include(joinpath(SCRIPT_DIR, "create_age_pyramid.jl"))
+include(joinpath(SCRIPT_DIR, "create_birth_table.jl"))
+include(joinpath(SCRIPT_DIR, "create_multiple_age_pyramids.jl"))
+include(joinpath(SCRIPT_DIR, "create_state_abbrev_map.jl"))
+include(joinpath(SCRIPT_DIR, "create_state_to_nation_map.jl"))
+include(joinpath(SCRIPT_DIR, "dms_to_decimal.jl"))
+include(joinpath(SCRIPT_DIR, "expand_state_codes.jl"))
+include(joinpath(SCRIPT_DIR, "fill_state.jl"))
+include(joinpath(SCRIPT_DIR, "filter_dataframes.jl"))
+include(joinpath(SCRIPT_DIR, "find_functions.jl"))
+include(joinpath(SCRIPT_DIR, "format_with_commas.jl"))
+include(joinpath(SCRIPT_DIR, "functions.jl"))
+include(joinpath(SCRIPT_DIR, "ga.jl"))
+include(joinpath(SCRIPT_DIR, "geo.jl"))
+include(joinpath(SCRIPT_DIR, "get_breaks.jl"))
+include(joinpath(SCRIPT_DIR, "get_childbearing_population.jl"))
+include(joinpath(SCRIPT_DIR, "get_colorado_basin_geoids.jl"))
+include(joinpath(SCRIPT_DIR, "get_dem_vote.jl"))
+include(joinpath(SCRIPT_DIR, "get_east_of_utah_geoids.jl"))
+include(joinpath(SCRIPT_DIR, "get_eastern_geoids.jl"))
+include(joinpath(SCRIPT_DIR, "get_geo_pop.jl"))
+include(joinpath(SCRIPT_DIR, "get_gop_vote.jl"))
+include(joinpath(SCRIPT_DIR, "get_nation_state.jl"))
+include(joinpath(SCRIPT_DIR, "get_nation_title_by_state.jl"))
+include(joinpath(SCRIPT_DIR, "get_nation_title.jl"))
+include(joinpath(SCRIPT_DIR, "get_slope_geoids.jl"))
+include(joinpath(SCRIPT_DIR, "get_southern_kansas_geoids.jl"))
+include(joinpath(SCRIPT_DIR, "get_state_gdp.jl"))
+include(joinpath(SCRIPT_DIR, "get_state_pop.jl"))
+include(joinpath(SCRIPT_DIR, "get_us_ages.jl"))
+include(joinpath(SCRIPT_DIR, "get_western_geoids.jl"))
+include(joinpath(SCRIPT_DIR, "gini.jl"))
+include(joinpath(SCRIPT_DIR, "inspect_shapefile_strurture.jl"))
+include(joinpath(SCRIPT_DIR, "make_growth_table.jl"))
+include(joinpath(SCRIPT_DIR, "make_legend.jl"))
+include(joinpath(SCRIPT_DIR, "make_nation_state_gdp_df.jl"))
+include(joinpath(SCRIPT_DIR, "make_nation_state_pop_df.jl"))
+include(joinpath(SCRIPT_DIR, "make_postal_codes.jl"))
+include(joinpath(SCRIPT_DIR, "map_poly.jl"))
+include(joinpath(SCRIPT_DIR, "margins.jl"))
+include(joinpath(SCRIPT_DIR, "my_cut.jl"))
+include(joinpath(SCRIPT_DIR, "parse_geoms.jl"))
+include(joinpath(SCRIPT_DIR, "process_education_by_nation.jl"))
+include(joinpath(SCRIPT_DIR, "q.jl"))
+include(joinpath(SCRIPT_DIR, "query_all_nation_ages.jl"))
+include(joinpath(SCRIPT_DIR, "query_nation_ages.jl"))
+include(joinpath(SCRIPT_DIR, "query_state_ages.jl"))
+include(joinpath(SCRIPT_DIR, "r_get_acs_data.jl"))
+include(joinpath(SCRIPT_DIR, "r_setup.jl"))
+include(joinpath(SCRIPT_DIR, "scriptdir.jl"))
 
-    # R function to install missing packages
-    install_if_missing <- function(pkg) {
-        if (!require(pkg, character.only = TRUE)) {
-            install.packages(pkg, repos = "https://cran.rstudio.com/")
-        }
-    }
-
-    # Install missing packages
-    invisible(sapply(required_packages, install_if_missing))
-
-    # Verify installations
-    installed <- sapply(required_packages, require, character.only = TRUE)
-    print(data.frame(
-        Package = required_packages,
-        Installed = installed
-))
-"""
-
-    _SETUP_COMPLETE[] = true
-    return nothing
-end
-# Run setup during module initialization
-function __init__()
-    setup_r_environment()
-end
-
-"""
-    get_acs_data(; geography::String, variables::Dict{String, String}, state::String,
-                 year::Union{Integer, Nothing} = nothing, survey::Union{String, Nothing} = nothing)
-
-Retrieve American Community Survey (ACS) data through R's tidycensus package.
-
-# Arguments
-- `geography::String`: Geographic level for data collection (e.g., "county", "tract", "block group")
-- `variables::Dict{String, String}`: Dictionary mapping desired variable names to Census variable codes
-- `state::String`: State abbreviation (e.g., "MA", "NY")
-- `year::Union{Integer, Nothing} = nothing`: Survey year. Defaults based on current date and survey type
-- `survey::Union{String, Nothing} = nothing`: Type of ACS survey. Use "acs1" for 1-year estimates,
-   nothing for 5-year estimates
-
-# Details
-Year defaults are determined by current date and survey type:
-- For 1-year ACS (`survey="acs1"`): after September, uses previous year
-- For 5-year ACS: after December, uses previous year
-- Otherwise uses two years prior
-
-ACS availability notes:
-- 1-year estimates (`survey="acs1"`) are only available for geographies with populations ≥ 65,000
-- 2020 data is not available for ACS (use get_decennial() instead)
-- 1-year and 5-year surveys are published in September and December respectively
-
-# Returns
-DataFrame containing requested ACS data
-
-# Examples
-```julia
-# Get 5-year estimates for counties in Massachusetts
-vars = Dict("median_income" => "B19013_001")
-df = get_acs_data(geography="county", variables=vars, state="MA")
-
-# Get 1-year estimates for 2022
-df = get_acs_data(geography="county", variables=vars, state="MA",
-                  survey="acs1", year=2022)
-"""
-function get_acs_data(; geography::String,
-                      variables::Dict{String, String},
-                      state::String,
-                      year::Union{Integer, Nothing} = nothing,
-                      survey::Union{String, Nothing} = nothing)
-
-    # Determine current date for default year logic
-    current_date = Dates.now()
-    current_year = Dates.year(current_date)
-    current_month = Dates.month(current_date)
-
-    # Calculate default year based on current date
-    if isnothing(year)
-        # After September, 1-year ACS for previous year becomes available
-        # After December, 5-year ACS for previous year becomes available
-        if current_month >= 9 && !isnothing(survey) && survey == "acs1"
-            year = current_year - 1
-        elseif current_month >= 12
-            year = current_year - 1
-        else
-            year = current_year - 2
-        end
-    end
-
-    # Check for 2020 restriction
-    if year == 2020
-        throw(ArgumentError("ACS is not available for 2020. Use get_decennial() or pick a later year."))
-    end
-
-    # Convert Julia Dict to R named vector
-    var_names = collect(keys(variables))
-    var_codes = collect(values(variables))
-    r_vars = R"setNames("$"(var_codes), $(var_names))"
-
-    # Build R function call, conditionally including survey parameter
-    if isnothing(survey)
-        R"""
-        # Call R get_acs() with the provided parameters
-        data <- get_acs(geography = $geography,
-                       variables = $r_vars,
-                       state = $state,
-                       year = $year)
-        """
-    else
-        R"""
-        # Call R get_acs() with the provided parameters including survey
-        data <- get_acs(geography = $geography,
-                       variables = $r_vars,
-                       state = $state,
-                       year = $year,
-                       survey = $survey)
-        """
-    end
-
-    # Convert R data frame to Julia DataFrame
-    return rcopy(R"data")
-end
-
-
-# Export the setup function in case manual rerun is needed
+# Export all public functions
+export add_col_margins
+export add_labels!
+export add_margins
+export add_row_margins
+export add_row_totals
+export build_census_query
+export calculate_dependency_ratio
+export CensusQuery
+export check_r_packages
+export cleveland_dot_plot
+export collect_state_age_dataframes
+export collect_state_ages
+export convert_decimals_to_int64!
+export create_age_pyramid
+export create_birth_table
+export create_multiple_age_pyramids
+export create_state_abbrev_map
+export create_state_to_nation_map
+export dms_to_decimal
+export expand_state_codes
+export fetch_census_data
+export fill_state!
+export filter_dataframe
+export find_julia_files
+export format_number
+export format_with_commas
+export ga
+export get_acs_data
+export get_breaks
+export get_census_data
+export get_childbearing_population
+export get_colorado_basin_geoids
+export get_dem_vote
+export get_east_of_utah_geoids
+export get_eastern_geoids
+export get_geo_pop
+export get_gop_vote
+export get_nation_state
+export get_nation_title
+export get_nation_title_by_name
+export get_slope_geoids
+export get_southern_kansas_geoids
+export get_state_gdp
+export get_state_pop
+export get_us_ages
+export get_western_geoids
+export gini
+export has_function_definition
+export inspect_shapefile_structure
+export install_r_packages
+export make_growth_table
+export make_legend
+export make_nation_state_gdp_df
+export make_nation_state_pop_df
+export make_postal_codes
+export map_poly
+export my_cut
+export parse_geoms
+export plot_cleveland_dots
+export plot_education_heatmap
+export process_education_by_nation
+export q
+export query_all_nation_ages
+export query_nation_ages
+export query_state_ages
+export r_get_acs_data
+export r_setup
+export scriptdir
 export setup_r_environment
+export table_vis
+export to_decimal
 
-# module Census
+# Define and export utility functions
+function valid_codes()
+    return sort(collect(VALID_POSTAL_CODES))
 end
+export valid_codes
+
+function ohio_basin_oh()
+    return setdiff(get_geo_pop(["OH"]).geoid, gl_oh)
+end
+export ohio_basin_oh
+
+end # module
