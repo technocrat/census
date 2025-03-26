@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: MIT
 
+# This file is now deprecated as its functionality has been moved to get_nation_title.jl
+# The file is kept for backward compatibility but should not be used in new code.
+
 function get_nation_title_by_name(state_name, nations, titles)
     # Mapping of full state names to their codes
     state_name_to_code = Dict(

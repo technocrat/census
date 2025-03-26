@@ -87,5 +87,3 @@ function create_age_pyramid(df::DataFrame, title::String="Population")
     
     return fig
 end
-
-

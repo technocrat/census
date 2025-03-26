@@ -6,10 +6,6 @@ and writes include statements to an output file.
 
 Usage: julia find_functions.jl <directory>
 """
-
-using Dates
-using Census
-
 # Check for command line arguments
 if length(ARGS) != 1
     println("Usage: julia $(PROGRAM_FILE) <directory>")

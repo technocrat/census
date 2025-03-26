@@ -1,4 +1,4 @@
-using DataFrames
+# SPDX-License-Identifier: MIT
 
 """
     add_margins(df::DataFrame; 

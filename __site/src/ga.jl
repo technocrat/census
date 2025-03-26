@@ -1,5 +1,4 @@
 # SPDX-License-Identifier: MIT
-
 function ga(row::Int64, col::Int64, title::String)
     GeoAxis(
         fig[row, col],

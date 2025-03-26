@@ -51,7 +51,3 @@ function get_geo_pop(target_states::Vector{String})
     
     return df
 end
-
-function make_postal_codes(nation::Vector{String})
-    return [PostalCode(state) for state in nation]
-end

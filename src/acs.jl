@@ -1,17 +1,4 @@
 # SPDX-License-Identifier: MIT
-using Census
-using HTTP
-using JSON3
-using DataFrames
-using URIs
-
-struct CensusQuery
-    year::Int
-    acs_period::String
-    variables::Vector{String}
-    geography::String
-    api_key::String
-end
 
 function CensusQuery(;
     year::Int=2023,

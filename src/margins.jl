@@ -1,6 +1,4 @@
 # SPDX-License-Identifier: MIT
-using Census
-using DataFrames
 
 """
     add_margins(df::DataFrame; 

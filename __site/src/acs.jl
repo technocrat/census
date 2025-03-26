@@ -1,15 +1,4 @@
-using HTTP
-using JSON3
-using DataFrames
-using URIs
-
-struct CensusQuery
-    year::Int
-    acs_period::String
-    variables::Vector{String}
-    geography::String
-    api_key::String
-end
+# SPDX-License-Identifier: MIT
 
 function CensusQuery(;
     year::Int=2023,

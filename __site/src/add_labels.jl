@@ -1,8 +1,4 @@
 # SPDX-License-Identifier: MIT
-
-using GeoMakie: GeoAxis, text!
-using ArchGDAL
-
 function add_labels!(df::DataFrame, the_axis::GeoAxis, label_column::Symbol; 
                     fontsize=10, color=:black, offset=(0.0, 0.0))
     # For each feature in the DataFrame

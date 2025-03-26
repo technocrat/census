@@ -15,8 +15,9 @@ function gini(v::Vector{Int})
     # Return the Gini coefficient
     return (numerator / denominator - (n + 1)) / n
 end
-
+"""
 # Example usage:
 income_data = [50.0, 20.0, 30.0, 10.0, 40.0]
 gini_coefficient = gini(income_data)
 println("Gini Coefficient: ", gini_coefficient)
+"""
