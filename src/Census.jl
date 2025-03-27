@@ -28,17 +28,18 @@ using Polynomials
 using PrettyTables
 using RCall
 using RDatasets
+using RSetup  # Use the new RSetup package
 using StatsBase
 using StatsPlots
 using URIs
 using Franklin
 
 # Include files in dependency order
-include(joinpath(@__DIR__, "..", "scripts", "cons.jl"))  # Constants and basic definitions
-include(joinpath(@__DIR__, "..", "scripts", "dict.jl"))  # Dictionary definitions
-include(joinpath(@__DIR__, "..", "scripts", "stru.jl"))  # Structure definitions
-include(joinpath(@__DIR__, "..", "scripts", "methods.jl"))  # Method definitions
-include(joinpath(@__DIR__, "..", "scripts", "highlighters.jl"))  # Syntax highlighting
+include(joinpath(dirname(@__DIR__), "scripts", "cons.jl"))  # Constants and basic definitions
+include(joinpath(dirname(@__DIR__), "scripts", "dict.jl"))  # Dictionary definitions
+include(joinpath(dirname(@__DIR__), "scripts", "stru.jl"))  # Structure definitions
+include(joinpath(dirname(@__DIR__), "scripts", "methods.jl"))  # Method definitions
+include(joinpath(dirname(@__DIR__), "scripts", "highlighters.jl"))  # Syntax highlighting
 
 # Include all function files
 include(joinpath(@__DIR__, "acs.jl"))
@@ -92,10 +93,9 @@ include(joinpath(@__DIR__, "query_all_nation_ages.jl"))
 include(joinpath(@__DIR__, "query_nation_ages.jl"))
 include(joinpath(@__DIR__, "query_state_ages.jl"))
 
-
 # Export all public functions
 export acs 
-export add_labels 
+export add_labels! 
 export add_row_totals 
 export calculate_dependency_ratio 
 export cleveland_dot_plot 
@@ -146,8 +146,10 @@ export query_all_nation_ages
 export query_nation_ages 
 export query_state_ages 
 export r_get_acs_data 
-export r_setup 
-
+export RCall  # Add RCall to exports
+export Figure  # Add Figure to exports
+export CairoMakie  # Add CairoMakie to exports
+export Label
 # Define and export utility functions
 function valid_codes()
     return sort(collect(VALID_POSTAL_CODES))

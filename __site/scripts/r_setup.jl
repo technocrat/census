@@ -12,7 +12,7 @@ This module manages R package dependencies and environment setup for Census data
 
 # Functions
 """
-
+using RCall
 # Flag to track if setup has been completed
 const SETUP_COMPLETE = Ref(false)
 

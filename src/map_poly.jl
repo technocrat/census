@@ -1,35 +1,36 @@
 # SPDX-License-Identifier: MIT
+function map_poly(df::DataFrame, title::String)
+    custom_colors = [
+        :forestgreen,  # Bin 1
+        :darkseagreen, # Bin 2
+        :lightskyblue3,# Bin 3
+        :slategray,    # Bin 4
+        :royalblue,    # Bin 5
+        :blue2,        # Bin 6 (if needed)
+        :gold1         # Bin 7 (if needed)
+    ]
 
-# with map_colors—see CRUCIAL/debris.ne.jl
+    # Create the GeoAxis in the second row
+    ga1 = ga(dest,1,1,title,fig)   
 
-function map_poly(df::DataFrame, the_axis::GeoAxis, characteristic::String)
-    column_sym = Symbol(characteristic * "_bins")
-    
-    # Calculate the color range from the data
-    min_val = minimum(df[!, column_sym])
-    max_val = maximum(df[!, column_sym])
-    
-    # For each feature, manually extract properly typed points
+    # Plot the polygons
     for i in 1:nrow(df)
-        multi_poly = df.geoms[i]
+        geom = df.parsed_geoms[i]
+        multi_poly = geom
         n_polys = ArchGDAL.ngeom(multi_poly)
         
+        # Get the bin number and ensure it's valid
+        bin_num = df[i, :pop_bins]
+        
         for p_idx in 0:(n_polys-1)
-            # Get each polygon
             poly = ArchGDAL.getgeom(multi_poly, p_idx)
-            
-            # For this polygon, extract its exterior ring
             ext_ring = ArchGDAL.getgeom(poly, 0)
-            
-            # Get WKT representation and parse
             ring_text = ArchGDAL.toWKT(ext_ring)
             
-            # Clean up the WKT text
             coords_text = replace(ring_text, "LINEARRING (" => "")
             coords_text = replace(coords_text, ")" => "")
             
-            # Parse points
-            point_list = Point2f[]  # Empty vector of Point2f
+            point_list = Point2f[]
             for pair in split(coords_text, ",")
                 parts = split(strip(pair))
                 if length(parts) >= 2
@@ -39,22 +40,36 @@ function map_poly(df::DataFrame, the_axis::GeoAxis, characteristic::String)
                 end
             end
             
-            # Only plot if we have points
             if !isempty(point_list)
-                # Create a properly typed polygon
                 poly_obj = GeometryBasics.Polygon(point_list)
-                
-                # Plot this single polygon with explicit colorrange
+                # Ensure bin_num is within valid range
+                color_idx = min(max(1, bin_num), length(custom_colors))
                 poly!(
-                    the_axis,
-                    poly_obj,  # Single GeometryBasics polygon
-                    color=df[i, column_sym],
-                    colormap=map_colors,
-                    colorrange=(min_val, max_val),  # Add explicit colorrange
+                    ga1,
+                    poly_obj,
+                    color=custom_colors[color_idx],
                     strokecolor=(:black, 0.5),
                     strokewidth=1
                 )
             end
         end
+    end
+
+    # Add labels manually
+    for i in 1:nrow(df)
+        geom = df.parsed_geoms[i]
+        multi_poly = geom
+        centroid = ArchGDAL.centroid(multi_poly)
+        x = Float64(ArchGDAL.getx(centroid, 0))
+        y = Float64(ArchGDAL.gety(centroid, 0))
+        text!(
+            ga1,
+            x,
+            y,
+            0.0,
+            text=string(df[i, :county]),
+            fontsize=12,
+            color=:white
+        )
     end
 end

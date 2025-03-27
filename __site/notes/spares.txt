@@ -13,3 +13,39 @@ rename!(gdp, :total => :GDP)
 df = leftjoin(pop, gdp, on=:nation)
 rename!(df, [:nation => :Nation, :total => :Population, :GDP => :GDP])	
 df.per_capita = df.GDP ./ df.Population
+
+# R environment settings
+const R_SETUP_COMPLETE = Ref(false)
+const R_LIBPATH = """
+    .libPaths(c(
+        "~/R/library",
+        "/usr/local/lib/R/site-library",
+        "/usr/lib/R/site-library",
+        "/usr/lib/R/library"
+    ))
+"""
+const R_PACKAGES = ["classInt","ggplot2", "tidyr", "dplyr", "tidycensus", "tigris"]
+const R_CHECK_CODE = """
+    all_packages <- installed.packages()
+    required_packages <- c($(join(map(x -> "\"$x\"", R_PACKAGES), ", ")))
+    missing_packages <- setdiff(required_packages, rownames(all_packages))
+    if (length(missing_packages) > 0) {
+        cat("Missing packages:", paste(missing_packages, collapse=", "), "\\n")
+        quit(status=1)
+    }
+"""
+const R_INSTALL_CODE = """
+    install.packages(c($(join(map(x -> "\"$x\"", R_PACKAGES), ", "))), 
+                    repos="https://cloud.r-project.org/",
+                    lib=Sys.getenv("R_LIBS_USER"))
+"""
+# Tier definitions
+const TIERS = ["Very Low", "Low", "Medium", "High", "Very High"]
+const TIER_COLORS = Dict(
+    "Very Low" => "#ffd700",
+    "Low" => "#ffa500",
+    "Medium" => "#ff4500",
+    "High" => "#ff0000",
+    "Very High" => "#8b0000"
+)
+

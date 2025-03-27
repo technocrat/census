@@ -1,25 +1,91 @@
 # SPDX-License-Identifier: MIT
-
-rejig       = copy(factoria)
-regig       = push!(rejig,"NY")
+add_from_metro = ["36003", "36009", "36011",
+    "36013", "36014", "36015", "36019", "36019", "36029",
+    "36031", "36031", "36033", "36037", "36037", "36037",
+    "36041", "36043", "36045", "36049", "36051", "36055",
+    "36063", "36065", "36067", "36069", "36073", "36075",
+    "36089", "36097", "36099", "36101", "36107", "36109",
+    "36117", "36121", "36123", "42003", "42005", "42007",
+    "42009", "42013", "42015", "42019", "42021", "42023",
+    "42027", "42031", "42033", "42035", "42037", "42039",
+    "42047", "42049", "42051", "42053", "42057", "42059",
+    "42061", "42063", "42065", "42067", "42073", "42081",
+    "42083", "42085", "42087", "42093", "42097", "42099",
+    "42104", "42105", "42109", "42111", "42113", "42117",
+    "42119", "42121", "42123", "42125", "42129", "43031",
+    "43063"]
+ohio_basin_va = ["51105","51169","51195","51120","51051","51027",
+"51167","51191","51070","51021","51071","51155",
+"51035","51195","51197","51173","51077","51185",
+"51750","51640","51520","51720"]
+gl_pa = ["42049"]
+peninsula = ["26053", "26131", "26061", "26083", "26013", "26071", "26103",
+        "26003", "26109", "26041", "26053", "26956", "26976", "26033",
+        "26043", "26053", "26095", "26097", "20033", "26043", "26053",
+        "26153"]
+        gl_in = ["18127", "18091", "18141", "18039", "18151", "18111",
+        "18073", "18149", "18099", "18085", "18113", "18033",
+        "18089", "18087"]
+gl_oh = ["39055", "39085", "39035", "39103", "39093", "39043",
+        "39077", "39033", "39147", "39143", "39123", "39095",
+        "39173", "39063", "39007", "39003", "39137", "39065",
+        "39051", "39171", "39069", "39161", "39039", "39125",
+        "39175", "39173", "37199"]
+metro_to_gl = ["23003", "23029", "36009",
+    "36011", "36013", "36014", "36019", "36029",
+    "36031", "36033", "36037", "36037", "36037",
+    "36041", "36043", "36045", "36049", "36051",
+    "36055", "36063", "36065", "36067", "36069",
+    "36073", "36075", "36089", "36099", "36117",
+    "36121"]
+ohio_basin_il = ["17019", "17183", "17041", "17045", "17029", "17023",
+    "17079", "17033", "17159", "17101", "17047", "17165",
+    "17193", "17059", "17069", "17151", "17049", "17025",
+    "17191", "17185", "17065", "17035", "17075"]
+take_from_il = setdiff(get_geo_pop(["IL"]).geoid,ohio_basin_il)
+take_from_metro = setdiff(get_geo_pop(["NY"]).geoid,add_from_metro)
+take_from_va = setdiff(get_geo_pop(["VA"]).geoid,ohio_basin_va)
+miss_basin_ky = ["21039","21105","21083","21039","21105","21075",
+                 "23007","21145","21007"]
+miss_basin_tn = ["47095","47131","47069","47079","47045","47053",
+                 "47017","47097","47033","47113","47077","47023",
+                 "47157","47047","47069","47109","47023","46069",
+                 "47183","47075","47166","47167"]
+ohio_basin_md = ["24023","24001","24043"]
+take_from_md = setdiff(get_geo_pop(["MD"]).geoid,ohio_basin_md)
+rejig       = copy(Census.factoria)
+regig       = push!(rejig,"NY","WV","TN","KY","MD","VA")
 df          = get_geo_pop(rejig)
 rename!(df, [:geoid, :stusps, :county, :geom, :pop])
+
+
+
+df          = filter(:geoid  => x -> x ∉ take_from_metro,df)
+df          = filter(:geoid  => x -> x ∉ gl_pa,df)
+df          = filter(:geoid  => x -> x ∉ peninsula,df)
+df          = filter(:geoid  => x -> x ∉ gl_in,df)
+df          = filter(:geoid  => x -> x ∉ gl_oh,df)  
+df          = filter(:geoid  => x -> x ∉ metro_to_gl,df)
+df          = filter(:geoid  => x -> x ∉ take_from_il,df)
+df          = filter(:geoid  => x -> x ∉ miss_basin_ky,df)
+df          = filter(:geoid  => x -> x ∉ miss_basin_tn,df)
+df          = filter(:stusps => x -> x != "WI",df)
+df          = filter(:stusps => x -> x != "MI",df)
+df          = filter(:geoid  => x -> x ∉ take_from_md,df)
+df          = filter(:geoid  => x -> x ∉ take_from_va,df)   
 setup_r_environment()
+df = get_geo_pop(["MD"])
+rename!(df, [:geoid, :stusps, :county, :geom, :pop])
+
 breaks      = rcopy(get_breaks(df,5))
 df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
 
 # Convert WKT strings to geometric objects
 df.parsed_geoms = parse_geoms(df)
 
-addns       = filter(:geoid  => x -> x ∈ add_to_factoria,df)
-df          = vcat(df,addns)
-df          = filter(:geoid  => x -> x ∉ take_from_factoria,df)
-exclude_ny  = setdiff(get_geo_pop(["NY"]).geoid,add_to_factoria)
-df          = filter(:geoid  => x -> x ∉ exclude_ny,df)
+# Create figure
+fig = Figure(size=(2400, 1600), fontsize=22)
 
-fig = Figure(size=(1200, 800), fontsize=22)
-title = Label(fig[0, 2], "Adjusted Factoria", fontsize=20)
-ga1 = ga(1, 1, "Population")
-poly1 = map_poly(df,ga1, "pop")
-add_labels!(df, ga1, :geoid, fontsize=6)
+map_poly(df,"Adjusted Factoria")
+# Display the figure
 display(fig)

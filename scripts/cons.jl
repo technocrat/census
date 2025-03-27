@@ -51,10 +51,12 @@ const postals = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA
 const VALID_POSTAL_CODES = Set(postals)
 
 # Color definitions
+using Colors
 const SALMON_PINK = "#fd7e7e"
 const COTTON_CANDY = "#f8c8dc"
 const SLATE_GREY = "#74909a"
 const SKY_BLUE = "#a0ced9"
+const SUNFLOWER_YELLOW = "#ffd700"
 const SAGE_GREEN = RGB(0.196, 0.388, 0.075)
 const FOREST_GREEN = RGB(0.196, 0.388, 0.075)
 const BRIGHT_BLUE = RGB(0.282, 0.416, 0.698)
@@ -63,53 +65,19 @@ const VIE_EN_ROSE = RGB(0.847, 0.749, 0.847)
 
 # Map colors
 const map_colors = [
-    SALMON_PINK,
-    COTTON_CANDY,
+    # VIE_EN_ROSE,
+    # SALMON_PINK,
+    # COTTON_CANDY,
+    FOREST_GREEN,
+    SAGE_GREEN,
+    LIGHT_GRAY,
     SLATE_GREY,
     SKY_BLUE,
-    SAGE_GREEN,
-    FOREST_GREEN,
     BRIGHT_BLUE,
-    LIGHT_GRAY,
-    VIE_EN_ROSE,
-    "#ffd700"
+    SUNFLOWER_YELLOW,
+    COTTON_CANDY
 ]
 
-# Tier definitions
-const TIERS = ["Very Low", "Low", "Medium", "High", "Very High"]
-const TIER_COLORS = Dict(
-    "Very Low" => "#ffd700",
-    "Low" => "#ffa500",
-    "Medium" => "#ff4500",
-    "High" => "#ff0000",
-    "Very High" => "#8b0000"
-)
-
-# R environment settings
-const R_SETUP_COMPLETE = Ref(false)
-const R_LIBPATH = """
-    .libPaths(c(
-        "~/R/library",
-        "/usr/local/lib/R/site-library",
-        "/usr/lib/R/site-library",
-        "/usr/lib/R/library"
-    ))
-"""
-const R_PACKAGES = ["classInt","ggplot2", "tidyr", "dplyr", "tidycensus", "tigris"]
-const R_CHECK_CODE = """
-    all_packages <- installed.packages()
-    required_packages <- c($(join(map(x -> "\"$x\"", R_PACKAGES), ", ")))
-    missing_packages <- setdiff(required_packages, rownames(all_packages))
-    if (length(missing_packages) > 0) {
-        cat("Missing packages:", paste(missing_packages, collapse=", "), "\\n")
-        quit(status=1)
-    }
-"""
-const R_INSTALL_CODE = """
-    install.packages(c($(join(map(x -> "\"$x\"", R_PACKAGES), ", "))), 
-                    repos="https://cloud.r-project.org/",
-                    lib=Sys.getenv("R_LIBS_USER"))
-"""
 
 # Database connection - moved to a function to avoid precompilation issues
 function get_db_connection()

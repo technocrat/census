@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: MIT
-function ga(row::Int64, col::Int64, title::String)
+function ga(dest::String,row::Int64, col::Int64, title::String,fig::Figure = fig)
     GeoAxis(
         fig[row, col],
         source="+proj=longlat +datum=WGS84",
-        dest="+proj=lcc +lon_0=-71 +lat_1=41 +lat_2=45",
+        dest=dest,
         title=title,
         xlabel="",
         ylabel="",

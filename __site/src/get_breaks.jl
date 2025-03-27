@@ -37,7 +37,7 @@ end
 
 
 function initialize()
-    include("r_setup.jl")
+    include(joinpath(@__DIR__, "r_setup.jl"))
     if !SETUP_COMPLETE[]
         setup_r_environment()
     end

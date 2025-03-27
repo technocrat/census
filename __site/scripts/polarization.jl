@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
 
-include("scripts/setup.jl")
-include(scriptsdir()*"/func.jl")
-include(srcdir()*"/q.jl")
+include(joinpath(@__DIR__, "setup.jl"))
+include(joinpath(@__DIR__, "func.jl"))
+include(joinpath(dirname(@__DIR__), "src", "q.jl"))
 df           = get_state_pop()
 gop          = get_gop_vote()
 dem          = get_dem_vote()
