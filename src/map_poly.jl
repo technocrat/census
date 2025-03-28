@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-function map_poly(df::DataFrame, title::String)
+function map_poly(df::DataFrame, title::String, dest::String, fig::Figure)
     custom_colors = [
         :forestgreen,  # Bin 1
         :darkseagreen, # Bin 2
@@ -11,7 +11,7 @@ function map_poly(df::DataFrame, title::String)
     ]
 
     # Create the GeoAxis in the second row
-    ga1 = ga(dest,1,1,title,fig)   
+    ga1 = ga(dest, 1, 1, title, fig)   
 
     # Plot the polygons
     for i in 1:nrow(df)

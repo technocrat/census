@@ -21,7 +21,8 @@ eastern_geoids = get_eastern_geoids().geoid
 const colorado_basin_geoids = get_colorado_basin_geoids()
 const slope_geoids = get_slope_geoids().geoid
 east_of_utah = get_east_of_utah_geoids().geoid
-
+necal = ["06015", "06093", "06049", "06023", "06105",
+    "06089", "06035"]
 az = subset(us, :stusps => ByRow(==("AZ")))
 az = subset(az, :geoid => ByRow(x -> x ∉ colorado_basin_geoids))
 
@@ -46,7 +47,7 @@ or = subset(us, :stusps => ByRow(==("OR")))
 or = subset(or, :geoid => ByRow(x -> x ∈ slope_geoids ||
     x ∈ necal))
 ca = subset(us, :stusps => ByRow(==("CA")))
-ca = subset(ca, :geoid => ByRow(x -> x ∈ necal))
+ca = subset(ca, :geoid => ByRow(x -> x ∉ necal))
 
 wa = subset(us, :stusps => ByRow(==("WA")))
 wa = subset(wa, :geoid => ByRow(x -> x ∈ slope_geoids))
@@ -55,10 +56,11 @@ df = vcat(az, id, nv, or, wa, ut, ca)
 
 df = subset(df, :stusps => ByRow(x -> x ∉ ["AK"]))
 
-fig = Figure(size=(1200, 800), fontsize=22)
-title = Label(fig[0, 2], "Erie", fontsize=20)
-ga1 = ga(1, 1, "Population")
-poly1 = map_poly(df, ga1, "pop")
-#add_labels!(df, ga1, :geoid, fontsize=6)
-display(fig)
+dest = "+proj=aea +lat_0=40.8 +lon_0=-115.8 +lat_1=31.8 +lat_2=49 +datum=NAD83 +units=m +no_defs"
+# Create figure
+fig = Figure(size=(2400, 1600), fontsize=22)
 
+map_poly(df, "Adjusted Deseret", dest, fig)
+# Display the figure
+
+display(fig)

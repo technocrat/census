@@ -1,4 +1,3 @@
-
 """
     get_colorado_basin_geoids() -> Vector{String}
 
@@ -6,7 +5,7 @@ Extracts GEOID values from the Colorado River Basin county boundaries shapefile.
 Returns a vector of GEOID strings.
 """
 function get_colorado_basin_geoids()
-    shapefile_path = joinpath(projectdir(), "data", "Colorado_River_Basin_County_Boundaries")
+    shapefile_path = joinpath(dirname(@__DIR__), "data", "Colorado_River_Basin_County_Boundaries")
     
     # Read the shapefile
     dataset = ArchGDAL.read(shapefile_path)

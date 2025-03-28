@@ -28,11 +28,18 @@ using Polynomials
 using PrettyTables
 using RCall
 using RDatasets
-using RSetup  # Use the new RSetup package
 using StatsBase
 using StatsPlots
 using URIs
 using Franklin
+
+
+
+# # Define paths directly
+# const SCRIPT_DIR   = joinpath(@__DIR__, "..", "scripts")
+# const OBJ_DIR      = joinpath(@__DIR__, "..", "obj")
+# const PARTIALS_DIR = joinpath(@__DIR__, "..", "_layout", "partials")
+
 
 # Include files in dependency order
 include(joinpath(dirname(@__DIR__), "scripts", "cons.jl"))  # Constants and basic definitions
@@ -40,6 +47,9 @@ include(joinpath(dirname(@__DIR__), "scripts", "dict.jl"))  # Dictionary definit
 include(joinpath(dirname(@__DIR__), "scripts", "stru.jl"))  # Structure definitions
 include(joinpath(dirname(@__DIR__), "scripts", "methods.jl"))  # Method definitions
 include(joinpath(dirname(@__DIR__), "scripts", "highlighters.jl"))  # Syntax highlighting
+
+# Include R setup code
+include(joinpath(dirname(@__DIR__), "scripts", "r_setup.jl"))
 
 # Include all function files
 include(joinpath(@__DIR__, "acs.jl"))
@@ -150,15 +160,21 @@ export RCall  # Add RCall to exports
 export Figure  # Add Figure to exports
 export CairoMakie  # Add CairoMakie to exports
 export Label
+export rename!  # Add rename! to exports
+export setup_r_environment  # Add setup_r_environment to exports
+export DataFrames
+export ByRow  # Add ByRow to exports
+export subset  # Add subset to exports
+export rcopy  # Add rcopy to exports
+export @R_str  # Add R string macro to exports
+export check_r_packages  # Add check_r_packages to exports
+export install_r_packages  # Add install_r_packages to exports
+
 # Define and export utility functions
 function valid_codes()
     return sort(collect(VALID_POSTAL_CODES))
 end
 export valid_codes
 
-function ohio_basin_oh()
-    return setdiff(get_geo_pop(["OH"]).geoid, gl_oh)
-end
-export ohio_basin_oh
 
 end # module

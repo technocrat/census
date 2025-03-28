@@ -12,17 +12,22 @@ using ArchGDAL
 using GeometryBasics
 RSetup.setup_r_environment(["classInt"])
 
-# Define the destination projection
-dest = "+proj=lcc +lon_0=-71 +lat_1=41 +lat_2=45"
+# For development - include map_poly.jl directly
+include("../src/map_poly.jl")
+include("../src/ga.jl")
 
+# Define the destination projection - Albers Equal Area centered on Lexington, KY
+dest = "+proj=aea +lat_0=38 +lon_0=-85 +lat_1=30 +lat_2=45 +datum=NAD83 +units=m +no_defs"
+
+# Create figure first
+fig = Figure(size=(2400, 1600), fontsize=22)
 
 rejig       = copy(Census.concord)
 regig       = push!(rejig,"NY")
 df          = get_geo_pop(rejig)
-rename!(df, [:geoid, :stusps, :county, :geom, :pop])
+DataFrames.rename!(df, [:geoid, :stusps, :county, :geom, :pop])
 breaks      = RCall.rcopy(get_breaks(df,5))
 df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
-
 
 # Convert WKT strings to geometric objects
 df.parsed_geoms = parse_geoms(df)
@@ -35,10 +40,10 @@ df          = filter(:geoid  => x -> x ∉ take_from_concordia,df)
 take_from_ny  = setdiff(get_geo_pop(["NY"]).geoid,add_to_concordia)
 df          = filter(:geoid  => x -> x ∉ take_from_ny,df)
 df          = filter(:geoid  => x -> x ∉ take_from_concordia,df)
-# Create figure
-fig = Figure(size=(2400, 1600), fontsize=22)
 
-map_poly(df,"Adjusted Concordia")
+# Now call map_poly with all required parameters
+map_poly(df, "Adjusted Concordia", dest, fig)
+
 # Display the figure
 display(fig)
 

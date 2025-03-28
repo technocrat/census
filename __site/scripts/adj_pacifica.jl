@@ -1,29 +1,36 @@
 # SPDX-License-Identifier: MIT
 
-rejig       = copy(pacific)
-regig       = push!(rejig,"NY")
-df          = get_geo_pop(rejig)
-rename!(df, [:geoid, :stusps, :county, :geom, :pop])
+
+necal = ["06015", "06093", "06049", "06023", "06105",
+    "06089", "06035"]
+
+us                  = get_geo_pop(Census.postals)
+
+rename!(us, [:geoid, :stusps, :county, :geom, :pop])
+
+const slope_geoids  = get_slope_geoids().geoid
+
+or = subset(us, :stusps => ByRow(==("OR")))
+or = subset(or, :geoid => ByRow(x -> x ∉ slope_geoids ||
+                                x ∈ necal))
+
+wa = subset(us, :stusps => ByRow(==("WA")))
+wa = subset(wa, :geoid => ByRow(x -> x ∉ slope_geoids))
+
+ca = subset(us, :stusps => ByRow(==("CA")))
+ca = subset(ca, :geoid => ByRow(x -> x ∈ necal && x ∉ slope_geoids))
+
+df = vcat(wa,or,ca)
 setup_r_environment()
-breaks      = rcopy(get_breaks(df,5))
-df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
+breaks              = rcopy(get_breaks(df,5))
+df.pop_bins         = my_cut(df.pop, breaks[:kmeans][:brks])
+df.parsed_geoms     = parse_geoms(df)
 
-# Convert WKT strings to geometric objects
-df.parsed_geoms = parse_geoms(df)
+dest = "+proj=aea +lat_0=43.1 +lon_0=-121.5 +lat_1=38.6 +lat_2=47.6 +datum=NAD83 +units=m +no_defs"
+# Create figure
+fig = Figure(size=(2400, 1600), fontsize=22)
 
-addns       = filter(:geoid  => x -> x ∈ add_to_pacifica,df)
-df          = vcat(df,addns)
-df          = filter(:geoid  => x -> x ∉ take_from_pacifica,df)
-exclude_ny  = setdiff(get_geo_pop(["NY"]).geoid,add_to_pacifica)
-df          = filter(:geoid  => x -> x ∉ exclude_ny,df)
+map_poly(df, "Pacifica", dest, fig)
+# Display the figure
 
-fig = Figure(size=(1200, 800), fontsize=22)
-title = Label(fig[0, 2], "Adjusted Pacifica", fontsize=20)
-ga1 = ga(1, 1, "Population")
-poly1 = map_poly(df,ga1, "pop")
-add_labels!(df, ga1, :geoid, fontsize=6)
 display(fig)
-
-
-
-

@@ -1,18 +1,5 @@
-"""
-Module-level documentation for R environment setup system.
-
-This module manages R package dependencies and environment setup for Census data analysis.
-
-# Constants
-- `SETUP_COMPLETE::Ref{Bool}`: Flag tracking if R environment is configured
-- `R_LIBPATH::String`: R library path configuration
-- `R_PACKAGES::Vector{String}`: Required R packages
-- `R_CHECK_CODE::String`: R code for package status verification
-- `R_INSTALL_CODE::String`: R code for package installation
-
-# Functions
-"""
 using RCall
+
 # Flag to track if setup has been completed
 const SETUP_COMPLETE = Ref(false)
 
