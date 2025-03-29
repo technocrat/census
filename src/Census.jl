@@ -69,15 +69,15 @@ export get_crs, CRS_STRINGS
 # Include analysis functions
 include(joinpath(@__DIR__, "analysis.jl"))
 
+# Include visualization functions
+include(joinpath(@__DIR__, "viz.jl"))
+
 # Include all other function files
 include(joinpath(@__DIR__, "acs.jl"))
 include(joinpath(@__DIR__, "add_labels.jl"))
 include(joinpath(@__DIR__, "add_row_totals.jl"))
-include(joinpath(@__DIR__, "cleveland_dot_plot.jl"))
 include(joinpath(@__DIR__, "collect_state_age_dataframes.jl"))
 include(joinpath(@__DIR__, "convert_decimals_to_int64!.jl"))
-include(joinpath(@__DIR__, "create_age_pyramid.jl"))
-include(joinpath(@__DIR__, "create_birth_table.jl"))
 include(joinpath(@__DIR__, "create_multiple_age_pyramids.jl"))
 include(joinpath(@__DIR__, "create_state_abbrev_map.jl"))
 include(joinpath(@__DIR__, "create_state_to_nation_map.jl"))
@@ -182,6 +182,8 @@ export @R_str  # Add R string macro to exports
 export check_r_packages  # Add check_r_packages to exports
 export install_r_packages  # Add install_r_packages to exports
 export LibPQ  # Add LibPQ to exports
+export save_plot  # Add save_plot to exports
+export format_number  # Add format_number to exports
 
 # Export all geoid constants
 export western_geoids,
