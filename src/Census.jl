@@ -47,8 +47,17 @@ using StatsPlots
 using URIs
 using Franklin
 
-# Include get_geo_pop before geoids submodule since it's needed there
-include(joinpath(@__DIR__, "get_geo_pop.jl"))
+# Include core types and structures
+include(joinpath(@__DIR__, "core.jl"))
+
+# Include syntax highlighting
+include(joinpath(dirname(@__DIR__), "scripts", "highlighters.jl"))
+
+# Include make_postal_codes before get_geo_pop since it's needed there
+include(joinpath(@__DIR__, "make_postal_codes.jl"))
+
+# Include geographic functions
+include(joinpath(@__DIR__, "geo.jl"))
 
 # Include the geoids submodule (which includes its implementation)
 include("geoids/geoids.jl")
@@ -57,21 +66,15 @@ include("geoids/geoids.jl")
 import .geoids: get_crs, CRS_STRINGS
 export get_crs, CRS_STRINGS
 
-# Include files in dependency order
-include(joinpath(dirname(@__DIR__), "scripts", "cons.jl"))  # Constants and basic definitions
-include(joinpath(dirname(@__DIR__), "scripts", "dict.jl"))  # Dictionary definitions
-include(joinpath(dirname(@__DIR__), "scripts", "stru.jl"))  # Structure definitions
-include(joinpath(dirname(@__DIR__), "scripts", "methods.jl"))  # Method definitions
-include(joinpath(dirname(@__DIR__), "scripts", "highlighters.jl"))  # Syntax highlighting
+# Include analysis functions
+include(joinpath(@__DIR__, "analysis.jl"))
 
 # Include all other function files
 include(joinpath(@__DIR__, "acs.jl"))
 include(joinpath(@__DIR__, "add_labels.jl"))
 include(joinpath(@__DIR__, "add_row_totals.jl"))
-include(joinpath(@__DIR__, "calculate_dependency_ratio.jl"))
 include(joinpath(@__DIR__, "cleveland_dot_plot.jl"))
 include(joinpath(@__DIR__, "collect_state_age_dataframes.jl"))
-include(joinpath(@__DIR__, "collect_state_ages.jl"))
 include(joinpath(@__DIR__, "convert_decimals_to_int64!.jl"))
 include(joinpath(@__DIR__, "create_age_pyramid.jl"))
 include(joinpath(@__DIR__, "create_birth_table.jl"))
@@ -90,23 +93,16 @@ include(joinpath(@__DIR__, "get_dem_vote.jl"))
 include(joinpath(@__DIR__, "get_gop_vote.jl"))
 include(joinpath(@__DIR__, "get_nation_state.jl"))
 include(joinpath(@__DIR__, "get_nation_title.jl"))
-include(joinpath(@__DIR__, "get_state_gdp.jl"))
 include(joinpath(@__DIR__, "get_state_pop.jl"))
 include(joinpath(@__DIR__, "get_us_ages.jl"))
-include(joinpath(@__DIR__, "gini.jl"))
 include(joinpath(@__DIR__, "inspect_shapefile_structure.jl"))
 include(joinpath(@__DIR__, "make_growth_table.jl"))
 include(joinpath(@__DIR__, "make_legend.jl"))
 include(joinpath(@__DIR__, "make_nation_state_gdp_df.jl"))
 include(joinpath(@__DIR__, "make_nation_state_pop_df.jl"))
-include(joinpath(@__DIR__, "make_postal_codes.jl"))
-include(joinpath(@__DIR__, "map_poly.jl"))
 include(joinpath(@__DIR__, "margins.jl"))
 include(joinpath(@__DIR__, "my_cut.jl"))
-include(joinpath(@__DIR__, "parse_geoms.jl"))
-include(joinpath(@__DIR__, "plot_map.jl"))
 include(joinpath(@__DIR__, "q.jl"))
-include(joinpath(@__DIR__, "query_all_nation_ages.jl"))
 include(joinpath(@__DIR__, "query_nation_ages.jl"))
 include(joinpath(@__DIR__, "query_state_ages.jl"))
 
@@ -199,11 +195,5 @@ export western_geoids,
        southern_missouri_geoids,
        northern_missouri_geoids,
        missouri_river_basin_geoids
-
-# Define and export utility functions
-function valid_codes()
-    return sort(collect(VALID_POSTAL_CODES))
-end
-export valid_codes
 
 end # module

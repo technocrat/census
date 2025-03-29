@@ -1,12 +1,7 @@
-"""
-    get_db_connection() -> LibPQ.Connection
+# SPDX-License-Identifier: MIT
 
-Creates a connection to the PostgreSQL database using default parameters.
-"""
-function get_db_connection()
-    conn = LibPQ.Connection("host=$DB_HOST port=$DB_PORT dbname=$DB_NAME")
-    return conn
-end
+# Import get_db_connection from parent module
+import ..Census: get_db_connection
 
 """
     get_western_geoids() -> Vector{String}
