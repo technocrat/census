@@ -20,7 +20,8 @@ function get_western_geoids()
     query = """
     SELECT geoid, name, stusps, ST_X(ST_Centroid(geom)) as lon
     FROM Census.counties
-    WHERE ST_X(ST_Centroid(geom)) < $WESTERN_BOUNDARY
+    WHERE ST_X(ST_Centroid(geom)) < $EASTERN_BOUNDARY
+    AND ST_X(ST_Centroid(geom)) > $WESTERN_BOUNDARY
     ORDER BY lon;
     """
     result = execute(conn, query)
@@ -40,7 +41,8 @@ function get_eastern_geoids()
     query = """
     SELECT geoid, name, stusps, ST_X(ST_Centroid(geom)) as lon
     FROM Census.counties
-    WHERE ST_X(ST_Centroid(geom)) > $EASTERN_BOUNDARY
+    WHERE ST_X(ST_Centroid(geom)) > -100
+    AND ST_X(ST_Centroid(geom)) < -90
     ORDER BY lon;
     """
     result = execute(conn, query)
@@ -53,7 +55,7 @@ end
 
 Returns GEOIDs for counties east of Utah's border (109°W longitude).
 """
-function get_east_of_utah_geoids()
+function get_east_of_utah_geoids()::Vector{String}
     conn = get_db_connection()
     query = """
     SELECT geoid, name, stusps, ST_X(ST_Centroid(geom)) as lon
@@ -63,16 +65,16 @@ function get_east_of_utah_geoids()
     """
     result = execute(conn, query)
     close(conn)
-    DataFrame(result)
+    return DataFrame(result).geoid
 end
 
 """
-    get_slope_geoids() -> Vector{String}
+    get_east_of_cascade_geoids()::Vector{String}
 
 Returns GEOIDs for counties between 115°W and 120°W longitude—used to get
 trans-Cascade counties of WA and OR.
 """
-function get_slope_geoids()
+function get_east_of_cascade_geoids()::Vector{String}
     conn = get_db_connection()
     query = """
     SELECT geoid, name, stusps, ST_X(ST_Centroid(geom)) as lon
@@ -91,7 +93,7 @@ end
 Returns GEOIDs for Kansas counties south of Osage County, an approximate
 boundary for the Missouri Basin
 """
-function get_southern_kansas_geoids()
+function get_southern_kansas_geoids()::Vector{String}
     conn = get_db_connection()
     query = """
     WITH osage AS (
@@ -109,13 +111,13 @@ function get_southern_kansas_geoids()
 end
 
 """
-    get_colorado_basin_geoids() -> Vector{String}
+    get_colorado_basin_geoids()::Vector{String}
 
 Extracts GEOID values from the Colorado River Basin county boundaries shapefile.
 Colorado Basin boundaries https://coloradoriverbasin-lincolninstitute.hub.arcgis.com/datasets/a922a3809058416b8260813e822f8980_0/explore?location=36.663436%2C-110.573590%2C5.51
 Returns a vector of GEOID strings.
 """
-function get_colorado_basin_geoids() -> Vector{String}
+function get_colorado_basin_geoids()::Vector{String}
     shapefile_path = joinpath(dirname(@__DIR__), "..", "data", "Colorado_River_Basin_County_Boundaries")
 
     # Read the shapefile
@@ -137,9 +139,8 @@ end
 """
 Get Missouri county geoids that are north of St. Charles County and east of Schuyler County,
 plus Schuyler and Adair counties, which drain into the Mississippi River.
-
 """
-function get_ne_missouri_geoids() -> Vector{String}
+function get_ne_missouri_geoids()::Vector{String}
     query = """
     WITH reference_counties AS (
         SELECT 
@@ -179,7 +180,7 @@ Get Missouri counties that are south of Perry County's southern boundary,
 excluding Vernon, Cedar, Polk, Dallas, Webster, Laclede, Wright, Texas, Dent 
 and Iron counties, which generally do not drain into the Missouri River.
 """
-function get_southern_missouri_geoids() -> Vector{String}
+function get_southern_missouri_geoids()::Vector{String}
     query = """
     WITH perry_boundary AS (
         SELECT ST_YMin(ST_Envelope(geom)) as southern_boundary
@@ -203,15 +204,29 @@ function get_southern_missouri_geoids() -> Vector{String}
     DataFrame(result).geoid
 end
 
-function get_northern_missouri_geoids() -> Vector{String}
+function get_northern_missouri_geoids()::Vector{String}
     setdiff(get_geo_pop(["MO"]).geoid, get_southern_missouri_geoids())
 end
 
+# Define static geoid sets
+const east_of_sierras_geoids = ["06049", "06035", "06051", "06027"]
 
-# Pre-compute commonly used geoid sets
-const western_geoids = get_western_geoids()
-const eastern_geoids = get_eastern_geoids()
-const east_of_utah_geoids = get_east_of_utah_geoids()
-const slope_geoids = get_slope_geoids()
-const southern_kansas_geoids = get_southern_kansas_geoids()
-const colorado_basin_geoids = get_colorado_basin_geoids()
+"""
+Get Missouri River Basin county geoids by combining northern and southern Missouri counties,
+excluding those that drain into the Mississippi River.
+"""
+function get_missouri_river_basin_geoids()::Vector{String}
+    # Get all Missouri counties
+    all_mo = get_geo_pop(["MO"]).geoid
+    
+    # Get counties that drain into the Mississippi
+    mississippi_counties = get_ne_missouri_geoids()
+    
+    # Get counties that don't drain into the Missouri
+    non_missouri_counties = get_southern_missouri_geoids()
+    
+    # The Missouri River Basin counties are all Missouri counties
+    # minus those that drain into the Mississippi
+    # minus those that don't drain into the Missouri
+    return setdiff(all_mo, mississippi_counties, non_missouri_counties)
+end

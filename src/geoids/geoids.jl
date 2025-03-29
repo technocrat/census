@@ -7,6 +7,9 @@ using LibPQ
 using DataFrames
 using ArchGDAL
 
+# Import get_geo_pop from parent module
+import ..Census: get_geo_pop
+
 # Database connection parameters
 const DB_HOST = "localhost"
 const DB_PORT = 5432
@@ -21,12 +24,24 @@ const SLOPE_EAST = -115.0
 const UTAH_BORDER = -109.0
 const CENTRAL_MERIDIAN = -100.0
 
+# Include the implementation and CRS definitions
+include("impl.jl")
+include("crs.jl")
+
+# Pre-compute commonly used geoid sets
+const western_geoids = get_western_geoids()
+const eastern_geoids = get_eastern_geoids()
+const east_of_utah_geoids = get_east_of_utah_geoids()
+const east_of_cascade_geoids = get_east_of_cascade_geoids()
+const southern_kansas_geoids = get_southern_kansas_geoids()
+const colorado_basin_geoids = get_colorado_basin_geoids()
+
 # Export public functions
 export get_db_connection,
        get_western_geoids,
        get_eastern_geoids,
        get_east_of_utah_geoids,
-       get_slope_geoids,
+       get_east_of_cascade_geoids,
        get_southern_kansas_geoids,
        get_colorado_basin_geoids,
        get_ne_missouri_geoids,
@@ -46,15 +61,13 @@ export DB_HOST,
        UTAH_BORDER,
        CENTRAL_MERIDIAN
 
-# Include the implementation
-include("impl.jl")
-
 # Export pre-computed geoid sets
 export western_geoids,
        eastern_geoids,
        east_of_utah_geoids,
-       slope_geoids,
+       east_of_cascade_geoids,
        southern_kansas_geoids,
-       colorado_basin_geoids
+       colorado_basin_geoids,
+       east_of_sierras_geoids
 
 end # module 

@@ -12,16 +12,13 @@ const DB_HOST = "localhost"
 const DB_PORT = 5432
 const DB_NAME = "geocoder"
 
-# Notable Geographic IDs
-const OSAGE_COUNTY_KS = "20167"  # Used as reference for Southern Kansas
-const LOS_ANGELES_COUNTY = "06037"
 
 # Longitude boundaries for regions
 const WESTERN_BOUNDARY = -115.0
 const EASTERN_BOUNDARY = -90.0
 const CONTINENTAL_DIVIDE = -109.5
-const SLOPE_WEST = -120.0
-const SLOPE_EAST = -115.0
+const CASCADE_SLOPE_WEST = -120.0
+const CASCADE_SLOPE_EAST = -115.0
 const UTAH_BORDER = -109.0
 const CENTRAL_MERIDIAN = -100.0
 
@@ -90,16 +87,16 @@ function get_east_of_utah_geoids()
 end
 
 """
-    get_slope_geoids() -> DataFrame
+    get_east_of_cascade_geoids() -> DataFrame
 
 Returns GEOIDs for counties between 115°W and 120°W longitude.
 """
-function get_slope_geoids()
+function get_east_of_cascade_geoids()
     conn = get_db_connection()
     query = """
     SELECT geoid, name, stusps, ST_X(ST_Centroid(geom)) as lon
     FROM census.counties
-    WHERE ST_X(ST_Centroid(geom)) BETWEEN $SLOPE_WEST AND $SLOPE_EAST
+    WHERE ST_X(ST_Centroid(geom)) BETWEEN $CASCADE_SLOPE_WEST AND $CASCADE_SLOPE_EAST
     ORDER BY lon;
     """
     result = execute(conn, query)
@@ -116,7 +113,7 @@ function get_southern_kansas_geoids()
     conn = get_db_connection()
     query = """
     WITH osage AS (
-        SELECT geom FROM counties WHERE geoid = '$OSAGE_COUNTY_KS'
+        SELECT geom FROM counties WHERE geoid = '20139'
     )
     SELECT c.geoid, c.name, c.stusps
     FROM counties c, osage o
@@ -160,16 +157,30 @@ end
 export get_western_geoids,
        get_eastern_geoids,
        get_east_of_utah_geoids,
-       get_slope_geoids,
+       get_east_of_cascade_geoids,
        get_southern_kansas_geoids,
        get_colorado_basin_geoids 
 
-const western_geoids = get_western_geoids()
 const eastern_geoids = get_eastern_geoids()
+const western_geoids = get_western_geoids()
 const east_of_utah_geoids = get_east_of_utah_geoids()
-const slope_geoids = get_slope_geoids()
+const east_of_cascade_geoids = get_east_of_cascade_geoids()
 const southern_kansas_geoids = get_southern_kansas_geoids()
 const colorado_basin_geoids = get_colorado_basin_geoids()
+const ne_missouri_geoids = get_ne_missouri_geoids()
+const southern_missouri_geoids = get_southern_missouri_geoids()
+const northern_missouri_geoids = get_northern_missouri_geoids()
+const missouri_river_basin_geoids = get_missouri_river_basin_geoids()
+export eastern_geoids,
+       western_geoids,
+       east_of_utah_geoids,
+       east_of_cascade_geoids,
+       southern_kansas_geoids,
+       colorado_basin_geoids,
+       ne_missouri_geoids,
+       southern_missouri_geoids,
+       northern_missouri_geoids,
+       missouri_river_basin_geoids
 
 ms_basin_ar = ["05001", "05003", "05017", "05021", "05031",
     "05035", "05037", "05041", "05055", "05067",
@@ -197,8 +208,6 @@ socal = ["06079", "06029", "06071", "06111", "06037",
 #          "06105", "41037", "65015", "06093", "06049"]
 
 east_of_sierras = ["06049","06035","06051","06051","06027"]
-
-eastern_geoids = get_eastern_geoids()
 
 missouri_river_basin = ["30005", "30007", "30013", "30015", "30017",
     "30021", "30027", "30033", "30041", "30045",
@@ -289,7 +298,7 @@ ms_basin_mo   = ["29071","29065","29099","29221","29093",
 Get Missouri counties that are north of St. Charles County and east of Schuyler County,
 plus Schuyler and Adair counties. Returns a DataFrame with geoid and name of qualifying counties.
 """
-function get_ne_missouri_counties()
+function get_ne_missouri_geoids()::Vector{String}
     query = """
     WITH reference_counties AS (
         SELECT 
@@ -321,8 +330,7 @@ function get_ne_missouri_counties()
     conn = get_db_connection()
     result = execute(conn, query)
     close(conn)
-    
-    DataFrame(result)
+    return DataFrame(result).geoid
 end
 
 """
@@ -330,7 +338,7 @@ Get Missouri counties that are south of Perry County's southern boundary,
 excluding Vernon, Cedar, Polk, Dallas, Webster, Laclede, Wright, Texas, Dent and Iron counties.
 Returns a vector of geoids.
 """
-function get_southern_missouri_counties()
+function get_southern_missouri_geoids()::Vector{String}
     query = """
     WITH perry_boundary AS (
         SELECT ST_YMin(ST_Envelope(geom)) as southern_boundary
@@ -350,11 +358,10 @@ function get_southern_missouri_counties()
     conn = get_db_connection()
     result = execute(conn, query)
     close(conn)
-    
-    DataFrame(result).geoid
+    return DataFrame(result).geoid
 end 
 
-function get_northern_missouri_counties()
+function get_northern_missouri_geoids()::Vector{String}
     setdiff(get_geo_pop(["MO"]).geoid, get_southern_missouri_counties())
 end
 
@@ -362,7 +369,7 @@ end
 Get Missouri River basin counties from Canadian border to Texas County's southern boundary.
 Returns a DataFrame with geoid and name of qualifying counties.
 """
-function get_missouri_river_basin_counties()
+function get_missouri_river_basin_geoids()::Vector{String}
     query = """
     WITH texas_boundary AS (
         SELECT ST_YMin(ST_Transform(geom, 26915)) as southern_boundary
@@ -386,11 +393,5 @@ function get_missouri_river_basin_counties()
     conn = get_db_connection()
     result = execute(conn, query)
     close(conn)
-    
-    DataFrame(result)
+    return DataFrame(result).geoid
 end
-
-export get_ne_missouri_counties,
-       get_southern_missouri_counties,
-       get_northern_missouri_counties,
-       get_missouri_river_basin_counties

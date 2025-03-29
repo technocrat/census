@@ -2,22 +2,13 @@
 # Script to adjust the Concordia dataset by adding 
 # Clinton and Essex counties in New York, 
 # and ceding portions of northern Maine to Canada 
-# plus moving greater Bridgeport to Metropolis
+# plus moving Fairfield County to Metropolis
+
+
 using Census
-using DataFrames: rename!, transform!, ByRow, nrow
-using RSetup
-using CairoMakie
-using GeoMakie
-using ArchGDAL
-using GeometryBasics
-RSetup.setup_r_environment(["classInt"])
 
-# For development - include map_poly.jl directly
-include("../src/map_poly.jl")
-include("../src/ga.jl")
-
-# Define the destination projection - Albers Equal Area centered on Lexington, KY
-dest = "+proj=aea +lat_0=38 +lon_0=-85 +lat_1=30 +lat_2=45 +datum=NAD83 +units=m +no_defs"
+# Define the destination projection - Albers Equal Area centered in mid Maine
+dest = get_crs("concordia")
 
 # Create figure first
 fig = Figure(size=(2400, 1600), fontsize=22)

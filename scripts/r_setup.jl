@@ -1,8 +1,7 @@
-using RCall
+# SPDX-License-Identifier: MIT
+# R environment setup and package management
 
-# Flag to track if setup has been completed
-const SETUP_COMPLETE = Ref(false)
-
+# Constants for R environment setup
 const R_LIBPATH = """
 .libPaths(c("/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library"))
 """
@@ -33,6 +32,9 @@ for(pkg in packages) {
     }
 }
 """
+
+# Flag to track if setup has been completed
+const SETUP_COMPLETE = Ref(false)
 
 """
     check_r_packages()
@@ -115,8 +117,6 @@ catch e
     setup_r_environment()
 end
 ```
-
-See also: [`check_r_packages`](@ref), [`install_r_packages`](@ref), [`RCall`](@ref)
 """
 function setup_r_environment()
     if SETUP_COMPLETE[]
