@@ -5,8 +5,7 @@ us              = get_geo_pop(Census.postals)
 
 rename!(us, [:geoid, :stusps, :county, :geom, :pop])
 
-western_geoids  = get_western_geoids().geoid
-eastern_geoids  = get_eastern_geoids().geoid
+
 const colorado_basin_geoids = get_colorado_basin_geoids()
 const slope_geoids = get_slope_geoids().geoid
 missouri_river_basin = ["30005", "30007", "30013", "30015", "30017",

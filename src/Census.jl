@@ -33,7 +33,15 @@ using StatsPlots
 using URIs
 using Franklin
 
+# Include the geoids submodule (which includes its implementation)
+include("geoids/geoids.jl")
 
+# Re-export geoids submodule and its constants
+using .geoids: western_geoids, eastern_geoids, east_of_utah_geoids,
+              slope_geoids, southern_kansas_geoids, colorado_basin_geoids
+
+export geoids, western_geoids, eastern_geoids, east_of_utah_geoids,
+       slope_geoids, southern_kansas_geoids, colorado_basin_geoids
 
 # # Define paths directly
 # const SCRIPT_DIR   = joinpath(@__DIR__, "..", "scripts")
@@ -117,6 +125,7 @@ export create_birth_table
 export create_multiple_age_pyramids 
 export create_state_abbrev_map 
 export create_state_to_nation_map 
+export DataFrames, DataFrame
 export dms_to_decimal 
 export expand_state_codes 
 export fill_state 
@@ -169,12 +178,11 @@ export rcopy  # Add rcopy to exports
 export @R_str  # Add R string macro to exports
 export check_r_packages  # Add check_r_packages to exports
 export install_r_packages  # Add install_r_packages to exports
-
+export LibPQ  # Add LibPQ to exports
 # Define and export utility functions
 function valid_codes()
     return sort(collect(VALID_POSTAL_CODES))
 end
 export valid_codes
-
 
 end # module

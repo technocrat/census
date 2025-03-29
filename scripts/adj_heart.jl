@@ -123,8 +123,7 @@ df = filter(row -> begin
     # Keep all non-MO counties
     !startswith(row.geoid, "29") || # 29 is MO state FIPS code
     # Keep specific MO counties we want (ms_basin_mo and lower_ms_mo)
-    row.geoid in ms_basin_mo || 
-    row.geoid in lower_ms_mo
+    row.geoid in get_ne_missouri_counties() 
 end, df)
 
 
