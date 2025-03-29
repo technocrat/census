@@ -47,18 +47,22 @@ using StatsPlots
 using URIs
 using Franklin
 
+# Include get_geo_pop before geoids submodule since it's needed there
+include(joinpath(@__DIR__, "get_geo_pop.jl"))
+
+# Include the geoids submodule (which includes its implementation)
+include("geoids/geoids.jl")
+
+# Import and re-export geoids submodule functions and constants
+import .geoids: get_crs, CRS_STRINGS
+export get_crs, CRS_STRINGS
+
 # Include files in dependency order
 include(joinpath(dirname(@__DIR__), "scripts", "cons.jl"))  # Constants and basic definitions
 include(joinpath(dirname(@__DIR__), "scripts", "dict.jl"))  # Dictionary definitions
 include(joinpath(dirname(@__DIR__), "scripts", "stru.jl"))  # Structure definitions
 include(joinpath(dirname(@__DIR__), "scripts", "methods.jl"))  # Method definitions
 include(joinpath(dirname(@__DIR__), "scripts", "highlighters.jl"))  # Syntax highlighting
-
-# Include get_geo_pop before geoids submodule since it's needed there
-include(joinpath(@__DIR__, "get_geo_pop.jl"))
-
-# Include the geoids submodule (which includes its implementation)
-include("geoids/geoids.jl")
 
 # Include all other function files
 include(joinpath(@__DIR__, "acs.jl"))
@@ -112,13 +116,12 @@ const eastern_geoids = geoids.eastern_geoids
 const east_of_utah_geoids = geoids.east_of_utah_geoids
 const east_of_cascade_geoids = geoids.east_of_cascade_geoids
 const southern_kansas_geoids = geoids.southern_kansas_geoids
+const northern_kansas_geoids = geoids.northern_kansas_geoids
 const colorado_basin_geoids = geoids.colorado_basin_geoids
-
-# Define Missouri-related geoid constants using the geoids submodule functions
-const ne_missouri_geoids = geoids.get_ne_missouri_geoids()
-const southern_missouri_geoids = geoids.get_southern_missouri_geoids()
-const northern_missouri_geoids = geoids.get_northern_missouri_geoids()
-const missouri_river_basin_geoids = geoids.get_missouri_river_basin_geoids()
+const ne_missouri_geoids = geoids.ne_missouri_geoids
+const southern_missouri_geoids = geoids.southern_missouri_geoids
+const northern_missouri_geoids = geoids.northern_missouri_geoids
+const missouri_river_basin_geoids = geoids.missouri_river_basin_geoids
 
 # Export all public functions and constants
 export acs 
@@ -190,6 +193,7 @@ export western_geoids,
        east_of_utah_geoids,
        east_of_cascade_geoids,
        southern_kansas_geoids,
+       northern_kansas_geoids,
        colorado_basin_geoids,
        ne_missouri_geoids,
        southern_missouri_geoids,

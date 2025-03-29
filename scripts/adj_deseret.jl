@@ -13,12 +13,12 @@ nm = subset(us, :stusps => ByRow(==("NM")))
 nm = subset(nm, :geoid => ByRow(x -> x ∉ western_geoids))
 
 mt = subset(us, :stusps => ByRow(==("MT")))
-mt = subset(mt, :geoid => ByRow(x -> x ∉ east_of_utah_geoids.geoid))
+mt = subset(mt, :geoid => ByRow(x -> x ∉ east_of_utah_geoids))
 
 id = subset(us, :stusps => ByRow(==("ID")))
 
 wy = subset(us, :stusps => ByRow(x -> x == "WY"))
-wy = subset(wy, :geoid => ByRow(x -> x ∉ east_of_utah_geoids.geoid))
+wy = subset(wy, :geoid => ByRow(x -> x ∉ east_of_utah_geoids))
 
 
 nv = subset(us, :stusps => ByRow(==("NV")))

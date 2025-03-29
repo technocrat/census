@@ -102,7 +102,30 @@ function get_southern_kansas_geoids()::Vector{String}
     SELECT c.geoid, c.name, c.stusps
     FROM Census.counties c, osage o
     WHERE c.stusps = 'KS'
-    AND ST_DWithin(c.geom, o.geom, 100000)
+    AND ST_Y(ST_Centroid(c.geom)) < ST_Y(ST_Centroid(o.geom))  -- South of Osage County
+    ORDER BY ST_Distance(c.geom, o.geom);
+    """
+    result = execute(conn, query)
+    close(conn)
+    return DataFrame(result).geoid
+end
+
+"""
+    get_northern_kansas_geoids() -> Vector{String}
+
+Returns GEOIDs for Kansas counties north of Osage County, an approximate
+boundary for the Missouri Basin
+"""
+function get_northern_kansas_geoids()::Vector{String}
+    conn = get_db_connection()
+    query = """
+    WITH osage AS (
+        SELECT geom FROM Census.counties WHERE geoid = '20167'
+    )
+    SELECT c.geoid, c.name, c.stusps
+    FROM Census.counties c, osage o
+    WHERE c.stusps = 'KS'
+    AND ST_Y(ST_Centroid(c.geom)) > ST_Y(ST_Centroid(o.geom))  -- North of Osage County
     ORDER BY ST_Distance(c.geom, o.geom);
     """
     result = execute(conn, query)
@@ -208,9 +231,6 @@ function get_northern_missouri_geoids()::Vector{String}
     setdiff(get_geo_pop(["MO"]).geoid, get_southern_missouri_geoids())
 end
 
-# Define static geoid sets
-const east_of_sierras_geoids = ["06049", "06035", "06051", "06027"]
-
 """
 Get Missouri River Basin county geoids by combining northern and southern Missouri counties,
 excluding those that drain into the Mississippi River.
@@ -230,3 +250,6 @@ function get_missouri_river_basin_geoids()::Vector{String}
     # minus those that don't drain into the Missouri
     return setdiff(all_mo, mississippi_counties, non_missouri_counties)
 end
+
+# Define static geoid sets
+const east_of_sierras_geoids = ["06049", "06035", "06051", "06027"]

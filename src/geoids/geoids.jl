@@ -34,7 +34,12 @@ const eastern_geoids = get_eastern_geoids()
 const east_of_utah_geoids = get_east_of_utah_geoids()
 const east_of_cascade_geoids = get_east_of_cascade_geoids()
 const southern_kansas_geoids = get_southern_kansas_geoids()
+const northern_kansas_geoids = get_northern_kansas_geoids()
 const colorado_basin_geoids = get_colorado_basin_geoids()
+const ne_missouri_geoids = get_ne_missouri_geoids()
+const southern_missouri_geoids = get_southern_missouri_geoids()
+const northern_missouri_geoids = get_northern_missouri_geoids()
+const missouri_river_basin_geoids = get_missouri_river_basin_geoids()
 
 # Export public functions
 export get_db_connection,
@@ -43,11 +48,13 @@ export get_db_connection,
        get_east_of_utah_geoids,
        get_east_of_cascade_geoids,
        get_southern_kansas_geoids,
+       get_northern_kansas_geoids,
        get_colorado_basin_geoids,
        get_ne_missouri_geoids,
        get_southern_missouri_geoids,
        get_northern_missouri_geoids,
-       get_missouri_river_basin_geoids
+       get_missouri_river_basin_geoids,
+       get_crs
 
 # Export constants
 export DB_HOST,
@@ -59,7 +66,8 @@ export DB_HOST,
        SLOPE_WEST,
        SLOPE_EAST,
        UTAH_BORDER,
-       CENTRAL_MERIDIAN
+       CENTRAL_MERIDIAN,
+       CRS_STRINGS
 
 # Export pre-computed geoid sets
 export western_geoids,
@@ -67,7 +75,12 @@ export western_geoids,
        east_of_utah_geoids,
        east_of_cascade_geoids,
        southern_kansas_geoids,
+       northern_kansas_geoids,
        colorado_basin_geoids,
+       ne_missouri_geoids,
+       southern_missouri_geoids,
+       northern_missouri_geoids,
+       missouri_river_basin_geoids,
        east_of_sierras_geoids
 
 end # module 
