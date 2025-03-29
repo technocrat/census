@@ -72,20 +72,20 @@ include(joinpath(@__DIR__, "analysis.jl"))
 # Include visualization functions
 include(joinpath(@__DIR__, "viz.jl"))
 
+# Include data processing functions
+include(joinpath(@__DIR__, "process.jl"))
+
 # Include all other function files
 include(joinpath(@__DIR__, "acs.jl"))
 include(joinpath(@__DIR__, "add_labels.jl"))
 include(joinpath(@__DIR__, "add_row_totals.jl"))
 include(joinpath(@__DIR__, "collect_state_age_dataframes.jl"))
-include(joinpath(@__DIR__, "convert_decimals_to_int64!.jl"))
 include(joinpath(@__DIR__, "create_multiple_age_pyramids.jl"))
 include(joinpath(@__DIR__, "create_state_abbrev_map.jl"))
 include(joinpath(@__DIR__, "create_state_to_nation_map.jl"))
 include(joinpath(@__DIR__, "dms_to_decimal.jl"))
 include(joinpath(@__DIR__, "expand_state_codes.jl"))
 include(joinpath(@__DIR__, "fill_state.jl"))
-include(joinpath(@__DIR__, "filter_dataframes.jl"))
-include(joinpath(@__DIR__, "format_with_commas.jl"))
 include(joinpath(@__DIR__, "ga.jl"))
 include(joinpath(@__DIR__, "get_breaks.jl"))
 include(joinpath(@__DIR__, "get_childbearing_population.jl"))
@@ -184,6 +184,9 @@ export install_r_packages  # Add install_r_packages to exports
 export LibPQ  # Add LibPQ to exports
 export save_plot  # Add save_plot to exports
 export format_number  # Add format_number to exports
+export clean_column_names!  # Add clean_column_names! to exports
+export remove_empty_columns!  # Add remove_empty_columns! to exports
+export standardize_missing!  # Add standardize_missing! to exports
 
 # Export all geoid constants
 export western_geoids,
