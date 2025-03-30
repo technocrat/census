@@ -117,6 +117,8 @@ const western_geoids = geoids.western_geoids
 const eastern_geoids = geoids.eastern_geoids
 const east_of_utah_geoids = geoids.east_of_utah_geoids
 const east_of_cascade_geoids = geoids.east_of_cascade_geoids
+const west_of_cascades = geoids.west_of_cascades
+const east_of_cascades = geoids.east_of_cascades
 const southern_kansas_geoids = geoids.southern_kansas_geoids
 const northern_kansas_geoids = geoids.northern_kansas_geoids
 const colorado_basin_geoids = geoids.colorado_basin_geoids
@@ -124,6 +126,19 @@ const ne_missouri_geoids = geoids.ne_missouri_geoids
 const southern_missouri_geoids = geoids.southern_missouri_geoids
 const northern_missouri_geoids = geoids.northern_missouri_geoids
 const missouri_river_basin_geoids = geoids.missouri_river_basin_geoids
+const east_of_sierras_geoids = geoids.east_of_sierras_geoids
+
+# Nation state definitions
+const concord    = ["CT", "MA", "ME", "NH", "RI", "VT"]
+const cumber     = ["WV","KY","TN"]
+const desert     = ["UT","MT","WY", "CO", "ID"]
+const dixie      = ["NC", "SC", "FL", "GA","MS","AL"]
+const factoria   = ["PA", "OH", "MI", "IN", "IL", "WI"]
+const heartland  = ["MN","IA","NE", "ND", "SD", "KS", "MO"]
+const lonestar   = ["TX","OK","AR","LA"]
+const metropolis = ["DE", "MD","NY","NJ","VA","DC"]
+const pacific    = ["WA","OR","AK"]
+const sonora     = ["CA","AZ","NM","NV","HI"]
 
 # Export all public functions and constants
 export acs 
@@ -198,12 +213,18 @@ export western_geoids,
        eastern_geoids,
        east_of_utah_geoids,
        east_of_cascade_geoids,
+       west_of_cascades,
+       east_of_cascades,
        southern_kansas_geoids,
        northern_kansas_geoids,
        colorado_basin_geoids,
        ne_missouri_geoids,
        southern_missouri_geoids,
        northern_missouri_geoids,
-       missouri_river_basin_geoids
+       missouri_river_basin_geoids,
+       east_of_sierras_geoids
+
+# Export nation state constants
+export concord, cumber, desert, dixie, factoria, heartland, lonestar, metropolis, pacific, sonora
 
 end # module

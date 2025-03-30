@@ -1,5 +1,23 @@
 # SPDX-License-Identifier: MIT
-function map_poly(df::DataFrame, title::String, dest::String, fig::Figure)
+
+"""
+    map_poly(df::DataFrame, title::String, dest::String, fig::Figure; save_path::Union{String,Nothing}=nothing, preview::Bool=false)
+
+Plot a map of polygons from a DataFrame with optional saving and preview functionality.
+
+# Arguments
+- `df::DataFrame`: DataFrame containing the geometries and data to plot
+- `title::String`: Title for the map
+- `dest::String`: Destination CRS for the projection
+- `fig::Figure`: The figure to plot on
+- `save_path::Union{String,Nothing}=nothing`: Optional path to save the figure
+- `preview::Bool=false`: Whether to open the saved figure in Preview.app
+
+# Returns
+- The created figure
+"""
+function map_poly(df::DataFrame, title::String, dest::String, fig::Figure; 
+                 save_path::Union{String,Nothing}=nothing, preview::Bool=false)
     # Ensure we have parsed geometries
     if !hasproperty(df, :parsed_geoms)
         df.parsed_geoms = parse_geoms(df.geom)
@@ -77,4 +95,18 @@ function map_poly(df::DataFrame, title::String, dest::String, fig::Figure)
             color=:white
         )
     end
+
+    # Save the figure if a path is provided
+    if !isnothing(save_path)
+        # Ensure the directory exists
+        mkpath(dirname(save_path))
+        save(save_path, fig)
+        
+        # Open with Preview if requested
+        if preview
+            run(`open -a Preview $save_path`)
+        end
+    end
+
+    return fig
 end

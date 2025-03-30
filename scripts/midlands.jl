@@ -16,26 +16,27 @@ ia = subset(us, :stusps => ByRow(==("IA")))
 ia = subset(ia, :geoid => ByRow(x -> x ∈ mo_basin_ia))
 
 mo = subset(us, :stusps => ByRow(==("MO")))
-mo = subset(mo, :geoid => ByRow(x -> x ∈ missouri_river_basin_geoids))  
+mo = subset(mo, :geoid => ByRow(x -> x ∈ Census.missouri_river_basin_geoids))  
 
 ks = subset(us, :stusps => ByRow(==("KS")))
-ks = subset(ks, :geoid => ByRow(x -> x ∈ northern_kansas_geoids
-                                  && x ∈ eastern_geoids))
+ks = subset(ks, :geoid => ByRow(x -> x ∈ Census.northern_kansas_geoids
+                                  && x ∈ Census.eastern_geoids))
 
 ne = subset(us, :stusps => ByRow(==("NE")))
-ne = subset(ne, :geoid => ByRow(x -> x ∈ eastern_geoids))
+ne = subset(ne, :geoid => ByRow(x -> x ∈ Census.eastern_geoids))
 
 nd = subset(us, :stusps => ByRow(==("ND")))
-nd = subset(nd, :geoid => ByRow(x -> x ∈ eastern_geoids))
+nd = subset(nd, :geoid => ByRow(x -> x ∈ Census.eastern_geoids))
 
 sd = subset(us, :stusps => ByRow(==("SD")))
-sd = subset(sd, :geoid => ByRow(x -> x ∈ eastern_geoids))   
+sd = subset(sd, :geoid => ByRow(x -> x ∈ Census.eastern_geoids))   
 
 df = vcat(mn,ia,mo,ks,ne,nd,sd) 
 
-
-
-
-plot_map(df, map_title, dest)
+# Create and save the plot
+fig = Figure(size=(2400, 1600), fontsize=22)
+plot_map(df, map_title, dest, fig; 
+         save_path=joinpath("plots", "midlands_map.png"),
+         preview=true)
 
 

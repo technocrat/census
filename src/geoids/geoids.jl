@@ -25,14 +25,16 @@ const UTAH_BORDER = -109.0
 const CENTRAL_MERIDIAN = -100.0
 
 # Include the implementation and CRS definitions
-include("impl.jl")
-include("crs.jl")
+include(joinpath(@__DIR__, "impl.jl"))
+include(joinpath(@__DIR__, "crs.jl"))
 
 # Pre-compute commonly used geoid sets
 const western_geoids = get_western_geoids()
 const eastern_geoids = get_eastern_geoids()
 const east_of_utah_geoids = get_east_of_utah_geoids()
 const east_of_cascade_geoids = get_east_of_cascade_geoids()
+const west_of_cascades = get_west_of_cascades()
+const east_of_cascades = get_east_of_cascades()
 const southern_kansas_geoids = get_southern_kansas_geoids()
 const northern_kansas_geoids = get_northern_kansas_geoids()
 const colorado_basin_geoids = get_colorado_basin_geoids()
@@ -47,6 +49,8 @@ export get_db_connection,
        get_eastern_geoids,
        get_east_of_utah_geoids,
        get_east_of_cascade_geoids,
+       get_west_of_cascades,
+       get_east_of_cascades,
        get_southern_kansas_geoids,
        get_northern_kansas_geoids,
        get_colorado_basin_geoids,
@@ -67,13 +71,18 @@ export DB_HOST,
        SLOPE_EAST,
        UTAH_BORDER,
        CENTRAL_MERIDIAN,
-       CRS_STRINGS
+       CRS_STRINGS,
+       east_of_sierras_geoids
+
+const east_of_sierras_geoids = ["06049","06035","06091"]
 
 # Export pre-computed geoid sets
 export western_geoids,
        eastern_geoids,
        east_of_utah_geoids,
        east_of_cascade_geoids,
+       west_of_cascades,
+       east_of_cascades,
        southern_kansas_geoids,
        northern_kansas_geoids,
        colorado_basin_geoids,
