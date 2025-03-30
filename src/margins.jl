@@ -4,18 +4,47 @@
     add_margins(df::DataFrame; 
                 margin_row_name="Total", 
                 margin_col_name="Total",
-                cols_to_sum=nothing)
+                cols_to_sum=nothing) -> DataFrame
     
-Add row and column totals to a DataFrame containing numeric data.
+Add row and column totals (margins) to a DataFrame containing numeric data.
 
 # Arguments
-- `df`: Input DataFrame
-- `margin_row_name`: Label for the row margin (default: "Total")
-- `margin_col_name`: Label for the column margin (default: "Total")
-- `cols_to_sum`: Columns to include in summation (default: all numeric columns)
+- `df::DataFrame`: Input DataFrame with numeric columns
+- `margin_row_name::String="Total"`: Label for the row margin (column totals)
+- `margin_col_name::String="Total"`: Label for the column margin (row totals)
+- `cols_to_sum::Union{Nothing,Vector{Symbol}}=nothing`: Specific columns to sum (default: all numeric columns)
 
 # Returns
-- A new DataFrame with margins added
+- `DataFrame`: A new DataFrame with:
+  - Original data
+  - Row totals in a new column (margin_col_name)
+  - Column totals in a new row (margin_row_name)
+  - Grand total in bottom-right cell
+
+# Example
+```julia
+df = DataFrame(
+    region = ["North", "South"],
+    sales_2021 = [100, 200],
+    sales_2022 = [150, 250]
+)
+add_margins(df)
+# Returns:
+# 3×4 DataFrame
+#  Row │ region  sales_2021  sales_2022  Total
+#      │ String  Int64       Int64       Int64
+# ─────┼────────────────────────────────────────
+#    1 │ North         100         150     250
+#    2 │ South         200         250     450
+#    3 │ Total         300         400     700
+```
+
+# Notes
+- Creates a copy of the input DataFrame
+- Automatically detects numeric columns if cols_to_sum is nothing
+- Preserves non-numeric columns in the margin row
+- Handles missing values (they are treated as 0 in sums)
+- Thread-safe (no mutation of input DataFrame)
 """
 function add_margins(df::DataFrame; 
                     margin_row_name="Total", 
@@ -57,17 +86,42 @@ end
 """
     add_row_margins(df::DataFrame; 
                     margin_col_name="Total",
-                    cols_to_sum=nothing)
+                    cols_to_sum=nothing) -> DataFrame
     
-Add only row totals to a DataFrame containing numeric data.
+Add row totals (horizontal sums) to a DataFrame containing numeric data.
 
 # Arguments
-- `df`: Input DataFrame
-- `margin_col_name`: Label for the column margin (default: "Total")
-- `cols_to_sum`: Columns to include in summation (default: all numeric columns)
+- `df::DataFrame`: Input DataFrame with numeric columns
+- `margin_col_name::String="Total"`: Name for the new totals column
+- `cols_to_sum::Union{Nothing,Vector{Symbol}}=nothing`: Specific columns to sum (default: all numeric columns)
 
 # Returns
-- A new DataFrame with row margins added
+- `DataFrame`: A new DataFrame with an additional column containing row totals
+
+# Example
+```julia
+df = DataFrame(
+    product = ["A", "B"],
+    q1 = [100, 150],
+    q2 = [120, 160],
+    q3 = [110, 170]
+)
+add_row_margins(df)
+# Returns:
+# 2×5 DataFrame
+#  Row │ product  q1    q2    q3    Total
+#      │ String   Int64 Int64 Int64 Int64
+# ─────┼─────────────────────────────────
+#    1 │ A         100   120   110    330
+#    2 │ B         150   160   170    480
+```
+
+# Notes
+- Creates a copy of the input DataFrame
+- Only adds horizontal totals (no column totals)
+- Automatically detects numeric columns if cols_to_sum is nothing
+- Thread-safe (no mutation of input DataFrame)
+- Useful for row-wise analysis without column totals
 """
 function add_row_margins(df::DataFrame; 
                         margin_col_name="Total",
@@ -92,17 +146,44 @@ end
 """
     add_col_margins(df::DataFrame; 
                      margin_row_name="Total",
-                     cols_to_sum=nothing)
+                     cols_to_sum=nothing) -> DataFrame
     
-Add only column totals to a DataFrame containing numeric data.
+Add column totals (vertical sums) to a DataFrame containing numeric data.
 
 # Arguments
-- `df`: Input DataFrame
-- `margin_row_name`: Label for the row margin (default: "Total")
-- `cols_to_sum`: Columns to include in summation (default: all numeric columns)
+- `df::DataFrame`: Input DataFrame with numeric columns
+- `margin_row_name::String="Total"`: Label for the totals row
+- `cols_to_sum::Union{Nothing,Vector{Symbol}}=nothing`: Specific columns to sum (default: all numeric columns)
 
 # Returns
-- A new DataFrame with column margins added
+- `DataFrame`: A new DataFrame with an additional row containing column totals
+
+# Example
+```julia
+df = DataFrame(
+    region = ["East", "West", "North"],
+    revenue = [1000, 1200, 800],
+    costs = [800, 900, 600]
+)
+add_col_margins(df)
+# Returns:
+# 4×3 DataFrame
+#  Row │ region  revenue  costs
+#      │ String  Int64    Int64
+# ─────┼──────────────────────
+#    1 │ East      1000    800
+#    2 │ West      1200    900
+#    3 │ North      800    600
+#    4 │ Total     3000   2300
+```
+
+# Notes
+- Creates a copy of the input DataFrame
+- Only adds vertical totals (no row totals)
+- Automatically detects numeric columns if cols_to_sum is nothing
+- Preserves non-numeric columns in the margin row
+- Thread-safe (no mutation of input DataFrame)
+- Useful for column-wise analysis without row totals
 """
 function add_col_margins(df::DataFrame; 
                        margin_row_name="Total",

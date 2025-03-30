@@ -15,8 +15,7 @@ function get_western_geoids()
     query = """
     SELECT geoid, name, stusps, ST_X(ST_Centroid(geom)) as lon
     FROM Census.counties
-    WHERE ST_X(ST_Centroid(geom)) < $EASTERN_BOUNDARY
-    AND ST_X(ST_Centroid(geom)) > $WESTERN_BOUNDARY
+    WHERE ST_X(ST_Centroid(geom)) < -100.0
     ORDER BY lon;
     """
     result = execute(conn, query)
@@ -246,5 +245,41 @@ function get_missouri_river_basin_geoids()::Vector{String}
     return setdiff(all_mo, mississippi_counties, non_missouri_counties)
 end
 
+"""
+    get_west_of_cascades()::Vector{String}
+
+Returns GEOIDs for counties west of the Cascade Mountains (west of 120°W longitude).
+"""
+function get_west_of_cascades()::Vector{String}
+    conn = get_db_connection()
+    query = """
+    SELECT geoid, name, stusps, ST_X(ST_Centroid(geom)) as lon
+    FROM census.counties
+    WHERE ST_X(ST_Centroid(geom)) < $SLOPE_WEST
+    ORDER BY lon;
+    """
+    result = execute(conn, query)
+    close(conn)
+    return DataFrame(result).geoid
+end
+
+"""
+    get_east_of_cascades()::Vector{String}
+
+Returns GEOIDs for counties east of the Cascade Mountains (east of 115°W longitude).
+"""
+function get_east_of_cascades()::Vector{String}
+    conn = get_db_connection()
+    query = """
+    SELECT geoid, name, stusps, ST_X(ST_Centroid(geom)) as lon
+    FROM census.counties
+    WHERE ST_X(ST_Centroid(geom)) > $SLOPE_EAST
+    ORDER BY lon;
+    """
+    result = execute(conn, query)
+    close(conn)
+    return DataFrame(result).geoid
+end
+
 # Define static geoid sets
-const east_of_sierras_geoids = ["06049", "06035", "06051", "06027"]
+# const east_of_sierras_geoids = ["06049", "06035", "06051", "06027"]

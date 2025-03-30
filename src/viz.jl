@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 # Visualization Module
 
@@ -12,10 +14,11 @@ using GeoMakie
 using Polynomials
 using CSV
 using Dates
+using Measures
 
 # Constants for visualization
 const DEFAULT_PLOT_SIZE = (1000, 600)
-const DEFAULT_MARGIN = 25mm
+const DEFAULT_MARGIN = Measures.mm(25)
 const MALE_COLOR = ("#b0c1e3", 0.9)    # Light blue
 const FEMALE_COLOR = ("#f8c8dc", 0.9)  # Light pink
 const TREND_COLOR = :red
@@ -51,21 +54,21 @@ function cleveland_dot_plot(df::DataFrame,
                           xlabel::String="",
                           title::String="Cleveland Dot Plot")
     # Drop any rows with missing values and sort
-    df_clean  = dropmissing(df, [value_col, label_col])
-    df_sorted = sort(df_clean, value_col, rev=true)
+    df_clean  = DataFrames.dropmissing(df, [value_col, label_col])
+    df_sorted = DataFrames.sort(df_clean, value_col, rev=true)
     
     # Calculate 80% threshold using non-missing values
     value_threshold = sum(skipmissing(df_clean[:, value_col])) * 0.8
     
     # Create positions array for curve fitting
-    positions = 1:nrow(df_sorted)
+    positions = 1:DataFrames.nrow(df_sorted)
     values    = collect(df_sorted[:, value_col])
     
     # Fit polynomial curve
     poly_fit  = Polynomials.fit(positions, Float64.(values), 3)
     
     # Create interpolated points for smoother curve
-    x_smooth  = range(1, nrow(df_sorted), length=100)
+    x_smooth  = range(1, DataFrames.nrow(df_sorted), length=100)
     y_smooth  = poly_fit.(x_smooth)
     
     # Fixed x-axis limits
@@ -81,10 +84,10 @@ function cleveland_dot_plot(df::DataFrame,
         legend     = false,
         xlabel     = xlabel,
         title      = title,
-        yticks     = (1:nrow(df_sorted), df_sorted[:, label_col]),
+        yticks     = (1:DataFrames.nrow(df_sorted), df_sorted[:, label_col]),
         yflip      = true,
         grid       = (:x, :gray, 0.2),
-        size       = (1000, max(400, 20 * nrow(df_sorted))),
+        size       = (1000, max(400, 20 * DataFrames.nrow(df_sorted))),
         margin     = DEFAULT_MARGIN,
         xlims      = (x_min, x_max),
         xticks     = 0:200_000:1_600_000,
@@ -109,7 +112,7 @@ function cleveland_dot_plot(df::DataFrame,
     )
     
     # Add reference lines connecting to y-axis
-    for i in 1:nrow(df_sorted)
+    for i in 1:DataFrames.nrow(df_sorted)
         Plots.plot!(
             [0, values[i]], 
             [i, i], 
@@ -141,19 +144,19 @@ Returns a `Figure` object containing the population pyramid visualization with:
 - Color-coded bars (blue for males, pink for females)
 """
 function create_age_pyramid(df::DataFrame, title::String="Population")
-    fig = Figure(size=DEFAULT_PLOT_SIZE)
-    ax = Axis(fig[1, 1])
+    fig = CairoMakie.Figure(size=DEFAULT_PLOT_SIZE)
+    ax = CairoMakie.Axis(fig[1, 1])
     
-    y_positions = 1:nrow(df)
+    y_positions = 1:DataFrames.nrow(df)
     males = df.male_percent
     females = df.female_percent
     
-    barplot!(ax, y_positions, males, 
+    CairoMakie.barplot!(ax, y_positions, males, 
         direction=:x, 
         color=MALE_COLOR,
         label="Male")
 
-    barplot!(ax, y_positions, females, 
+    CairoMakie.barplot!(ax, y_positions, females, 
         direction=:x, 
         color=FEMALE_COLOR,
         label="Female")
@@ -165,10 +168,10 @@ function create_age_pyramid(df::DataFrame, title::String="Population")
     ax.title = "$title Age Pyramid"
     
     # Add a zero line
-    vlines!(ax, 0, color=:black, linewidth=1)
+    CairoMakie.vlines!(ax, 0, color=:black, linewidth=1)
     
     # Add legend
-    axislegend(ax, position=:rt)
+    CairoMakie.axislegend(ax, position=:rt)
     
     # Reverse y-axis to have youngest at bottom
     ax.yreversed = false

@@ -3,7 +3,42 @@
 """
     ga(dest::String, row::Int, col::Int, title::String, fig::Figure, df::DataFrame) -> GeoAxis
 
-Creates a GeoAxis with the specified destination CRS and title, using the bounding box of all geometries.
+Create a GeoAxis for geographic visualization with automatic bounding box calculation.
+
+# Arguments
+- `dest::String`: Destination CRS (Coordinate Reference System) string (e.g., "EPSG:4326")
+- `row::Int`: Row position in the figure grid
+- `col::Int`: Column position in the figure grid
+- `title::String`: Title for the axis
+- `fig::Figure`: Parent Makie figure
+- `df::DataFrame`: DataFrame containing a 'geom' column with MULTIPOLYGON WKT strings
+
+# Returns
+- `GeoAxis`: A configured GeoAxis object with:
+  - Specified CRS projection
+  - Data aspect ratio preserved
+  - Automatic bounding box from geometries
+  - Rounded limits to nearest 5 degrees
+
+# Coordinate Processing
+1. Extracts first coordinate pair from each MULTIPOLYGON
+2. Finds min/max coordinates across all geometries
+3. Rounds limits to nearest 5 degrees for clean boundaries
+4. Sets axis limits to encompass all geometries
+
+# Example
+```julia
+using CairoMakie, GeoMakie
+fig = Figure()
+df = DataFrame(geom = ["MULTIPOLYGON(((-120 45,...)))", ...])
+axis = ga("EPSG:4326", 1, 1, "My Map", fig, df)
+```
+
+# Notes
+- Uses regex to extract coordinates from WKT strings
+- Assumes MULTIPOLYGON geometry type in WKT format
+- Sets DataAspect() to preserve geographic proportions
+- Useful for creating base maps in map_poly() and similar functions
 """
 function ga(dest::String, row::Int, col::Int, title::String, fig::Figure, df::DataFrame)
     # Create the GeoAxis

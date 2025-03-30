@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "derive": {
+    "cursorRules": {
+      "enabled": true,
+      "source": "cursorRules",
+      "autoUpdate": true
+    }
+  },
+  "history": {
+    "enabled": true,
+    "location": "./history"
+  }
+} 
