@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: MIT
 
 using Census
-
+using RCall
+using CairoMakie
 
 dest = get_crs("powell")
 map_title = "Powell"
@@ -48,6 +49,23 @@ df = vcat(mt,nm,wy,az,co,az,nd,sd,ne,ks,tx,ok,ut)
 # Plot the map using the new convenience function
 plot_map(df, map_title, dest)
 
+# Subset to exclude Alaska
+# df = subset(df, :stusps => ByRow(≠("AK")))
+
+
+rename!(df, [:geoid, :stusps, :county, :geom, :pop])
+
+# Convert population to numeric and handle any missing values
+df.pop = parse.(Int64, df.pop)
+
+
+breaks = RCall.rcopy(get_breaks(df, 5))
+df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
+
+# Create figure and plot map
+fig = Figure(size=(2400, 1600), fontsize=22)
+map_poly(df, map_title, dest, fig)
+display(fig)
 
 
 

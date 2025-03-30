@@ -1,107 +1,59 @@
 # SPDX-License-Identifier: MIT
 
 """
-    get_geo_pop(postals::Vector{String}) -> DataFrame
+    get_geo_pop(target_states::Vector{String}) -> DataFrame
 
 Returns a DataFrame containing geographic information for the specified postal codes.
 """
-function get_geo_pop(postals::Vector{String})
-    conn = get_db_connection()
-    query = """
-    SELECT geoid, name, stusps, 
-           ST_Centroid(geom) as centroid, 
-           ST_AsText(geom) as geom
-    FROM Census.counties
-    WHERE stusps = ANY(\$1)
-    ORDER BY stusps, name;
+function get_geo_pop(target_states::Vector{String})
+    target_states = make_postal_codes(target_states)
+    # Connect to database
+    conn = LibPQ.Connection("dbname=geocoder")
+    
+    # Convert PostalCode objects to their string values for the query
+    state_codes = [pc.code for pc in target_states]
+    
+    # Prepare the query with parameter placeholder
+    geo_query = """
+        SELECT q.geoid, q.stusps, q.name, ST_AsText(q.geom) as geom, vd.value as total_population
+        FROM census.counties q
+        LEFT JOIN census.variable_data vd
+            ON q.geoid = vd.geoid
+            AND vd.variable_name = 'total_population'
+        WHERE q.stusps = ANY(\$1)
     """
-    result = execute(conn, query, [postals])
+    
+    # Execute the query with parameters
+    result = execute(conn, geo_query, [state_codes])
+    
+    # Process the result
+    df = DataFrame(result)
+    
+    # Close the connection
     close(conn)
-    return DataFrame(result)
+    
+    return df
 end
 
 """
-    map_poly(df::DataFrame, title::String, dest::String) -> Nothing
+    parse_geoms(geoms::Vector{Union{Missing, String}}) -> Vector{Union{Missing, ArchGDAL.IGeometry}}
 
-Plots a map of the geographic data in the DataFrame.
-
-# Arguments
-- `df::DataFrame`: DataFrame containing geographic data with columns :geom and :name
-- `title::String`: Title for the map
-- `dest::String`: Destination name for the map (used for CRS and filename)
+Parses a vector of WKT geometry strings into ArchGDAL geometries.
+Returns missing for any geometries that fail to parse.
 """
-function map_poly(df::DataFrame, title::String, dest::String)
-    # Create the plot
-    fig = Figure()
-    ax = GeoAxis(fig[1, 1],
-        dest=dest,
-        title=title
-    )
-
-    # Parse the WKT geometries
-    geoms = parse_geoms(df.geom)
-
-    # Plot the data
+function parse_geoms(geoms::Vector{Union{Missing, String}})
+    parsed = Vector{Union{Missing, ArchGDAL.IGeometry}}(missing, length(geoms))
     for (i, geom) in enumerate(geoms)
-        multi_poly = geom
-        n_polys = ArchGDAL.ngeom(multi_poly)
-        
-        for p_idx in 0:(n_polys-1)
-            poly = ArchGDAL.getgeom(multi_poly, p_idx)
-            ext_ring = ArchGDAL.getgeom(poly, 0)
-            ring_text = ArchGDAL.toWKT(ext_ring)
-            
-            coords_text = replace(ring_text, "LINEARRING (" => "")
-            coords_text = replace(coords_text, ")" => "")
-            
-            point_list = Point2f[]
-            for pair in split(coords_text, ",")
-                parts = split(strip(pair))
-                if length(parts) >= 2
-                    x = parse(Float32, parts[1])
-                    y = parse(Float32, parts[2])
-                    push!(point_list, Point2f(x, y))
-                end
-            end
-            
-            if !isempty(point_list)
-                poly_obj = GeometryBasics.Polygon(point_list)
-                poly!(
-                    ax,
-                    poly_obj,
-                    color=:lightgray,
-                    strokecolor=:black,
-                    strokewidth=1
-                )
+        if !ismissing(geom)
+            try
+                parsed[i] = ArchGDAL.fromWKT(geom)
+            catch e
+                @warn "Failed to parse geometry at index $i: $e\nWKT: $geom" maxlog=5
+                parsed[i] = missing
             end
         end
     end
-
-    # Add labels
-    for row in eachrow(df)
-        text!(ax, row.centroid, text=row.name, color=:black, fontsize=8)
-    end
-
-    # Create filename with title and datetime
-    timestamp = Dates.format(now(), "yyyy-mm-dd_HHMMSS")
-    filename = joinpath("plots", "$(title)_$(timestamp).png")
-    
-    # Ensure plots directory exists
-    mkpath("plots")
-    
-    # Save the plot
-    save(filename, fig)
-end
-
-"""
-    parse_geoms(geoms::Vector{Union{Missing, String}}) -> Vector{ArchGDAL.IGeometry}
-
-Parses a vector of WKT geometry strings into ArchGDAL geometries.
-Handles missing values by filtering them out.
-"""
-function parse_geoms(geoms::Vector{Union{Missing, String}})
-    valid_geoms = filter(!ismissing, geoms)
-    return [ArchGDAL.fromWKT(geom) for geom in valid_geoms]
+    return parsed
 end
 
 """
@@ -131,17 +83,7 @@ function convert_to_polygon(geom::ArchGDAL.IGeometry)
     end
 end
 
-"""
-    plot_map(df::DataFrame, title::String, dest::String) -> Nothing
-
-Convenience function for plotting a map with the given DataFrame, title, and destination.
-"""
-function plot_map(df::DataFrame, title::String, dest::String)
-    map_poly(df, title, dest)
-end
-
 # Export all public functions
 export get_geo_pop,
-       map_poly,
        parse_geoms,
-       plot_map 
+       convert_to_polygon 

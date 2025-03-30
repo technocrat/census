@@ -1,5 +1,10 @@
 # SPDX-License-Identifier: MIT
 function map_poly(df::DataFrame, title::String, dest::String, fig::Figure)
+    # Ensure we have parsed geometries
+    if !hasproperty(df, :parsed_geoms)
+        df.parsed_geoms = parse_geoms(df.geom)
+    end
+
     custom_colors = [
         :forestgreen,  # Bin 1
         :darkseagreen, # Bin 2
@@ -11,8 +16,8 @@ function map_poly(df::DataFrame, title::String, dest::String, fig::Figure)
     ]
 
     # Create the GeoAxis in the second row
-    ga1 = ga(dest, 1, 1, title, fig)   
-
+    ga1 = ga(dest, 1, 1, title, fig, df)   
+    
     # Plot the polygons
     for i in 1:nrow(df)
         geom = df.parsed_geoms[i]

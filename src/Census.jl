@@ -56,6 +56,9 @@ include(joinpath(dirname(@__DIR__), "scripts", "highlighters.jl"))
 # Include make_postal_codes before get_geo_pop since it's needed there
 include(joinpath(@__DIR__, "make_postal_codes.jl"))
 
+# Include map_poly.jl before geo.jl to ensure the 4-argument version takes precedence
+include(joinpath(@__DIR__, "map_poly.jl"))
+
 # Include geographic functions
 include(joinpath(@__DIR__, "geo.jl"))
 
@@ -65,6 +68,9 @@ include("geoids/geoids.jl")
 # Import and re-export geoids submodule functions and constants
 import .geoids: get_crs, CRS_STRINGS
 export get_crs, CRS_STRINGS
+
+# Explicitly export the 4-argument version of map_poly
+export map_poly
 
 # Include analysis functions
 include(joinpath(@__DIR__, "analysis.jl"))
@@ -158,7 +164,6 @@ export make_legend
 export make_nation_state_gdp_df 
 export make_nation_state_pop_df 
 export make_postal_codes 
-export map_poly 
 export margins 
 export my_cut 
 export parse_geoms 
