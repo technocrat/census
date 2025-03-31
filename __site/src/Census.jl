@@ -1,180 +1,88 @@
-# SPDX-License-Identifier: MIT
+"""
+    Census
+
+A Julia package for analyzing alternatives for nation states to replace the existing United States.
+This package provides tools for analyzing various aspects of potential nation states, including:
+
+- Population characteristics
+- Economic indicators
+- Political structures
+- Historical context
+- Geographic features
+
+The package integrates with R's statistical packages and provides GIS functionality through various Julia packages.
+
+# Main Features
+- Data processing and analysis tools
+- Visualization capabilities using CairoMakie and GeoMakie
+- Integration with R's statistical packages
+- Geographic information system (GIS) functionality
+- Population analysis tools
+
+# Example
+```julia
+using Census
+
+# Get population data for a state
+state_pop = get_state_pop("CA")
+
+# Create visualizations
+map_poly(population_data)
+```
+"""
 module Census
 
-# All dependencies
-using ArchGDAL
-using BSON
-using CairoMakie
-using Colors
-using CSV
+using RCall
 using DataFrames
-using Dates
-using Decimals
-using FixedPointNumbers
-using Format
-using GeoInterface
-using GeoJSON
-using GeoMakie
-using GeometryBasics
-using Graphs
-using GraphPlot
 using HTTP
 using JSON3
-using LibPQ
-using Measures
-using PlotlyJS
-using Plots
-using Polynomials
-using PrettyTables
-using RCall
-using RDatasets
-using StatsBase
-using StatsPlots
-using URIs
-using Franklin
+using GeoInterface
+using CairoMakie
+using GeoMakie
+using LibGEOS
+using WellKnownGeometry
 
+# Include constants and types first
+include("constants.jl")
 
+# Include core functionality
+include("core.jl")
 
-# # Define paths directly
-# const SCRIPT_DIR   = joinpath(@__DIR__, "..", "scripts")
-# const OBJ_DIR      = joinpath(@__DIR__, "..", "obj")
-# const PARTIALS_DIR = joinpath(@__DIR__, "..", "_layout", "partials")
+# Include submodules
+include("RSetup.jl")
+using .RSetup
 
+# Include processing and analysis functions
+include("acs.jl")
+include("ga.jl")
+include("get_breaks.jl")
+include("margins.jl")
+include("process.jl")
+include("viz.jl")
 
-# Include files in dependency order
-include(joinpath(dirname(@__DIR__), "scripts", "cons.jl"))  # Constants and basic definitions
-include(joinpath(dirname(@__DIR__), "scripts", "dict.jl"))  # Dictionary definitions
-include(joinpath(dirname(@__DIR__), "scripts", "stru.jl"))  # Structure definitions
-include(joinpath(dirname(@__DIR__), "scripts", "methods.jl"))  # Method definitions
-include(joinpath(dirname(@__DIR__), "scripts", "highlighters.jl"))  # Syntax highlighting
-
-# Include R setup code
-include(joinpath(dirname(@__DIR__), "scripts", "r_setup.jl"))
-
-# Include all function files
-include(joinpath(@__DIR__, "acs.jl"))
-include(joinpath(@__DIR__, "add_labels.jl"))
-include(joinpath(@__DIR__, "add_row_totals.jl"))
-include(joinpath(@__DIR__, "calculate_dependency_ratio.jl"))
-include(joinpath(@__DIR__, "cleveland_dot_plot.jl"))
-include(joinpath(@__DIR__, "collect_state_age_dataframes.jl"))
-include(joinpath(@__DIR__, "collect_state_ages.jl"))
-include(joinpath(@__DIR__, "convert_decimals_to_int64!.jl"))
-include(joinpath(@__DIR__, "create_age_pyramid.jl"))
-include(joinpath(@__DIR__, "create_birth_table.jl"))
-include(joinpath(@__DIR__, "create_multiple_age_pyramids.jl"))
-include(joinpath(@__DIR__, "create_state_abbrev_map.jl"))
-include(joinpath(@__DIR__, "create_state_to_nation_map.jl"))
-include(joinpath(@__DIR__, "dms_to_decimal.jl"))
-include(joinpath(@__DIR__, "expand_state_codes.jl"))
-include(joinpath(@__DIR__, "fill_state.jl"))
-include(joinpath(@__DIR__, "filter_dataframes.jl"))
-include(joinpath(@__DIR__, "format_with_commas.jl"))
-include(joinpath(@__DIR__, "ga.jl"))
-include(joinpath(@__DIR__, "get_breaks.jl"))
-include(joinpath(@__DIR__, "get_childbearing_population.jl"))
-include(joinpath(@__DIR__, "get_colorado_basin_geoids.jl"))
-include(joinpath(@__DIR__, "get_dem_vote.jl"))
-include(joinpath(@__DIR__, "get_east_of_utah_geoids.jl"))
-include(joinpath(@__DIR__, "get_eastern_geoids.jl"))
-include(joinpath(@__DIR__, "get_geo_pop.jl"))
-include(joinpath(@__DIR__, "get_gop_vote.jl"))
-include(joinpath(@__DIR__, "get_nation_state.jl"))
-include(joinpath(@__DIR__, "get_nation_title.jl"))
-include(joinpath(@__DIR__, "get_slope_geoids.jl"))
-include(joinpath(@__DIR__, "get_southern_kansas_geoids.jl"))
-include(joinpath(@__DIR__, "get_state_gdp.jl"))
-include(joinpath(@__DIR__, "get_state_pop.jl"))
-include(joinpath(@__DIR__, "get_us_ages.jl"))
-include(joinpath(@__DIR__, "get_western_geoids.jl"))
-include(joinpath(@__DIR__, "gini.jl"))
-include(joinpath(@__DIR__, "inspect_shapefile_structure.jl"))
-include(joinpath(@__DIR__, "make_growth_table.jl"))
-include(joinpath(@__DIR__, "make_legend.jl"))
-include(joinpath(@__DIR__, "make_nation_state_gdp_df.jl"))
-include(joinpath(@__DIR__, "make_nation_state_pop_df.jl"))
-include(joinpath(@__DIR__, "make_postal_codes.jl"))
-include(joinpath(@__DIR__, "map_poly.jl"))
-include(joinpath(@__DIR__, "margins.jl"))
-include(joinpath(@__DIR__, "my_cut.jl"))
-include(joinpath(@__DIR__, "parse_geoms.jl"))
-include(joinpath(@__DIR__, "q.jl"))
-include(joinpath(@__DIR__, "query_all_nation_ages.jl"))
-include(joinpath(@__DIR__, "query_nation_ages.jl"))
-include(joinpath(@__DIR__, "query_state_ages.jl"))
-
-# Export all public functions
-export acs 
-export add_labels! 
-export add_row_totals 
-export calculate_dependency_ratio 
-export cleveland_dot_plot 
-export collect_state_age_dataframes 
-export collect_state_ages 
-export convert_decimals_to_int64! 
-export create_age_pyramid 
-export create_birth_table 
-export create_multiple_age_pyramids 
-export create_state_abbrev_map 
-export create_state_to_nation_map 
-export dms_to_decimal 
-export expand_state_codes 
-export fill_state 
-export filter_dataframes 
-export format_with_commas 
-export ga 
-export geo 
-export get_breaks 
-export get_childbearing_population 
-export get_colorado_basin_geoids 
-export get_dem_vote 
-export get_east_of_utah_geoids 
-export get_eastern_geoids 
-export get_geo_pop 
-export get_gop_vote 
-export get_nation_state 
-export get_nation_title 
-export get_slope_geoids 
-export get_southern_kansas_geoids 
-export get_state_gdp 
-export get_state_pop 
-export get_us_ages 
-export get_western_geoids 
-export gini 
-export inspect_shapefile_structure 
-export make_growth_table 
-export make_legend 
-export make_nation_state_gdp_df 
-export make_nation_state_pop_df 
-export make_postal_codes 
-export map_poly 
-export margins 
-export my_cut 
-export parse_geoms 
-export q 
-export query_all_nation_ages 
-export query_nation_ages 
-export query_state_ages 
-export r_get_acs_data 
-export RCall  # Add RCall to exports
-export Figure  # Add Figure to exports
-export CairoMakie  # Add CairoMakie to exports
-export Label
-export rename!  # Add rename! to exports
-export setup_r_environment  # Add setup_r_environment to exports
-export DataFrames
-export ByRow  # Add ByRow to exports
-export subset  # Add subset to exports
-export rcopy  # Add rcopy to exports
-export @R_str  # Add R string macro to exports
-export check_r_packages  # Add check_r_packages to exports
-export install_r_packages  # Add install_r_packages to exports
-
-# Define and export utility functions
-function valid_codes()
-    return sort(collect(VALID_POSTAL_CODES))
+# Initialize R environment during precompilation
+try
+    setup_r_environment()
+catch e
+    @warn "Failed to initialize R environment during precompilation. Please run setup_r_environment() manually."
 end
-export valid_codes
 
+# Export core types and functions
+export PostalCode, CensusQuery
+export valid_codes, is_valid_postal_code, get_state_name, get_postal_code
+export get_db_connection, initialize
 
-end # module
+# Export R setup functions
+export setup_r_environment, SETUP_COMPLETE, RSetup
+
+# Export data fetching and processing functions
+export build_census_query, fetch_census_data, get_census_data
+export add_margins, add_row_margins, add_col_margins
+export get_breaks
+export ga
+
+# Export visualization functions
+export cleveland_dot_plot, create_age_pyramid, create_birth_table
+export map_poly, geo, viz
+
+end # module Census

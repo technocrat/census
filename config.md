@@ -12,7 +12,7 @@ prepath 	= "/refounded/"
 # these files might be copied and, if markdown, processed by Franklin which
 # you might not want. Indicate directories by ending the name with a `/`.
 # Base files such as LICENSE.md and README.md are ignored by default.
-ignore = ["node_modules/"]
+ignore = ["data/", "/objs", ".cursor/",".cursorignore",".cursorrules",".git/",".paelladoc/",".specstory/",".vscode","test/","holding/",".DStore","src/","scripts/","docs/","notes/"]
 
 +++
 

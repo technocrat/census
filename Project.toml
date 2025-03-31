@@ -4,6 +4,7 @@ version = "0.1.0"
 
 [deps]
 ArchGDAL = "c9ce4bd3-c3d5-55b8-8973-c0e20141b8c3"
+ArgCheck = "dce04be8-c92d-5529-be00-80e4d2c0e197"
 BSON = "fbb218c0-5317-5bc6-957e-2ee96dd4b1f0"
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
@@ -38,9 +39,11 @@ RDatasets = "ce6b1742-4840-55fa-b093-852dadbb1d8b"
 RSetup = "d73537e9-64d3-4f49-9d69-a310b603d8ca"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
+StringEncodings = "69024149-9ee7-55f6-a4c4-859efe599b68"
 URIs = "5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4"
 WebIO = "0f1e0344-ec1d-5b48-a673-e5cf874b6c29"
 WellKnownGeometry = "0f680547-7be7-4555-8820-bb198eeb646b"
+XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

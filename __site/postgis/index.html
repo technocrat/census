@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/styles/github.min.css">
+   
+  <link rel="stylesheet" href="https://technocrat.site//refounded//css/franklin.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/tufte.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/latex.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/adjust.css"> <!-- sheet to overwrite some clashing styles -->
+<link rel="icon" href="https://technocrat.site//refounded//assets/favicon.png">
+
+   <title>America Refounded</title>  
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="layout">
+  <div id="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="/league/">Summary Table</a></li>
+      <li><a href="/common/">Commonalities</a></li>
+      <li><a href="/concord/">Concordia</a></li>
+      <li><a href="/metro/">Metropolis</a></li>
+      <li><a href="/factor/">Factoria</a></li>
+      <li><a href="/lonestar/">The Lone Star Republic</a></li>
+      <li><a href="/dixie/">New Dixie</a></li>
+      <li><a href="/cumber/">Cumberland</a></li>
+      <li><a href="/heart/">Heartlandia</a></li>
+      <li><a href="/desert/">Deseret</a></li>
+      <li><a href="/sonora/">New Sonora</a></li>
+      <li><a href="/pacific/">Pacifica</a></li>
+      <li><a href="/alter/">Alternatives</a></li>
+      <li><a href="/appendix/">Appendix</a></li>
+    </ul>
+  </div>
+<div id="main">
+    
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><p>Here are the key advantages of using PostgreSQL/PostGIS as a backend for choropleth maps in Julia:</p>
+<ol>
+<li><p>Performance and Scalability:</p>
+</li>
+</ol>
+<ul>
+<li><p>PostGIS&#39;s spatial indexing &#40;via GiST&#41; enables efficient querying of large geographic datasets</p>
+</li>
+<li><p>PostgreSQL can handle millions of records efficiently, making it suitable for detailed county-level analysis over time</p>
+</li>
+<li><p>Server-side geometry processing reduces data transfer and client-side computation</p>
+</li>
+</ul>
+<ol start="2">
+<li><p>Data Integrity and Management:</p>
+</li>
+</ol>
+<ul>
+<li><p>Database constraints ensure data consistency</p>
+</li>
+<li><p>Built-in spatial validation prevents invalid geometries</p>
+</li>
+<li><p>Version control and backup capabilities for your spatial data</p>
+</li>
+<li><p>Ability to integrate with other demographic or statistical data using SQL joins</p>
+</li>
+</ul>
+<ol start="3">
+<li><p>Advanced Spatial Operations:</p>
+</li>
+</ol>
+<ul>
+<li><p>Complex spatial queries &#40;intersections, unions, buffers&#41; can be performed at the database level</p>
+</li>
+<li><p>On-the-fly coordinate system transformations</p>
+</li>
+<li><p>Topology handling for maintaining relationships between adjacent counties</p>
+</li>
+<li><p>Geometry simplification for different zoom levels</p>
+</li>
+</ul>
+<ol start="4">
+<li><p>Integration Benefits:</p>
+</li>
+</ol>
+<ul>
+<li><p>Julia&#39;s LibPQ.jl provides native PostgreSQL connectivity</p>
+</li>
+<li><p>Can combine with other Julia packages like DataFrames.jl for analysis</p>
+</li>
+<li><p>Multiple applications/users can access the same data source</p>
+</li>
+<li><p>Easy integration with web services if needed</p>
+</li>
+</ul>
+<ol start="5">
+<li><p>Cost and Memory Efficiency:</p>
+</li>
+</ol>
+<ul>
+<li><p>Only load the geometries needed for specific visualizations</p>
+</li>
+<li><p>Avoid loading entire shapefiles into memory</p>
+</li>
+<li><p>Server handles heavy computational tasks</p>
+</li>
+<li><p>Open-source solution with no licensing costs</p>
+</li>
+</ul>
+<ol start="6">
+<li><p>Data Updates and Maintenance:</p>
+</li>
+</ol>
+<ul>
+<li><p>Easier to update specific regions or attributes without replacing entire files</p>
+</li>
+<li><p>Can track changes over time using temporal tables</p>
+</li>
+<li><p>Simple to add new data columns or related datasets</p>
+</li>
+</ul>
+<p>The main trade-off is the initial setup complexity compared to working directly with shapefiles, but the benefits typically outweigh this for any serious analytical work or when dealing with frequently updated data.</p>
+<h1 id="setting_up_postgresqlpostgis_for_census_data_analysis_with_julia"><a href="#setting_up_postgresqlpostgis_for_census_data_analysis_with_julia" class="header-anchor">Setting Up PostgreSQL/PostGIS for Census Data Analysis with Julia</a></h1>
+<p>This guide walks through setting up a spatial database using PostgreSQL and PostGIS to store US Census county boundary data, which can then be used to create choropleth maps in Julia.</p>
+<h2 id="prerequisites_installation"><a href="#prerequisites_installation" class="header-anchor">Prerequisites Installation</a></h2>
+<ol>
+<li><p>Install PostgreSQL:</p>
+</li>
+</ol>
+<p><pre>bash
+
+# Ubuntu/Debian
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+</pre>
+# macOS with Homebrew
+&lt;pre&gt;bash brew install postgresql &lt;/pre&gt;</p>
+<ol start="2">
+<li><p>Install PostGIS extension:</p>
+</li>
+</ol>
+<pre>bash
+
+# Ubuntu/Debian
+sudo apt install postgis
+
+# macOS
+brew install postgis
+</pre>
+<h2 id="database_setup"><a href="#database_setup" class="header-anchor">Database Setup</a></h2>
+<ol>
+<li><p>Create a new database:</p>
+</li>
+</ol>
+<pre><code class="language-sql">createdb census_spatial</code></pre>
+<ol start="2">
+<li><p>Enable PostGIS extension:</p>
+</li>
+</ol>
+<pre><code class="language-sql">psql -d census_spatial
+CREATE EXTENSION postgis;
+CREATE EXTENSION postgis_topology;</code></pre>
+<ol start="3">
+<li><p>Create table for county boundaries:</p>
+</li>
+</ol>
+<pre><code class="language-sql">CREATE TABLE county_boundaries &#40;
+    geoid VARCHAR&#40;5&#41; PRIMARY KEY,
+    name VARCHAR&#40;100&#41;,
+    state_fips CHAR&#40;2&#41;,
+    county_fips CHAR&#40;3&#41;,
+    geom geometry&#40;MultiPolygon, 4269&#41;
+&#41;;</code></pre>
+<h2 id="loading_census_data"><a href="#loading_census_data" class="header-anchor">Loading Census Data</a></h2>
+<ol>
+<li><p>Download county boundary files:</p>
+</li>
+</ol>
+<pre><code class="language-bash">wget https://www2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip
+unzip tl_2023_us_county.zip</code></pre>
+<ol start="2">
+<li><p>Load shapefile using shp2pgsql:</p>
+</li>
+</ol>
+<pre><code class="language-bash">shp2pgsql -s 4269 -I tl_2023_us_county.shp county_boundaries | psql -d census_spatial</code></pre>
+<h2 id="julia_setup"><a href="#julia_setup" class="header-anchor">Julia Setup</a></h2>
+<ol>
+<li><p>Install required Julia packages:</p>
+</li>
+</ol>
+<pre><code class="language-julia">using Pkg
+Pkg.add&#40;&#91;&quot;LibPQ&quot;, &quot;DataFrames&quot;, &quot;GeoInterface&quot;, &quot;Plots&quot;&#93;&#41;</code></pre>
+<ol start="2">
+<li><p>Basic connection code:</p>
+</li>
+</ol>
+<pre><code class="language-julia">using LibPQ, DataFrames
+
+conn &#61; LibPQ.Connection&#40;&quot;dbname&#61;census_spatial&quot;&#41;
+
+# Query example
+counties &#61; execute&#40;conn, &quot;&quot;&quot;
+    SELECT geoid, name, ST_AsGeoJSON&#40;geom&#41; as geometry 
+    FROM county_boundaries;
+&quot;&quot;&quot;&#41; |&gt; DataFrame</code></pre>
+<h2 id="creating_choropleth_maps"><a href="#creating_choropleth_maps" class="header-anchor">Creating Choropleth Maps</a></h2>
+<p>Here&#39;s a basic example of creating a choropleth map using the data:</p>
+<pre><code class="language-julia">using Plots
+using JSON3
+
+# Assuming you have a DataFrame &#39;data&#39; with GEOID and values to plot
+function create_choropleth&#40;data, geom_df&#41;
+    # Merge geometry with data
+    merged &#61; leftjoin&#40;geom_df, data, on&#61;:geoid&#41;
+    
+    # Parse GeoJSON and create plot
+    plot&#40;&#41;
+    for row in eachrow&#40;merged&#41;
+        geom &#61; JSON3.read&#40;row.geometry&#41;
+        coords &#61; geom&#91;&quot;coordinates&quot;&#93;&#91;1&#93;&#91;1&#93;  # Assuming simple polygons
+        x &#61; &#91;p&#91;1&#93; for p in coords&#93;
+        y &#61; &#91;p&#91;2&#93; for p in coords&#93;
+        plot&#33;&#40;x, y, fill&#61;&#40;true, row.value&#41;, leg&#61;false&#41;
+    end
+    current&#40;&#41;
+end</code></pre>
+<h2 id="performance_optimization"><a href="#performance_optimization" class="header-anchor">Performance Optimization</a></h2>
+<p>Add spatial indices for better query performance:</p>
+<pre><code class="language-sql">CREATE INDEX county_boundaries_geom_idx 
+    ON county_boundaries USING GIST &#40;geom&#41;;</code></pre>
+<p>Consider adding additional indices based on your query patterns:</p>
+<pre><code class="language-sql">CREATE INDEX county_boundaries_geoid_idx 
+    ON county_boundaries &#40;geoid&#41;;</code></pre>
+<h2 id="maintenance"><a href="#maintenance" class="header-anchor">Maintenance</a></h2>
+<p>Regular maintenance tasks to keep the database performing well:</p>
+<pre><code class="language-sql">-- Analyze table statistics
+ANALYZE county_boundaries;
+
+-- Vacuum to reclaim space and update statistics
+VACUUM ANALYZE county_boundaries;</code></pre>
+<h2 id="common_spatial_queries"><a href="#common_spatial_queries" class="header-anchor">Common Spatial Queries</a></h2>
+<p>Useful spatial queries for analysis:</p>
+<pre><code class="language-sql">-- Find adjacent counties
+SELECT b.geoid, b.name 
+FROM county_boundaries a 
+JOIN county_boundaries b 
+    ON ST_Touches&#40;a.geom, b.geom&#41; 
+WHERE a.geoid &#61; &#39;06037&#39;;  -- Los Angeles County
+
+-- Calculate county areas
+SELECT geoid, name, 
+    ST_Area&#40;ST_Transform&#40;geom, 3857&#41;&#41;/1000000 as area_km2 
+FROM county_boundaries;
+
+-- Simplify geometries for faster rendering
+SELECT geoid, name, 
+    ST_SimplifyPreserveTopology&#40;geom, 0.01&#41; as geom_simplified 
+FROM county_boundaries;</code></pre>
+<p>Remember to adjust the tolerance values in simplification and coordinate systems based on your specific needs and accuracy requirements.</p>
+<h1 id="setting_up_postgis_on_macos_and_ubuntu"><a href="#setting_up_postgis_on_macos_and_ubuntu" class="header-anchor">Setting up PostGIS on macOS and Ubuntu</a></h1>
+<p>PostGIS extends PostgreSQL with geographic objects and functions, allowing you to run location queries in SQL. Here&#39;s how to set up PostGIS on both macOS and Ubuntu systems.</p>
+<h2 id="macos_setup"><a href="#macos_setup" class="header-anchor">macOS Setup</a></h2>
+<h3 id="using_homebrew_recommended"><a href="#using_homebrew_recommended" class="header-anchor">Using Homebrew &#40;Recommended&#41;</a></h3>
+<ol>
+<li><p><strong>Install PostgreSQL with PostGIS</strong>:</p>
+</li>
+</ol>
+<pre><code class="language-bash">brew install postgresql@15
+   brew install postgis</code></pre>
+<ol start="2">
+<li><p><strong>Start PostgreSQL service</strong> &#40;if not already running&#41;:</p>
+</li>
+</ol>
+<pre><code class="language-bash">brew services start postgresql@15</code></pre>
+<ol start="3">
+<li><p><strong>Create a spatially-enabled database</strong>:</p>
+</li>
+</ol>
+<pre><code class="language-bash"># Connect to PostgreSQL
+   psql postgres
+   
+   # Create a new database
+   CREATE DATABASE gisdb;
+   
+   # Connect to the new database
+   \c gisdb
+   
+   # Add PostGIS extension
+   CREATE EXTENSION postgis;
+   CREATE EXTENSION postgis_topology;</code></pre>
+<ol start="4">
+<li><p><strong>Verify PostGIS installation</strong>:</p>
+</li>
+</ol>
+<pre><code class="language-sql">SELECT PostGIS_version&#40;&#41;;</code></pre>
+<h3 id="using_postgresqlapp"><a href="#using_postgresqlapp" class="header-anchor">Using PostgreSQL.app</a></h3>
+<p>PostgreSQL.app actually comes with PostGIS pre-installed, which makes this method even simpler:</p>
+<ol>
+<li><p>Download and install PostgreSQL.app from <a href="https://postgresapp.com/">https://postgresapp.com/</a></p>
+</li>
+<li><p>Open the app and initialize a server</p>
+</li>
+<li><p>Connect to a database and enable PostGIS:</p>
+</li>
+</ol>
+<pre><code class="language-sql">CREATE EXTENSION postgis;
+   CREATE EXTENSION postgis_topology;</code></pre>
+<h2 id="ubuntu_setup"><a href="#ubuntu_setup" class="header-anchor">Ubuntu Setup</a></h2>
+<ol>
+<li><p><strong>Install PostgreSQL and PostGIS packages</strong>:</p>
+</li>
+</ol>
+<pre><code class="language-bash">sudo apt update
+   sudo apt install postgresql postgresql-contrib
+   sudo apt install postgis postgresql-15-postgis-3</code></pre>
+<p>Note: The version numbers may vary. Use <code>apt search postgresql postgis</code> to find the available versions.</p>
+<ol start="2">
+<li><p><strong>Create a spatially-enabled database</strong>:</p>
+</li>
+</ol>
+<pre><code class="language-bash"># Connect as postgres user
+   sudo -u postgres psql
+   
+   # Create a new database
+   CREATE DATABASE gisdb;
+   
+   # Connect to the new database
+   \c gisdb
+   
+   # Add PostGIS extensions
+   CREATE EXTENSION postgis;
+   CREATE EXTENSION postgis_topology;</code></pre>
+<ol start="3">
+<li><p><strong>Verify installation</strong>:</p>
+</li>
+</ol>
+<pre><code class="language-sql">SELECT PostGIS_full_version&#40;&#41;;</code></pre>
+<h2 id="common_postgis_operations"><a href="#common_postgis_operations" class="header-anchor">Common PostGIS Operations</a></h2>
+<p>Once you have PostGIS set up, here are some basic operations to test your installation:</p>
+<h3 id="creating_a_spatial_table"><a href="#creating_a_spatial_table" class="header-anchor">Creating a Spatial Table</a></h3>
+<pre><code class="language-sql">CREATE TABLE points_of_interest &#40;
+    id SERIAL PRIMARY KEY,
+    name VARCHAR&#40;100&#41;,
+    category VARCHAR&#40;50&#41;,
+    geom GEOMETRY&#40;Point, 4326&#41;
+&#41;;</code></pre>
+<h3 id="inserting_spatial_data"><a href="#inserting_spatial_data" class="header-anchor">Inserting Spatial Data</a></h3>
+<pre><code class="language-sql">-- Add a point using longitude/latitude &#40;SRID 4326 is WGS84&#41;
+INSERT INTO points_of_interest &#40;name, category, geom&#41;
+VALUES &#40;&#39;Central Park&#39;, &#39;Park&#39;, ST_SetSRID&#40;ST_MakePoint&#40;-73.965, 40.782&#41;, 4326&#41;&#41;;</code></pre>
+<h3 id="querying_spatial_data"><a href="#querying_spatial_data" class="header-anchor">Querying Spatial Data</a></h3>
+<pre><code class="language-sql">-- Find all points within 5km of a location
+SELECT name, category
+FROM points_of_interest
+WHERE ST_DWithin&#40;
+    geom,
+    ST_SetSRID&#40;ST_MakePoint&#40;-73.98, 40.76&#41;, 4326&#41;::geography,
+    5000
+&#41;;</code></pre>
+<h2 id="connecting_from_julia"><a href="#connecting_from_julia" class="header-anchor">Connecting from Julia</a></h2>
+<p>To work with PostGIS from Julia, you can use the LibPQ.jl package along with GeoInterface.jl:</p>
+<pre><code class="language-julia">using LibPQ
+using GeoInterface
+using GeoFormatTypes
+
+# Connect to the database
+conn &#61; LibPQ.Connection&#40;&quot;host&#61;localhost dbname&#61;gisdb user&#61;myuser password&#61;mypassword&quot;&#41;
+
+# Query spatial data
+result &#61; execute&#40;conn, &quot;SELECT name, category, ST_AsGeoJSON&#40;geom&#41; AS geom FROM points_of_interest;&quot;&#41;
+
+# Process spatial results
+for row in result
+    name &#61; row&#91;&quot;name&quot;&#93;
+    category &#61; row&#91;&quot;category&quot;&#93;
+    
+    # Parse the GeoJSON geometry
+    geom_json &#61; row&#91;&quot;geom&quot;&#93;
+    geom &#61; GeoFormatTypes.GeoJSON&#40;geom_json&#41;
+    
+    # Now you can work with the geometry
+    println&#40;&quot;&#36;name &#40;&#36;category&#41; at coordinates: &#36;&#40;GeoInterface.coordinates&#40;geom&#41;&#41;&quot;&#41;
+end
+
+# Insert spatial data
+point_query &#61; &quot;&quot;&quot;
+INSERT INTO points_of_interest &#40;name, category, geom&#41;
+VALUES &#40;\&#36;1, \&#36;2, ST_SetSRID&#40;ST_MakePoint&#40;\&#36;3, \&#36;4&#41;, 4326&#41;&#41;
+&quot;&quot;&quot;
+execute&#40;conn, point_query, &#91;&quot;Empire State Building&quot;, &quot;Building&quot;, -73.9857, 40.7484&#93;&#41;
+
+# Close connection
+close&#40;conn&#41;</code></pre>
+<h2 id="postgis_maintenance"><a href="#postgis_maintenance" class="header-anchor">PostGIS Maintenance</a></h2>
+<h3 id="updating_statistics"><a href="#updating_statistics" class="header-anchor">Updating Statistics</a></h3>
+<p>To ensure the query planner makes good decisions with spatial data:</p>
+<pre><code class="language-sql">VACUUM ANALYZE points_of_interest;</code></pre>
+<h3 id="creating_spatial_indexes"><a href="#creating_spatial_indexes" class="header-anchor">Creating Spatial Indexes</a></h3>
+<p>For faster spatial queries:</p>
+<pre><code class="language-sql">CREATE INDEX points_of_interest_geom_idx
+ON points_of_interest
+USING GIST &#40;geom&#41;;</code></pre>
+<h2 id="troubleshooting_tips"><a href="#troubleshooting_tips" class="header-anchor">Troubleshooting Tips</a></h2>
+<ol>
+<li><p><strong>Extension creation fails</strong>: Ensure you have the correct PostGIS package installed for your PostgreSQL version</p>
+</li>
+<li><p><strong>Slow spatial queries</strong>: Check that you have spatial indexes on your geometry columns</p>
+</li>
+<li><p><strong>&quot;Invalid SRID&quot; errors</strong>: Make sure you&#39;re specifying the correct coordinate reference system</p>
+</li>
+<li><p><strong>Transformation errors</strong>: You may need to install additional packages:</p>
+</li>
+</ol>
+<pre><code class="language-bash"># On Ubuntu
+   sudo apt install proj-bin</code></pre>
+<p>By following these steps, you&#39;ll have a fully functioning PostgreSQL database with spatial capabilities through PostGIS, ready for developing location-aware applications. PostGIS provides hundreds of spatial functions that can be used for complex GIS analysis directly within your database.</p>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg"  
+            style="width:44px;height:15px;">
+    </a>
+     Richard Careaga. Last modified: March 31, 2025.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+        </div> <!-- end of id=main -->
+    </div> <!-- end of id=layout -->
+    
+    
+        <script src="/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
+
+    
+  </body>
+</html>

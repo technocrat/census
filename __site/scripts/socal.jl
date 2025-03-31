@@ -21,13 +21,16 @@ us.parsed_geoms = parse_geoms(us)
 df = subset(us, :stusps => ByRow(==("CA")))
 df = subset(df, :geoid => ByRow(x -> x ∈ socal))
 
-fig = Figure(size=(1200, 800), fontsize=22)
-title = Label(fig[0, 2], "Erie", fontsize=20)
-ga1 = ga(1, 1, "Population")
-poly1 = map_poly(df,ga1, "pop")
-add_labels!(df, ga1, :geoid, fontsize=6)
+dest = """
++proj=aea +lat_1=35 +lat_2=45 +lat_0=40 +lon_0=-120 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs
+"""
+# Create figure
+fig = Figure(size=(2400, 1600), fontsize=22)
+
+map_poly(df, "Midlands", dest, fig)
+# Display the figure
+
 display(fig)
-
-
+              
 
 

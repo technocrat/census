@@ -5,9 +5,10 @@
 :root {
   --block-background: hsl(0, 0%, 94%);
   --output-background: hsl(0, 0%, 98%);
-  --small: 6px;  /* Reduced from 14px */
-  --normal: 16px; /* Reduced from 19px */
+  --small: 14px;  /* Increased from 6px to be more readable */
+  --normal: 16px;
   --text-color: hsv(0, 0%, 20%);
+  --code-background: #f0f0f0;
 }
 
 /* ==================================================================
@@ -320,12 +321,31 @@ body { counter-reset: eqnum; }
     CODE & HIGHLIGHT.JS
 ================================================================== */
 
-code {
-  font-family:  'IBM Plex Mono', 'Courier New', 'Courier', monospace;
-  background-color: var(--block-background);
-  padding: 0.1em 0.2em;
-  border-radius: 2px;
-  font-size: var(--small);
+.franklin-content pre {
+  background-color: var(--code-background);
+  padding: 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: var(--normal);
+  line-height: 1.5;
+  margin: 1em 0;
+}
+
+.franklin-content code {
+  font-family: 'IBM Plex Mono', 'Courier New', 'Courier', monospace;
+  background-color: var(--code-background);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: var(--normal);
+  color: #333;
+  word-break: break-word;
+}
+
+.franklin-content pre code {
+  background-color: transparent;  /* Remove nested background */
+  padding: 0;  /* Remove nested padding */
+  border-radius: 0;  /* Remove nested border radius */
+  font-size: inherit;  /* Inherit font size from pre */
 }
 
 .hljs {

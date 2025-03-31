@@ -205,3 +205,194 @@ FROM county_boundaries;
 ```
 
 Remember to adjust the tolerance values in simplification and coordinate systems based on your specific needs and accuracy requirements.
+
+# Setting up PostGIS on macOS and Ubuntu
+
+PostGIS extends PostgreSQL with geographic objects and functions, allowing you to run location queries in SQL. Here's how to set up PostGIS on both macOS and Ubuntu systems.
+
+## macOS Setup
+
+### Using Homebrew (Recommended)
+
+1. **Install PostgreSQL with PostGIS**:
+   ```bash
+   brew install postgresql@15
+   brew install postgis
+   ```
+
+2. **Start PostgreSQL service** (if not already running):
+   ```bash
+   brew services start postgresql@15
+   ```
+
+3. **Create a spatially-enabled database**:
+   ```bash
+   # Connect to PostgreSQL
+   psql postgres
+   
+   # Create a new database
+   CREATE DATABASE gisdb;
+   
+   # Connect to the new database
+   \c gisdb
+   
+   # Add PostGIS extension
+   CREATE EXTENSION postgis;
+   CREATE EXTENSION postgis_topology;
+   ```
+
+4. **Verify PostGIS installation**:
+   ```sql
+   SELECT PostGIS_version();
+   ```
+
+### Using PostgreSQL.app
+
+PostgreSQL.app actually comes with PostGIS pre-installed, which makes this method even simpler:
+
+1. Download and install PostgreSQL.app from [https://postgresapp.com/](https://postgresapp.com/)
+2. Open the app and initialize a server
+3. Connect to a database and enable PostGIS:
+   ```sql
+   CREATE EXTENSION postgis;
+   CREATE EXTENSION postgis_topology;
+   ```
+
+## Ubuntu Setup
+
+1. **Install PostgreSQL and PostGIS packages**:
+   ```bash
+   sudo apt update
+   sudo apt install postgresql postgresql-contrib
+   sudo apt install postgis postgresql-15-postgis-3
+   ```
+   Note: The version numbers may vary. Use `apt search postgresql postgis` to find the available versions.
+
+2. **Create a spatially-enabled database**:
+   ```bash
+   # Connect as postgres user
+   sudo -u postgres psql
+   
+   # Create a new database
+   CREATE DATABASE gisdb;
+   
+   # Connect to the new database
+   \c gisdb
+   
+   # Add PostGIS extensions
+   CREATE EXTENSION postgis;
+   CREATE EXTENSION postgis_topology;
+   ```
+
+3. **Verify installation**:
+   ```sql
+   SELECT PostGIS_full_version();
+   ```
+
+## Common PostGIS Operations
+
+Once you have PostGIS set up, here are some basic operations to test your installation:
+
+### Creating a Spatial Table
+
+```sql
+CREATE TABLE points_of_interest (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    category VARCHAR(50),
+    geom GEOMETRY(Point, 4326)
+);
+```
+
+### Inserting Spatial Data
+
+```sql
+-- Add a point using longitude/latitude (SRID 4326 is WGS84)
+INSERT INTO points_of_interest (name, category, geom)
+VALUES ('Central Park', 'Park', ST_SetSRID(ST_MakePoint(-73.965, 40.782), 4326));
+```
+
+### Querying Spatial Data
+
+```sql
+-- Find all points within 5km of a location
+SELECT name, category
+FROM points_of_interest
+WHERE ST_DWithin(
+    geom,
+    ST_SetSRID(ST_MakePoint(-73.98, 40.76), 4326)::geography,
+    5000
+);
+```
+
+## Connecting from Julia
+
+To work with PostGIS from Julia, you can use the LibPQ.jl package along with GeoInterface.jl:
+
+```julia
+using LibPQ
+using GeoInterface
+using GeoFormatTypes
+
+# Connect to the database
+conn = LibPQ.Connection("host=localhost dbname=gisdb user=myuser password=mypassword")
+
+# Query spatial data
+result = execute(conn, "SELECT name, category, ST_AsGeoJSON(geom) AS geom FROM points_of_interest;")
+
+# Process spatial results
+for row in result
+    name = row["name"]
+    category = row["category"]
+    
+    # Parse the GeoJSON geometry
+    geom_json = row["geom"]
+    geom = GeoFormatTypes.GeoJSON(geom_json)
+    
+    # Now you can work with the geometry
+    println("$name ($category) at coordinates: $(GeoInterface.coordinates(geom))")
+end
+
+# Insert spatial data
+point_query = """
+INSERT INTO points_of_interest (name, category, geom)
+VALUES (\$1, \$2, ST_SetSRID(ST_MakePoint(\$3, \$4), 4326))
+"""
+execute(conn, point_query, ["Empire State Building", "Building", -73.9857, 40.7484])
+
+# Close connection
+close(conn)
+```
+
+## PostGIS Maintenance
+
+### Updating Statistics
+
+To ensure the query planner makes good decisions with spatial data:
+
+```sql
+VACUUM ANALYZE points_of_interest;
+```
+
+### Creating Spatial Indexes
+
+For faster spatial queries:
+
+```sql
+CREATE INDEX points_of_interest_geom_idx
+ON points_of_interest
+USING GIST (geom);
+```
+
+## Troubleshooting Tips
+
+1. **Extension creation fails**: Ensure you have the correct PostGIS package installed for your PostgreSQL version
+2. **Slow spatial queries**: Check that you have spatial indexes on your geometry columns
+3. **"Invalid SRID" errors**: Make sure you're specifying the correct coordinate reference system
+4. **Transformation errors**: You may need to install additional packages:
+   ```bash
+   # On Ubuntu
+   sudo apt install proj-bin
+   ```
+
+By following these steps, you'll have a fully functioning PostgreSQL database with spatial capabilities through PostGIS, ready for developing location-aware applications. PostGIS provides hundreds of spatial functions that can be used for complex GIS analysis directly within your database.

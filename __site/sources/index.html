@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  <link rel="stylesheet" href="https://technocrat.site//refounded//css/franklin.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/tufte.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/latex.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/adjust.css"> <!-- sheet to overwrite some clashing styles -->
+<link rel="icon" href="https://technocrat.site//refounded//assets/favicon.png">
+
+   <title>America Refounded</title>  
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="layout">
+  <div id="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="/league/">Summary Table</a></li>
+      <li><a href="/common/">Commonalities</a></li>
+      <li><a href="/concord/">Concordia</a></li>
+      <li><a href="/metro/">Metropolis</a></li>
+      <li><a href="/factor/">Factoria</a></li>
+      <li><a href="/lonestar/">The Lone Star Republic</a></li>
+      <li><a href="/dixie/">New Dixie</a></li>
+      <li><a href="/cumber/">Cumberland</a></li>
+      <li><a href="/heart/">Heartlandia</a></li>
+      <li><a href="/desert/">Deseret</a></li>
+      <li><a href="/sonora/">New Sonora</a></li>
+      <li><a href="/pacific/">Pacifica</a></li>
+      <li><a href="/alter/">Alternatives</a></li>
+      <li><a href="/appendix/">Appendix</a></li>
+    </ul>
+  </div>
+<div id="main">
+    
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="sources"><a href="#sources" class="header-anchor">Sources</a></h1>
+<h2 id="state_and_county_boundry_files"><a href="#state_and_county_boundry_files" class="header-anchor">State and County Boundry Files</a></h2>
+<p><a href="https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year&#61;2024&amp;layergroup&#61;Counties&#43;&#37;28and&#43;equivalent&#37;29">Census National County Boundary Files</a></p>
+<p>This is a zipped shapefile that contains the boundaries of all the counties and equivalent entities in the United States. It is saved to the <code>data</code> directory after unzipping.  </p>
+<h2 id="gdp"><a href="#gdp" class="header-anchor">GDP</a></h2>
+<p><a href="https://www.bea.gov/sites/default/files/2024-12/lagdp1224.xlsx">GDP by County, Metro, and Other Areas</a></p>
+<p>This is a spreadsheet that is formatted as a presentation table, so some preprocessing is needed to get the data into a format that can be used for analysis.</p>
+<ol>
+<li><p>Download the spreadsheet</p>
+</li>
+<li><p>Open it in Excel</p>
+</li>
+<li><p>Remove rows 1-5</p>
+</li>
+<li><p>Use row six to create column headers—label Column A as &quot;county&quot; and Column E as &quot;GDP&quot; with the other columns as &quot;drop&quot;</p>
+</li>
+<li><p>Select Column E and format it as a number without commas</p>
+</li>
+<li><p>Export to CSV to the <code>obj</code> directory. By convention, we use the <code>data</code> directory for data that is received from others and the <code>obj</code> directory for data that is created by the scripts.</p>
+</li>
+<li><p>Use the <code>create_gdp_database.jl</code> script to create a database table from the CSV file.</p>
+</li>
+</ol>
+<h2 id="connecticut_planning_region_gdp"><a href="#connecticut_planning_region_gdp" class="header-anchor">Connecticut Planning Region GDP</a></h2>
+<p><a href="https://mcdc.missouri.edu/cgi-bin/broker?_PROGRAM&#61;apps.geocorr2022.sas&amp;_SERVICE&#61;MCDC_long&amp;_debug&#61;0&amp;state&#61;Ct09&amp;g1_&#61;county&amp;g2_&#61;ctregion&amp;wtvar&#61;pop20&amp;nozerob&#61;1&amp;fileout&#61;1&amp;filefmt&#61;csv&amp;lstfmt&#61;html&amp;title&#61;&amp;counties&#61;&amp;metros&#61;&amp;places&#61;&amp;oropt&#61;&amp;latitude&#61;&amp;longitude&#61;&amp;distance&#61;&amp;kiloms&#61;0&amp;locname&#61;">Connecticut Crosswalk File</a></p>
+<p>This file apportions the state&#39;s county-level population to the Connecticut planning regions and is used to create the <code>ct_gdp.csv</code> file in the <code>create_gdp_database.jl</code> script. </p>
+<p><a href="https://coloradoriverbasin-lincolninstitute.hub.arcgis.com/datasets/a922a3809058416b8260813e822f8980_0/explore?location&#61;36.663436&#37;2C-110.573590&#37;2C5.51">Colorado Basin boundaries</a> was used to identify counties lying within the watershed.</p>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg"  
+            style="width:44px;height:15px;">
+    </a>
+     Richard Careaga. Last modified: March 31, 2025.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+        </div> <!-- end of id=main -->
+    </div> <!-- end of id=layout -->
+    
+    
+  </body>
+</html>

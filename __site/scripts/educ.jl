@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: MIT
+# update SRC_DIR and DATA_DIR to reflect current project usage
 using CSV, DataFrames, Census
 
 include(joinpath(SRC_DIR, "setup.jl"))

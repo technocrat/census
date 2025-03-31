@@ -1,0 +1,74 @@
+
+## PROJECT OVERVIEW
+This project analyzes alternatives for nation states to replace the existing United States, considering population characteristics, economics, politics, history, and natural geography. The output will be an HTML publication using Franklin.jl.  The goal is to complete a comprehensive Julia package. The primary database used is PostgreSQL.
+
+## CODE STYLE
+Functional programming approach is preferred.  Prioritize readability over performance.  Fully qualify all function and type names to improve clarity, maintainability, and prevent namespace conflicts.  Use `include(joinpath(@__DIR__, "filename.jl"))` for consistent file inclusion within modules.
+
+## FOLDER ORGANIZATION
+(Folder organization details are not provided in the new interactions and should be added separately if needed).
+
+## TECH STACK
+Julia, R, PostgreSQL, Franklin.jl, Documenter.jl (v1.9.0), RCall, LibGEOS, WellKnownGeometry, CairoMakie, GeoMakie, GeoInterface
+
+## PROJECT-SPECIFIC STANDARDS
+(Project-specific standards details are not provided in the new interactions and should be added separately if needed).  Files should be consistently marked with "SPDX-License-Identifier: MIT" where appropriate.  This will be implemented in all files eventually.
+
+## WORKFLOW & RELEASE RULES
+(Workflow and release rules details are not provided in the new interactions and should be added separately if needed).  A new branch, `consolidated-processing`, has been created and pushed to GitHub for managing updates.  Pull requests should be used for merging changes into the main branch. Deprecated files should be moved to a `holding` directory.  If a file is marked as deprecated without further comment, it should be moved to the `holding` directory.  Files marked as deprecated should be moved to the `holding` directory.  The process for handling deprecated files has been clarified: files marked as deprecated without further comment should be moved to the `holding` directory.
+
+## REFERENCE EXAMPLES
+(Reference examples details are not provided in the new interactions and should be added separately if needed).
+
+## PROJECT DOCUMENTATION & CONTEXT SYSTEM
+Documentation should be included with code suggestions.  Project context: Analysis of alternatives for nation states to replace the existing United States.  Docstrings will be added to functions in the `src` directory using Julia's documentation conventions in anticipation of using Documenter.jl.  Docstrings have been added to core functions and modules in the `src` directory following Julia's documentation conventions.  This anticipates the future use of Documenter.jl for generating project documentation.  Docstrings have been added to the following functions: `get_nation_state`, `initialize`, `get_us_ages`, `get_dem_vote`, `get_gop_vote`, `get_childbearing_population`, `get_state_pop`, `make_nation_state_pop_df`, `make_nation_state_gdp_df`, and `map_poly`.  These docstrings follow Julia's documentation conventions and include function signatures, descriptions, argument and return types, examples, and notes.  All functions in `src/acs.jl`, `src/geo.jl`, `src/ga.jl`, and `src/margins.jl` now have comprehensive docstrings following Julia's conventions.  These include function signatures, descriptions, argument and return types, examples, and notes.  All functions within the `src` directory now have comprehensive docstrings.  Documenter.jl has been added as a project dependency to facilitate documentation generation. A `docs` directory has been created with a `make.jl` file for building documentation using Documenter.jl.  Tutorials on getting started, population analysis, and economic analysis have been added to the documentation.  The documentation includes API reference sections for core functions, data processing, and visualization. Version 1.9.0 of Documenter.jl is now used.
+
+## DEBUGGING
+(Debugging details are not provided in the new interactions and should be added separately if needed).  A common error is using unqualified variable names, such as `concord`, which should be qualified as `Census.concord`. Another common error is a simple typo in function names, such as `get_ne_missouri_counties` which should be `get_ne_missouri_geoids`.  A further common error is incorrect relative paths when including files within modules; use `include(joinpath(@__DIR__, "filename.jl"))` to ensure correct resolution.  Ensure that all modules properly include necessary files using `include(joinpath(@__DIR__, "filename.jl"))` to avoid path resolution issues.  DrWatson is no longer used; direct pathing should be used instead.
+
+
+## FINAL DOs AND DON'Ts
+*   No human persona, first/second person acceptable.
+*   No apologies or congratulations.
+*   Thoughtful, nuanced, factual answers.
+*   Follow requirements precisely, ask questions when ambiguous.
+*   Step-by-step reasoning and planning.
+*   Confirm before writing code.
+*   Write correct, bug-free, secure, performant code.
+*   Prioritize readability over performance.
+*   Complete implementation of all functionality.
+*   No TODOs or placeholders.
+*   Complete code with required imports.
+*   Concise prose.
+*   Admit uncertainty.
+*   Suggest codebase improvements for package uniformity.
+
+## MCP RULES
+**Rules:**
+* Explore thoroughly: Avoid rushing to conclusions and keep investigating until a natural solution emerges.
+* Think deeply: Engage in extensive contemplation, breaking complex thoughts into simple steps.
+* Express naturally: Use conversational internal monologue with short, simple sentences that mirror natural thought patterns.
+* Embrace uncertainty: Acknowledge doubts, revise previous thoughts, and explore multiple possibilities.
+* Show your work: Demonstrate work-in-progress thinking, including dead ends and backtracking.
+* Persist and review: Value thorough exploration over quick resolution, and implement multi-stage reviews for all solutions.
+* Ensure compatibility: When changing patterns or functions, update associated files to maintain consistency.
+* Learn and improve: Monitor solution effectiveness, identify patterns, and create new rules based on insights.
+* Manage memory: Start tasks by retrieving relevant information and update the knowledge base after each task.
+* Seek feedback: Evaluate solutions against quality criteria and iterate based on user or expert input.
+
+**Message Steps:**
+* Read/Update MCP Memory
+* Update MCP Memory with what was learned during learning phase
+* Update MCP Memory with any changes made
+
+**Conversation History:**
+Location: /.specstory/history/
+Enabled: true
+
+**Goals:**
+* Reach conclusions through thorough exploration
+* Let conclusions emerge naturally from exhaustive contemplation
+* Confidently state impossibility when tasks cannot be completed
+* Strive for continuous improvement through self-learning
+* Maintain rigorous review processes
+* Practice effective memory management

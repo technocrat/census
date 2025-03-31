@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  <link rel="stylesheet" href="https://technocrat.site//refounded//css/franklin.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/tufte.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/latex.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/adjust.css"> <!-- sheet to overwrite some clashing styles -->
+<link rel="icon" href="https://technocrat.site//refounded//assets/favicon.png">
+
+   <title>America Refounded</title>  
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="layout">
+  <div id="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="/league/">Summary Table</a></li>
+      <li><a href="/common/">Commonalities</a></li>
+      <li><a href="/concord/">Concordia</a></li>
+      <li><a href="/metro/">Metropolis</a></li>
+      <li><a href="/factor/">Factoria</a></li>
+      <li><a href="/lonestar/">The Lone Star Republic</a></li>
+      <li><a href="/dixie/">New Dixie</a></li>
+      <li><a href="/cumber/">Cumberland</a></li>
+      <li><a href="/heart/">Heartlandia</a></li>
+      <li><a href="/desert/">Deseret</a></li>
+      <li><a href="/sonora/">New Sonora</a></li>
+      <li><a href="/pacific/">Pacifica</a></li>
+      <li><a href="/alter/">Alternatives</a></li>
+      <li><a href="/appendix/">Appendix</a></li>
+    </ul>
+  </div>
+<div id="main">
+    
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="loading_census_tiger_shapefiles_into_postgresqlpostgis"><a href="#loading_census_tiger_shapefiles_into_postgresqlpostgis" class="header-anchor">Loading Census TIGER Shapefiles into PostgreSQL/PostGIS</a></h1>
+<p>Loading Census TIGER shapefiles into a PostgreSQL database with PostGIS involves several steps: downloading the data, preparing your database, and then importing the shapefiles. I&#39;ll walk you through the entire process with attention to the unique characteristics of TIGER data.</p>
+<h2 id="understanding_tiger_data_structure"><a href="#understanding_tiger_data_structure" class="header-anchor">Understanding TIGER Data Structure</a></h2>
+<p>TIGER &#40;Topologically Integrated Geographic Encoding and Referencing&#41; files from the U.S. Census Bureau are organized hierarchically by geographic levels and feature types. Before downloading, it helps to understand what you&#39;re looking for:</p>
+<ul>
+<li><p>State and county boundaries</p>
+</li>
+<li><p>Census tracts and block groups</p>
+</li>
+<li><p>Roads and address ranges</p>
+</li>
+<li><p>Water features</p>
+</li>
+<li><p>Administrative boundaries</p>
+</li>
+<li><p>And many other geographic entities</p>
+</li>
+</ul>
+<h2 id="step_1_downloading_tiger_shapefiles"><a href="#step_1_downloading_tiger_shapefiles" class="header-anchor">Step 1: Downloading TIGER Shapefiles</a></h2>
+<p>The Census Bureau updates TIGER data annually. Here&#39;s how to get the most recent data:</p>
+<pre>bash
+
+# Create a directory for your TIGER data
+mkdir -p tiger_data
+cd tiger_data
+
+# Download specific TIGER datasets using wget
+# Example for downloading 2023 county boundaries:
+wget https://www2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip
+
+# Unzip the downloaded file
+unzip tl_2023_us_county.zip
+</pre>
+<p>For specific datasets, you&#39;ll need to navigate the Census Bureau&#39;s FTP site structure at: https://www2.census.gov/geo/tiger/</p>
+<p>You can also automate this with a script:</p>
+<pre>bash
+
+#!/bin/bash
+# Example script to download multiple TIGER datasets
+YEAR=2023
+BASE_URL="https://www2.census.gov/geo/tiger/TIGER${YEAR}"
+
+# Array of datasets to download
+DATASETS=(
+  "COUNTY/tl_${YEAR}_us_county.zip"
+  "TRACT/tl_${YEAR}_01_tract.zip"  # Alabama tracts
+  "BG/tl_${YEAR}_01_bg.zip"        # Alabama block groups
+  # Add more as needed
+)
+
+for DATASET in "${DATASETS[@]}"; do
+  echo "Downloading $DATASET"
+  wget "${BASE_URL}/${DATASET}"
+  unzip -o "${DATASET##*/}"
+done
+</pre>
+<h2 id="step_2_preparing_your_postgis_database"><a href="#step_2_preparing_your_postgis_database" class="header-anchor">Step 2: Preparing Your PostGIS Database</a></h2>
+<p>Ensure your PostgreSQL database has PostGIS enabled:</p>
+<pre>bash
+
+# Connect to PostgreSQL
+psql -U postgres
+
+# Create a dedicated database for TIGER data
+CREATE DATABASE tiger_db;
+
+# Connect to the new database
+\c tiger_db
+
+# Enable PostGIS extensions
+CREATE EXTENSION postgis;
+CREATE EXTENSION postgis_topology;
+CREATE EXTENSION fuzzystrmatch;  # Helpful for geocoding
+CREATE EXTENSION postgis_tiger_geocoder;  # Optional, for geocoding
+</pre>
+<h2 id="step_3_importing_shapefiles_using_shp2pgsql"><a href="#step_3_importing_shapefiles_using_shp2pgsql" class="header-anchor">Step 3: Importing Shapefiles Using shp2pgsql</a></h2>
+<p>The <code>shp2pgsql</code> utility converts shapefiles to SQL that can be loaded into PostgreSQL:</p>
+<pre>bash
+
+# Basic syntax:
+# shp2pgsql -s SRID -I -D -e shapefile table_name | psql -d database_name -U username
+
+# Example for counties (Census TIGER uses SRID 4269, NAD83)
+shp2pgsql -s 4269 -I -D -e tl_2023_us_county.shp tiger_counties | psql -d tiger_db -U postgres
+</pre>
+<p>Breaking down the options:</p>
+<ul>
+<li><p><code>-s 4269</code>: Sets the SRID &#40;Spatial Reference ID&#41; to NAD83, which is what Census TIGER uses</p>
+</li>
+<li><p><code>-I</code>: Creates a GiST spatial index on the geometry column</p>
+</li>
+<li><p><code>-D</code>: Uses PostgreSQL&#39;s COPY command for faster loading</p>
+</li>
+<li><p><code>-e</code>: Creates a new table and doesn&#39;t drop existing ones</p>
+</li>
+</ul>
+<h2 id="step_4_creating_a_loader_script_for_multiple_files"><a href="#step_4_creating_a_loader_script_for_multiple_files" class="header-anchor">Step 4: Creating a Loader Script for Multiple Files</a></h2>
+<p>When loading many TIGER files, a script helps automate the process:</p>
+<pre>bash
+
+#!/bin/bash
+# Script to load multiple shapefiles into PostGIS
+
+DB_NAME="tiger_db"
+DB_USER="postgres"
+TIGER_DIR="./tiger_data"
+SRID=4269
+
+# Function to load a shapefile
+load_shapefile() {
+  local shp_file=$1
+  local table_name=$2
+  
+  echo "Loading $shp_file into table $table_name"
+  shp2pgsql -s $SRID -I -D -e "$shp_file" "$table_name" | psql -d $DB_NAME -U $DB_USER
+}
+
+# Load county boundaries
+load_shapefile "$TIGER_DIR/tl_2023_us_county.shp" "tiger_counties"
+
+# Load state boundaries
+load_shapefile "$TIGER_DIR/tl_2023_us_state.shp" "tiger_states"
+
+# Load census tracts for a specific state (Alabama=01)
+load_shapefile "$TIGER_DIR/tl_2023_01_tract.shp" "tiger_tracts_01"
+
+# Add more as needed
+</pre>
+<h2 id="step_5_using_ogr2ogr_alternative_method"><a href="#step_5_using_ogr2ogr_alternative_method" class="header-anchor">Step 5: Using ogr2ogr &#40;Alternative Method&#41;</a></h2>
+<p>Another powerful tool for importing spatial data is GDAL&#39;s <code>ogr2ogr</code>:</p>
+<pre>bash
+
+# Basic syntax for loading a shapefile:
+ogr2ogr -f "PostgreSQL" PG:"dbname=tiger_db user=postgres" tl_2023_us_county.shp -nln tiger_counties -nlt PROMOTE_TO_MULTI
+
+# Explanation:
+# -f "PostgreSQL": Output format
+# PG:"connection string": PostgreSQL connection details
+# -nln tiger_counties: Name for the new layer (table)
+# -nlt PROMOTE_TO_MULTI: Ensures geometry type compatibility
+</pre>
+<h2 id="step_6_optimizing_tiger_data_in_postgis"><a href="#step_6_optimizing_tiger_data_in_postgis" class="header-anchor">Step 6: Optimizing TIGER Data in PostGIS</a></h2>
+<p>After loading the data, some optimization steps are recommended:</p>
+<pre>sql
+-- Connect to your database
+\c tiger_db
+
+-- Update table statistics
+VACUUM ANALYZE tiger_counties;
+
+-- Add a geoid index for faster joins with demographic data
+CREATE INDEX idx_tiger_counties_geoid ON tiger_counties (geoid);
+
+-- Convert to a different projection if needed (e.g., to Web Mercator for web maps)
+ALTER TABLE tiger_counties 
+ADD COLUMN geom_web geometry(MultiPolygon, 3857);
+
+UPDATE tiger_counties 
+SET geom_web = ST_Transform(geom, 3857);
+
+CREATE INDEX idx_tiger_counties_geom_web 
+ON tiger_counties USING GIST(geom_web);
+</pre>
+<h2 id="step_7_using_the_census_bureaus_loader_scripts"><a href="#step_7_using_the_census_bureaus_loader_scripts" class="header-anchor">Step 7: Using the Census Bureau&#39;s Loader Scripts</a></h2>
+<p>The Census Bureau provides specialized loader scripts specifically for TIGER data:</p>
+<pre>bash
+
+# Download the nation script
+wget https://www2.census.gov/geo/tiger/TIGER_DP/2023ACS/nation_script_load.sh
+
+# Make it executable
+chmod +x nation_script_load.sh
+
+# Edit the script to customize database connection parameters
+# Then run it
+./nation_script_load.sh
+</pre>
+<p>These scripts are designed to work with the PostGIS TIGER geocoder extension and include proper table structures and relationships.</p>
+<h2 id="example_query_census_tiger_data"><a href="#example_query_census_tiger_data" class="header-anchor">Example: Query Census TIGER Data</a></h2>
+<p>Once your data is loaded, you can run spatial queries:</p>
+<pre>sql
+-- Find all counties in a state
+SELECT county.name, state.name 
+FROM tiger_counties county 
+JOIN tiger_states state ON ST_Intersects(county.geom, state.geom) 
+WHERE state.name = 'California';
+
+-- Find census tracts within 5km of a point
+SELECT tract.geoid, tract.name 
+FROM tiger_tracts tract 
+WHERE ST_DWithin(
+  tract.geom::geography, 
+  ST_SetSRID(ST_MakePoint(-122.3321, 47.6062), 4269)::geography, 
+  5000
+);
+
+-- Count population by county (assuming you've loaded demographic data)
+SELECT county.name, SUM(tract.population) as total_pop 
+FROM tiger_counties county 
+JOIN tiger_tracts tract ON ST_Intersects(county.geom, tract.geom) 
+GROUP BY county.name 
+ORDER BY total_pop DESC;
+</pre>
+<h2 id="working_with_tiger_data_in_julia"><a href="#working_with_tiger_data_in_julia" class="header-anchor">Working with TIGER Data in Julia</a></h2>
+<p>Since you&#39;re coding in Julia, here&#39;s how you might interact with your TIGER data:</p>
+<pre>julia
+using LibPQ
+using DataFrames
+using GeoInterface
+using GeoFormatTypes
+
+# Connect to the PostgreSQL database
+conn = LibPQ.Connection("dbname=tiger_db user=postgres")
+
+# Query counties in a state
+query = """
+SELECT county.name as county_name, 
+       county.geoid as county_geoid,
+       ST_AsGeoJSON(county.geom) as geometry
+FROM tiger_counties county
+WHERE county.statefp = '06'  -- California
+LIMIT 10;
+"""
+
+result = execute(conn, query)
+counties_df = DataFrame(result)
+
+# Process the results
+for row in eachrow(counties_df)
+    county_name = row.county_name
+    county_geoid = row.county_geoid
+    
+    # Parse the GeoJSON geometry
+    geom_json = row.geometry
+    geom = GeoFormatTypes.GeoJSON(geom_json)
+    
+    # Access properties of the geometry
+    println("$county_name ($county_geoid) has area: $(GeoInterface.area(geom)) square degrees")
+end
+
+# Close connection
+close(conn)
+</pre>
+<h2 id="advanced_setting_up_a_nationwide_tiger_geocoder"><a href="#advanced_setting_up_a_nationwide_tiger_geocoder" class="header-anchor">Advanced: Setting up a Nationwide TIGER Geocoder</a></h2>
+<p>If your goal is geocoding, the PostGIS TIGER geocoder extension can create a complete address geocoding system:</p>
+<pre>bash
+# First, enable the extensions
+psql -d tiger_db -U postgres -c "CREATE EXTENSION postgis_tiger_geocoder;"
+
+# Download the loader scripts
+wget https://raw.githubusercontent.com/postgis/postgis/master/extras/tiger_geocoder/tiger_loader.sql
+
+# Edit the nation_script_load.sh file to set database parameters
+# Then run it to download and load all TIGER data needed for geocoding
+./nation_script_load.sh
+</pre>
+<p>This process will download many gigabytes of data and can take several hours to complete, but will give you a complete geocoding system.</p>
+<h2 id="troubleshooting_common_issues"><a href="#troubleshooting_common_issues" class="header-anchor">Troubleshooting Common Issues</a></h2>
+<ol>
+<li><p><strong>Encoding problems</strong>: TIGER files use Latin1 encoding. If you see character problems:</p>
+</li>
+</ol>
+<pre>sql
+   -- Check and possibly set client encoding
+   SHOW client_encoding;
+   SET client_encoding TO 'LATIN1';
+</pre>
+<ol start="2">
+<li><p><strong>Memory issues during loading</strong>:</p>
+<ul>
+<li><p>Split your loading process into smaller batches</p>
+</li>
+<li><p>Increase PostgreSQL memory parameters in postgresql.conf:</p>
+</li>
+</ul>
+</li>
+</ol>
+<pre>
+     maintenance_work_mem = 256MB
+     work_mem = 16MB
+</pre>
+<ol start="3">
+<li><p><strong>Slow loading</strong>: </p>
+<ul>
+<li><p>Temporarily disable indexes during bulk loads: <pre>sql
+     -- Disable triggers
+     ALTER TABLE tiger_counties DISABLE TRIGGER ALL;
+     -- Load data...
+     -- Then re-enable triggers
+     ALTER TABLE tiger_counties ENABLE TRIGGER ALL;
+     </pre></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>By following these steps, you&#39;ll have a comprehensive geographic database with Census TIGER data ready for spatial analysis, mapping, and potentially geocoding applications. The structured approach ensures that your data is properly organized, indexed, and optimized for geographic queries.</p>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg"  
+            style="width:44px;height:15px;">
+    </a>
+     Richard Careaga. Last modified: March 31, 2025.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+        </div> <!-- end of id=main -->
+    </div> <!-- end of id=layout -->
+    
+    
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  <link rel="stylesheet" href="https://technocrat.site//refounded//css/franklin.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/tufte.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/latex.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/adjust.css"> <!-- sheet to overwrite some clashing styles -->
+<link rel="icon" href="https://technocrat.site//refounded//assets/favicon.png">
+
+   <title>America Refounded</title>  
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="layout">
+  <div id="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="/league/">Summary Table</a></li>
+      <li><a href="/common/">Commonalities</a></li>
+      <li><a href="/concord/">Concordia</a></li>
+      <li><a href="/metro/">Metropolis</a></li>
+      <li><a href="/factor/">Factoria</a></li>
+      <li><a href="/lonestar/">The Lone Star Republic</a></li>
+      <li><a href="/dixie/">New Dixie</a></li>
+      <li><a href="/cumber/">Cumberland</a></li>
+      <li><a href="/heart/">Heartlandia</a></li>
+      <li><a href="/desert/">Deseret</a></li>
+      <li><a href="/sonora/">New Sonora</a></li>
+      <li><a href="/pacific/">Pacifica</a></li>
+      <li><a href="/alter/">Alternatives</a></li>
+      <li><a href="/appendix/">Appendix</a></li>
+    </ul>
+  </div>
+<div id="main">
+    
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="r_programming_language_setup"><a href="#r_programming_language_setup" class="header-anchor">R Programming Language Setup</a></h1>
+<h2 id="macos_installation"><a href="#macos_installation" class="header-anchor">macOS Installation</a></h2>
+<ol>
+<li><p><strong>Using Homebrew</strong>:</p>
+</li>
+</ol>
+
+<pre>
+bash
+   brew install r
+</pre>
+
+<ol start="2">
+<li><p><strong>Direct Download</strong>:</p>
+<ul>
+<li><p>Visit the CRAN website: https://cran.r-project.org/bin/macosx/</p>
+</li>
+<li><p>Download the latest R package &#40;.pkg file&#41;</p>
+</li>
+<li><p>Open the downloaded file and follow installation instructions</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Install RStudio &#40;Optional&#41;</strong>:</p>
+<ul>
+<li><p>Download from: https://www.rstudio.com/products/rstudio/download/</p>
+</li>
+<li><p>Open the .dmg file and drag RStudio to your Applications folder</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="ubuntu_installation"><a href="#ubuntu_installation" class="header-anchor">Ubuntu Installation</a></h2>
+<ol>
+<li><p><strong>Add the CRAN Repository</strong>:</p>
+</li>
+</ol>
+
+ <pre>bash
+   # Update indices
+   sudo apt update
+   
+   # Install required packages
+   sudo apt install software-properties-common dirmngr
+   
+   # Add the signing key
+   wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+   
+   # Add the repository
+   sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+</pre>
+
+<ol start="2">
+<li><p><strong>Install R</strong>:</p>
+</li>
+</ol>
+
+<pre>bash
+   sudo apt update
+   sudo apt install r-base r-base-dev
+</pre>
+
+<h2 id="verify_installation"><a href="#verify_installation" class="header-anchor">Verify Installation</a></h2>
+<p>Open a terminal and type: <pre>bash
+R --version
+</pre></p>
+<p>You should see the installed R version information.</p>
+<p>The Census package uses the classIntervals function from the classInt library to divide continuous arrays into discrete intervals for coloring maps. Other <code>R</code> libraries can be installed and loaded using the R.Setup submodule, as described in the documentation. &#40;In preparation—link to be provided&#41;</p>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg"  
+            style="width:44px;height:15px;">
+    </a>
+     Richard Careaga. Last modified: March 31, 2025.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+        </div> <!-- end of id=main -->
+    </div> <!-- end of id=layout -->
+    
+    
+  </body>
+</html>

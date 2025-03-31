@@ -4,16 +4,16 @@ globs: *
 ---
 
 ## PROJECT OVERVIEW
-This project analyzes alternatives for nation states to replace the existing United States, considering population characteristics, economics, politics, history, and natural geography. The output will be an HTML publication using Franklin.jl.  The goal is to complete a comprehensive Julia package. The primary database used is PostgreSQL.
+This project analyzes alternatives for nation states to replace the existing United States, considering population characteristics, economics, politics, history, and natural geography. The output will be an HTML publication using Franklin.jl.  The goal is to complete a comprehensive Julia package. The primary database used is PostgreSQL.  A new script, `scripts/create_census_variables_table.jl`, has been added to handle the creation of a PostgreSQL table from a large JSON file (`data/census_acs_2023_variables.json`).
 
 ## CODE STYLE
-Functional programming approach is preferred.  Prioritize readability over performance.  Fully qualify all function and type names to improve clarity, maintainability, and prevent namespace conflicts.
+Functional programming approach is preferred.  Prioritize readability over performance.  Fully qualify all function and type names to improve clarity, maintainability, and prevent namespace conflicts.  Use `include(joinpath(@__DIR__, "filename.jl"))` for consistent file inclusion within modules.  Absolute paths from the project root should be used for all file paths.
 
 ## FOLDER ORGANIZATION
 (Folder organization details are not provided in the new interactions and should be added separately if needed).
 
 ## TECH STACK
-Julia, R, PostgreSQL, Franklin.jl, Documenter.jl (v1.9.0), RCall, LibGEOS, WellKnownGeometry, CairoMakie, GeoMakie, GeoInterface
+Julia, R, PostgreSQL, Franklin.jl, Documenter.jl (v1.9.0), RCall, LibGEOS, WellKnownGeometry, CairoMakie, GeoMakie, GeoInterface, LibPQ
 
 ## PROJECT-SPECIFIC STANDARDS
 (Project-specific standards details are not provided in the new interactions and should be added separately if needed).  Files should be consistently marked with "SPDX-License-Identifier: MIT" where appropriate.  This will be implemented in all files eventually.
@@ -28,7 +28,8 @@ Julia, R, PostgreSQL, Franklin.jl, Documenter.jl (v1.9.0), RCall, LibGEOS, WellK
 Documentation should be included with code suggestions.  Project context: Analysis of alternatives for nation states to replace the existing United States.  Docstrings will be added to functions in the `src` directory using Julia's documentation conventions in anticipation of using Documenter.jl.  Docstrings have been added to core functions and modules in the `src` directory following Julia's documentation conventions.  This anticipates the future use of Documenter.jl for generating project documentation.  Docstrings have been added to the following functions: `get_nation_state`, `initialize`, `get_us_ages`, `get_dem_vote`, `get_gop_vote`, `get_childbearing_population`, `get_state_pop`, `make_nation_state_pop_df`, `make_nation_state_gdp_df`, and `map_poly`.  These docstrings follow Julia's documentation conventions and include function signatures, descriptions, argument and return types, examples, and notes.  All functions in `src/acs.jl`, `src/geo.jl`, `src/ga.jl`, and `src/margins.jl` now have comprehensive docstrings following Julia's conventions.  These include function signatures, descriptions, argument and return types, examples, and notes.  All functions within the `src` directory now have comprehensive docstrings.  Documenter.jl has been added as a project dependency to facilitate documentation generation. A `docs` directory has been created with a `make.jl` file for building documentation using Documenter.jl.  Tutorials on getting started, population analysis, and economic analysis have been added to the documentation.  The documentation includes API reference sections for core functions, data processing, and visualization. Version 1.9.0 of Documenter.jl is now used.
 
 ## DEBUGGING
-(Debugging details are not provided in the new interactions and should be added separately if needed).  A common error is using unqualified variable names, such as `concord`, which should be qualified as `Census.concord`. Another common error is a simple typo in function names, such as `get_ne_missouri_counties` which should be `get_ne_missouri_geoids`.  A further common error is incorrect relative paths when including files within modules; use `include(joinpath(@__DIR__, "filename.jl"))` to ensure correct resolution.  Ensure that all modules properly include necessary files using `include(joinpath(@__DIR__, "filename.jl"))` to avoid path resolution issues.
+(Debugging details are not provided in the new interactions and should be added separately if needed).  A common error is using unqualified variable names, such as `concord`, which should be qualified as `Census.concord`. Another common error is a simple typo in function names, such as `get_ne_missouri_counties` which should be `get_ne_missouri_geoids`.  A further common error is incorrect relative paths when including files within modules; use `include(joinpath(@__DIR__, "filename.jl"))` to ensure correct resolution.  Ensure that all modules properly include necessary files using `include(joinpath(@__DIR__, "filename.jl"))` to avoid path resolution issues.  DrWatson is no longer used; direct pathing should be used instead. Absolute paths from the project root should be used for all file paths to ensure consistent operation regardless of the current working directory.
+
 
 ## FINAL DOs AND DON'Ts
 *   No human persona, first/second person acceptable.

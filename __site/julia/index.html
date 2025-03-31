@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  <link rel="stylesheet" href="https://technocrat.site//refounded//css/franklin.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/tufte.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/latex.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/adjust.css"> <!-- sheet to overwrite some clashing styles -->
+<link rel="icon" href="https://technocrat.site//refounded//assets/favicon.png">
+
+   <title>America Refounded</title>  
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="layout">
+  <div id="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="/league/">Summary Table</a></li>
+      <li><a href="/common/">Commonalities</a></li>
+      <li><a href="/concord/">Concordia</a></li>
+      <li><a href="/metro/">Metropolis</a></li>
+      <li><a href="/factor/">Factoria</a></li>
+      <li><a href="/lonestar/">The Lone Star Republic</a></li>
+      <li><a href="/dixie/">New Dixie</a></li>
+      <li><a href="/cumber/">Cumberland</a></li>
+      <li><a href="/heart/">Heartlandia</a></li>
+      <li><a href="/desert/">Deseret</a></li>
+      <li><a href="/sonora/">New Sonora</a></li>
+      <li><a href="/pacific/">Pacifica</a></li>
+      <li><a href="/alter/">Alternatives</a></li>
+      <li><a href="/appendix/">Appendix</a></li>
+    </ul>
+  </div>
+<div id="main">
+    
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="installing_julia_on_macos_and_ubuntu"><a href="#installing_julia_on_macos_and_ubuntu" class="header-anchor">Installing Julia on macOS and Ubuntu</a></h1>
+<h2 id="macos_installation"><a href="#macos_installation" class="header-anchor">macOS Installation</a></h2>
+<ol>
+<li><p><strong>Using Homebrew</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   brew install julia
+</pre>
+<ol start="2">
+<li><p><strong>Direct Download</strong>:</p>
+<ul>
+<li><p>Visit the official Julia website: https://julialang.org/downloads/</p>
+</li>
+<li><p>Download the macOS .dmg file for your architecture &#40;Intel or Apple Silicon&#41;</p>
+</li>
+<li><p>Open the .dmg file and drag the Julia app to your Applications folder</p>
+</li>
+<li><p>For command-line access, create a symlink:</p>
+</li>
+</ul>
+</li>
+</ol>
+
+</pre>
+     sudo ln -s /Applications/Julia-x.y.app/Contents/Resources/julia/bin/julia /usr/local/bin/julia
+</pre>
+
+<ol start="3">
+<li><p><strong>Using juliaup &#40;Version Manager&#41;</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   curl -fsSL https://install.julialang.org | sh
+</pre>
+<h2 id="ubuntu_installation"><a href="#ubuntu_installation" class="header-anchor">Ubuntu Installation</a></h2>
+<ol>
+<li><p><strong>Using apt &#40;from default repositories&#41;</strong>:</p>
+</li>
+</ol>
+
+<pre>bash
+
+   sudo apt update
+   sudo apt install julia
+</pre>
+
+<p>Note: This might not install the latest version</p>
+<ol start="2">
+<li><p><strong>Using the official Julia PPA</strong>:</p>
+</li>
+</ol>
+
+<pre>bash
+
+   sudo add-apt-repository ppa:julia-team/julia
+   sudo apt update
+   sudo apt install julia
+</pre>
+<ol start="3">
+<li><p><strong>Direct Download</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   # Download the latest Linux tarball
+   wget https://julialang-s3.julialang.org/bin/linux/x64/1.10/julia-1.10.2-linux-x86_64.tar.gz
+   
+   # Extract the tarball
+   tar -xvzf julia-1.10.2-linux-x86_64.tar.gz
+   
+   # Move to /opt
+   sudo mv julia-1.10.2 /opt/
+   
+   # Create a symbolic link
+   sudo ln -s /opt/julia-1.10.2/bin/julia /usr/local/bin/julia
+</pre>
+<ol start="4">
+<li><p><strong>Using juliaup &#40;Version Manager&#41;</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   curl -fsSL https://install.julialang.org | sh
+</pre>
+<h2 id="verify_installation"><a href="#verify_installation" class="header-anchor">Verify Installation</a></h2>
+<p>Open a terminal and type: <pre>bash
+
+julia --version
+</pre></p>
+<p>You should see the installed Julia version information.</p>
+<h2 id="set_up_julia_environment"><a href="#set_up_julia_environment" class="header-anchor">Set Up Julia Environment</a></h2>
+<p>Start Julia and install some basic packages: <pre>julia
+# Launch Julia
+julia
+
+# Install common packages
+using Pkg
+Pkg.add(["IJulia", "Plots", "DataFrames"])
+</pre></p>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg"  
+            style="width:44px;height:15px;">
+    </a>
+     Richard Careaga. Last modified: March 31, 2025.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+        </div> <!-- end of id=main -->
+    </div> <!-- end of id=layout -->
+    
+    
+  </body>
+</html>

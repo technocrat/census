@@ -18,7 +18,7 @@ using Measures
 
 # Constants for visualization
 const DEFAULT_PLOT_SIZE = (1000, 600)
-const DEFAULT_MARGIN = Measures.mm(25)
+const DEFAULT_MARGIN = 25mm  # Use mm directly as a unit, not as a function
 const MALE_COLOR = ("#b0c1e3", 0.9)    # Light blue
 const FEMALE_COLOR = ("#f8c8dc", 0.9)  # Light pink
 const TREND_COLOR = :red

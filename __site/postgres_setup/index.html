@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  <link rel="stylesheet" href="https://technocrat.site//refounded//css/franklin.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/tufte.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/latex.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/adjust.css"> <!-- sheet to overwrite some clashing styles -->
+<link rel="icon" href="https://technocrat.site//refounded//assets/favicon.png">
+
+   <title>America Refounded</title>  
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="layout">
+  <div id="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="/league/">Summary Table</a></li>
+      <li><a href="/common/">Commonalities</a></li>
+      <li><a href="/concord/">Concordia</a></li>
+      <li><a href="/metro/">Metropolis</a></li>
+      <li><a href="/factor/">Factoria</a></li>
+      <li><a href="/lonestar/">The Lone Star Republic</a></li>
+      <li><a href="/dixie/">New Dixie</a></li>
+      <li><a href="/cumber/">Cumberland</a></li>
+      <li><a href="/heart/">Heartlandia</a></li>
+      <li><a href="/desert/">Deseret</a></li>
+      <li><a href="/sonora/">New Sonora</a></li>
+      <li><a href="/pacific/">Pacifica</a></li>
+      <li><a href="/alter/">Alternatives</a></li>
+      <li><a href="/appendix/">Appendix</a></li>
+    </ul>
+  </div>
+<div id="main">
+    
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="setting_up_a_postgresql_server_on_macos_and_ubuntu"><a href="#setting_up_a_postgresql_server_on_macos_and_ubuntu" class="header-anchor">Setting up a PostgreSQL Server on macOS and Ubuntu</a></h1>
+<p>PostgreSQL is a powerful, open-source relational database system. I&#39;ll walk you through setting up a local PostgreSQL server on both macOS and Ubuntu.</p>
+<h2 id="macos_setup"><a href="#macos_setup" class="header-anchor">macOS Setup</a></h2>
+<h3 id="method_1_using_homebrew_recommended"><a href="#method_1_using_homebrew_recommended" class="header-anchor">Method 1: Using Homebrew &#40;Recommended&#41;</a></h3>
+<ol>
+<li><p><strong>Install Homebrew</strong> &#40;if not already installed&#41;:</p>
+</li>
+</ol>
+<pre>bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+</pre>
+<ol start="2">
+<li><p><strong>Install PostgreSQL</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   brew install postgresql@15
+</pre>
+<ol start="3">
+<li><p><strong>Initialize the database</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   initdb --locale=C -E UTF-8 $(brew --prefix)/var/postgres
+</pre>
+<ol start="4">
+<li><p><strong>Start PostgreSQL service</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   brew services start postgresql@15
+</pre>
+<ol start="5">
+<li><p><strong>Verify installation</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   psql postgres
+</pre>
+<h3 id="method_2_using_postgresqlapp"><a href="#method_2_using_postgresqlapp" class="header-anchor">Method 2: Using PostgreSQL.app</a></h3>
+<ol>
+<li><p>Download PostgreSQL.app from <a href="https://postgresapp.com/">https://postgresapp.com/</a></p>
+</li>
+<li><p>Move to your Applications folder and open it</p>
+</li>
+<li><p>Click &quot;Initialize&quot; to create a new server</p>
+</li>
+<li><p>Add to your PATH with:</p>
+</li>
+</ol>
+<pre>bash
+
+   echo 'export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"' >> ~/.zshrc
+</pre>
+<h2 id="ubuntu_setup"><a href="#ubuntu_setup" class="header-anchor">Ubuntu Setup</a></h2>
+<ol>
+<li><p><strong>Update package lists</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   sudo apt update
+</pre>
+<ol start="2">
+<li><p><strong>Install PostgreSQL</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   sudo apt install postgresql postgresql-contrib
+</pre>
+<ol start="3">
+<li><p><strong>Verify the service status</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   sudo systemctl status postgresql
+</pre>
+<ol start="4">
+<li><p><strong>Start PostgreSQL</strong> &#40;if not already running&#41;:</p>
+</li>
+</ol>
+<pre>bash
+
+   sudo systemctl start postgresql
+</pre>
+<ol start="5">
+<li><p><strong>Enable autostart on boot</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   sudo systemctl enable postgresql
+</pre>
+<h2 id="post-installation_configuration_both_systems"><a href="#post-installation_configuration_both_systems" class="header-anchor">Post-Installation Configuration &#40;Both Systems&#41;</a></h2>
+<h3 id="creating_a_database_and_user"><a href="#creating_a_database_and_user" class="header-anchor">Creating a Database and User</a></h3>
+<ol>
+<li><p><strong>Switch to the postgres user</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   # On macOS
+   psql -U postgres
+   
+   # On Ubuntu
+   sudo -u postgres psql
+</pre>
+<ol start="2">
+<li><p><strong>Create a new database</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   CREATE DATABASE mydb;
+</pre>
+<ol start="3">
+<li><p><strong>Create a new user and set password</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   CREATE USER myuser WITH ENCRYPTED PASSWORD 'mypassword';
+</pre>
+<ol start="4">
+<li><p><strong>Grant privileges to the user on the database</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   GRANT ALL PRIVILEGES ON DATABASE mydb TO myuser;
+</pre>
+<h3 id="configure_remote_access_optional"><a href="#configure_remote_access_optional" class="header-anchor">Configure Remote Access &#40;Optional&#41;</a></h3>
+<ol>
+<li><p><strong>Edit postgresql.conf</strong> to listen on all interfaces:</p>
+</li>
+</ol>
+<pre>bash
+
+   # On macOS with Homebrew
+   vim $(brew --prefix)/var/postgres/postgresql.conf
+   
+   # On Ubuntu
+   sudo vim /etc/postgresql/14/main/postgresql.conf
+
+   Find the line with `listen_addresses` and change it to:
+   ```
+   listen_addresses = '*'
+   </pre>~~~
+
+
+2. **Edit pg_hba.conf** to allow remote connections:
+~~~<pre>bash
+
+   # On macOS with Homebrew
+   vim $(brew --prefix)/var/postgres/pg_hba.conf
+   
+   # On Ubuntu
+   sudo vim /etc/postgresql/14/main/pg_hba.conf
+</pre>~~~
+
+   Add the following line:
+   ```
+   host    all             all             0.0.0.0/0               md5
+</pre>
+<ol start="3">
+<li><p><strong>Restart PostgreSQL</strong>:</p>
+</li>
+</ol>
+<pre>bash
+
+   # On macOS with Homebrew
+   brew services restart postgresql
+   
+   # On Ubuntu
+   sudo systemctl restart postgresql
+</pre>
+<h2 id="connecting_from_julia"><a href="#connecting_from_julia" class="header-anchor">Connecting from Julia</a></h2>
+<p>Since you&#39;re coding in Julia, you&#39;ll likely want to connect to your PostgreSQL server from there. You can use the <code>LibPQ.jl</code> package:</p>
+<pre>julia
+using LibPQ
+
+# Connect to the database
+conn = LibPQ.Connection("host=localhost dbname=mydb user=myuser password=mypassword")
+
+# Execute a query
+result = execute(conn, "SELECT * FROM mytable;")
+
+# Process results
+for row in result
+    println(row)
+end
+
+# Close connection
+close(conn)
+</pre>
+<h2 id="common_troubleshooting"><a href="#common_troubleshooting" class="header-anchor">Common Troubleshooting</a></h2>
+<ol>
+<li><p><strong>Connection refused errors</strong>: Check if PostgreSQL is running with <code>ps aux | grep postgres</code></p>
+</li>
+<li><p><strong>Authentication failed</strong>: Ensure your pg_hba.conf is properly configured for the authentication method</p>
+</li>
+<li><p><strong>Permission denied</strong>: Check user privileges with <code>\l</code> in psql</p>
+</li>
+<li><p><strong>Port conflicts</strong>: If port 5432 is already in use, change PostgreSQL&#39;s port in postgresql.conf</p>
+</li>
+</ol>
+<p>This setup gives you a functioning local PostgreSQL server that you can use for development. Remember to use strong passwords for production environments and consider firewall rules if exposing the database to remote connections.</p>
+<p><a href="/tiger/">Alternative instructions</a></p>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg"  
+            style="width:44px;height:15px;">
+    </a>
+     Richard Careaga. Last modified: March 31, 2025.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+        </div> <!-- end of id=main -->
+    </div> <!-- end of id=layout -->
+    
+    
+  </body>
+</html>

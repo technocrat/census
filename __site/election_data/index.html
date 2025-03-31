@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  <link rel="stylesheet" href="https://technocrat.site//refounded//css/franklin.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/tufte.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/latex.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/adjust.css"> <!-- sheet to overwrite some clashing styles -->
+<link rel="icon" href="https://technocrat.site//refounded//assets/favicon.png">
+
+   <title>America Refounded</title>  
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="layout">
+  <div id="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="/league/">Summary Table</a></li>
+      <li><a href="/common/">Commonalities</a></li>
+      <li><a href="/concord/">Concordia</a></li>
+      <li><a href="/metro/">Metropolis</a></li>
+      <li><a href="/factor/">Factoria</a></li>
+      <li><a href="/lonestar/">The Lone Star Republic</a></li>
+      <li><a href="/dixie/">New Dixie</a></li>
+      <li><a href="/cumber/">Cumberland</a></li>
+      <li><a href="/heart/">Heartlandia</a></li>
+      <li><a href="/desert/">Deseret</a></li>
+      <li><a href="/sonora/">New Sonora</a></li>
+      <li><a href="/pacific/">Pacifica</a></li>
+      <li><a href="/alter/">Alternatives</a></li>
+      <li><a href="/appendix/">Appendix</a></li>
+    </ul>
+  </div>
+<div id="main">
+    
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><p>Notes on processing of 2024 county level election results from <a href="https://tonmcg.github.io/US_County_Level_Election_Results_08-24/">United States General Election Presidential Results by District, Ward, or County from 2008 to 2024</a></p>
+<h1 id="importing_csv_data_into_postgresql"><a href="#importing_csv_data_into_postgresql" class="header-anchor">Importing CSV Data into PostgreSQL</a></h1>
+<p>
+<pre>
+sql
+   BEGIN;
+   CREATE TEMP TABLE temp_gop (geoid varchar(5), value bigint);
+   COPY temp_gop FROM '/Users/ro/projects/census/data/2024_gop.csv' WITH (FORMAT csv, HEADER true);
+   INSERT INTO census.variable_data (geoid, variable_name, value)
+   SELECT t.geoid, 'republican', t.value
+   FROM temp_gop t
+   WHERE EXISTS (SELECT 1 FROM census.counties c WHERE c.geoid = t.geoid);
+   DROP TABLE temp_gop;
+   COMMIT;
+   BEGIN;
+   CREATE TEMP TABLE temp_dem (geoid varchar(5), value bigint);
+   COPY temp_dem FROM '/Users/ro/projects/census/data/2024_dem.csv' WITH (FORMAT csv, HEADER true);
+   INSERT INTO census.variable_data (geoid, variable_name, value)
+   SELECT t.geoid, 'democratic', t.value
+   FROM temp_dem t
+   WHERE EXISTS (SELECT 1 FROM census.counties c WHERE c.geoid = t.geoid);
+   DROP TABLE temp_dem;
+   COMMIT;
+</pre>
+ Finding Missing GEOIDs 
+<pre>
+   BEGIN;
+   CREATE TEMP TABLE temp_gop (geoid varchar(5), value bigint);
+   COPY temp_gop FROM '/Users/ro/projects/census/data/2024_gop.csv' WITH (FORMAT csv, HEADER true);
+   SELECT t.geoid FROM temp_gop t LEFT JOIN census.counties c ON t.geoid = c.geoid WHERE c.geoid IS NULL ORDER BY t.geoid;
+   DROP TABLE temp_gop;
+   COMMIT;
+</pre>
+</p>
+<p>Found 44 missing geoids that weren&#39;t inserted into the database: <pre>
+02001   02002   02003   02004   02005   02006   02007   02008   02009   02010
+02011   02012   02014   02015   02017   02018   02019   02021   02022   02023
+02024   02025   02026   02027   02028   02029   02030   02031   02032   02033
+02034   02035   02036   02037   02038   02039   02040   11002   11003   11004
+11005   11006   11007   11008
+</pre>
+</p>
+<ul>
+<li><p>Most missing geoids start with &quot;02&quot; &#40;Alaska&#39;s FIPS state code&#41;</p>
+</li>
+<li><p>A few start with &quot;11&quot; &#40;District of Columbia&#39;s FIPS state code&#41;</p>
+</li>
+<li><p>These likely represent boroughs/census areas in Alaska and wards in DC that aren&#39;t defined as counties in the census.counties table</p>
+</li>
+</ul>
+<p>HI &amp; AK state election results missing from county returns: <a href="https://en.wikipedia.org/wiki/2024_United_States_presidential_election">2024 United States presidential election</a> AK GOP 184458 DEM 140026 HI GOP 193661 DEM 313044</p>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg"  
+            style="width:44px;height:15px;">
+    </a>
+     Richard Careaga. Last modified: March 31, 2025.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+        </div> <!-- end of id=main -->
+    </div> <!-- end of id=layout -->
+    
+    
+  </body>
+</html>

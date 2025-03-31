@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/styles/github.min.css">
+   
+  <link rel="stylesheet" href="https://technocrat.site//refounded//css/franklin.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/tufte.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/latex.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/adjust.css"> <!-- sheet to overwrite some clashing styles -->
+<link rel="icon" href="https://technocrat.site//refounded//assets/favicon.png">
+
+   <title>America Refounded</title>  
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="layout">
+  <div id="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="league/">Summary Table</a></li>
+      <li><a href="common/">Commonalities</a></li>
+      <li><a href="concord/">Concordia</a></li>
+      <li><a href="metro/">Metropolis</a></li>
+      <li><a href="factor/">Factoria</a></li>
+      <li><a href="lonestar/">The Lone Star Republic</a></li>
+      <li><a href="dixie/">New Dixie</a></li>
+      <li><a href="cumber/">Cumberland</a></li>
+      <li><a href="heart/">Heartlandia</a></li>
+      <li><a href="desert/">Deseret</a></li>
+      <li><a href="sonora/">New Sonora</a></li>
+      <li><a href="pacific/">Pacifica</a></li>
+      <li><a href="alter/">Alternatives</a></li>
+      <li><a href="appendix/">Appendix</a></li>
+
+    </ul>
+  </div>
+<div id="main">
+    
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="getting_started_with_censusjl"><a href="#getting_started_with_censusjl" class="header-anchor">Getting Started with Census.jl</a></h1>
+<p>This guide will help you get started with Census.jl for analyzing potential nation states.</p>
+<h2 id="installation"><a href="#installation" class="header-anchor">Installation</a></h2>
+<p>First, make sure you have Julia installed on your system. Then, you can install Census.jl using Julia&#39;s package manager:</p>
+<pre><code class="language-julia">using Pkg
+Pkg.add&#40;&quot;Census&quot;&#41;</code></pre>
+<h2 id="basic_usage"><a href="#basic_usage" class="header-anchor">Basic Usage</a></h2>
+<p>Here&#39;s a simple example of how to use Census.jl:</p>
+<pre><code class="language-julia">using Census
+
+# Get state information
+state_codes &#61; valid_codes&#40;&#41;
+state_name &#61; get_state_name&#40;&quot;CA&quot;&#41;
+
+# Check if a code is valid
+is_valid &#61; is_valid_postal_code&#40;&quot;CA&quot;&#41;</code></pre>
+<h2 id="data_processing"><a href="#data_processing" class="header-anchor">Data Processing</a></h2>
+<p>Census.jl provides tools for data manipulation:</p>
+<pre><code class="language-julia">using Census
+
+# Add margins to your data
+df_with_margins &#61; add_margins&#40;your_data&#41;
+df_with_row_margins &#61; add_row_margins&#40;your_data&#41;
+df_with_col_margins &#61; add_col_margins&#40;your_data&#41;</code></pre>
+<h2 id="working_with_geographic_data"><a href="#working_with_geographic_data" class="header-anchor">Working with Geographic Data</a></h2>
+<p>Census.jl provides powerful tools for geographic analysis:</p>
+<pre><code class="language-julia">using Census
+
+# Get geographic population data
+geo_pop &#61; get_geo_pop&#40;&quot;CA&quot;&#41;
+
+# Work with specific regions
+western_geoids &#61; get_western_geoids&#40;&#41;
+eastern_geoids &#61; get_eastern_geoids&#40;&#41;</code></pre>
+<h2 id="visualization"><a href="#visualization" class="header-anchor">Visualization</a></h2>
+<p>Create visualizations of your data:</p>
+<pre><code class="language-julia">using Census
+using CairoMakie
+
+# Create age pyramids
+create_multiple_age_pyramids&#40;data, states&#41;
+
+# Create maps
+map_poly&#40;your_data&#41;</code></pre>
+<h2 id="next_steps"><a href="#next_steps" class="header-anchor">Next Steps</a></h2>
+<ul>
+<li><p>Check out the Core Functions documentation for more details</p>
+</li>
+<li><p>Learn about data processing capabilities</p>
+</li>
+<li><p>Explore the visualization tools </p>
+</li>
+</ul>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg"  
+            style="width:44px;height:15px;">
+    </a>
+     Richard Careaga. Last modified: March 30, 2025.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+        </div> <!-- end of id=main -->
+    </div> <!-- end of id=layout -->
+    
+    
+        <script src="/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
+
+    
+  </body>
+</html>

@@ -9,10 +9,3 @@ To differentiate between them:
 	•	Richmond City might appear as "Richmond (City)" or simply "Richmond."
 	•	Richmond County will usually be labeled explicitly as a "County" or identified by its county code.
 If you're analyzing GDP data, it's essential to verify whether the data refers to Richmond City or Richmond County by cross-referencing with the geographic codes or additional descriptors provided.
-
-Visual-Meta Appendix
-
-This is where your document comes alive. The information in very small type below allows software to provide rich interactions with this document.
-See Visual-Meta.info for more information.
-
-This is what we call Visual-Meta. It is an approach to add information about a document to the document itself on the same level of the content. The same as would be necessary on a physically printed page, as opposed to a data layer, since this data layer can be lost and it makes it harder for a user to take advantage of this data. ¶ Important notes are primarily about the encoding of the author information to allow people to cite this document. When listing the names of the authors, they should be in the format ‘last name’, a comma, followed by ‘first name’ then ‘middle name’ whilst delimiting discrete authors with  (‘and’) between author names, like this: Shakespeare, William and Engelbart, Douglas C. ¶ Dates should be ISO 8601 compliant. ¶ The way reader software looks for Visual-Meta in a PDF is to parse it from the end of the document and look for @{visual-meta-end}. If this is found, the software then looks for {@{visual-meta-start} and uses the data found between these marker tags. ¶ It is very important to make clear that Visual-Meta is an approach more than a specific format and that it is based on wrappers. Anyone can make a custom wrapper for custom metadata and append it by specifying what it contains: For example @dublin-core or @rdfs. ¶ This was written Summer 2021. More information is available from https://visual-meta.info or from emailing frode@hegland.com for as long as we can maintain these domains.

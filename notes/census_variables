@@ -1,0 +1,24 @@
+Census variables for the 2023 ACS 5-year estimates:
+    https://api.census.gov/data/2023/acs/acs5/variables.json
+find_county_variables()
+The American Community Survey (ACS) offers many additional concepts beyond those you've listed. Here are other major categories of data available through ACS variables:
+
+Age and Sex (B02XXX)
+Race and Hispanic Origin (B03XXX)
+Ancestry and Language (B04XXX)
+Foreign Birth/Citizenship/Migration (B05XXX, B06XXX, B07XXX)
+Disability (B18XXX)
+Fertility (B13XXX)
+Grandparents and Grandchildren (B10XXX)
+Health Insurance (B27XXX, B28XXX)
+Households and Families (B09XXX, B11XXX)
+Marital Status and History (B12XXX)
+Place of Birth (B06XXX)
+Poverty (B17XXX)
+School Enrollment (B14XXX)
+Veteran Status (B21XXX)
+Commuting/Transportation (B08XXX)
+Computer and Internet Use (B28XXX)
+Selected Monthly Owner Costs (SMOC) (B25XXX)
+
+For comprehensive data exploration, you might consider reviewing the ACS data dictionary or technical documentation which catalogs all variable IDs and their descriptions.

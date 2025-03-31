@@ -2,14 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
+    <loc>https://technocrat.site/tiger/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://technocrat.site/factor/index.html</loc>
     <lastmod>2025-03-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://technocrat.site/population/index.html</loc>
-    <lastmod>2025-02-25</lastmod>
+    <loc>https://technocrat.site/postgres_setup/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -22,6 +28,18 @@
 <url>
     <loc>https://technocrat.site/lonestar/index.html</loc>
     <lastmod>2025-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://technocrat.site/julia/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://technocrat.site/postgis/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -62,8 +80,26 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://technocrat.site/crosswalk/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://technocrat.site/league/index.html</loc>
     <lastmod>2025-03-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://technocrat.site/sources/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://technocrat.site/appendix/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -80,8 +116,20 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://technocrat.site/election_data/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://technocrat.site/desert/index.html</loc>
     <lastmod>2025-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://technocrat.site/cran/index.html</loc>
+    <lastmod>2025-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -94,12 +142,6 @@
 <url>
     <loc>https://technocrat.site/alter/index.html</loc>
     <lastmod>2025-03-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://technocrat.site/data/MTContDivide2003/ContDivide2003_metadata/</loc>
-    <lastmod>2014-01-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/styles/github.min.css">
+   
+  <link rel="stylesheet" href="https://technocrat.site//refounded//css/franklin.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/tufte.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/latex.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/adjust.css"> <!-- sheet to overwrite some clashing styles -->
+<link rel="icon" href="https://technocrat.site//refounded//assets/favicon.png">
+
+   <title>America Refounded</title>  
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="layout">
+  <div id="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="league/">Summary Table</a></li>
+      <li><a href="common/">Commonalities</a></li>
+      <li><a href="concord/">Concordia</a></li>
+      <li><a href="metro/">Metropolis</a></li>
+      <li><a href="factor/">Factoria</a></li>
+      <li><a href="lonestar/">The Lone Star Republic</a></li>
+      <li><a href="dixie/">New Dixie</a></li>
+      <li><a href="cumber/">Cumberland</a></li>
+      <li><a href="heart/">Heartlandia</a></li>
+      <li><a href="desert/">Deseret</a></li>
+      <li><a href="sonora/">New Sonora</a></li>
+      <li><a href="pacific/">Pacifica</a></li>
+      <li><a href="alter/">Alternatives</a></li>
+      <li><a href="appendix/">Appendix</a></li>
+
+    </ul>
+  </div>
+<div id="main">
+    
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="population_analysis"><a href="#population_analysis" class="header-anchor">Population Analysis</a></h1>
+<p>This tutorial covers how to analyze population characteristics using Census.jl.</p>
+<h2 id="age_distribution_analysis"><a href="#age_distribution_analysis" class="header-anchor">Age Distribution Analysis</a></h2>
+<p>Census.jl provides tools for analyzing age distributions across different regions:</p>
+<pre><code class="language-julia">using Census
+
+# Get US age distribution
+us_ages &#61; get_us_ages&#40;&#41;
+
+# Get childbearing population data
+childbearing_pop &#61; get_childbearing_population&#40;&quot;CA&quot;&#41;
+
+# Create age pyramids for multiple states
+states &#61; &#91;&quot;CA&quot;, &quot;NY&quot;, &quot;TX&quot;&#93;
+age_data &#61; collect_state_age_dataframes&#40;states&#41;
+create_multiple_age_pyramids&#40;age_data, states&#41;</code></pre>
+<h2 id="population_growth_analysis"><a href="#population_growth_analysis" class="header-anchor">Population Growth Analysis</a></h2>
+<p>Analyze population growth trends:</p>
+<pre><code class="language-julia">using Census
+
+# Create growth tables
+growth_table &#61; make_growth_table&#40;data&#41;
+
+# Analyze nation state population
+nation_pop &#61; make_nation_state_pop_df&#40;&quot;Pacific&quot;&#41;</code></pre>
+<h2 id="geographic_population_analysis"><a href="#geographic_population_analysis" class="header-anchor">Geographic Population Analysis</a></h2>
+<p>Analyze population distribution across geographic regions:</p>
+<pre><code class="language-julia">using Census
+
+# Get population data for specific geographic areas
+western_pop &#61; get_geo_pop&#40;get_western_geoids&#40;&#41;&#41;
+eastern_pop &#61; get_geo_pop&#40;get_eastern_geoids&#40;&#41;&#41;
+colorado_basin_pop &#61; get_geo_pop&#40;get_colorado_basin_geoids&#40;&#41;&#41;</code></pre>
+<h2 id="visualization_and_mapping"><a href="#visualization_and_mapping" class="header-anchor">Visualization and Mapping</a></h2>
+<p>Create visualizations of population data:</p>
+<pre><code class="language-julia">using Census
+using CairoMakie
+
+# Create population maps
+map_poly&#40;population_data&#41;
+
+# Add labels and legends
+add_labels&#40;map&#41;
+make_legend&#40;map&#41;</code></pre>
+<h2 id="advanced_analysis"><a href="#advanced_analysis" class="header-anchor">Advanced Analysis</a></h2>
+<p>Perform more complex population analysis:</p>
+<pre><code class="language-julia">using Census
+
+# Query detailed age statistics
+state_ages &#61; query_state_ages&#40;state&#41;
+nation_ages &#61; query_nation_ages&#40;nation&#41;
+
+# Process and analyze data
+processed_data &#61; process&#40;raw_data&#41;
+analysis_results &#61; analysis&#40;processed_data&#41;</code></pre>
+<p></p>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg"  
+            style="width:44px;height:15px;">
+    </a>
+     Richard Careaga. Last modified: March 30, 2025.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+        </div> <!-- end of id=main -->
+    </div> <!-- end of id=layout -->
+    
+    
+        <script src="/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
+
+    
+  </body>
+</html>

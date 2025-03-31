@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/styles/github.min.css">
+   
+  <link rel="stylesheet" href="https://technocrat.site//refounded//css/franklin.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/tufte.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/latex.css">
+<link rel="stylesheet" href="https://technocrat.site//refounded//css/adjust.css"> <!-- sheet to overwrite some clashing styles -->
+<link rel="icon" href="https://technocrat.site//refounded//assets/favicon.png">
+
+   <title>America Refounded</title>  
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="layout">
+  <div id="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="league/">Summary Table</a></li>
+      <li><a href="common/">Commonalities</a></li>
+      <li><a href="concord/">Concordia</a></li>
+      <li><a href="metro/">Metropolis</a></li>
+      <li><a href="factor/">Factoria</a></li>
+      <li><a href="lonestar/">The Lone Star Republic</a></li>
+      <li><a href="dixie/">New Dixie</a></li>
+      <li><a href="cumber/">Cumberland</a></li>
+      <li><a href="heart/">Heartlandia</a></li>
+      <li><a href="desert/">Deseret</a></li>
+      <li><a href="sonora/">New Sonora</a></li>
+      <li><a href="pacific/">Pacifica</a></li>
+      <li><a href="alter/">Alternatives</a></li>
+      <li><a href="appendix/">Appendix</a></li>
+
+    </ul>
+  </div>
+<div id="main">
+    
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="economic_analysis"><a href="#economic_analysis" class="header-anchor">Economic Analysis</a></h1>
+<p>This tutorial covers how to analyze economic characteristics of potential nation states using Census.jl.</p>
+<h2 id="gdp_analysis"><a href="#gdp_analysis" class="header-anchor">GDP Analysis</a></h2>
+<p>Analyze GDP data for potential nation states:</p>
+<pre><code class="language-julia">using Census
+
+# Get GDP data for a nation state
+nation_gdp &#61; make_nation_state_gdp_df&#40;&quot;Pacific&quot;&#41;
+
+# Process and analyze economic data
+processed_data &#61; process&#40;gdp_data&#41;
+analysis_results &#61; analysis&#40;processed_data&#41;</code></pre>
+<h2 id="regional_economic_analysis"><a href="#regional_economic_analysis" class="header-anchor">Regional Economic Analysis</a></h2>
+<p>Analyze economic patterns across different regions:</p>
+<pre><code class="language-julia">using Census
+
+# Get economic data for specific regions
+western_econ &#61; get_geo_pop&#40;get_western_geoids&#40;&#41;&#41;
+eastern_econ &#61; get_geo_pop&#40;get_eastern_geoids&#40;&#41;&#41;
+colorado_basin_econ &#61; get_geo_pop&#40;get_colorado_basin_geoids&#40;&#41;&#41;</code></pre>
+<h2 id="economic_visualization"><a href="#economic_visualization" class="header-anchor">Economic Visualization</a></h2>
+<p>Create visualizations of economic data:</p>
+<pre><code class="language-julia">using Census
+using CairoMakie
+
+# Create economic maps
+map_poly&#40;economic_data&#41;
+
+# Add labels and create legends
+add_labels&#40;map&#41;
+make_legend&#40;map&#41;</code></pre>
+<h2 id="advanced_economic_analysis"><a href="#advanced_economic_analysis" class="header-anchor">Advanced Economic Analysis</a></h2>
+<p>Perform more complex economic analysis:</p>
+<pre><code class="language-julia">using Census
+
+# Process economic indicators
+indicators &#61; process&#40;economic_data&#41;
+
+# Create economic growth tables
+growth_table &#61; make_growth_table&#40;indicators&#41;
+
+# Add row totals for economic summaries
+totals &#61; add_row_totals&#40;economic_data&#41;</code></pre>
+<h2 id="integration_with_geographic_data"><a href="#integration_with_geographic_data" class="header-anchor">Integration with Geographic Data</a></h2>
+<p>Combine economic and geographic analysis:</p>
+<pre><code class="language-julia">using Census
+
+# Get economic data for specific geographic areas
+slope_econ &#61; get_geo_pop&#40;get_slope_geoids&#40;&#41;&#41;
+southern_kansas_econ &#61; get_geo_pop&#40;get_southern_kansas_geoids&#40;&#41;&#41;
+
+# Create visualizations of regional economic patterns
+map_poly&#40;regional_economic_data&#41;</code></pre>
+<p></p>
+<div class="page-foot">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/CC_BY-SA_icon.svg"  
+            style="width:44px;height:15px;">
+    </a>
+     Richard Careaga. Last modified: March 30, 2025.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div><!-- CONTENT ENDS HERE -->
+        </div> <!-- end of id=main -->
+    </div> <!-- end of id=layout -->
+    
+    
+        <script src="/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
+
+    
+  </body>
+</html>

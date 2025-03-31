@@ -1,16 +1,12 @@
 # SPDX-License-Identifier: MIT
+# fix some holes
+using Census
+df = get_geo_pop(postals)
 
-rejig       = copy(Census.heartland)
-push!(rejig,"IL","WI","MI")
-df          = get_geo_pop(rejig)
-DataFrames.rename!(df, [:geoid, :stusps, :county, :geom, :pop])
-RSetup.setup_r_environment()
-breaks      = RCall.rcopy(get_breaks(df,5))
-df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
 peninsula = ["26053", "26131", "26061", "26083", "26013", "26071", "26103",
-        "26003", "26109", "26041", "26053", "26956", "26976", "26033",
-        "26043", "26053", "26095", "26097", "20033", "26043", "26053",
-        "26153", "26069", "26001", "26007"]
+    "26003", "26109", "26041", "26053", "26956", "26976", "26033",
+    "26043", "26053", "26095", "26097", "20033", "26043", "26053",
+    "26153", "26069", "26001", "26007"]
 missouri_river_basin = ["30005", "30007", "30013", "30015", "30017",
     "30021", "30027", "30033", "30041", "30045",
     "30049", "30051", "30055", "30059", "30069",
@@ -77,7 +73,7 @@ ms_basin_ia = ["19043", "19007", "19005", "19195", "19045",
     "19089", "19191", "19169", "19081", "19121", "19197",
     "19053", "19185", "19105", "19113", "19095", "19115",
     "19181"]
-mo_basin_mn = ["27117", "27133", "27195","27083"]
+mo_basin_mn = ["27117", "27133", "27195", "27083"]
 mo_basin_mo = ["29005", "29087", "29147", "29003", "29021",
     "29165", "29047", "29049", "29063", "29075",
     "29177", "29025", "29061", "29081", "29041",
@@ -88,54 +84,74 @@ mo_basin_mo = ["29005", "29087", "29147", "29003", "29021",
     "29027", "29129", "29079", "29117", "29033",
     "29171", "29211", "29115", "29199", "29103",
     "29510", "29219", "25215"]
-ms_basin_mo = ["29071","29099", "29221", 
+ms_basin_mo = ["29071", "29099", "29221",
     "29179", "29031", "29207", "29069",
     "29155", "29143", "29133", "29201", "29017",
     "29179", "29187", "29123", "29186",
     "29157"]
 
-ms_basin_mo   = ["29071","29065","29099","29221","29093",
-    "29179","29031","29223","29207","29069",
-    "29155","29143","29133","29201","29017",
-    "29179","29187","29123","29186",
+ms_basin_mo = ["29071", "29065", "29099", "29221", "29093",
+    "29179", "29031", "29223", "29207", "29069",
+    "29155", "29143", "29133", "29201", "29017",
+    "29179", "29187", "29123", "29186",
     "29157"]
-ar_basin_mo   = ["29011","29145","29119","29109","29009",
-    "29077","29043","29209","29113","29067",
-    "29227","29997","29153","29091","29149",
-    "29181","29213","29017","29123","29187",
+ar_basin_mo = ["29011", "29145", "29119", "29109", "29009",
+    "29077", "29043", "29209", "29113", "29067",
+    "29227", "29997", "29153", "29091", "29149",
+    "29181", "29213", "29017", "29123", "29187",
     "29097"]
-lower_ms_mo = setdiff(ms_basin_mo,get_geo_pop(["MO"]).geoid)
+lower_ms_mo = setdiff(ms_basin_mo, get_geo_pop(["MO"]).geoid)
+ohio_basin_il = ["17019", "17183", "17041", "17045", "17029", "17023",
+    "17079", "17033", "17159", "17101", "17047", "17165",
+    "17193", "17059", "17069", "17151", "17049", "17025",
+    "17191", "17185", "17065", "17035", "17075"]
 
-# Convert WKT strings to geometric objects
-df.parsed_geoms = parse_geoms(df)
+us = get_geo_pop(postals)
 
-df          = filter(:stusps  => x -> x != "KS",df)
-df          = filter(:stusps  => x -> x != "ND",df)
-df          = filter(:stusps  => x -> x != "SD",df)
+mn = subset(us, :stusps => ByRow(==("MN")))
+mn = subset(mn, :geoid => ByRow(x -> x ∉ mo_basin_mn))
 
-df          = filter(:geoid  => x -> x ∉ missouri_river_basin,df)
-df          = filter(:geoid  => x -> x ∉ setdiff(get_geo_pop(["MI"]).geoid,peninsula),df)
-df          = filter(:geoid  => x -> x ∉ mo_basin_ia,df)
-df          = filter(:geoid  => x -> x ∉ mo_basin_mn,df)
+ia = subset(us, :stusps => ByRow(==("IA")))
+ia = subset(ia, :geoid => ByRow(x -> x ∉ mo_basin_ia))
+
+mo = subset(us, :stusps => ByRow(==("MO")))
+mo = subset(mo, :geoid => ByRow(x -> x ∉ Census.missouri_river_basin_geoids
+                                  && x ∉ southern_missouri_geoids))  
+
+il = subset(us, :stusps => ByRow(==("IL")))
+il = subset(il, :geoid => ByRow(x -> x ∉ ohio_basin_il))
+
+nd = subset(us, :stusps => ByRow(==("ND")))
+nd = subset(nd, :geoid => ByRow(x -> x ∈ eastern_geoids))
+
+sd = subset(us, :stusps => ByRow(==("SD")))
+sd = subset(sd, :geoid => ByRow(x -> x ∈ eastern_geoids))
+
+mi = subset(us, :stusps => ByRow(==("MI")))
+mi = subset(mi, :geoid => ByRow(x -> x ∈ peninsula))
+
+df = vcat(mn, ia, mo, il, nd, sd, mi)
 
 # Keep MS basin and lower MS counties in MO while excluding other MO counties
 df = filter(row -> begin
-    # Keep all non-MO counties
-    !startswith(row.geoid, "29") || # 29 is MO state FIPS code
-    # Keep specific MO counties we want (ms_basin_mo and lower_ms_mo)
-    row.geoid in ms_basin_mo || 
-    row.geoid in lower_ms_mo
-end, df)
+        # Keep all non-MO counties
+        !startswith(row.geoid, "29") || # 29 is MO state FIPS code
+        # Keep specific MO counties we want (ms_basin_mo and lower_ms_mo)
+            row.geoid in get_ne_missouri_counties()
+    end, df)
 
 
+DataFrames.rename!(df, [:geoid, :stusps, :county, :geom, :pop])
 
+breaks = rcopy(get_breaks(df, 5))
+df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
 df.parsed_geoms = parse_geoms(df)
-
+map_title = "Adjusted Heartlandia"
 dest = "+proj=aea +lat_0=40 +lon_0=-94 +lat_1=35 +lat_2=45 +datum=NAD83 +units=m +no_defs"
 # Create figure
 fig = Figure(size=(2400, 1600), fontsize=22)
 
-map_poly(df, "Adjusted Hearlandia", dest, fig)
+map_poly(df, map_title, dest, fig)
 # Display the figure
 
 display(fig)

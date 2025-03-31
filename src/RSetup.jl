@@ -17,7 +17,7 @@ Global flag to track if R environment has been set up
 const SETUP_COMPLETE = Ref(false)
 
 """
-    setup_r_environment() -> Bool
+    setup_r_environment(libraries::Vector{String} = ["classInt"]) -> Bool
 
 Set up the R environment by installing and loading required packages.
 
@@ -29,19 +29,17 @@ Set up the R environment by installing and loading required packages.
 - Sets up RCall configuration
 - Required packages: classInt
 """
-function setup_r_environment()
+function setup_r_environment(libraries::Vector{String} = ["classInt"])
     try
-        # Check if classInt is installed
-        R"""
-        if (!require("classInt")) {
-            install.packages("classInt", repos="https://cloud.r-project.org")
-        }
-        """
-        
-        # Load the package
-        R"""
-        library(classInt)
-        """
+        # Install and load each library
+        for lib in libraries
+            R"""
+            if (!require($lib, character.only = TRUE)) {
+                install.packages($lib, repos="https://cloud.r-project.org")
+                library($lib, character.only = TRUE)
+            }
+            """
+        end
         
         SETUP_COMPLETE[] = true
         return true
