@@ -1,5 +1,4 @@
 # SPDX-License-Identifier: MIT
-# need to take out Erie
 add_from_metro = ["36003", "36009", "36011",
     "36013", "36014", "36015", "36019", "36019", "36029",
     "36031", "36031", "36033", "36037", "36037", "36037",
@@ -74,48 +73,45 @@ take_from_ky     = setdiff(get_geo_pop(["KY"]).geoid,ohio_basin_ky)
 take_from_tn     = setdiff(get_geo_pop(["TN"]).geoid,ohio_basin_tn)
 take_from_va     = setdiff(get_geo_pop(["VA"]).geoid,ohio_basin_va)
 take_from_metro  = setdiff(get_geo_pop(["NY"]).geoid,add_from_metro)
+rejig            = copy(Census.factoria)
+regig            = push!(rejig,"NY","WV","TN","KY","MD","VA","AL","MS","GA","NC")
+df               = get_geo_pop(regig)
+DataFrames.rename!(df, [:geoid, :stusps, :county, :geom, :pop])
 
-df = get_geo_pop(postals)
+df = filter(:stusps => x -> x != "WI",df)
+df = filter(:stusps => x -> x != "MI",df)
+df = filter(:geoid  => x -> x ∉ gl_in,df)
+df = filter(:geoid  => x -> x ∉ gl_oh,df)  
+df = filter(:geoid  => x -> x ∉ take_from_al,df)
+df = filter(:geoid  => x -> x ∉ take_from_ga,df)
+df = filter(:geoid  => x -> x ∉ take_from_il,df)
+df = filter(:geoid  => x -> x ∉ take_from_ky,df)
+df = filter(:geoid  => x -> x ∉ take_from_md,df)
+df = filter(:geoid  => x -> x ∉ take_from_metro,df)
+df = filter(:geoid  => x -> x ∉ metro_to_gl,df)
+df = filter(:geoid  => x -> x ∉ take_from_ms,df)
+df = filter(:geoid  => x -> x ∉ take_from_nc,df)
+df = filter(:geoid  => x -> x ∉ take_from_oh,df)
+df = filter(:geoid  => x -> x ∉ take_from_tn,df)
+df = filter(:geoid  => x -> x ∉ take_from_va,df)
+df = filter(:geoid  => x -> x ∉ gl_pa && 
+                            x ∉ take_from_pa,df)
 
-oh = subset(df, :stusps => ByRow(==("OH")))
-oh = subset(oh, :geoid => ByRow(x -> x ∉ take_from_oh))
-
-pa = subset(df, :stusps => ByRow(==("PA")))
-pa = subset(pa, :geoid => ByRow(x -> x ∉ take_from_pa))
-
-il = subset(df, :stusps => ByRow(==("IL")))
-il = subset(il, :geoid => ByRow(x -> x ∉ take_from_il))
-
-in = subset(df, :stusps => ByRow(==("IN")))
-in = subset(in, :geoid => ByRow(x -> x ∉ take_from_in))     
-
-ky = subset(df, :stusps => ByRow(==("KY")))
-ky = subset(ky, :geoid => ByRow(x -> x ∉ take_from_ky))
-
-tn = subset(df, :stusps => ByRow(==("TN")))
-tn = subset(tn, :geoid => ByRow(x -> x ∉ take_from_tn)) 
-
-va = subset(df, :stusps => ByRow(==("VA")))
-va = subset(va, :geoid => ByRow(x -> x ∉ take_from_va)) 
-
-ny = subset(df, :stusps => ByRow(==("NY")))
-ny = subset(ny, :geoid => ByRow(x -> x ∉ take_from_metro))
-
-df = vcat(oh,pa,il,in,ky,tn,va,ny)  
-
+df = get_geo_pop(["NY"])
+RSetup.setup_r_environment()
 rename!(df, [:geoid, :stusps, :county, :geom, :pop])
 
-breaks      = rcopy(get_breaks(df,5))
+breaks      = RCall.rcopy(get_breaks(df,5))
 df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
 
 # Convert WKT strings to geometric objects
 df.parsed_geoms = parse_geoms(df)
-map_title = "Adjusted Factoria"
+
 dest = "+proj=aea +lat_0=38 +lon_0=-85 +lat_1=30 +lat_2=45 +datum=NAD83 +units=m +no_defs"
 # Create figure
 fig = Figure(size=(2400, 1600), fontsize=22)
 
-map_poly(df, map_title, dest, fig)
+map_poly(df, "Adjusted Factoria", dest, fig)
 # Display the figure
 
 display(fig)
