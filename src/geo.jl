@@ -35,18 +35,13 @@ df = get_geo_pop(states)
 ```
 
 # Notes
-- Automatically converts input to PostalCode objects
 - Requires LibPQ for database connection
 - Returns WKT format geometries (use parse_geoms to convert to ArchGDAL geometries)
 - Closes database connection after query
 """
 function get_geo_pop(target_states::Vector{String})
-    target_states = make_postal_codes(target_states)
     # Connect to database
     conn = LibPQ.Connection("dbname=geocoder")
-    
-    # Convert PostalCode objects to their string values for the query
-    state_codes = [pc.code for pc in target_states]
     
     # Prepare the query with parameter placeholder
     geo_query = """
@@ -59,7 +54,7 @@ function get_geo_pop(target_states::Vector{String})
     """
     
     # Execute the query with parameters
-    result = execute(conn, geo_query, [state_codes])
+    result = execute(conn, geo_query, [target_states])
     
     # Process the result
     df = DataFrame(result)

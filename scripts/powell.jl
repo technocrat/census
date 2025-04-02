@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: MIT
 
-
+using Census
+using Census.geoids  # Add explicit import of geoids submodule
+using DataFrames
 us              = get_geo_pop(Census.postals)
 
 rename!(us, [:geoid, :stusps, :county, :geom, :pop])
-
 
 const colorado_basin_geoids = get_colorado_basin_geoids()
 const slope_geoids = get_slope_geoids().geoid
@@ -60,8 +61,7 @@ az = subset(az, :geoid => ByRow(x -> x ∈ colorado_basin_geoids))
 nm = subset(us, :stusps => ByRow(==("NM")))
 
 mt = subset(us, :stusps => ByRow(==("MT")))
-mt_keep = ["30011","30025"]
-mt = subset(mt, :geoid => ByRow(x -> x ∈ missouri_river_basin || x ∈ mt_keep))
+mt = subset(mt, :geoid => ByRow(x -> x ∉ west_montana))
 
 co = subset(us, :stusps => ByRow(x -> x == "CO"))
 
@@ -91,24 +91,42 @@ ut = subset(ut, :geoid => ByRow(x -> x ∈ keep_ut))
 
 df = vcat(mt,nm,wy,az,co,az,nd,sd,ne,ks,tx,ok,ut)
 
-df = subset(df, :stusps => ByRow(x -> x ∉ ["AK"]))
+
 setup_r_environment()
 breaks          = rcopy(get_breaks(df,5))
-df.pop_bins     = my_cut(df.pop, breaks[:kmeans][:brks])
+df.pop_bins     = customcut(df.pop, breaks[:kmeans][:brks])
 df.parsed_geoms = parse_geoms(df)
 
 dest = """
 +proj=aea +lat_1=25 +lat_2=47 +lat_0=36 +lon_0=-110 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs
 """
 
+map_title = "Powell"
 # Create figure
 fig = Figure(size=(2400, 1600), fontsize=22)
 
-map_poly(df, "Powell", dest, fig)
-# Display the figure
+# Create the map
+map_poly_with_projection(df, map_title, dest, fig)
 
+# Save the figure with absolute path
+img_dir = abspath("/Users/ro/projects/census/img")  # Use absolute path to Census project
+@info "Saving to directory: $img_dir"
+saved_path = save_plot(fig, map_title, directory=img_dir)
+@info "Plot saved to: $saved_path"
+
+# Verify file exists
+if isfile(saved_path)
+    @info "File successfully created at: $saved_path"
+else
+    @error "Failed to create file at: $saved_path"
+end
+
+# Display the figure
 display(fig)
 
+
+powell_geoids = df.geoid
+set_nation_state_geoids("Powell", powell_geoids)
 
 
 

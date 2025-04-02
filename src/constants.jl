@@ -15,7 +15,11 @@ const VALID_POSTAL_CODES = [
     "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "DC"
 ]
 
-# Define postals as an alias for VALID_POSTAL_CODES for backward compatibility
+# Transrockies counties in Montana
+const west_montana = ["30023", "30029", "30039", "30047", "30053",
+                      "30061", "30063", "30081", "30089", "30093"]
+
+                      # Define postals as an alias for VALID_POSTAL_CODES for backward compatibility
 const postals = VALID_POSTAL_CODES
 
 const VALID_STATE_NAMES = Dict(
@@ -140,4 +144,18 @@ end
 Base.string(pc::PostalCode) = pc.code
 Base.show(io::IO, pc::PostalCode) = print(io, pc.code)
 Base.:(==)(a::PostalCode, b::PostalCode) = a.code == b.code
-Base.hash(pc::PostalCode, h::UInt) = hash(pc.code, h) 
+Base.hash(pc::PostalCode, h::UInt) = hash(pc.code, h)
+
+"""
+    US_POSTALS
+
+Vector of all US state postal codes, including territories.
+"""
+const US_POSTALS = [
+    "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+    "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+    "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+    "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+    "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY",
+    "DC", "PR", "VI", "GU", "AS", "MP"
+] 

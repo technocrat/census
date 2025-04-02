@@ -19,7 +19,7 @@ df = vcat(ny,pa,oh,ind,mi,il)
 rename!(df, [:geoid, :stusps, :county, :geom, :pop])
 RSetup.setup_r_environment()
 breaks = RCall.rcopy(get_breaks(df,5))
-df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
+df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
 df.parsed_geoms = parse_geoms(df)
 peninsula = ["26053", "26131", "26061", "26083", "26013", "26071", "26103",
         "26003", "26109", "26041", "26053", "26956", "26976", "26033",
@@ -69,7 +69,7 @@ df = filter(:geoid => x -> x ∉ exclude_from_erie,df)
 DataFrames.rename!(df, [:geoid, :stusps, :county, :geom, :pop])
 RSetup.setup_r_environment()
 breaks      = rcopy(RSetup.get_breaks(df,5))
-df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
+df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
 dest = +proj=aea +lat_0=43.1 +lon_0=-79.0 +lat_1=41 +lat_2=45 +datum=NAD83 +units=m +no_defs
 # Create figure
 fig = Figure(size=(2400, 1600), fontsize=22)

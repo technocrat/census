@@ -1,4 +1,9 @@
 # SPDX-License-Identifier: MIT
+using Census
+using Dates
+using RCall
+using CSV
+using DataFrames    
 
 """
     r_get_acs_data(; geography::String, variables::Dict{String, String}, state::String,
@@ -37,12 +42,20 @@ df = r_get_acs_data(geography="county", variables=vars, state="MA")
 # Get 1-year estimates for 2022
 df = r_get_acs_data(geography="county", variables=vars, state="MA",
                   survey="acs1", year=2022)
+```
 """
 function r_get_acs_data(; geography::String,
                       variables::Dict{String, String},
                       state::String,
                       year::Union{Integer, Nothing} = nothing,
                       survey::Union{String, Nothing} = nothing)
+
+    # Ensure R environment is set up using Census module's function
+    try
+        Census.RSetup.setup_r_environment()
+    catch e
+        error("Failed to set up R environment: ", sprint(showerror, e))
+    end
 
     # Determine current date for default year logic
     current_date = Dates.now()
@@ -70,29 +83,51 @@ function r_get_acs_data(; geography::String,
     # Convert Julia Dict to R named vector
     var_names = collect(keys(variables))
     var_codes = collect(values(variables))
-    r_vars    = R"setNames("$"(var_codes), $(var_names))"
+    
+    # Use proper R string interpolation
+    R"""
+    r_vars <- setNames(c($(var_codes)), c($(var_names)))
+    """
 
-    # Build R function call, conditionally including survey parameter
-    if isnothing(survey)
-        R"""
-        # Call R get_acs() with the provided parameters
-        data <- get_acs(geography = $geography,
-                       variables  = $r_vars,
-                       state      = $state,
-                       year       = $year)
-        """
-    else
-        R"""
-        # Call R get_acs() with the provided parameters including survey
-        data <- get_acs(geography = $geography,
-                       variables  = $r_vars,
-                       state      = $state,
-                       year       = $year,
-                       survey     = $survey)
-        """
+    # Build R function call with proper error handling
+    try
+        if isnothing(survey)
+            R"""
+            # Ensure tidycensus is loaded
+            library(tidycensus)
+            
+            # Call R get_acs() with the provided parameters
+            data <- get_acs(geography = $(geography),
+                          variables = r_vars,
+                          state = $(state),
+                          year = $(year))
+            """
+        else
+            R"""
+            # Ensure tidycensus is loaded
+            library(tidycensus)
+            
+            # Call R get_acs() with the provided parameters including survey
+            data <- get_acs(geography = $(geography),
+                          variables = r_vars,
+                          state = $(state),
+                          year = $(year),
+                          survey = $(survey))
+            """
+        end
+    catch e
+        if isa(e, RCall.REvalError)
+            error("R evaluation error: ", sprint(showerror, e))
+        else
+            rethrow(e)
+        end
     end
 
-    # Convert R data frame to Julia DataFrame
-    return rcopy(R"data")
+    # Convert R data frame to Julia DataFrame with error handling
+    try
+        return rcopy(R"data")
+    catch e
+        error("Failed to convert R data frame to Julia DataFrame: ", sprint(showerror, e))
+    end
 end
 

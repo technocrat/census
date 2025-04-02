@@ -7,15 +7,15 @@ using LibPQ
 using DataFrames
 using ArchGDAL
 
-# Import get_geo_pop from parent module
-import ..Census: get_geo_pop
+# Import specific functions
+import LibPQ: execute
 
 # Database connection parameters
 const DB_HOST = "localhost"
 const DB_PORT = 5432
 const DB_NAME = "geocoder"
 
-# Longitude boundaries for regions
+# Geographic constants
 const WESTERN_BOUNDARY = -115.0
 const EASTERN_BOUNDARY = -90.0
 const CONTINENTAL_DIVIDE = -109.5
@@ -24,24 +24,12 @@ const SLOPE_EAST = -115.0
 const UTAH_BORDER = -109.0
 const CENTRAL_MERIDIAN = -100.0
 
-# Include the implementation and CRS definitions
-include(joinpath(@__DIR__, "impl.jl"))
-include(joinpath(@__DIR__, "crs.jl"))
+# Import database connection function
+import ..Census: get_db_connection
 
-# Pre-compute commonly used geoid sets
-const western_geoids = get_western_geoids()
-const eastern_geoids = get_eastern_geoids()
-const east_of_utah_geoids = get_east_of_utah_geoids()
-const east_of_cascade_geoids = get_east_of_cascade_geoids()
-const west_of_cascades = get_west_of_cascades()
-const east_of_cascades = get_east_of_cascades()
-const southern_kansas_geoids = get_southern_kansas_geoids()
-const northern_kansas_geoids = get_northern_kansas_geoids()
-const colorado_basin_geoids = get_colorado_basin_geoids()
-const ne_missouri_geoids = get_ne_missouri_geoids()
-const southern_missouri_geoids = get_southern_missouri_geoids()
-const northern_missouri_geoids = get_northern_missouri_geoids()
-const missouri_river_basin_geoids = get_missouri_river_basin_geoids()
+# Include implementation files
+include("impl.jl")
+include("crs.jl")
 
 # Export public functions
 export get_db_connection,
@@ -58,7 +46,13 @@ export get_db_connection,
        get_southern_missouri_geoids,
        get_northern_missouri_geoids,
        get_missouri_river_basin_geoids,
-       get_crs
+       get_slope_geoids,
+       get_crs,
+       setup_nation_states_table,
+       set_nation_state_geoids,
+       get_nation_state_geoids,
+       clear_nation_state_geoids,
+       execute
 
 # Export constants
 export DB_HOST,
@@ -71,10 +65,25 @@ export DB_HOST,
        SLOPE_EAST,
        UTAH_BORDER,
        CENTRAL_MERIDIAN,
-       CRS_STRINGS,
-       east_of_sierras_geoids
+       CRS_STRINGS
 
+# Static geoid sets
 const east_of_sierras_geoids = ["06049","06035","06091"]
+
+# Pre-compute commonly used geoid sets using imported functions
+const western_geoids = get_western_geoids()
+const eastern_geoids = get_eastern_geoids()
+const east_of_utah_geoids = get_east_of_utah_geoids()
+const east_of_cascade_geoids = get_east_of_cascade_geoids()
+const west_of_cascades = get_west_of_cascades()
+const east_of_cascades = get_east_of_cascades()
+const southern_kansas_geoids = get_southern_kansas_geoids()
+const northern_kansas_geoids = get_northern_kansas_geoids()
+const colorado_basin_geoids = get_colorado_basin_geoids()
+const ne_missouri_geoids = get_ne_missouri_geoids()
+const southern_missouri_geoids = get_southern_missouri_geoids()
+const northern_missouri_geoids = get_northern_missouri_geoids()
+const missouri_river_basin_geoids = get_missouri_river_basin_geoids()
 
 # Export pre-computed geoid sets
 export western_geoids,

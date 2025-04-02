@@ -2,30 +2,29 @@ using Documenter
 using Census
 
 makedocs(
-    sitename = "Census",
+    sitename = "Census.jl",
     format = Documenter.HTML(),
     modules = [Census],
     pages = [
         "Home" => "index.md",
         "API Reference" => [
-            "Core Functions" => "api/core.md",
-            "Data Processing" => "api/data_processing.md",
-            "Visualization" => "api/visualization.md"
+            "Main Functions" => "api/main.md",
+            "Types" => "api/types.md",
+            "Helper Functions" => "api/helpers.md"
         ],
         "Tutorials" => [
             "Getting Started" => "tutorials/getting_started.md",
-            "Population Analysis" => "tutorials/population.md",
-            "Economic Analysis" => "tutorials/economics.md"
+            "Working with Variables" => "tutorials/variables.md",
+            "Geographic Data" => "tutorials/geography.md",
+            "Mapping" => "tutorials/mapping.md"
         ]
-    ],
-    doctest = true,
-    clean = true,
-    checkdocs = :none  # Temporarily disable checking for missing docstrings
+    ]
 )
 
 # Documenter can also automatically deploy documentation to gh-pages.
 # See "Hosting Documentation" and deploydocs() in the Documenter manual
 # for more information.
 deploydocs(
-    repo = "github.com/USERNAME/Census.jl.git"  # Update this with your actual repository
+    repo = "github.com/username/Census.jl.git",
+    devbranch = "main"
 ) 

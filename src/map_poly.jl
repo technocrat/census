@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 """
-    map_poly(df::DataFrame, title::String, dest::String, fig::Figure; save_path::Union{String,Nothing}=nothing, preview::Bool=false)
+    map_poly_with_projection(df::DataFrame, title::String, dest::String, fig::Figure; save_path::Union{String,Nothing}=nothing, preview::Bool=false)
 
 Create a choropleth map of polygons from a DataFrame with customizable styling and labels.
 
@@ -46,7 +46,7 @@ df = DataFrame(
     pop_bins = [1, 2, 3, ...],
     county = ["County A", "County B", ...]
 )
-map_poly(df, "Population by County", "EPSG:4326", fig, save_path="map.png")
+map_poly_with_projection(df, "Population by County", "EPSG:4326", fig, save_path="map.png")
 ```
 
 # Notes
@@ -56,7 +56,7 @@ map_poly(df, "Population by County", "EPSG:4326", fig, save_path="map.png")
 - Creates directories for save_path if they don't exist
 - Preview functionality is macOS-specific
 """
-function map_poly(df::DataFrame, title::String, dest::String, fig::Figure; 
+function map_poly_with_projection(df::DataFrame, title::String, dest::String, fig::Figure; 
                  save_path::Union{String,Nothing}=nothing, preview::Bool=false)
     # Ensure we have parsed geometries
     if !hasproperty(df, :parsed_geoms)

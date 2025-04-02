@@ -6,7 +6,7 @@ DataFrames.rename!(df, [:geoid, :stusps, :county, :geom, :pop])
 df = filter(:geoid => x -> x ∈ south_fl, df)
 RSetup.setup_r_environment()
 breaks      = rcopy(RSetup.get_breaks(df,5))
-df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
+df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
 
 # Convert WKT strings to geometric objects
 df.parsed_geoms = parse_geoms(df)

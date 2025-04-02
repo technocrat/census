@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
-# Import get_db_connection from parent module
-import ..Census: get_db_connection
+using DataFrames
+using ArchGDAL
 
 """
     get_western_geoids() -> Vector{String}
@@ -18,7 +18,7 @@ function get_western_geoids()
     WHERE ST_X(ST_Centroid(geom)) < -100.0
     ORDER BY lon;
     """
-    result = execute(conn, query)
+    result = LibPQ.execute(conn, query)
     close(conn)
     return DataFrame(result).geoid
 end
@@ -39,7 +39,7 @@ function get_eastern_geoids()
     AND ST_X(ST_Centroid(geom)) < -90
     ORDER BY lon;
     """
-    result = execute(conn, query)
+    result = LibPQ.execute(conn, query)
     close(conn)
     return DataFrame(result).geoid
 end
@@ -57,7 +57,7 @@ function get_east_of_utah_geoids()::Vector{String}
     WHERE ST_X(ST_Centroid(geom)) > $UTAH_BORDER
     ORDER BY lon;
     """
-    result = execute(conn, query)
+    result = LibPQ.execute(conn, query)
     close(conn)
     return DataFrame(result).geoid
 end
@@ -76,7 +76,7 @@ function get_east_of_cascade_geoids()::Vector{String}
     WHERE ST_X(ST_Centroid(geom)) BETWEEN $SLOPE_WEST AND $SLOPE_EAST
     ORDER BY lon;
     """
-    result = execute(conn, query)
+    result = LibPQ.execute(conn, query)
     close(conn)
     return DataFrame(result).geoid
 end
@@ -99,7 +99,7 @@ function get_southern_kansas_geoids()::Vector{String}
     AND ST_Y(ST_Centroid(c.geom)) < ST_Y(ST_Centroid(o.geom))  -- South of Osage County
     ORDER BY ST_Distance(c.geom, o.geom);
     """
-    result = execute(conn, query)
+    result = LibPQ.execute(conn, query)
     close(conn)
     return DataFrame(result).geoid
 end
@@ -122,7 +122,7 @@ function get_northern_kansas_geoids()::Vector{String}
     AND ST_Y(ST_Centroid(c.geom)) > ST_Y(ST_Centroid(o.geom))  -- North of Osage County
     ORDER BY ST_Distance(c.geom, o.geom);
     """
-    result = execute(conn, query)
+    result = LibPQ.execute(conn, query)
     close(conn)
     return DataFrame(result).geoid
 end
@@ -187,7 +187,7 @@ function get_ne_missouri_geoids()::Vector{String}
     """
 
     conn = get_db_connection()
-    result = DataFrame(execute(conn, query))
+    result = DataFrame(LibPQ.execute(conn, query))
     close(conn)
     return result.geoid
 end
@@ -215,14 +215,24 @@ function get_southern_missouri_geoids()::Vector{String}
     """
 
     conn = get_db_connection()
-    result = execute(conn, query)
+    result = LibPQ.execute(conn, query)
     close(conn)
 
     DataFrame(result).geoid
 end
 
 function get_northern_missouri_geoids()::Vector{String}
-    setdiff(get_geo_pop(["MO"]).geoid, get_southern_missouri_geoids())
+    conn = get_db_connection()
+    query = """
+    SELECT geoid 
+    FROM census.counties 
+    WHERE stusps = 'MO' AND geoid NOT IN (
+        SELECT geoid FROM census.counties WHERE geoid = ANY(\$1)
+    )
+    """
+    result = LibPQ.execute(conn, query, [get_southern_missouri_geoids()])
+    close(conn)
+    return DataFrame(result).geoid
 end
 
 """
@@ -230,19 +240,17 @@ Get Missouri River Basin county geoids by combining northern and southern Missou
 excluding those that drain into the Mississippi River.
 """
 function get_missouri_river_basin_geoids()::Vector{String}
-    # Get all Missouri counties
-    all_mo = get_geo_pop(["MO"]).geoid
-    
-    # Get counties that drain into the Mississippi
-    mississippi_counties = get_ne_missouri_geoids()
-    
-    # Get counties that don't drain into the Missouri
-    non_missouri_counties = get_southern_missouri_geoids()
-    
-    # The Missouri River Basin counties are all Missouri counties
-    # minus those that drain into the Mississippi
-    # minus those that don't drain into the Missouri
-    return setdiff(all_mo, mississippi_counties, non_missouri_counties)
+    conn = get_db_connection()
+    query = """
+    SELECT geoid 
+    FROM census.counties 
+    WHERE stusps = 'MO' AND geoid NOT IN (
+        SELECT geoid FROM census.counties WHERE geoid = ANY(\$1) OR geoid = ANY(\$2)
+    )
+    """
+    result = LibPQ.execute(conn, query, [get_ne_missouri_geoids(), get_southern_missouri_geoids()])
+    close(conn)
+    return DataFrame(result).geoid
 end
 
 """
@@ -258,7 +266,7 @@ function get_west_of_cascades()::Vector{String}
     WHERE ST_X(ST_Centroid(geom)) < $SLOPE_WEST
     ORDER BY lon;
     """
-    result = execute(conn, query)
+    result = LibPQ.execute(conn, query)
     close(conn)
     return DataFrame(result).geoid
 end
@@ -276,10 +284,94 @@ function get_east_of_cascades()::Vector{String}
     WHERE ST_X(ST_Centroid(geom)) > $SLOPE_EAST
     ORDER BY lon;
     """
-    result = execute(conn, query)
+    result = LibPQ.execute(conn, query)
     close(conn)
     return DataFrame(result).geoid
 end
 
 # Define static geoid sets
 # const east_of_sierras_geoids = ["06049", "06035", "06051", "06027"]
+
+"""
+    setup_nation_states_table()
+
+Creates or updates the nation_state column in the census.counties table.
+"""
+function setup_nation_states_table()
+    conn = get_db_connection()
+    query = """
+    DO \$\$
+    BEGIN
+        IF NOT EXISTS (
+            SELECT 1 
+            FROM information_schema.columns 
+            WHERE table_schema = 'census' 
+            AND table_name = 'counties' 
+            AND column_name = 'nation_state'
+        ) THEN
+            ALTER TABLE census.counties 
+            ADD COLUMN nation_state VARCHAR(50);
+        END IF;
+    END \$\$;
+    """
+    LibPQ.execute(conn, query)
+    close(conn)
+end
+
+"""
+    set_nation_state_geoids(nation_state::String, geoids::Union{Vector{String}, Vector{Union{Missing, String}}})
+
+Associates the given geoids with a nation state in the database. Handles both Vector{String} and 
+Vector{Union{Missing, String}}, filtering out any missing values.
+"""
+function set_nation_state_geoids(nation_state::String, geoids::Union{Vector{String}, Vector{Union{Missing, String}}})
+    # Filter out missing values and convert to Vector{String}
+    clean_geoids = filter(!ismissing, geoids)
+    
+    conn = get_db_connection()
+    # First ensure the table is set up
+    setup_nation_states_table()
+    
+    # Update the nation state for these geoids
+    query = """
+    UPDATE census.counties 
+    SET nation_state = \$1 
+    WHERE geoid = ANY(\$2::text[]);
+    """
+    LibPQ.execute(conn, query, [nation_state, "{" * join(clean_geoids, ",") * "}"])
+    close(conn)
+end
+
+"""
+    get_nation_state_geoids(nation_state::String)::Vector{String}
+
+Retrieves all geoids associated with a given nation state.
+"""
+function get_nation_state_geoids(nation_state::String)::Vector{String}
+    conn = get_db_connection()
+    query = """
+    SELECT geoid 
+    FROM census.counties 
+    WHERE nation_state = \$1
+    ORDER BY geoid;
+    """
+    result = LibPQ.execute(conn, query, [nation_state])
+    close(conn)
+    return DataFrame(result).geoid
+end
+
+"""
+    clear_nation_state_geoids(nation_state::String)
+
+Removes the nation state association for all counties of the given nation state.
+"""
+function clear_nation_state_geoids(nation_state::String)
+    conn = get_db_connection()
+    query = """
+    UPDATE census.counties 
+    SET nation_state = \$1 
+    WHERE nation_state = \$1;
+    """
+    LibPQ.execute(conn, query, [nation_state])
+    close(conn)
+end

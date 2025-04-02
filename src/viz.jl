@@ -244,25 +244,42 @@ function create_birth_table()
 end
 
 """
-    save_plot(plot, title::String; format::String="png")
+    save_plot(plot, title::String; format::String="png", directory::String="img") -> String
 
-Saves a plot to a file with a standardized naming convention.
+Save a plot to a specified directory with a given title and format.
 
 # Arguments
-- `plot`: The plot object to save (Plots.jl or Makie.jl)
-- `title::String`: Title for the plot (used in filename)
-- `format::String`: Output format (default: "png")
+- `plot`: A Plots.Plot or Makie.Figure object to save
+- `title::String`: Title to use in the filename
+- `format::String="png"`: Output format (default: "png")
+- `directory::String="img"`: Target directory (default: "img")
 
 # Returns
-- The path to the saved file
+- `String`: Absolute path to the saved file
+
+# Example
+```julia
+using CairoMakie
+fig = Figure()
+# ... create plot ...
+save_plot(fig, "My Plot")  # Saves to img/My_Plot_TIMESTAMP.png
+```
 
 # Notes
-- Creates a 'plots' directory if it doesn't exist
-- Filename includes timestamp and sanitized title
+- Creates the target directory if it doesn't exist
+- Sanitizes title for use in filename
+- Adds timestamp to filename to prevent overwrites
+- Supports both Plots.jl and Makie plots
+- Uses absolute paths for reliable file operations
 """
-function save_plot(plot, title::String; format::String="png")
-    # Create plots directory if it doesn't exist
-    mkpath("plots")
+function save_plot(plot, title::String; format::String="png", directory::String="img")
+    # Convert to absolute path if relative
+    if !isabspath(directory)
+        directory = abspath(directory)
+    end
+    
+    # Create directory if it doesn't exist
+    mkpath(directory)
     
     # Create timestamp
     timestamp = Dates.format(now(), "yyyy-mm-dd_HH-MM-SS")
@@ -270,18 +287,19 @@ function save_plot(plot, title::String; format::String="png")
     # Sanitize title for filename
     safe_title = replace(title, r"[^a-zA-Z0-9]" => "_")
     
-    # Create filename
-    filename = "plots/$(safe_title)_$(timestamp).$(format)"
+    # Create filename with absolute path
+    filename = joinpath(directory, "$(safe_title)_$(timestamp).$(format)")
     
     # Save the plot
     if plot isa Plots.Plot
         Plots.savefig(plot, filename)
     elseif plot isa Figure
-        save(filename, plot)
+        save(filename, plot, px_per_unit=2)  # Increased resolution
     else
-        error("Unsupported plot type")
+        error("Unsupported plot type: $(typeof(plot))")
     end
     
+    @info "Plot saved to: $filename"
     return filename
 end
 

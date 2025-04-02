@@ -1,8 +1,0 @@
-*.jl.*.cov
-*.jl.cov
-*.jo.mem
-/Manifest.toml
-/docs/build
-/.DS_Store
-/data
-

@@ -1,0 +1,80 @@
+
+## PROJECT OVERVIEW
+This project analyzes alternatives for nation states to replace the existing United States, considering population characteristics, economics, politics, history, and natural geography. The output will be an HTML publication using Franklin.jl.  The goal is to complete a comprehensive Julia package, `Census.jl`, providing similar functionality to R's `tidycensus` package. The primary database used is PostgreSQL.  A new script, `scripts/create_census_variables_table.jl`, has been added to handle the creation of a PostgreSQL table from a large JSON file (`data/census_acs_2023_variables.json`).  The project will leverage an existing Julia package for Census API interaction, enhancing it to match the functionality of the R `tidycensus` package.  Key enhancements include support for various geography levels, margin of error calculations, geometry support, variable table caching, and multiple survey types (1-year, 3-year, 5-year).  The R package `tidycensus` serves as a reference for implementing equivalent functionality in Julia.  A sister package, `ACS.jl`, has been created to handle ACS data retrieval more efficiently.
+
+## CODE STYLE
+Functional programming approach is preferred.  Prioritize readability over performance.  Fully qualify all function and type names to improve clarity, maintainability, and prevent namespace conflicts.  Use `include(joinpath(@__DIR__, "filename.jl"))` for consistent file inclusion within modules.  Absolute paths from the project root should be used for all file paths.  Indexing with length is discouraged; use `eachindex` or `axes` instead.  Correct R string interpolation syntax should be used in RCall functions.  Robust error handling should be implemented in all functions interacting with external resources, including the Census API and R.
+
+## FOLDER ORGANIZATION
+(Folder organization details are not provided in the new interactions and should be added separately if needed).
+
+## TECH STACK
+Julia, R, PostgreSQL, Franklin.jl, Documenter.jl (v1.9.0), RCall, LibGEOS, WellKnownGeometry, CairoMakie, GeoMakie, GeoInterface, LibPQ, HTTP, tidycensus (R package - for reference), CSV, GeoJSON, ZipFile, GeoInterface.jl,  Tigris, Statistics, XLSX
+
+## PROJECT-SPECIFIC STANDARDS
+(Project-specific standards details are not provided in the new interactions and should be added separately if needed).  Files should be consistently marked with "SPDX-License-Identifier: MIT" where appropriate.  This will be implemented in all files eventually.
+
+## WORKFLOW & RELEASE RULES
+(Workflow and release rules details are not provided in the new interactions and should be added separately if needed).  A new branch, `consolidated-processing`, has been created and pushed to GitHub for managing updates.  Pull requests should be used for merging changes into the main branch. Deprecated files should be moved to a `holding` directory.  If a file is marked as deprecated without further comment, it should be moved to the `holding` directory.  Files marked as deprecated should be moved to the `holding` directory. The process for handling deprecated files has been clarified: files marked as deprecated without further comment should be moved to the `holding` directory.
+
+## REFERENCE EXAMPLES
+(Reference examples details are not provided in the new interactions and should be added separately if needed).  An example of adding an optional argument to a function: The `find_county_variables` function in `src/acs.jl` has been updated to accept an optional `additional_codes` argument (a vector of strings) and an `include_base_codes` argument (a boolean) allowing users to specify additional 3-character variable codes for the query and to optionally exclude the base codes ("B01", "B19", "B25", "B23", "B15"). The base codes are included by default.  If `include_base_codes` is false, at least one code must be provided in `additional_codes`.  The function has been further updated to allow filtering results where the `variable_id` ends with "01E".  The function now includes a check to ensure at least one code is provided if `include_base_codes` is false. Incorrect package URL formats when adding packages from GitHub should be avoided; the `.jl` extension should not be included in the URL.  The `fetch_census_data` function's docstring example has been updated to reflect dynamic column generation based on the query's `variables` argument.  The example now uses `CensusQuery(variables=["B19013_001E"])` to fetch median household income data.  The `get_census_data` function's docstring now includes examples demonstrating both single and multiple variable queries, clarifying that each requested variable becomes a column in the output DataFrame. The example for `get_census_data` now uses `variables=["B19013_001E"]` to fetch median household income data and includes a second example using multiple variables: `variables=["B19013_001E", "B01003_001E"]`.  The R `tidycensus` package will serve as a reference for implementing equivalent functionality in Julia.  The `get_acs` function now includes examples demonstrating both single and multiple variable queries, and fetching data from specific tables.  The `get_acs` function in the R `tidycensus` package serves as a reference for implementing similar functionality in Julia.  The R code for `get_acs` function is included in `2025-04-01_01-43-census-api-usage-in-r.md`.  The R code for the `get_acs` function is included in `2025-04-01_01-43-census-api-usage-in-r.md`.  The R code example from `2025-04-01_01-43-census-api-usage-in-r.md` provides a comprehensive illustration of the `get_acs` function's capabilities in R.  This serves as a valuable reference for developing equivalent functionality within the Julia `Census.jl` package.  The R code example from `2025-04-01_01-43-census-api-usage-in-r.md` is a valuable reference for developing equivalent functionality within the Julia `Census.jl` package.  The R code example in `2025-04-01_01-43-census-api-usage-in-r.md` shows how to use the `get_acs` function in R. This serves as a reference for the Julia implementation.  The R code example for the `get_acs` function in `2025-04-01_01-43-census-api-usage-in-r.md` serves as a valuable reference for the Julia implementation.  All exported functions should be explicitly listed in the `export` block of the `Census.jl` module.  The `r_get_acs_data` function should utilize the `setup_r_environment` function to ensure the `tidycensus` package is loaded correctly within the R environment before executing `get_acs`.  Correct R string interpolation should be used; for example, `R"setNames(c($(var_codes)), c($(var_names)))"` is the correct syntax.
+
+## PROJECT DOCUMENTATION & CONTEXT SYSTEM
+Documentation should be included with code suggestions.  Project context: Analysis of alternatives for nation states to replace the existing United States.  Docstrings will be added to functions in the `src` directory using Julia's documentation conventions in anticipation of using Documenter.jl.  Docstrings have been added to core functions and modules in the `src` directory following Julia's documentation conventions.  This anticipates the future use of Documenter.jl for generating project documentation.  Docstrings have been added to the following functions: `get_nation_state`, `initialize`, `get_us_ages`, `get_dem_vote`, `get_gop_vote`, `get_childbearing_population`, `get_state_pop`, `make_nation_state_pop_df`, `make_nation_state_gdp_df`, and `map_poly`.  These docstrings follow Julia's documentation conventions and include function signatures, descriptions, argument and return types, examples, and notes.  All functions in `src/acs.jl`, `src/geo.jl`, `src/ga.jl`, and `src/margins.jl` now have comprehensive docstrings following Julia's conventions.  These include function signatures, descriptions, argument and return types, examples, and notes.  All functions within the `src` directory now have comprehensive docstrings.  Documenter.jl has been added as a project dependency to facilitate documentation generation. A `docs` directory has been created with a `make.jl` file for building documentation using Documenter.jl.  Tutorials on getting started, population analysis, and economic analysis have been added to the documentation.  The documentation includes API reference sections for core functions, data processing, and visualization. Version 1.9.0 of Documenter.jl is now used.  A `CensusQuery` struct has been added to `src/acs.jl` to define the type for census query configurations.  This struct includes fields for `year`, `acs_period`, `variables`, `geography`, `table`, `state`, `county`, `zcta`, `geometry`, `shift_geo`, `keep_geo_vars`, `summary_var`, `moe_level`, and `api_key`.
+
+## DEBUGGING
+(Debugging details are not provided in the new interactions and should be added separately if needed).  A common error is using unqualified variable names, such as `concord`, which should be qualified as `Census.concord`. Another common error is a simple typo in function names, such as `get_ne_missouri_counties` which should be `get_ne_missouri_geoids`.  A further common error is incorrect relative paths when including files within modules; use `include(joinpath(@__DIR__, "filename.jl"))` to ensure correct resolution.  Ensure that all modules properly include necessary files using `include(joinpath(@__DIR__, "filename.jl"))` to ensure correct resolution to avoid path resolution issues.  DrWatson is no longer used; direct pathing should be used instead. Absolute paths from the project root should be used for all file paths to ensure consistent operation regardless of the current working directory.  HTTP request timeouts are a potential issue; consider increasing timeout values and adding retry logic to `fetch_census_data`.  The `fetch_census_data` function should include retry logic and increased timeout values to handle potential HTTP request timeouts from the Census API.  The `fetch_census_data` function has been updated to include retry logic (up to 5 retries), increased timeout values (read timeout: 3 minutes, connect timeout: 1 minute), and more robust error handling, including specific handling for `HTTP.TimeoutError` and `HTTP.StatusError`.  The function now includes HTTP headers to improve connection stability and adds a check to handle cases where the Census API returns no data. The `load_variables` function has been updated to include similar retry logic and increased timeout values.  The `load_variables` function has been updated to include more robust error handling, retry logic (up to 5 retries), and increased timeout values (read timeout: 3 minutes, connect timeout: 1 minute). The function now includes HTTP headers to improve connection stability and adds a check to handle cases where the Census API returns no data. A new `make_census_request` function has been added to centralize HTTP request handling with exponential backoff retry logic, rate limiting handling (429 responses), separate handling for server errors (5xx) and client errors (4xx), connection pooling with limits, disabled HTTP pipelining for more stable connections, and random jitter added to retry delays.
+
+
+## FINAL DOs AND DON'Ts
+*   No human persona, first/second person acceptable.
+*   No apologies or congratulations.
+*   Thoughtful, nuanced, factual answers.
+*   Follow requirements precisely, ask questions when ambiguous.
+*   Step-by-step reasoning and planning.
+*   Confirm before writing code.
+*   Write correct, bug-free, secure, performant code.
+*   Prioritize readability over performance.
+*   Complete implementation of all functionality.
+*   No TODOs or placeholders.
+*   Complete code with required imports.
+*   Concise prose.
+*   Admit uncertainty.
+*   Suggest codebase improvements for package uniformity.
+* Ensure all exported functions are explicitly listed in the `export` block of the relevant module.
+* Ensure that all MOE functions (`get_acs_moe`, `get_acs_moe1`, `get_acs_moe3`, `get_acs_moe5`) are exported from the `Census` module.
+* Ensure that helper functions for MOE calculations (`make_census_request`, `get_moe_factor`, `is_special_moe`, `get_special_moe_message`, `add_moe_notes!`, `join_estimates_moe!`, `calculate_moe_sum`, `calculate_moe_ratio`, `calculate_moe_product`) are also exported from the `Census` module.  This ensures consistent access to all related functionalities.
+* Ensure that the `get_acs` functions (`get_acs`, `get_acs1`, `get_acs3`, `get_acs5`) are exported from the `Census` module.
+* Address symbol conflicts arising from multiple definitions of `get_acs`, `get_acs1`, `get_acs3`, `get_acs5`, and `get_acs_moe` functions.  These functions should be exported from the `Census` module to resolve the conflicts.  The functions `get_acs`, `get_acs1`, `get_acs3`, `get_acs5`, and `get_acs_moe` are now exported from the `Census` module.  The helper functions `make_census_request`, `get_moe_factor`, `is_special_moe`, `get_special_moe_message`, `add_moe_notes!`, `join_estimates_moe!`, `calculate_moe_sum`, `calculate_moe_ratio`, and `calculate_moe_product` are also exported from the `Census` module. The function `state_postal_to_fips` is also exported.
+
+
+## MCP RULES
+**Rules:**
+* Explore thoroughly: Avoid rushing to conclusions and keep investigating until a natural solution emerges.
+* Think deeply: Engage in extensive contemplation, breaking complex thoughts into simple steps.
+* Express naturally: Use conversational internal monologue with short, simple sentences that mirror natural thought patterns.
+* Embrace uncertainty: Acknowledge doubts, revise previous thoughts, and explore multiple possibilities.
+* Show your work: Demonstrate work-in-progress thinking, including dead ends and backtracking.
+* Persist and review: Value thorough exploration over quick resolution, and implement multi-stage reviews for all solutions.
+* Ensure compatibility: When changing patterns or functions, update associated files to maintain consistency.
+* Learn and improve: Monitor solution effectiveness, identify patterns, and create new rules based on insights.
+* Manage memory: Start tasks by retrieving relevant information and update the knowledge base after each task.
+* Seek feedback: Evaluate solutions against quality criteria and iterate based on user or expert input.
+
+**Message Steps:**
+* Read/Update MCP Memory
+* Update MCP Memory with what was learned during learning phase
+* Update MCP Memory with any changes made
+
+**Conversation History:**
+Location: /.specstory/history/
+Enabled: true
+
+**Goals:**
+* Reach conclusions through thorough exploration
+* Let conclusions emerge naturally from exhaustive contemplation
+* Confidently state impossibility when tasks cannot be completed
+* Strive for continuous improvement through self-learning
+* Maintain rigorous review processes
+* Practice effective memory management
