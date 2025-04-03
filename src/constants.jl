@@ -1,5 +1,10 @@
 # SPDX-License-Identifier: MIT
 
+# Database configuration
+const DB_HOST = "localhost"
+const DB_PORT = 5432
+const DB_NAME = "geocoder"
+
 # Constants for the Census package
 
 """
@@ -82,10 +87,39 @@ const NATION_STATES = Dict(
     "sonora" => ["CA", "AZ", "NM", "NV", "HI"]
 )
 
-# Database connection parameters
-const DB_HOST = "localhost"
-const DB_PORT = 5432
-const DB_NAME = "geocoder"
+# Geographic constants
+const WESTERN_BOUNDARY = -115.0
+const EASTERN_BOUNDARY = -90.0
+const CONTINENTAL_DIVIDE = -109.5
+const SLOPE_WEST = -120.0
+const SLOPE_EAST = -115.0
+const UTAH_BORDER = -109.0
+const CENTRAL_MERIDIAN = -100.0
+
+# Color definitions
+using Colors
+const SALMON_PINK = "#fd7e7e"
+const COTTON_CANDY = "#f8c8dc"
+const SLATE_GREY = "#74909a"
+const SKY_BLUE = "#a0ced9"
+const SUNFLOWER_YELLOW = "#ffd700"
+const SAGE_GREEN = RGB(0.196, 0.388, 0.075)
+const FOREST_GREEN = RGB(0.196, 0.388, 0.075)
+const BRIGHT_BLUE = RGB(0.282, 0.416, 0.698)
+const LIGHT_GRAY = RGB(0.812, 0.812, 0.812)
+const VIE_EN_ROSE = RGB(0.847, 0.749, 0.847)
+
+# Map colors
+const map_colors = [
+    FOREST_GREEN,
+    SAGE_GREEN,
+    LIGHT_GRAY,
+    SLATE_GREY,
+    SKY_BLUE,
+    BRIGHT_BLUE,
+    SUNFLOWER_YELLOW,
+    COTTON_CANDY
+]
 
 """
     CensusQuery
@@ -159,3 +193,4 @@ const US_POSTALS = [
     "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY",
     "DC", "PR", "VI", "GU", "AS", "MP"
 ] 
+

@@ -1,9 +1,6 @@
 # SPDX-License-Identifier: MIT
+# SCRIPT
 using Census
-using Dates
-using RCall
-using CSV
-using DataFrames    
 
 """
     r_get_acs_data(; geography::String, variables::Dict{String, String}, state::String,

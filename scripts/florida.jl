@@ -1,20 +1,33 @@
 # SPDX-License-Identifier: MIT
+# SCRIPT
+using Census
 
+us = init_census_data()
 
-df          = get_geo_pop(Census.postals)
-DataFrames.rename!(df, [:geoid, :stusps, :county, :geom, :pop])
-df = filter(:geoid => x -> x ∈ south_fl, df)
-RSetup.setup_r_environment()
-breaks      = rcopy(RSetup.get_breaks(df,5))
-df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
+# Get Florida counties
+df = subset(us, :stusps => ByRow(==("FL")))
+df = subset(df, :geoid => ByRow(x -> x ∈ FLORIDA_GEOIDS))
 
-# Convert WKT strings to geometric objects
-df.parsed_geoms = parse_geoms(df)
+# Stereographic projection centered on the Keys
+dest = CRS_STRINGS["florida_south"]
+# Create figure with larger size for better visibility
+fig = Figure(size=(3200, 2400), fontsize=24)
 
+map_title = "Elysia"
+map_poly_with_projection(df, map_title, dest, fig)
 
-# Create figure
-fig = Figure(size=(2400, 1600), fontsize=22)
+# Save the figure with absolute path
+img_dir = abspath(joinpath(@__DIR__, "..", "img"))
+@info "Saving to directory: $img_dir"
+saved_path = save_plot(fig, map_title, directory=img_dir)
+@info "Plot saved to: $saved_path"
 
-map_poly(df,"Florida")
-# Display the figure
-display(fig)
+# Verify file exists
+if isfile(saved_path)
+    @info "File successfully created at: $saved_path"
+else
+    @error "Failed to create file at: $saved_path"
+end
+
+# Store the geoids for later use
+#set_nation_state_geoids("Elysia", df.geoid)

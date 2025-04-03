@@ -4,17 +4,6 @@
 # and ceding portions of northern Maine to Canada 
 # plus moving greater Bridgeport to Metropolis
 using Census
-using DataFrames: rename!, transform!, ByRow, nrow
-using RSetup
-using CairoMakie
-using GeoMakie
-using ArchGDAL
-using GeometryBasics
-RSetup.setup_r_environment(["classInt"])
-
-# For development - include map_poly.jl directly
-include("../src/map_poly.jl")
-include("../src/ga.jl")
 
 # Define the destination projection - Albers Equal Area centered on Lexington, KY
 dest = "+proj=aea +lat_0=38 +lon_0=-85 +lat_1=30 +lat_2=45 +datum=NAD83 +units=m +no_defs"
@@ -22,12 +11,12 @@ dest = "+proj=aea +lat_0=38 +lon_0=-85 +lat_1=30 +lat_2=45 +datum=NAD83 +units=m
 # Create figure first
 fig = Figure(size=(2400, 1600), fontsize=22)
 
-rejig       = copy(Census.concord)
+rejig       = copy(Census.NATION_STATES["concord"])
 regig       = push!(rejig,"NY")
-df          = get_geo_pop(rejig)
-DataFrames.rename!(df, [:geoid, :stusps, :county, :geom, :pop])
-breaks      = RCall.rcopy(get_breaks(df,5))
-df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
+df          = get_geo_pop(regig)
+rename!(df, [:geoid, :stusps, :county, :geom, :pop])
+breaks      = rcopy(get_breaks(df,5))
+df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
 
 # Convert WKT strings to geometric objects
 df.parsed_geoms = parse_geoms(df)

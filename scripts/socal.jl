@@ -15,7 +15,7 @@ us = get_geo_pop(postals)
 rename!(us, [:geoid, :stusps, :county, :geom, :pop])
 setup_r_environment()
 breaks = rcopy(get_breaks(us,5))
-us.pop_bins = my_cut(us.pop, breaks[:kmeans][:brks])
+us.pop_bins = customcut(us.pop, breaks[:kmeans][:brks])
 us.parsed_geoms = parse_geoms(us)
 
 df = subset(us, :stusps => ByRow(==("CA")))

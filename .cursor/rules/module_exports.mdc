@@ -1,0 +1,26 @@
+---
+description: Rules for Census module exports
+globs: src/**/*.jl
+alwaysApply: true
+---
+
+## MODULE EXPORTS POLICY
+
+All functions defined in `src/` and any functions they depend upon, along with all constants exposed from `constants.jl`, shall be automatically available to any script that includes `using Census` unless specifically excluded by user directive.
+
+### Implementation Requirements
+
+1. All functions in `src/` directories must be exported by default
+2. All constants defined in `constants.jl` must be exported by default
+3. All dependent functions required by exported functions must also be exported
+4. Functions should only be excluded from export if specifically directed by user
+5. The module should maintain a comprehensive export list in `src/Census.jl`
+
+### Usage
+
+Scripts should only need to include:
+```julia
+using Census
+```
+
+All functionality should be available through this single import unless specifically excluded. 

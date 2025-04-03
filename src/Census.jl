@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
     Census
 
@@ -47,98 +49,205 @@ using ACS
 using DataFramesMeta  # For ByRow and other DataFrame operations
 using LibPQ  # For database connections
 using GeometryBasics  # For polygon creation and geometric operations
+using ColorSchemes  # For color schemes
+
+# Re-export specific types and functions from CairoMakie and GeoMakie
+import CairoMakie: Figure, Axis, Label, Colorbar
+import GeoMakie: GeoAxis
 
 # Import specific functions
 import RCall: rcopy
 import LibPQ: execute
 
-# Include constants and types first
+# Include all modules first
 include("constants.jl")
+include("core/core.jl")
+include("core/acs.jl")
+include("core/RSetup.jl")
+include("core/geoids.jl")
+include("core/crs.jl")  # Add CRS definitions
+include("core/great_lakes.jl")  # Add Great Lakes region constants
+include("utils/add_labels.jl")
+include("utils/add_row_totals.jl")
+include("utils/customcut.jl")
+include("utils/dms_to_decimal.jl")
+include("utils/expand_state_codes.jl")
+include("utils/fill_state.jl")
+include("utils/make_postal_codes.jl")
+include("utils/q.jl")
+include("geo/geo.jl")
+include("geo/map_poly.jl")
+include("geo/inspect_shapefile_structure.jl")
+include("analysis/analysis.jl")
+include("analysis/collect_state_age_dataframes.jl")
+include("analysis/ga.jl")
+include("analysis/get_breaks.jl")
+include("analysis/get_childbearing_population.jl")
+include("analysis/get_dem_vote.jl")
+include("analysis/get_gop_vote.jl")
+include("analysis/get_health_insurance_coverage.jl")
+include("analysis/get_nation_state.jl")
+include("analysis/get_nation_title.jl")
+include("analysis/get_state_pop.jl")
+include("analysis/get_us_ages.jl")
+include("analysis/make_growth_table.jl")
+include("analysis/make_nation_state_gdp_df.jl")
+include("analysis/make_nation_state_pop_df.jl")
+include("analysis/margins.jl")
+include("analysis/process.jl")
+include("analysis/query_nation_ages.jl")
+include("analysis/query_state_ages.jl")
+include("viz/viz.jl")
+include("viz/make_legend.jl")
+include("viz/create_state_to_nation_map.jl")
+include("viz/create_state_abbrev_map.jl")
+include("viz/create_multiple_age_pyramids.jl")
 
-# Include core functionality
-include("core.jl")
+# Add initialization function
+"""
+    init_census_data() -> DataFrame
 
-# Include and use submodules
-include("geoids/geoids.jl")
-using .geoids
+Initialize common Census data used across scripts. This:
+1. Gets population data for all US states
+2. Renames columns to standard format
+3. Sets up R environment
+4. Calculates population bins
+5. Parses geometries
 
-# Include other modules
-include("geo.jl")
-include("ga.jl")
-include("get_breaks.jl")
-include("margins.jl")
-include("process.jl")
-include("viz.jl")
-include("map_poly.jl")
-include("customcut.jl")
+Returns a DataFrame with columns [:geoid, :stusps, :county, :geom, :pop, :pop_bins, :parsed_geoms]
+"""
+function init_census_data()
+    us = get_geo_pop(postals)
+    rename!(us, [:geoid, :stusps, :county, :geom, :pop])
+    setup_r_environment()
+    breaks = rcopy(get_breaks(us.pop))  # Pass population vector directly
+    us.pop_bins = customcut(us.pop, breaks[:kmeans][:brks])
+    us.parsed_geoms = parse_geoms(us)
+    return us
+end
 
 # Initialize R environment during precompilation
 try
-    RSetup.setup_r_environment(["classInt", "tidycensus", "tidyr", "dplyr"])
+    RSetup.setup_r_environment(["classInt"])
 catch e
     @warn "Failed to initialize R environment during precompilation. Please run RSetup.setup_r_environment() manually."
 end
 
-# Export core types and functions
+# Export the GreatLakes module
+export GreatLakes
+
+# Initialize all geoid constants after all modules are loaded
+const WESTERN_GEOIDS = get_western_geoids()
+const EASTERN_GEOIDS = get_eastern_geoids()
+const EAST_OF_UTAH_GEOIDS = get_east_of_utah_geoids()
+const EAST_OF_CASCADE_GEOIDS = get_east_of_cascade_geoids()
+const WEST_OF_CASCADES_GEOIDS = get_west_of_cascades()
+const EAST_OF_CASCADES_GEOIDS = get_east_of_cascades()
+const SOUTHERN_KANSAS_GEOIDS = get_southern_kansas_geoids()
+const NORTHERN_KANSAS_GEOIDS = get_northern_kansas_geoids()
+const COLORADO_BASIN_GEOIDS = get_colorado_basin_geoids()
+const NE_MISSOURI_GEOIDS = get_ne_missouri_geoids()
+const SOUTHERN_MISSOURI_GEOIDS = get_southern_missouri_geoids()
+const NORTHERN_MISSOURI_GEOIDS = get_northern_missouri_geoids()
+const MISSOURI_RIVER_BASIN_GEOIDS = get_missouri_river_basin_geoids()
+const SLOPE_GEOIDS = get_slope_geoids()
+const FLORIDA_GEOIDS = get_florida_south_geoids()
+
+# Initialize Great Lakes constants
+const MICHIGAN_PENINSULA_GEOID_LIST = GreatLakes.get_michigan_peninsula_geoids()
+const METRO_TO_GREAT_LAKES_GEOID_LIST = GreatLakes.get_metro_to_great_lakes_geoids()
+const GREAT_LAKES_PA_GEOID_LIST = GreatLakes.get_great_lakes_pa_geoids()
+const GREAT_LAKES_IN_GEOID_LIST = GreatLakes.get_great_lakes_in_geoids()
+const GREAT_LAKES_OH_GEOID_LIST = GreatLakes.get_great_lakes_oh_geoids()
+const OHIO_BASIN_IL_GEOID_LIST = GreatLakes.get_ohio_basin_il_geoids()
+
+# Export all geoid constants
+export WESTERN_GEOIDS,
+       EASTERN_GEOIDS,
+       EAST_OF_UTAH_GEOIDS,
+       EAST_OF_CASCADE_GEOIDS,
+       WEST_OF_CASCADES_GEOIDS,
+       EAST_OF_CASCADES_GEOIDS,
+       SOUTHERN_KANSAS_GEOIDS,
+       NORTHERN_KANSAS_GEOIDS,
+       COLORADO_BASIN_GEOIDS,
+       NE_MISSOURI_GEOIDS,
+       SOUTHERN_MISSOURI_GEOIDS,
+       NORTHERN_MISSOURI_GEOIDS,
+       MISSOURI_RIVER_BASIN_GEOIDS,
+       SLOPE_GEOIDS,
+       FLORIDA_GEOIDS,
+       MICHIGAN_PENINSULA_GEOID_LIST,
+       METRO_TO_GREAT_LAKES_GEOID_LIST,
+       GREAT_LAKES_PA_GEOID_LIST,
+       GREAT_LAKES_IN_GEOID_LIST,
+       GREAT_LAKES_OH_GEOID_LIST,
+       OHIO_BASIN_IL_GEOID_LIST
+
+# Export everything from the module
 export PostalCode, CensusQuery
-export valid_codes, is_valid_postal_code, get_state_name, get_postal_code
-export get_db_connection, initialize
-export get_crs, CRS_STRINGS, west_montana
-export get_geo_pop, customcut, parse_geoms
-export US_POSTALS, VALID_POSTAL_CODES
 
-# Export data fetching and processing functions
-export build_census_query, fetch_census_data, get_census_data
-export add_margins, add_row_margins, add_col_margins
-export get_breaks
-export ga
+# Export all utility functions
+export valid_codes, is_valid_postal_code, get_state_name, get_postal_code,
+       initialize, get_crs, west_montana,
+       get_geo_pop, customcut, parse_geoms,
+       US_POSTALS, VALID_POSTAL_CODES,
+       add_labels, add_row_totals, dms_to_decimal,
+       expand_state_codes, fill_state, make_postal_codes, q
 
-# Export visualization functions
-export cleveland_dot_plot, create_age_pyramid, create_birth_table
-export map_poly, map_poly_with_projection, geo, viz, save_plot
+# Export all core functions
+export build_census_query, fetch_census_data, get_census_data,
+       add_margins, add_row_margins, add_col_margins,
+       get_breaks, ga
+
+# Export all analysis functions
+export collect_state_age_dataframes, get_childbearing_population,
+       get_dem_vote, get_gop_vote, get_health_insurance_coverage,
+       get_nation_state, get_nation_title, get_state_pop,
+       get_us_ages, make_growth_table,
+       make_nation_state_gdp_df, make_nation_state_pop_df,
+       query_nation_ages, query_state_ages
+
+# Export all visualization functions
+export cleveland_dot_plot, create_age_pyramid, create_birth_table,
+       map_poly, map_poly_with_projection, geo, viz, save_plot,
+       make_legend, create_state_to_nation_map,
+       create_state_abbrev_map, create_multiple_age_pyramids
 
 # Re-export functions from RSetup and ACS
-export setup_r_environment
-export get_acs, get_acs1, get_acs3, get_acs5
-export get_acs_moe, get_acs_moe1, get_acs_moe3, get_acs_moe5
+export setup_r_environment,
+       get_acs, get_acs1, get_acs3, get_acs5,
+       get_acs_moe, get_acs_moe1, get_acs_moe3, get_acs_moe5
 
 # Re-export from DataFramesMeta for convenience
-export @subset, subset, @select, select, @transform, transform
-export ByRow, @by, by, @combine, combine
-export rename!, vcat
+export @subset, subset, @select, select, @transform, transform,
+       ByRow, @by, by, @combine, combine,
+       rename!, vcat
+
+# Re-export entire packages
+export DataFrames, DataFramesMeta, ArchGDAL, CairoMakie, GeoMakie, GeometryBasics
 
 # Re-export from RCall
 export rcopy
 
-# Re-export from geoids module
-export get_western_geoids, get_eastern_geoids
-export get_east_of_utah_geoids, get_east_of_cascade_geoids
-export get_west_of_cascades, get_east_of_cascades
-export get_southern_kansas_geoids, get_northern_kansas_geoids
-export get_colorado_basin_geoids, get_ne_missouri_geoids
-export get_southern_missouri_geoids, get_northern_missouri_geoids
-export get_missouri_river_basin_geoids, get_slope_geoids
+# Export initialization function
+export init_census_data
 
-# Add nation state functions
-export setup_nation_states_table, set_nation_state_geoids
-export get_nation_state_geoids, clear_nation_state_geoids
-export execute
+# Export all geoid-related functions and constants
+export get_western_geoids, get_eastern_geoids,
+       get_colorado_basin_geoids, get_west_montana_geoids,
+       get_florida_south_geoids,
+       WESTERN_BOUNDARY, EASTERN_BOUNDARY,
+       CONTINENTAL_DIVIDE, SLOPE_WEST, SLOPE_EAST, UTAH_BORDER,
+       CENTRAL_MERIDIAN, CRS_STRINGS, get_crs, set_nation_state_geoids
 
-# Re-export geoids constants
-export western_geoids, eastern_geoids
-export east_of_utah_geoids, east_of_cascade_geoids
-export west_of_cascades, east_of_cascades
-export southern_kansas_geoids, northern_kansas_geoids
-export colorado_basin_geoids, ne_missouri_geoids
-export southern_missouri_geoids, northern_missouri_geoids
-export missouri_river_basin_geoids, east_of_sierras_geoids
+# Export database configuration and connection
+export DB_HOST, DB_PORT, DB_NAME, get_db_connection
 
-# Export geographic constants
-export WESTERN_BOUNDARY, EASTERN_BOUNDARY
-export CONTINENTAL_DIVIDE, SLOPE_WEST, SLOPE_EAST
-export UTAH_BORDER, CENTRAL_MERIDIAN
+# Re-export visualization types from CairoMakie and GeoMakie
+export Figure, Axis, Label, Colorbar, GeoAxis
 
-# Export Figure from CairoMakie
-export Figure
+# Re-export ColorSchemes for convenience
+export ColorSchemes
 
 end # module Census

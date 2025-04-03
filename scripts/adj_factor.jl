@@ -1,19 +1,14 @@
 # SPDX-License-Identifier: MIT
+using Census
+using Census.GreatLakes
+
 add_from_metro = ["36003", "36009", "36011",
     "36013", "36014", "36015", "36019", "36019", "36029",
     "36031", "36031", "36033", "36037", "36037", "36037",
     "36041", "36043", "36045", "36049", "36051", "36055",
     "36063", "36065", "36067", "36069", "36073", "36075",
     "36089", "36097", "36099", "36101", "36107", "36109",
-    "36117", "36121", "36123", "42003", "42005", "42007",
-    "42009", "42013", "42015", "42019", "42021", "42023",
-    "42027", "42031", "42033", "42035", "42037", "42039",
-    "42047", "42049", "42051", "42053", "42057", "42059",
-    "42061", "42063", "42065", "42067", "42073", "42081",
-    "42083", "42085", "42087", "42093", "42097", "42099",
-    "42104", "42105", "42109", "42111", "42113", "42117",
-    "42119", "42121", "42123", "42125", "42129", "43031",
-    "43063"]
+    "36117", "36121", "36123"]
 ohio_basin_pa = ["42039","42085","42073","42007","42125","42059",
     "42123","42083","42121","42053","42047","42033",
     "42021","42411","42065","42129","42051","42031",
@@ -76,7 +71,6 @@ take_from_metro  = setdiff(get_geo_pop(["NY"]).geoid,add_from_metro)
 rejig            = copy(Census.factoria)
 regig            = push!(rejig,"NY","WV","TN","KY","MD","VA","AL","MS","GA","NC")
 df               = get_geo_pop(regig)
-DataFrames.rename!(df, [:geoid, :stusps, :county, :geom, :pop])
 
 df = filter(:stusps => x -> x != "WI",df)
 df = filter(:stusps => x -> x != "MI",df)
@@ -102,7 +96,7 @@ RSetup.setup_r_environment()
 rename!(df, [:geoid, :stusps, :county, :geom, :pop])
 
 breaks      = RCall.rcopy(get_breaks(df,5))
-df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
+df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
 
 # Convert WKT strings to geometric objects
 df.parsed_geoms = parse_geoms(df)
@@ -111,8 +105,27 @@ dest = "+proj=aea +lat_0=38 +lon_0=-85 +lat_1=30 +lat_2=45 +datum=NAD83 +units=m
 # Create figure
 fig = Figure(size=(2400, 1600), fontsize=22)
 
-map_poly(df, "Adjusted Factoria", dest, fig)
-# Display the figure
+# Create a new axis with a title
+ax = Axis(
+    fig[1, 1],
+    dest=dest,
+    title="Adjusted Factoria"
+)
 
+# Plot the polygons
+map_poly_with_projection(df, "Adjusted Factoria", dest, fig)
+
+# Add labels
+add_labels!(df, ax)
+
+# Save the plot
+img_dir = joinpath(dirname(@__DIR__), "img")
+mkpath(img_dir)
+timestamp = Dates.format(now(), "yyyy-mm-dd_HHMMSS")
+filename = joinpath(img_dir, "Adjusted_Factoria_$(timestamp).png")
+save(filename, fig, px_per_unit=2)
+@info "Plot saved to: $filename"
+
+# Display the figure
 display(fig)
 

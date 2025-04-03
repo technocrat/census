@@ -1,0 +1,195 @@
+
+---
+description: Cursor rules derived by SpecStory from the project AI interaction history
+globs: *
+alwaysApply: false
+---
+
+## PROJECT OVERVIEW
+This project analyzes alternatives for nation states to replace the existing United States, considering population characteristics, economics, politics, history, and natural geography. The output will be an HTML publication using Franklin.jl.  The goal is to complete a comprehensive Julia package, `Census.jl`, providing similar functionality to R's `tidycensus` package. The primary database used is PostgreSQL.  A new script, `scripts/create_census_variables_table.jl`, has been added to handle the creation of a PostgreSQL table from a large JSON file (`data/census_acs_2023_variables.json`).  The project will leverage an existing Julia package for Census API interaction, enhancing it to match the functionality of the R `tidycensus` package.  Key enhancements include support for various geography levels, margin of error calculations, geometry support, variable table caching, and multiple survey types (1-year, 3-year, 5-year).  The R package `tidycensus` serves as a reference for implementing equivalent functionality in Julia.  A sister package, `ACS.jl`, has been created to handle ACS data retrieval more efficiently. The `RSetup.jl` and `ACS.jl` packages have been added to replace internal functions for R environment setup and ACS data retrieval.  The issue with adding `ACS.jl` as a dependency has been resolved.  The correct repository URL is `git@github.com:technocrat/ACS.git`.  Geoid data for nation states (e.g., `powell_geoids`) will now be stored in the `census.counties` PostgreSQL table with a `nation_state` column, enhancing data persistence, relational context, flexibility, and query efficiency.  The `DataFrames` package should be imported into the `Census.jl` module to avoid repeated imports in individual scripts. To simplify imports, all functions and constants within the `Census` module should be exported.  This allows users to access all functionality with a simple `using Census` statement.  A new function `init_census_data` has been added to initialize census data, addressing inconsistencies previously observed.  The `scripts/cons.jl` file has been deprecated and moved to `/Users/ro/projects/holding/`. The `constants.jl` file should now be used for constants.  All nation state constants (e.g., `concord`) should be accessed via `Census.NATION_STATES["concord"]`.  A common error is using unqualified variable names, such as `concord`, which should be qualified as `Census.concord`. Another common error is a simple typo in function names, such as `get_ne_missouri_counties` which should be `get_ne_missouri_geoids`.  A further common error is incorrect relative paths when including files within modules; use `include(joinpath(@__DIR__, "filename.jl"))` to ensure correct resolution.  Ensure that all modules properly include necessary files using `include(joinpath(@__DIR__, "filename.jl"))` to ensure correct resolution to avoid path resolution issues.  Absolute paths from the project root should be used for all file paths to ensure consistent operation regardless of the current working directory.  All scripts should be able to access all functions within the `Census` module and its submodules without qualification.  All scripts should be able to use any function in any submodule or the `src` directory without the necessity of declaration or qualification.  This is achieved by exporting all functions and constants from all submodules in the `Census.jl` module.  Pre-compiled geoid vectors are now directly available as constants upon importing the `Census` module.  All scripts should be able to use any function in any submodule or the `src` directory without the necessity of declaration or qualification. The geoids submodule has been eliminated, and all geoid-related functions and constants have been integrated directly into the `Census` module. A new constant, `FLORIDA_GEOIDS`, has been added to represent the GEOIDs for Florida counties with centroids south of 29 degrees latitude.  The `save_plot` function now correctly saves plots to the specified directory, handling absolute paths and sanitizing titles for filenames.  It includes a timestamp to prevent overwriting, creates the directory if needed, supports both Plots.jl and Makie plots, increases the resolution of Makie plots, and includes informative logging messages.  A check for `isabspath` has been added. The `add_labels!` function has been updated to handle the coordinate system correctly for 2D plots, fixing an issue where text labels were being placed incorrectly.  To avoid circular dependencies, geoid constants are now initialized using `init_geoid_constants()` after module loading.
+
+
+## CODE STYLE
+Functional programming approach is preferred.  Prioritize readability over performance.  Fully qualify all function and type names to improve clarity, maintainability, and prevent namespace conflicts.  Use `include(joinpath(@__DIR__, "filename.jl"))` for consistent file inclusion within modules.  Absolute paths from the project root should be used for all file paths.  Indexing with length is discouraged; use `eachindex` or `axes` instead.  Correct R string interpolation syntax should be used in RCall functions.  Robust error handling should be implemented in all functions interacting with external resources, including the Census API and R. Any script should use absolute paths. Constants should be qualified (e.g., `Census.FLORIDA_GEOIDS`).
+
+## FOLDER ORGANIZATION
+(Folder organization details are not provided in the new interactions and should be added separately if needed).
+
+## TECH STACK
+Julia, R, PostgreSQL, Franklin.jl, Documenter.jl (v1.9.0), RCall, LibGEOS, WellKnownGeometry, CairoMakie, GeoMakie, GeoInterface, LibPQ, HTTP, tidycensus (R package - for reference), CSV, GeoJSON, ZipFile, GeoInterface.jl,  Tigris, Statistics, XLSX, ArchGDAL, RSetup, ACS, RSetup.jl, ACS.jl, DataFramesMeta, LibPQ, GeometryBasics, DataFrames, Pkg
+
+## PROJECT-SPECIFIC STANDARDS
+(Project-specific standards details are not provided in the new interactions and should be added separately if needed).  Files should be consistently marked with "SPDX-License-Identifier: MIT" where appropriate.  This will be implemented in all files eventually.
+
+## WORKFLOW & RELEASE RULES
+(Workflow and release rules details are not provided in the new interactions and should be added separately if needed).  A new branch, `consolidated-processing`, has been created and pushed to GitHub for managing updates.  Pull requests should be used for merging changes into the main branch. Deprecated files should be moved to a `holding` directory.  If a file is marked as deprecated without further comment, it should be moved to the `holding` directory.  Files marked as deprecated should be moved to the `holding` directory. The process for handling deprecated files has been clarified: files marked as deprecated without further comment should be moved to the `holding` directory.
+
+## REFERENCE EXAMPLES
+(Reference examples details are not provided in the new interactions and should be added separately if needed).  An example of adding an optional argument to a function: The `find_county_variables` function in `src/acs.jl` has been updated to accept an optional `additional_codes` argument (a vector of strings) and an `include_base_codes` argument (a boolean) allowing users to specify additional 3-character variable codes for the query and to optionally exclude the base codes ("B01", "B19", "B25", "B23", "B15"). The base codes are included by default.  If `include_base_codes` is false, at least one code must be provided in `additional_codes`.  The function has been further updated to allow filtering results where the `variable_id` ends with "01E".  The function now includes a check to ensure at least one code is provided if `include_base_codes` is false. Incorrect package URL formats when adding packages from GitHub should be avoided; the `.jl` extension should not be included in the URL.  The `fetch_census_data` function's docstring example has been updated to reflect dynamic column generation based on the query's `variables` argument.  The example now uses `CensusQuery(variables=["B19013_001E"])` to fetch median household income data.  The `get_census_data` function's docstring now includes examples demonstrating both single and multiple variable queries, clarifying that each requested variable becomes a column in the output DataFrame. The example for `get_census_data` now uses `variables=["B19013_001E"]` to fetch median household income data and includes a second example using multiple variables: `variables=["B19013_001E", "B01003_001E"]`.  The R `tidycensus` package will serve as a reference for implementing equivalent functionality in Julia.  The `get_acs` function now includes examples demonstrating both single and multiple variable queries, and fetching data from specific tables.  The `get_acs` function in the R `tidycensus` package serves as a reference for implementing similar functionality in Julia.  The R code for `get_acs` function is included in `2025-04-01_01-43-census-api-usage-in-r.md`.  The R code for the `get_acs` function is included in `2025-04-01_01-43-census-api-usage-in-r.md`.  The R code example from `2025-04-01_01-43-census-api-usage-in-r.md` provides a comprehensive illustration of the `get_acs` function's capabilities in R.  This serves as a valuable reference for developing equivalent functionality within the Julia `Census.jl` package.  The R code example from `2025-04-01_01-43-census-api-usage-in-r.md` is a valuable reference for developing equivalent functionality within the Julia `Census.jl` package.  The R code example in `2025-04-01_01-43-census-api-usage-in-r.md` shows how to use the `get_acs` function in R. This serves as a reference for the Julia implementation.  The R code example for the `get_acs` function in `2025-04-01_01-43-census-api-usage-in-r.md` serves as a valuable reference for the Julia implementation.  All exported functions should be explicitly listed in the `export` block of the `Census.jl` module.  The `r_get_acs_data` function should utilize the `setup_r_environment` function to ensure the `tidycensus` package is loaded correctly within the R environment before executing `get_acs`.  Correct R string interpolation should be used; for example, `R"setNames(c($(var_codes)), c($(var_names)))"` is the correct syntax.  There are two versions of `map_poly`: one in `src/geo.jl` that uses named arguments (`title`, `colormap`), and one in `src/map_poly.jl` that uses positional arguments (`df`, `title`, `dest`, `fig`, `save_path`, `preview`).  To avoid conflict, these have been renamed to `map_poly` and `map_poly_with_projection` to clarify their distinct functionality.  An example of retrieving geoids for a nation state from the database:
+
+```julia
+function get_powell_geoids()
+    query = "SELECT geoid FROM census.counties WHERE nation_state = 'powell'"
+    # Execute query using your DB connection
+end
+```
+An example of subsetting a DataFrame based on latitude using ArchGDAL:
+
+```julia
+# Assuming 'df' is a DataFrame with a 'geom' column containing WKT geometry strings
+df = subset(df, :geom => ByRow(geom -> begin
+    ismissing(geom) && return false
+    parsed_geom = ArchGDAL.fromWKT(String(geom))
+    centroid = ArchGDAL.centroid(parsed_geom)
+    lat = ArchGDAL.gety(centroid, 0)
+    lat < 29.0
+end))
+```
+An example of a Florida-specific Albers Equal Area projection:
+
+```
++proj=aea +lat_1=24 +lat_2=31.5 +lat_0=24 +lon_0=-83 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs
+```
+A Florida-specific Albers Equal Area projection, extending to include the Florida Keys:
+```
++proj=aea +lat_1=24 +lat_2=31.5 +lat_0=24 +lon_0=-83 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs +lat_ts=24
+```
+A modified Florida State Plane (South) projection for better Keys visibility:
+```
++proj=aea +lat_1=24.33333333333333 +lat_2=26.66666666666667 +lat_0=24.0 +lon_0=-82 +x_0=400000 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs
+```
+The `get_geo_pop` function should handle both raw strings and `PostalCode` objects.  The `get_geo_pop` function has been updated to handle both raw strings and `PostalCode` objects. The path to the Colorado River Basin shapefile in `get_colorado_basin_geoids` was corrected from a relative path within the `src` directory to an absolute path from the project root.  A new CRS string for the Pacific Coast region has been added: `"+proj=aea +lat_0=43 +lon_0=-121.5 +lat_1=38.5 +lat_2=47.6 +datum=NAD83 +units=m +no_defs"`
+
+
+## PROJECT DOCUMENTATION & CONTEXT SYSTEM
+Documentation should be included with code suggestions.  Project context: Analysis of alternatives for nation states to replace the existing United States.  Docstrings will be added to functions in the `src` directory using Julia's documentation conventions in anticipation of using Documenter.jl.  Docstrings have been added to core functions and modules in the `src` directory following Julia's documentation conventions.  This anticipates the future use of Documenter.jl for generating project documentation.  Docstrings have been added to the following functions: `get_nation_state`, `initialize`, `get_us_ages`, `get_dem_vote`, `get_gop_vote`, `get_childbearing_population`, `get_state_pop`, `make_nation_state_pop_df`, `make_nation_state_gdp_df`, and `map_poly`.  These docstrings follow Julia's documentation conventions and include function signatures, descriptions, argument and return types, examples, and notes.  All functions in `src/acs.jl`, `src/geo.jl`, `src/ga.jl`, and `src/margins.jl` now have comprehensive docstrings following Julia's conventions.  These include function signatures, descriptions, argument and return types, examples, and notes.  All functions within the `src` directory now have comprehensive docstrings.  Documenter.jl has been added as a project dependency to facilitate documentation generation. A `docs` directory has been created with a `make.jl` file for building documentation using Documenter.jl.  Tutorials on getting started, population analysis, and economic analysis have been added to the documentation.  The documentation includes API reference sections for core functions, data processing, and visualization. Version 1.9.0 of Documenter.jl is now used.  A `CensusQuery` struct has been added to `src/acs.jl` to define the type for census query configurations.  This struct includes fields for `year`, `acs_period`, `variables`, `geography`, `table`, `state`, `county`, `zcta`, `geometry`, `shift_geo`, `keep_geo_vars`, `summary_var`, `moe_level`, and `api_key`.  The `init_census_data` function has been added to the `Census` module and exported.
+
+## DEBUGGING
+(Debugging details are not provided in the new interactions and should be added separately if needed).  A common error is using unqualified variable names, such as `concord`, which should be qualified as `Census.concord`. Another common error is a simple typo in function names, such as `get_ne_missouri_counties` which should be `get_ne_missouri_geoids`.  A further common error is incorrect relative paths when including files within modules; use `include(joinpath(@__DIR__, "filename.jl"))` to ensure correct resolution.  Ensure that all modules properly include necessary files using `include(joinpath(@__DIR__, "filename.jl"))` to ensure correct resolution to avoid path resolution issues.  DrWatson is no longer used; direct pathing should be used instead. Absolute paths from the project root should be used for all file paths to ensure consistent operation regardless of the current working directory.  HTTP request timeouts are a potential issue; consider increasing timeout values and adding retry logic to `fetch_census_data`.  The `fetch_census_data` function should include retry logic and increased timeout values to handle potential HTTP request timeouts from the Census API.  The `fetch_census_data` function has been updated to include retry logic (up to 5 retries), increased timeout values (read timeout: 3 minutes, connect timeout: 1 minute), and more robust error handling, including specific handling for `HTTP.TimeoutError` and `HTTP.StatusError`.  The function now includes HTTP headers to improve connection stability and adds a check to handle cases where the Census API returns no data. The `load_variables` function has been updated to include similar retry logic and increased timeout values.  The `load_variables` function has been updated to include more robust error handling, retry logic (up to 5 retries), and increased timeout values (read timeout: 3 minutes, connect timeout: 1 minute). The function now includes HTTP headers to improve connection stability and adds a check to handle cases where the Census API returns no data. A new `make_census_request` function has been added to centralize HTTP request handling with exponential backoff retry logic, rate limiting handling (429 responses), separate handling for server errors (5xx) and client errors (4xx), connection pooling with limits, disabled HTTP pipelining for more stable connections, and random jitter added to retry delays.  The `get_acs5` function has been updated to include more robust error handling and retry logic to address API request timeouts.  The `get_acs5` function has been updated to include informative logging messages at various stages of execution, improving transparency and debugging capabilities.  More specific error handling has been added for `HTTP.TimeoutError` to provide more helpful error messages to the user.  The `map_poly` function has two implementations that have been renamed to `map_poly` and `map_poly_with_projection` to avoid ambiguity.  There are two versions of the `map_poly` function: one in `src/geo.jl` that uses named arguments, and one in `src/map_poly.jl` that uses positional arguments. To avoid confusion, they have been renamed to `map_poly` and `map_poly_with_projection`, respectively.  Both functions are now exported from the `Census` module.  Two versions of the `map_poly` function exist: one in `src/geo.jl` using named arguments (`title`, `colormap`), and another in `src/map_poly.jl` using positional arguments (`df`, `title`, `dest`, `fig`, `save_path`, `preview`). To avoid confusion, they are renamed `map_poly` and `map_poly_with_projection`, respectively.  Both functions are now exported from the `Census` module.  A `save_plot` function has been added to handle saving plots.  The function uses absolute paths, sanitizes titles for filenames, includes a timestamp to prevent overwriting, creates the directory if it does not exist, and supports both Plots.jl and Makie plots.  The resolution of saved Makie plots has been increased. The function includes informative logging messages and a check for `isabspath`.  Ensure that `execute` from `LibPQ` is imported into `src/geoids/geoids.jl` and not in `src/geoids/impl.jl`. Ensure that LibPQ.execute is used for database queries within the geoids submodule.  The `DataFramesMeta` package should be added to the project's dependencies to enable the use of the `@subset` macro.  ArchGDAL should be used for geometry operations, and missing geometry values should be handled appropriately.  The `subset` function with `ByRow` should be used for filtering based on latitude calculations using ArchGDAL.  The use of `subset` with `ByRow` for filtering based on latitude calculations using ArchGDAL has been clarified and improved to handle missing geometry values.  The correct method for subsetting DataFrames based on latitude using ArchGDAL is to use `subset` with `ByRow` and handle missing geometry values appropriately.  This ensures that the filtering process works correctly and efficiently.  The correct method for subsetting DataFrames based on latitude using ArchGDAL is to use `subset` with `ByRow` and handle missing geometry values appropriately. This ensures that the filtering process works correctly and efficiently.  The correct method for subsetting DataFrames based on latitude using ArchGDAL is to use `subset` with `ByRow` and handle missing geometry values appropriately.  Scripts should not directly include functions from other files; instead use the `Census` module. The `get_geo_pop` function should handle both raw strings and `PostalCode` objects. The `get_geo_pop` function has been updated to handle both raw strings and `PostalCode` objects.  The path to the Colorado River Basin shapefile in `get_colorado_basin_geoids` was corrected from a relative path within the `src` directory to an absolute path from the project root.  A bug in the `save_plot` function has been identified where the variable `saved_path` was undefined. This has been corrected by using `filename` instead.  A new `init_geoid_constants()` function has been added to the `Census` module to initialize geoid constants after module loading, resolving a circular dependency issue.
+
+
+## FINAL DOs AND DON'Ts
+*   No human persona, first/second person acceptable.
+*   No apologies or congratulations.
+*   Thoughtful, nuanced, factual answers.
+*   Follow requirements precisely, ask questions when ambiguous.
+*   Step-by-step reasoning and planning.
+*   Confirm before writing code.
+*   Write correct, bug-free, secure, performant code.
+*   Prioritize readability over performance.
+*   Complete implementation of all functionality.
+*   No TODOs or placeholders.
+*   Complete code with required imports.
+*   Concise prose.
+*   Admit uncertainty.
+*   Suggest codebase improvements for package uniformity.
+* Ensure all exported functions are explicitly listed in the `export` block of the relevant module.
+* Ensure that all MOE functions (`get_acs_moe`, `get_acs_moe1`, `get_acs_moe3`, `get_acs_moe5`) are exported from the `Census` module.
+* Ensure that helper functions for MOE calculations (`make_census_request`, `get_moe_factor`, `is_special_moe`, `get_special_moe_message`, `add_moe_notes!`, `join_estimates_moe!`, `calculate_moe_sum`, `calculate_moe_ratio`, `calculate_moe_product`) are also exported from the `Census` module.  This ensures consistent access to all related functionalities.
+* Ensure that the `get_acs` functions (`get_acs`, `get_acs1`, `get_acs3`, `get_acs5`) are exported from the `Census` module.
+* The functions `get_acs`, `get_acs1`, `get_acs3`, `get_acs5`, and `get_acs_moe` are now exported from the `Census` module.  The helper functions `make_census_request`, `get_moe_factor`, `is_special_moe`, `get_special_moe_message`, `add_moe_notes!`, `join_estimates_moe!`, `calculate_moe_sum`, `calculate_moe_ratio`, and `calculate_moe_product` are also exported from the `Census` module. The function `state_postal_to_fips` is also exported.
+* Ensure that the `get_crs` function is exported from the `Census` module.
+* Ensure that `get_geo_pop`, `customcut`, `parse_geoms` are exported from the `Census` module.
+* Ensure that `US_POSTALS` constant is exported from the `Census` module.
+* The `RSetup` and `ACS` packages have been added as dependencies. The issue with adding `ACS.jl` as a dependency has been resolved.  The correct repository URL is `git@github.com:technocrat/ACS.git`.
+* Ensure that  `get_colorado_basin_geoids`, `get_slope_geoids`, `get_western_geoids`, `get_eastern_geoids` are exported from the `Census` module.
+* Ensure that `Figure` from `CairoMakie` is exported from the `Census` module.
+* Ensure that `@subset`, `subset`, `@select`, `select`, `@transform`, `transform`, `ByRow`, `@by`, `by`, `@combine`, `combine`, `rename!`, `vcat` from `DataFramesMeta` are exported from the `Census` module.
+* Ensure that all functions and constants from the `geoids` submodule are exported from the `Census` module.  This includes functions like `get_western_geoids`, `get_eastern_geoids`, etc., and constants like `western_geoids`, `eastern_geoids`, etc.
+* Ensure that `rcopy` from `RCall` is exported from the `Census` module.
+* Ensure that `get_db_connection` is exported from the `Census` module.
+* Ensure that `state_postal_to_fips` is exported from the `Census` module.
+* Ensure that `map_poly` and `map_poly_with_projection` are both exported from the `Census` module.
+* Ensure that `customcut` is exported from the `Census` module.
+* Ensure that `save_plot` is exported from the `Census` module.
+* Ensure that the `save_plot` function in `src/viz.jl` handles saving plots to a specified directory, using absolute paths, and sanitizes titles for filenames.  The function should also include a timestamp to prevent overwriting and create the directory if it does not exist.
+* Ensure that the `save_plot` function handles saving plots to a specified directory using absolute paths, sanitizes titles for filenames, includes a timestamp to prevent overwriting, and creates the directory if it does not exist.  The function should also support both Plots.jl and Makie plots and increase the resolution of saved Makie plots.
+* Ensure that the `save_plot` function handles saving plots to a specified directory using absolute paths, sanitizes titles for filenames, includes a timestamp to prevent overwriting, and creates the directory if it does not exist. The function should also support both Plots.jl and Makie plots, increase the resolution of saved Makie plots, and use informative logging messages.  The function now includes a check for `isabspath` and converts relative paths to absolute paths before proceeding.
+* Geoid data for nation states (e.g., `powell_geoids`) should be stored in the `census.counties` PostgreSQL table with a `nation_state` column.  This approach enhances data persistence, relational context, flexibility, and query efficiency.
+* DataFrames should be exported from the Census module.
+* Ensure that `DataFrame` is exported from the `Census` module.
+* Ensure that `LibPQ.execute` is used for database queries within the `geoids` submodule.
+* Ensure that `setup_nation_states_table`, `set_nation_state_geoids`, `get_nation_state_geoids`, and `clear_nation_state_geoids` are exported from the `Census.geoids` module and the main `Census` module.
+* Ensure that `DataFrames` is exported from the `Census` module.
+* Ensure that `LibPQ` is imported in `src/geoids.jl` and `LibPQ.execute` is used consistently throughout the `geoids` submodule.
+* Ensure that `LibPQ.execute` is used for database queries within the geoids submodule.
+* Ensure that `DataFrames` is exported from the `Census` module.
+* The correct method for subsetting DataFrames based on latitude using ArchGDAL is to use `subset` with `ByRow` and handle missing geometry values appropriately.  This ensures that the filtering process works correctly and efficiently.
+* To simplify imports, all functions and constants within the `Census` module should be exported.  This allows users to access all functionality with a simple `using Census` statement.
+* To simplify imports, all functions and constants within the `Census` module should be exported. This allows users to access all functionality with a simple `using Census` statement.  This includes the export of `GeoAxis`, `poly!`, `text!`, `fromWKT`, `centroid`, `getx`, and `gety` from GeoMakie and ArchGDAL respectively.
+* To simplify imports, all functions and constants within the `Census` module should be exported. This allows users to access all functionality with a simple `using Census` statement.  This includes the export of `GeoAxis`, `poly!`, `text!`, `fromWKT`, `centroid`, `getx`, `gety`, `DataFrames`, `DataFramesMeta`, `ArchGDAL`, `CairoMakie`, `GeoMakie`, and `GeometryBasics`.
+* To simplify imports, all functions and constants within the `Census` module should be exported. This allows users to access all functionality with a simple `using Census` statement.  This includes the export of `init_census_data`.
+* To simplify imports, all functions and constants within the `Census` module should be exported. This allows users to access all functionality with a simple `using Census` statement. This includes the export of `create_age_pyramid`, `cleveland_dot_plot`, and `create_birth_table`.
+* To simplify imports, all functions and constants within the `Census` module should be exported. This allows users to access all functionality with a simple `using Census` statement. This includes the export of `nfeature` from `ArchGDAL`.
+* The `init_census_data` function should be exported from the `Census` module.
+*  All nation state constants (e.g., `concord`) should be accessed via `Census.NATION_STATES["concord"]`.
+* All functions included in `src/` and any functions that they depend upon, and all constants exposed from `constants.jl` shall be available to any script that includes `using Census` unless specifically excluded by user directive.
+* Static geoid vectors (e.g., `colorado_basin`) should be pre-compiled and readily available upon importing the `Census` module.
+* All scripts should be able to use any function in any submodule or the `src` directory without the necessity of declaration or qualification.  This is achieved by exporting all functions and constants from all submodules in the `Census.jl` module.  Pre-compiled geoid vectors are now directly available as constants upon importing the `Census` module.
+* All scripts should be able to use any function in any submodule or the `src` directory without the necessity of declaration or qualification.
+* All scripts should be able to use any function in any submodule or the `src` directory without the necessity of declaration or qualification.
+* Check for and eliminate all redefinitions of constants.
+* Constants should be defined exactly once in the codebase. Functions used to compute constants must be defined before the constants that use them. Include order must ensure dependencies are available before they are used. Check for and eliminate any constant redefinitions.
+* Add to policy—check for and eliminate redefinitions and fix these
+* Ensure that `get_western_geoids` is exported from the `Census` module.
+* Ensure that `init_geoid_constants` is exported from the `Census` module.
+* Ensure that `init_geoid_constants` is exported from the `Census` module.
+* Ensure that `CRS_STRINGS` is exported from the `Census` module.
+
+
+## MCP RULES
+**Rules:**
+* Explore thoroughly: Avoid rushing to conclusions and keep investigating until a natural solution emerges.
+* Think deeply: Engage in extensive contemplation, breaking complex thoughts into simple steps.
+* Express naturally: Use conversational internal monologue with short, simple sentences that mirror natural thought patterns.
+* Embrace uncertainty: Acknowledge doubts, revise previous thoughts, and explore multiple possibilities.
+* Show your work: Demonstrate work-in-progress thinking, including dead ends and backtracking.
+* Persist and review: Value thorough exploration over quick resolution, and implement multi-stage reviews for all solutions.
+* Ensure compatibility: When changing patterns or functions, update associated files to maintain consistency.
+* Learn and improve: Monitor solution effectiveness, identify patterns, and create new rules based on insights.
+* Manage memory: Start tasks by retrieving relevant information and update the knowledge base after each task.
+* Seek feedback: Evaluate solutions against quality criteria and iterate based on user or expert input.
+
+**Message Steps:**
+* Read/Update MCP Memory
+* Update MCP Memory with what was learned during learning phase
+* Update MCP Memory with any changes made
+
+**Conversation History:**
+Location: /.specstory/history/
+Enabled: true
+
+**Goals:**
+* Reach conclusions through thorough exploration
+* Let conclusions emerge naturally from exhaustive contemplation
+* Confidently state impossibility when tasks cannot be completed
+* Strive for continuous improvement through self-learning
+* Maintain rigorous review processes
+* Practice effective memory management
+
+---
+description: Rules for Census module exports
+globs: src/**/*.jl
+alwaysApply: true
+---
+
+## MODULE EXPORTS POLICY
+
+All functions defined in `src/` and any functions they depend upon, along with all constants exposed from `constants.jl`, shall be automatically available to any script that includes `using Census` unless specifically excluded by user directive.
+
+### Implementation Requirements
+
+1. All functions in `src/` directories must be exported by default
+2. All constants defined in `constants.jl` must be exported by default
+3. All dependent functions required by exported functions must also be exported
+4. Functions should only be excluded from export if specifically directed by user
+5. The module should maintain a comprehensive export list in `src/Census.jl`
+
+### Usage
+
+Scripts should only need to include:
+```julia
+using Census
+```
+
+All functionality should be available through this single import unless specifically excluded.  Static geoid vectors should be pre-compiled and available immediately upon import.  All scripts should be able to use any function in any submodule or the `src` directory without the necessity of declaration or qualification.  The `COLORADO_BASIN_GEOIDS` constant should be directly accessible after `using Census`.  Constants should be qualified in all scripts (e.g., `Census.FLORIDA_GEOIDS`).  The geoids submodule should be eliminated and all functions and constants integrated directly into the `Census` module.  The `init_geoid_constants()` function should be called after `using Census` to initialize pre-compiled geoid vectors.

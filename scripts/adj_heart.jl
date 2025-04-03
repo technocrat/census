@@ -6,7 +6,7 @@ df          = get_geo_pop(rejig)
 DataFrames.rename!(df, [:geoid, :stusps, :county, :geom, :pop])
 RSetup.setup_r_environment()
 breaks      = RCall.rcopy(get_breaks(df,5))
-df.pop_bins = my_cut(df.pop, breaks[:kmeans][:brks])
+df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
 peninsula = ["26053", "26131", "26061", "26083", "26013", "26071", "26103",
         "26003", "26109", "26041", "26053", "26956", "26976", "26033",
         "26043", "26053", "26095", "26097", "20033", "26043", "26053",
