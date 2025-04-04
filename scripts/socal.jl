@@ -1,36 +1,36 @@
 # SPDX-License-Identifier: MIT
-
 using Census
 
-# Include core files
-include(joinpath(SCRIPTS_DIR, "libr.jl"))
-include(joinpath(SCRIPTS_DIR, "dict.jl"))
-include(joinpath(SCRIPTS_DIR, "func.jl"))
-include(joinpath(SCRIPTS_DIR, "highlighters.jl"))
-include(joinpath(SCRIPTS_DIR, "stru.jl"))
-include(joinpath(SCRIPTS_DIR, "setup.jl"))
+# Initialize census data
+us = init_census_data()
 
-us = get_geo_pop(postals)
-
-rename!(us, [:geoid, :stusps, :county, :geom, :pop])
-setup_r_environment()
-breaks = rcopy(get_breaks(us,5))
-us.pop_bins = customcut(us.pop, breaks[:kmeans][:brks])
-us.parsed_geoms = parse_geoms(us)
-
+# Filter for California counties not in SoCal or east of Sierras
 df = subset(us, :stusps => ByRow(==("CA")))
-df = subset(df, :geoid => ByRow(x -> x ∈ socal))
+df = subset(df, :geoid => ByRow(x -> x ∈ SOCAL_GEOIDS))
+breaks          = rcopy(get_breaks(df.pop))  # Pass population vector directly
+df.pop_bins     = customcut(df.pop, breaks[:kmeans][:brks])
 
-dest = """
-+proj=aea +lat_1=35 +lat_2=45 +lat_0=40 +lon_0=-120 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs
-"""
-# Create figure
-fig = Figure(size=(2400, 1600), fontsize=22)
+# Define projection
 
-map_poly(df, "Midlands", dest, fig)
-# Display the figure
+dest = CRS_STRINGS["pacific_coast"]
+
+map_title = "Southland"
+fig = Figure(size=(3200, 2400), fontsize=24)
+map_poly(df, map_title, dest, fig)
+# Save the figure with absolute path
+img_dir = abspath(joinpath(@__DIR__, "..", "Census", "img"))
+@info "Saving to directory: $img_dir"
+saved_path = save_plot(fig, map_title, directory=img_dir)
+@info "Plot saved to: $saved_path"
+
+# Verify file exists
+if isfile(saved_path)
+    @info "File successfully created at: $saved_path"
+else
+    @error "Failed to create file at: $saved_path"
+end
+
 
 display(fig)
-              
-
-
+# Store the geoids for later use
+# set_nation_state_geoids(map_title, df.geoid)

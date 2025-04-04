@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: MIT
 using Census
-using Census.GreatLakes
+
+# Initialize census data
+us = init_census_data()
 
 add_from_metro = ["36003", "36009", "36011",
     "36013", "36014", "36015", "36019", "36019", "36029",
@@ -68,9 +70,7 @@ take_from_ky     = setdiff(get_geo_pop(["KY"]).geoid,ohio_basin_ky)
 take_from_tn     = setdiff(get_geo_pop(["TN"]).geoid,ohio_basin_tn)
 take_from_va     = setdiff(get_geo_pop(["VA"]).geoid,ohio_basin_va)
 take_from_metro  = setdiff(get_geo_pop(["NY"]).geoid,add_from_metro)
-rejig            = copy(Census.factoria)
-regig            = push!(rejig,"NY","WV","TN","KY","MD","VA","AL","MS","GA","NC")
-df               = get_geo_pop(regig)
+
 
 df = filter(:stusps => x -> x != "WI",df)
 df = filter(:stusps => x -> x != "MI",df)
@@ -91,41 +91,65 @@ df = filter(:geoid  => x -> x ∉ take_from_va,df)
 df = filter(:geoid  => x -> x ∉ gl_pa && 
                             x ∉ take_from_pa,df)
 
-df = get_geo_pop(["NY"])
-RSetup.setup_r_environment()
-rename!(df, [:geoid, :stusps, :county, :geom, :pop])
+oh = subset(us, :stusps => ByRow(==("OH")))
 
-breaks      = RCall.rcopy(get_breaks(df,5))
+
+pa = subset(us, :stusps => ByRow(==("PA")))
+
+
+in = subset(us, :stusps => ByRow(==("IN")))
+
+
+il = subset(us, :stusps => ByRow(==("IL")))
+
+
+ky = subset(us, :stusps => ByRow(==("KY")))
+
+
+md = subset(us, :stusps => ByRow(==("MD")))
+
+
+va = subset(us, :stusps => ByRow(==("VA")))
+
+
+al = subset(us, :stusps => ByRow(==("AL")))
+
+
+ms = subset(us, :stusps => ByRow(==("MS")))
+
+
+ga = subset(us, :stusps => ByRow(==("GA")))
+
+
+nc = subset(us, :stusps => ByRow(==("NC")))
+
+df = vcat(oh,pa,in,il,ky,md,va,al,ms,ga,nc)
+
+breaks      = rcopy(get_breaks(df.pop))
 df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
 
-# Convert WKT strings to geometric objects
-df.parsed_geoms = parse_geoms(df)
 
-dest = "+proj=aea +lat_0=38 +lon_0=-85 +lat_1=30 +lat_2=45 +datum=NAD83 +units=m +no_defs"
-# Create figure
-fig = Figure(size=(2400, 1600), fontsize=22)
+# Define projection
 
-# Create a new axis with a title
-ax = Axis(
-    fig[1, 1],
-    dest=dest,
-    title="Adjusted Factoria"
-)
+dest = CRS_STRINGS["gateway"]
 
-# Plot the polygons
-map_poly_with_projection(df, "Adjusted Factoria", dest, fig)
+map_title = "Factoria"
+fig = Figure(size=(3200, 2400), fontsize=24)
+map_poly(df, map_title, dest, fig)
+# Save the figure with absolute path
+img_dir = abspath(joinpath(@__DIR__, "..", "Census", "img"))
+@info "Saving to directory: $img_dir"
+saved_path = save_plot(fig, map_title, directory=img_dir)
+@info "Plot saved to: $saved_path"
 
-# Add labels
-add_labels!(df, ax)
+# Verify file exists
+if isfile(saved_path)
+    @info "File successfully created at: $saved_path"
+else
+    @error "Failed to create file at: $saved_path"
+end
 
-# Save the plot
-img_dir = joinpath(dirname(@__DIR__), "img")
-mkpath(img_dir)
-timestamp = Dates.format(now(), "yyyy-mm-dd_HHMMSS")
-filename = joinpath(img_dir, "Adjusted_Factoria_$(timestamp).png")
-save(filename, fig, px_per_unit=2)
-@info "Plot saved to: $filename"
 
-# Display the figure
 display(fig)
-
+# Store the geoids for later use
+# set_nation_state_geoids(map_title, df.geoid)

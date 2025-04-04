@@ -34,22 +34,22 @@ map_poly(population_data)
 """
 module Census
 
-using RCall
 using DataFrames
+using DataFramesMeta
+using LibPQ
+using RCall
+using CairoMakie
+using GeoMakie
+using GeometryBasics
+using ColorSchemes
+using ArchGDAL
 using HTTP
 using JSON3
 using GeoInterface
-using CairoMakie
-using GeoMakie
 using LibGEOS
 using WellKnownGeometry
-using ArchGDAL
 using RSetup
 using ACS
-using DataFramesMeta  # For ByRow and other DataFrame operations
-using LibPQ  # For database connections
-using GeometryBasics  # For polygon creation and geometric operations
-using ColorSchemes  # For color schemes
 
 # Re-export specific types and functions from CairoMakie and GeoMakie
 import CairoMakie: Figure, Axis, Label, Colorbar
@@ -59,14 +59,67 @@ import GeoMakie: GeoAxis
 import RCall: rcopy
 import LibPQ: execute
 
-# Include all modules first
+# Database configuration
+const DB_HOST = get(ENV, "CENSUS_DB_HOST", "localhost")
+const DB_PORT = parse(Int, get(ENV, "CENSUS_DB_PORT", "5432"))
+const DB_NAME = get(ENV, "CENSUS_DB_NAME", "geocoder")
+
+# Southern California counties (San Luis Obispo, Kern, San Bernardino and all south)
+const SOCAL_GEOIDS::Vector{String} = [
+    "06025",  # Imperial County
+    "06029",  # Kern County
+    "06037",  # Los Angeles County
+    "06059",  # Orange County
+    "06065",  # Riverside County
+    "06071",  # San Bernardino County
+    "06073",  # San Diego County
+    "06079",  # San Luis Obispo County
+    "06083",  # Santa Barbara County
+    "06111"   # Ventura County
+]
+
+"""
+    get_db_connection() -> LibPQ.Connection
+
+Creates a connection to the PostgreSQL database using default parameters.
+
+# Returns
+- A `LibPQ.Connection` object representing an active database connection
+
+# Database Parameters
+- Host: $DB_HOST (default: "localhost")
+- Port: $DB_PORT (default: 5432)
+- Database: $DB_NAME (default: "geocoder")
+
+# Example
+```julia
+conn = get_db_connection()
+try
+    # Use connection
+finally
+    close(conn)
+end
+```
+
+# Notes
+- Connection should be closed after use
+- Uses environment variables if set, otherwise defaults
+- Environment variables: CENSUS_DB_HOST, CENSUS_DB_PORT, CENSUS_DB_NAME
+"""
+function get_db_connection()
+    conn = LibPQ.Connection("host=$DB_HOST port=$DB_PORT dbname=$DB_NAME")
+    return conn
+end
+
+# Include files in dependency order
 include("constants.jl")
 include("core/core.jl")
 include("core/acs.jl")
 include("core/RSetup.jl")
-include("core/geoids.jl")
+include("core/geoids.jl")  # get_exclude_from_va_geoids is defined here
 include("core/crs.jl")  # Add CRS definitions
 include("core/great_lakes.jl")  # Add Great Lakes region constants
+include("analysis/get_breaks.jl")  # Move get_breaks.jl earlier
 include("utils/add_labels.jl")
 include("utils/add_row_totals.jl")
 include("utils/customcut.jl")
@@ -75,13 +128,12 @@ include("utils/expand_state_codes.jl")
 include("utils/fill_state.jl")
 include("utils/make_postal_codes.jl")
 include("utils/q.jl")
+include("geo/map_poly.jl")  # Load map_poly first
 include("geo/geo.jl")
-include("geo/map_poly.jl")
 include("geo/inspect_shapefile_structure.jl")
 include("analysis/analysis.jl")
 include("analysis/collect_state_age_dataframes.jl")
 include("analysis/ga.jl")
-include("analysis/get_breaks.jl")
 include("analysis/get_childbearing_population.jl")
 include("analysis/get_dem_vote.jl")
 include("analysis/get_gop_vote.jl")
@@ -136,7 +188,8 @@ end
 # Export the GreatLakes module
 export GreatLakes
 
-# Initialize all geoid constants after all modules are loaded
+# Initialize all geoid constants after geoids.jl is loaded
+const EXCLUDE_FROM_VA = get_exclude_from_va_geoids()
 const WESTERN_GEOIDS = get_western_geoids()
 const EASTERN_GEOIDS = get_eastern_geoids()
 const EAST_OF_UTAH_GEOIDS = get_east_of_utah_geoids()
@@ -152,6 +205,8 @@ const NORTHERN_MISSOURI_GEOIDS = get_northern_missouri_geoids()
 const MISSOURI_RIVER_BASIN_GEOIDS = get_missouri_river_basin_geoids()
 const SLOPE_GEOIDS = get_slope_geoids()
 const FLORIDA_GEOIDS = get_florida_south_geoids()
+
+const EAST_OF_SIERRAS_GEOIDS = get_east_of_sierras_geoids()
 
 # Initialize Great Lakes constants
 const MICHIGAN_PENINSULA_GEOID_LIST = GreatLakes.get_michigan_peninsula_geoids()
@@ -177,12 +232,15 @@ export WESTERN_GEOIDS,
        MISSOURI_RIVER_BASIN_GEOIDS,
        SLOPE_GEOIDS,
        FLORIDA_GEOIDS,
+       SOCAL_GEOIDS,
+       EAST_OF_SIERRAS_GEOIDS,
        MICHIGAN_PENINSULA_GEOID_LIST,
        METRO_TO_GREAT_LAKES_GEOID_LIST,
        GREAT_LAKES_PA_GEOID_LIST,
        GREAT_LAKES_IN_GEOID_LIST,
        GREAT_LAKES_OH_GEOID_LIST,
-       OHIO_BASIN_IL_GEOID_LIST
+       OHIO_BASIN_IL_GEOID_LIST,
+       EXCLUDE_FROM_VA
 
 # Export everything from the module
 export PostalCode, CensusQuery
@@ -208,11 +266,9 @@ export collect_state_age_dataframes, get_childbearing_population,
        make_nation_state_gdp_df, make_nation_state_pop_df,
        query_nation_ages, query_state_ages
 
-# Export all visualization functions
-export cleveland_dot_plot, create_age_pyramid, create_birth_table,
-       map_poly, map_poly_with_projection, geo, viz, save_plot,
-       make_legend, create_state_to_nation_map,
-       create_state_abbrev_map, create_multiple_age_pyramids
+# Export visualization functions
+export cleveland_dot_plot, create_age_pyramid, create_birth_table
+export map_poly, geo, viz
 
 # Re-export functions from RSetup and ACS
 export setup_r_environment,
@@ -249,5 +305,31 @@ export Figure, Axis, Label, Colorbar, GeoAxis
 
 # Re-export ColorSchemes for convenience
 export ColorSchemes
+
+# Export all public functions
+export get_db_connection,
+       get_nation_state,
+       initialize,
+       get_us_ages,
+       get_dem_vote,
+       get_gop_vote,
+       get_childbearing_population,
+       get_state_pop,
+       make_nation_state_pop_df,
+       make_nation_state_gdp_df,
+       get_breaks,
+       map_poly,
+       geo_plot,
+       save_plot,
+       format_number,
+       add_labels!,
+       add_row_totals!,
+       customcut,
+       dms_to_decimal,
+       expand_state_codes,
+       fill_state,
+       make_postal_codes,
+       q,
+       inspect_shapefile_structure
 
 end # module Census

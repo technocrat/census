@@ -142,29 +142,30 @@ function set_nation_state_geoids(nation_state::String, geoids::Union{Vector{Stri
     conn = get_db_connection()
     try
         # Start a transaction
-        execute(conn, "BEGIN;")
+        LibPQ.execute(conn, "BEGIN;")
         
         # First, clear the nation_state for any counties that currently have it
-        execute(conn, 
-            "UPDATE census.counties SET nation_state = NULL WHERE nation_state = \$1",
+        LibPQ.execute(conn, 
+            "UPDATE census.counties SET nation_state = NULL WHERE nation_state = \$1;",
             [nation_state]
         )
         
-        # Then set the new nation_state for the specified counties
-        for geoid in geoids
-            if !ismissing(geoid)
-                execute(conn, 
-                    "UPDATE census.counties SET nation_state = \$1 WHERE geoid = \$2",
-                    [nation_state, geoid]
-                )
-            end
+        # Filter out missing values and convert to array
+        valid_geoids = filter(!ismissing, collect(String, geoids))
+        
+        if !isempty(valid_geoids)
+            # Then set the new nation_state for all specified counties in one query
+            LibPQ.execute(conn, 
+                "UPDATE census.counties SET nation_state = \$1 WHERE geoid = ANY(\$2::text[]);",
+                [nation_state, valid_geoids]
+            )
         end
         
         # Commit the transaction
-        execute(conn, "COMMIT;")
+        LibPQ.execute(conn, "COMMIT;")
     catch e
         # Rollback on error
-        execute(conn, "ROLLBACK;")
+        LibPQ.execute(conn, "ROLLBACK;")
         rethrow(e)
     finally
         close(conn)
@@ -383,6 +384,116 @@ function get_east_of_utah_geoids()
     return DataFrame(result).geoid
 end
 
+"""
+    get_socal_geoids()
+
+Returns GEOIDs for Southern California counties, including:
+- San Luis Obispo, Kern, and San Bernardino counties
+- All counties south of these counties
+"""
+function get_socal_geoids()
+    conn = get_db_connection()
+    query = """
+        WITH socal_counties AS (
+            -- Explicitly include the northernmost counties
+            SELECT geoid
+            FROM census.counties
+            WHERE stusps = 'CA'
+            AND name IN ('San Luis Obispo', 'Kern', 'San Bernardino')
+            
+            UNION
+            
+            -- Include all counties south of these
+            SELECT geoid
+            FROM census.counties
+            WHERE stusps = 'CA'
+            AND ST_Y(ST_Centroid(geom)) <= (
+                SELECT MAX(ST_Y(ST_Centroid(geom)))
+                FROM census.counties
+                WHERE name IN ('San Luis Obispo', 'Kern', 'San Bernardino')
+                AND stusps = 'CA'
+            )
+        )
+        SELECT geoid
+        FROM socal_counties
+        ORDER BY geoid;
+    """
+    result = LibPQ.execute(conn, query)
+    close(conn)
+    return DataFrame(result).geoid
+end
+
+"""
+    get_east_of_sierras_geoids()
+
+Returns GEOIDs for California counties bordering Nevada (except Placer County) plus Plumas County.
+These counties form the eastern Sierra region.
+"""
+function get_east_of_sierras_geoids()
+    conn = get_db_connection()
+    query = """
+        WITH border_counties AS (
+            SELECT DISTINCT c1.geoid, c1.name
+            FROM census.counties c1
+            JOIN census.counties c2 ON ST_Touches(c1.geom, c2.geom)
+            WHERE c1.stusps = 'CA' 
+            AND c2.stusps = 'NV'
+            AND c1.geoid != '06061'  -- Exclude Placer County
+            UNION
+            SELECT geoid, name
+            FROM census.counties
+            WHERE stusps = 'CA'
+            AND name = 'Plumas'
+        )
+        SELECT geoid 
+        FROM border_counties
+        ORDER BY geoid;
+    """
+    result = LibPQ.execute(conn, query)
+    close(conn)
+    return DataFrame(result).geoid
+end
+
+"""
+    get_exclude_from_va_geoids() -> Vector{String}
+
+Returns GEOIDs for Virginia counties northeast of Highland County's centroid.
+Highland County is explicitly included in the results.
+"""
+function get_exclude_from_va_geoids()
+    conn = get_db_connection()
+    query = """
+    WITH highland_centroid AS (
+        SELECT ST_X(ST_Centroid(geom)) as ref_lon,
+               ST_Y(ST_Centroid(geom)) as ref_lat
+        FROM census.counties 
+        WHERE stusps = 'VA' AND name = 'Highland'
+    ),
+    northeast_counties AS (
+        SELECT c.geoid
+        FROM census.counties c, highland_centroid h
+        WHERE c.stusps = 'VA'
+        AND (ST_Y(ST_Centroid(c.geom)) > h.ref_lat 
+             OR (ST_Y(ST_Centroid(c.geom)) = h.ref_lat 
+                 AND ST_X(ST_Centroid(c.geom)) > h.ref_lon))
+    ),
+    highland_county AS (
+        SELECT geoid
+        FROM census.counties
+        WHERE stusps = 'VA' AND name = 'Highland'
+    )
+    SELECT geoid FROM (
+        SELECT geoid FROM northeast_counties
+        UNION
+        SELECT geoid FROM highland_county
+    ) combined
+    ORDER BY geoid;
+    """
+    result = LibPQ.execute(conn, query)
+    close(conn)
+    return DataFrame(result).geoid
+end
+
 # Export all functions
 export get_western_geoids,
        get_eastern_geoids,
@@ -400,4 +511,7 @@ export get_western_geoids,
        get_missouri_river_basin_geoids,
        get_slope_geoids,
        get_east_of_utah_geoids,
-       set_nation_state_geoids 
+       get_socal_geoids,
+       set_nation_state_geoids,
+       get_east_of_sierras_geoids,
+       get_exclude_from_va_geoids 

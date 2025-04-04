@@ -1,5 +1,13 @@
 # SPDX-License-Identifier: MIT
 
+using CSV
+using DataFrames
+using Statistics
+
+# Define paths relative to project root
+const PROJECT_ROOT = dirname(dirname(@__FILE__))
+const DATA_DIR = joinpath(PROJECT_ROOT, "data")
+
 include(joinpath(@__DIR__, "setup.jl"))
 include(joinpath(@__DIR__, "func.jl"))
 include(joinpath(dirname(@__DIR__), "src", "q.jl"))
@@ -30,7 +38,7 @@ nation_votes.margin        = round.(nation_votes.margin, digits = 2)
 nation_votes.margin        = string.(nation_votes.margin) .* "%"
 
 sort!(nation_votes,:nation)
-long_term        = CSV.read(datadir()*"/long_votes.csv",DataFrame)
+long_term = CSV.read(joinpath(DATA_DIR, "long_votes.csv"), DataFrame)
 long_term.nation = [get_nation_title_by_name(state, nations, Titles) for state in long_term.State]
 long_term.stusps = [get(reverse_state_dict, state, missing) for state in long_term.State]
 df               = get_state_pop()

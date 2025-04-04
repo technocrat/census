@@ -5,34 +5,50 @@
 # plus moving greater Bridgeport to Metropolis
 using Census
 
-# Define the destination projection - Albers Equal Area centered on Lexington, KY
-dest = "+proj=aea +lat_0=38 +lon_0=-85 +lat_1=30 +lat_2=45 +datum=NAD83 +units=m +no_defs"
 
-# Create figure first
-fig = Figure(size=(2400, 1600), fontsize=22)
+us = init_census_data()
 
-rejig       = copy(Census.NATION_STATES["concord"])
-regig       = push!(rejig,"NY")
-df          = get_geo_pop(regig)
-rename!(df, [:geoid, :stusps, :county, :geom, :pop])
-breaks      = rcopy(get_breaks(df,5))
-df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
+ct = subset(us, :stusps => ByRow(==("CT")))
+me = subset(us, :stusps => ByRow(==("ME")))
+ma = subset(us, :stusps => ByRow(==("MA")))
+nh = subset(us, :stusps => ByRow(==("NH")))
+ri = subset(us, :stusps => ByRow(==("RI")))
+vt = subset(us, :stusps => ByRow(==("VT")))
+ny = subset(us, :stusps => ByRow(==("NY")))
 
-# Convert WKT strings to geometric objects
-df.parsed_geoms = parse_geoms(df)
 
 add_to_concordia = ["36019","36031"]
-addns       = filter(:geoid  => x -> x ∈ add_to_concordia,df)
-df          = vcat(df,addns)
+
 take_from_concordia = ["23003","20029","09160","09190"]
-df          = filter(:geoid  => x -> x ∉ take_from_concordia,df)
+ma          = filter(:geoid  => x -> x ∉ take_from_concordia,ma)
+me          = filter(:geoid  => x -> x ∉ take_from_concordia,me)
 take_from_ny  = setdiff(get_geo_pop(["NY"]).geoid,add_to_concordia)
-df          = filter(:geoid  => x -> x ∉ take_from_ny,df)
-df          = filter(:geoid  => x -> x ∉ take_from_concordia,df)
+ny          = filter(:geoid  => x -> x ∉ take_from_ny,ny)
+addns       = filter(:geoid  => x -> x ∈ add_to_concordia,ny)
+ma          = vcat(ma,addns)
+ct          = subset(ct, :geoid => ByRow(x -> x ∉ take_from_concordia))
+df          = vcat(ct,me, ma,nh,ri,vt,ny)
 
-# Now call map_poly with all required parameters
-map_poly(df, "Adjusted Concordia", dest, fig)
+breaks      = rcopy(get_breaks(df))
+df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
 
-# Display the figure
+map_title = "Concordia"
+dest = CRS_STRINGS["concordia"]
+fig = Figure(size=(3200, 2400), fontsize=24)
+map_poly(df, map_title, dest, fig)
+img_dir = abspath(joinpath(@__DIR__, "..", "Census", "img"))
+@info "Saving to directory: $img_dir"
+saved_path = save_plot(fig, map_title, directory=img_dir)
+@info "Plot saved to: $saved_path"
+
+# Verify file exists
+if isfile(saved_path)
+    @info "File successfully created at: $saved_path"
+else
+    @error "Failed to create file at: $saved_path"
+end
+
+
 display(fig)
-
+# Store the geoids for later use
+# set_nation_state_geoids(map_title, df.geoid)

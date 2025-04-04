@@ -1,10 +1,5 @@
 # SPDX-License-Identifier: MIT
 
-# Database configuration
-const DB_HOST = "localhost"
-const DB_PORT = 5432
-const DB_NAME = "geocoder"
-
 # Constants for the Census package
 
 """
@@ -24,7 +19,7 @@ const VALID_POSTAL_CODES = [
 const west_montana = ["30023", "30029", "30039", "30047", "30053",
                       "30061", "30063", "30081", "30089", "30093"]
 
-                      # Define postals as an alias for VALID_POSTAL_CODES for backward compatibility
+# Define postals as an alias for VALID_POSTAL_CODES for backward compatibility
 const postals = VALID_POSTAL_CODES
 
 const VALID_STATE_NAMES = Dict(
@@ -193,4 +188,58 @@ const US_POSTALS = [
     "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY",
     "DC", "PR", "VI", "GU", "AS", "MP"
 ] 
+
+"""
+    OHIO_BASIN_AL_GEOIDS::Vector{String}
+
+GEOIDs for Alabama counties in the Ohio River Basin.
+"""
+const OHIO_BASIN_AL_GEOIDS = ["01077","01083","01089","01033",
+                             "01059","01079","01103","01071","01049","01195"]
+
+"""
+    OHIO_BASIN_MS_GEOIDS::Vector{String}
+
+GEOIDs for Mississippi counties in the Ohio River Basin.
+"""
+const OHIO_BASIN_MS_GEOIDS = ["28141"]
+
+"""
+    OHIO_BASIN_NC_GEOIDS::Vector{String}
+
+GEOIDs for North Carolina counties in the Ohio River Basin.
+"""
+const OHIO_BASIN_NC_GEOIDS = ["37039","37043","37075","37113","37087","37099",
+                             "37115","37021","37011","37009","37005","37173",
+                             "37189","37121","37199","37089","37089"]
+
+"""
+    OHIO_BASIN_VA_GEOIDS::Vector{String}
+
+GEOIDs for Virginia counties in the Ohio River Basin.
+"""
+const OHIO_BASIN_VA_GEOIDS = ["51105","51169","51195","51120","51051",
+                             "51027","51167","51191","51070","51021",
+                             "51071","51155","51035","51195","51197",
+                             "51173","51077","51185","51750","51640",
+                             "51520","51720","51750","51640","51520",
+                             "51720"]
+
+"""
+    OHIO_BASIN_GA_GEOIDS::Vector{String}
+
+GEOIDs for Georgia counties in the Ohio River Basin.
+"""
+const OHIO_BASIN_GA_GEOIDS = ["13295","13111","13291","13241",
+                             "13083","13111"]
+
+"""
+    MS_EAST_LA_GEOIDS::Vector{String}
+
+GEOIDs for Louisiana parishes east of the Mississippi River.
+"""
+const MS_EAST_LA_GEOIDS = ["22125","22091","22058","22117",
+                          "22033","22063","22103","22093","22095",
+                          "22029","22051","22075","22087","22037",
+                          "22105","22051","22071","22089","22093"]
 

@@ -5,6 +5,12 @@ using CairoMakie
 using GeoInterface
 using LibGEOS
 using WellKnownGeometry
+using ArchGDAL
+using GeometryBasics: Point2f, Polygon
+using DataFrames: DataFrame, nrow
+
+# Import map_poly from map_poly.jl
+import ..Census: map_poly
 
 """
     get_geo_pop(target_states::Vector{String}) -> DataFrame
@@ -173,43 +179,6 @@ function convert_to_polygon(geom::ArchGDAL.IGeometry)
     end
 end
 
-function map_poly(data::DataFrame; 
-                 title::String="Geographic Distribution",
-                 colormap=:viridis)
-    
-    fig = CairoMakie.Figure(size=DEFAULT_PLOT_SIZE)
-    
-    # Create the map axis
-    ga = GeoMakie.GeoAxis(
-        fig[1,1],
-        title = title,
-        dest = GeoMakie.WGS84(),
-        coastlines = true,
-        lonlims = (-180, 180),
-        latlims = (-90, 90)
-    )
-    
-    # Plot the polygons
-    for row in eachrow(data)
-        geom = GeoInterface.coordinates(row.geometry)
-        GeoMakie.poly!(ga, geom,
-            color = row.value,
-            colormap = colormap,
-            strokewidth = 1,
-            strokecolor = :black
-        )
-    end
-    
-    # Add a colorbar
-    CairoMakie.Colorbar(fig[1,2], colormap=colormap,
-        label="Value",
-        width=20,
-        height=Relative(0.5)
-    )
-    
-    return fig
-end
-
 function geo_plot(data::DataFrame;
                  lon_col::Symbol=:longitude,
                  lat_col::Symbol=:latitude,
@@ -251,5 +220,4 @@ end
 export get_geo_pop,
        parse_geoms,
        convert_to_polygon,
-       map_poly,
        geo_plot 

@@ -1,6 +1,13 @@
-include("setup.jl")
-world = CSV.read(datadir() * "/world_gdp.csv", DataFrame)
-partialsdir(args...) = projectdir("_layout/partials", args...)
+using CSV
+using DataFrames
+
+# Define paths relative to project root
+const PROJECT_ROOT = dirname(dirname(@__FILE__))
+const DATA_DIR = joinpath(PROJECT_ROOT, "data")
+const PARTIALS_DIR = joinpath(PROJECT_ROOT, "_layout", "partials")
+
+# Read data
+world = CSV.read(joinpath(DATA_DIR, "world_gdp.csv"), DataFrame)
 world = world[!,[1,68]]
 rename!(world,[:country,:gdp])
 sort!(world, :country)
@@ -11,7 +18,7 @@ sort!(eu, :gdp)
 
 function output_gdp_compared_to_eu_table(nations::Vector{Vector{String}}, 
                                         titles::Vector{String},
-                                        base_path::String=partialsdir())
+                                        base_path::String=PARTIALS_DIR)
     
     @assert length(nations) == length(titles) "Number of nation groups must match number of titles"
     

@@ -1,7 +1,13 @@
+using Census
+
+# Define paths relative to project root
+const PROJECT_ROOT = dirname(dirname(@__FILE__))
+const PARTIALS_DIR = joinpath(PROJECT_ROOT, "_layout", "partials")
+
 function report_polarization(recently::DataFrame, historical::DataFrame, 
                            nations::Vector{Vector{String}} = nations, 
                            titles::Vector{String} = Titles,    
-                           base_path::String= projectdir() * "/_layout/partials/")
+                           base_path::String=PARTIALS_DIR)
     for nation in Titles
         grab = filter(:nation => (x -> x == nation), recently)
         recent_html = "<p>Politcal polarization of " * grab[1,1] * ", as measured by the " *

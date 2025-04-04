@@ -38,7 +38,7 @@ tx = subset(us, :stusps => ByRow(==("TX")))
 tx = subset(tx, :geoid => ByRow(x -> x ∈ WESTERN_GEOIDS))
 
 ut = subset(us, :stusps => ByRow(==("UT")))
-keep_ut = ["48047","49037","49019"]
+keep_ut = ["49037","49019"]
 ut = subset(ut, :geoid => ByRow(x -> x ∈ keep_ut))
 
 df = vcat(mt,nm,wy,az,co,az,nd,sd,ne,ks,tx,ok,ut)
@@ -51,7 +51,7 @@ map_title = "Powell"
 fig = Figure(size=(2400, 1600), fontsize=22)
 
 # Create the map
-map_poly_with_projection(df, map_title, dest, fig)
+map_poly(df, map_title, dest, fig)
 
 # Save the figure with absolute path
 img_dir = abspath(joinpath(@__DIR__, "..", "img"))  # Use relative path from script location
@@ -67,4 +67,4 @@ else
 end
 
 # Store the geoids for later use
-set_nation_state_geoids("Powell", df.geoid)
+# set_nation_state_geoids("Powell", df.geoid)

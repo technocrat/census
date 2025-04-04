@@ -23,7 +23,43 @@ const CRS_STRINGS = Dict{String,String}(
     "lonestar" => "+proj=aea +lat_0=32.8 +lon_0=-96.8 +lat_1=30 +lat_2=37 +datum=NAD83 +units=m +no_defs",
     
     # Erie Region (Great Lakes)
-    "erie" => "+proj=aea +lat_0=42.5 +lon_0=-80.0 +lat_1=41 +lat_2=44 +x_0=0 +y_0=0 +lon_1=-87.0 +lon_2=-73.0 +datum=NAD83 +units=m +no_defs"
+    "erie" => "+proj=aea +lat_0=42.5 +lon_0=-80.0 +lat_1=41 +lat_2=44 +x_0=0 +y_0=0 +lon_1=-87.0 +lon_2=-73.0 +datum=NAD83 +units=m +no_defs",
+
+    # Concordia (New England)
+    "concordia" => "+proj=aea +lat_0=44 +lon_0=-70 +lat_1=40 +lat_2=48 +datum=NAD83 +units=m +no_defs",
+
+    # Kansas City centered (100th Meridian to Mississippi, Canada to Gulf)
+    "heartland" => "+proj=aea +lat_0=39.1 +lon_0=-94.6 +lat_1=29 +lat_2=49 +datum=NAD83 +units=m +no_defs",
+
+    # St. Louis centered (100th Meridian to Mississippi, Canada to Gulf)
+    "gateway" => "+proj=aea +lat_0=38.6 +lon_0=-90.2 +lat_1=29 +lat_2=49 +datum=NAD83 +units=m +no_defs",
+
+    # Omaha centered (100th Meridian to Mississippi, Canada to Gulf)
+    "missouri" => "+proj=aea +lat_0=41.25 +lon_0=-95.93 +lat_1=29 +lat_2=49 +datum=NAD83 +units=m +no_defs",
+
+    # Des Moines centered (100th Meridian to Mississippi, Canada to Gulf)
+    "prairie" => "+proj=aea +lat_0=41.59 +lon_0=-93.62 +lat_1=29 +lat_2=49 +datum=NAD83 +units=m +no_defs",
+
+    # Tulsa centered (100th Meridian to Mississippi, Canada to Gulf)
+    "ozark" => "+proj=aea +lat_0=36.15 +lon_0=-95.99 +lat_1=29 +lat_2=49 +datum=NAD83 +units=m +no_defs",
+
+    # Wichita centered (100th Meridian to Mississippi, Canada to Gulf)
+    "plains" => "+proj=aea +lat_0=37.69 +lon_0=-97.34 +lat_1=29 +lat_2=49 +datum=NAD83 +units=m +no_defs",
+
+    # Fargo centered (100th Meridian to Mississippi, Canada to Gulf)
+    "redriver" => "+proj=aea +lat_0=46.87 +lon_0=-96.78 +lat_1=29 +lat_2=49 +datum=NAD83 +units=m +no_defs",
+
+    # Sioux Falls centered (100th Meridian to Mississippi, Canada to Gulf)
+    "dakota" => "+proj=aea +lat_0=43.54 +lon_0=-96.73 +lat_1=29 +lat_2=49 +datum=NAD83 +units=m +no_defs",
+
+    # Little Rock centered (100th Meridian to Mississippi, Canada to Gulf)
+    "arkansas" => "+proj=aea +lat_0=34.74 +lon_0=-92.28 +lat_1=29 +lat_2=49 +datum=NAD83 +units=m +no_defs",
+
+    # Memphis centered (100th Meridian to Mississippi, Canada to Gulf)
+    "delta" => "+proj=aea +lat_0=35.15 +lon_0=-90.05 +lat_1=29 +lat_2=49 +datum=NAD83 +units=m +no_defs",
+
+    # Minneapolis centered (100th Meridian to Mississippi, Canada to Gulf)
+    "northstar" => "+proj=aea +lat_0=44.98 +lon_0=-93.27 +lat_1=29 +lat_2=49 +datum=NAD83 +units=m +no_defs"
 )
 
 """
@@ -54,4 +90,4 @@ function get_crs(region::String)::String
 end
 
 # Export the constants and functions
-export CRS_STRINGS, get_crs 
+export CRS_STRINGS, get_crs

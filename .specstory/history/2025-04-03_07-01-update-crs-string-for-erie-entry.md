@@ -2583,6 +2583,263 @@ Would you like to test this updated projection to see if it handles the Michigan
 
 ---
 
+_**User**_
+
+The problem is due using map_poly rather than map_poly_with_projection. I've also learned the following
+
+That explains the consistent appearance across different CRS specifications. If your plotting routine is defaulting to WGS84 (EPSG:4326) regardless of what CRS you specify, then the projection settings aren't being applied to your visualization.
+
+In Julia with GeoMakie, you'll need to explicitly transform your data to the desired projection rather than just specifying the CRS string. Here's how you might approach this:
+
+```julia
+using GeoMakie
+using GeoInterface
+using Proj
+
+# Define your desired projection (Ohio Basin custom LCC)
+ohio_basin_proj = "+proj=lcc +lat_1=37 +lat_2=41 +lat_0=39 +lon_0=-84 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
+
+# Create a transformation from WGS84 to your custom projection
+wgs84_to_ohio = Proj.Transformation("EPSG:4326", ohio_basin_proj)
+
+# Assuming your geometries are in a variable called `geometries`
+# Transform the geometries to the new projection
+transformed_geometries = map(geometries) do geom
+    # Use GeoInterface to get coordinates and transform them
+    # This is pseudocode - you'll need to adapt to your actual data structure
+    transform_coordinates(geom, wgs84_to_ohio)
+end
+
+# Now plot with the transformed geometries
+fig = Figure()
+ax = GeoAxis(fig[1, 1], 
+             # Important: tell GeoMakie to use the raw coordinates without projection
+             source=nothing, 
+             dest=nothing,
+             # Set appropriate limits based on your transformed coordinates
+             limits=(xmin, ymin, xmax, ymax))
+
+poly!(ax, transformed_geometries)
+```
+
+The key issue is that GeoMakie.WGS84 is being used internally regardless of what you specify. You need to pre-transform your data to your desired projection and then tell GeoMakie not to apply any additional transformations by setting `source=nothing, dest=nothing` in your GeoAxis.
+
+This approach should allow you to properly visualize your data in the projection that best fits the Ohio Basin and Michigan region.
+
+---
+
+_**Assistant**_
+
+This is a crucial insight about how GeoMakie handles projections. Let me help implement this approach by first checking our current implementation and then making the necessary changes.
+
+---
+
+<details>
+            <summary>Searched codebase "map_poly_with_projection function definition" • **25** results</summary>
+        
+| File | Lines |
+|------|-------|
+| `src/geo/map_poly.jl` | L68-133 |
+| `src/geo/map_poly.jl` | L1-68 |
+| `src/geo/geo.jl` | L155-213 |
+| `.specstory/history/2025-03-29_20-57-map-plotting-troubleshooting.md` | L2396-2471 |
+| `.specstory/history/2025-03-29_20-57-map-plotting-troubleshooting.md` | L1064-1105 |
+| `src/geo/map_poly.jl` | L178-220 |
+| `.specstory/history/2025-03-29_20-57-map-plotting-troubleshooting.md` | L3368-3420 |
+| `.specstory/history/2025-03-29_20-57-map-plotting-troubleshooting.md` | L177-234 |
+| `.specstory/history/2025-03-29_10-19-reorganizing-data-analysis-functions.md` | L1012-1069 |
+| `.specstory/history/2025-03-29_20-57-map-plotting-troubleshooting.md` | L3235-3292 |
+| `scripts/adj_concordia.jl` | L1-40 |
+| `src/geo/map_poly.jl` | L133-178 |
+| `scripts/nocal.jl` | L1-25 |
+| `scripts/adj_concord.jl` | L1-39 |
+| `src/geo/geo.jl` | L213-255 |
+| `scripts/socal.jl` | L1-37 |
+| `.specstory/history/2025-04-02_07-49-subset-counties-by-latitude.md` | L1547-1615 |
+| `src/utils/add_labels.jl` | L1-29 |
+| `scripts/adj_factor.jl` | L91-132 |
+| `.specstory/history/2025-04-02_07-49-subset-counties-by-latitude.md` | L1690-1721 |
+| `.specstory/history/2025-03-29_20-57-map-plotting-troubleshooting.md` | L986-1064 |
+| `.specstory/history/2025-03-27_21-10-enhancing-census-module-with-rename!.md` | L70-122 |
+| `.specstory/history/2025-04-02_07-49-subset-counties-by-latitude.md` | L573-625 |
+| `.specstory/history/2025-04-02_07-49-subset-counties-by-latitude.md` | L1495-1547 |
+| `src/core/crs.jl` | L1-57 |
+
+</details>
+
+---
+
+Let me help implement the proper projection handling in our mapping functions. First, let's modify the `map_poly_with_projection` function to properly handle the CRS transformation:
+
+---
+
+```diff
+  using GeometryBasics: Point2f, Polygon
+  using DataFrames: DataFrame, nrow
++ using Proj
+  
+  """
+  
+  Create a choropleth map of polygons from a DataFrame with customizable styling and labels.
++ Properly transforms geometries from WGS84 to the target projection.
+  
+  # Arguments
+    - `county`: County names for labels
+  - `title::String`: Title for the map
+- - `dest::String`: Destination CRS (Coordinate Reference System) for the projection
++ - `dest::String`: PROJ.4 string for the target projection
+  - `fig::Figure`: The Makie figure to plot on
+  
+          :slategray,    # Bin 4
+          :royalblue,    # Bin 5
+-         :blue2,        # Bin 6 (if needed)
+-         :gold1         # Bin 7 (if needed)
++         :blue2,        # Bin 6
++         :gold1         # Bin 7
+      ]
+  
+-     # Create the GeoAxis
++     # Create transformation from WGS84 to target projection
++     wgs84_to_target = Proj.Transformation("EPSG:4326", dest)
++ 
++     # Create the GeoAxis with source=nothing and dest=nothing to prevent automatic transformation
+      ga1 = GeoAxis(
+          fig[1, 1],
+-         dest=dest,
+-         title=title
+-     )   
+-     
++         source = nothing,
++         dest = nothing,
++         title = title
++     )
++ 
+      # Plot the polygons
+      for i in 1:nrow(df)
+          n_polys = ArchGDAL.ngeom(multi_poly)
+          
+-         # Get the bin number and ensure it's valid
+          bin_num = df[i, :pop_bins]
+          
+          for p_idx in 0:(n_polys-1)
+              poly = ArchGDAL.getgeom(multi_poly, p_idx)
+              ext_ring = ArchGDAL.getgeom(poly, 0)
+-             ring_text = ArchGDAL.toWKT(ext_ring)
+              
+-             coords_text = replace(ring_text, "LINEARRING (" => "")
+-             coords_text = replace(coords_text, ")" => "")
+-             
++             # Get coordinates and transform them
+              point_list = Point2f[]
+-             for pair in split(coords_text, ",")
+-                 parts = split(strip(pair))
+-                 if length(parts) >= 2
+-                     x = parse(Float32, parts[1])
+-                     y = parse(Float32, parts[2])
+-                     push!(point_list, Point2f(x, y))
+-                 end
++             for i in 0:(ArchGDAL.ngeom(ext_ring)-1)
++                 x = Float64(ArchGDAL.getx(ext_ring, i))
++                 y = Float64(ArchGDAL.gety(ext_ring, i))
++                 # Transform coordinates
++                 transformed_x, transformed_y = Proj.transform(wgs84_to_target, x, y)
++                 push!(point_list, Point2f(transformed_x, transformed_y))
+              end
+              
+              if !isempty(point_list)
+                  poly_obj = Polygon(point_list)
+-                 # Ensure bin_num is within valid range
+                  color_idx = min(max(1, bin_num), length(custom_colors))
+                  poly!(
+                      ga1,
+                      poly_obj,
+-                     color=custom_colors[color_idx],
+-                     strokecolor=(:black, 0.5),
+-                     strokewidth=1
++                     color = custom_colors[color_idx],
++                     strokecolor = (:black, 0.5),
++                     strokewidth = 1
+                  )
+              end
+          end
+      end
+  
+-     # Add labels manually
++     # Add labels with transformed coordinates
+      for i in 1:nrow(df)
+          geom = df.parsed_geoms[i]
+-         multi_poly = geom
+-         centroid = ArchGDAL.centroid(multi_poly)
++         centroid = ArchGDAL.centroid(geom)
+          x = Float64(ArchGDAL.getx(centroid, 0))
+          y = Float64(ArchGDAL.gety(centroid, 0))
++         # Transform centroid coordinates
++         transformed_x, transformed_y = Proj.transform(wgs84_to_target, x, y)
+          text!(
+              ga1,
+-             x,
+-             y,
+-             0.0,
+-             text=string(df[i, :county]),
+-             fontsize=12,
+-             color=:white
++             transformed_x,
++             transformed_y,
++             text = string(df[i, :county]),
++             fontsize = 12,
++             color = :white
+          )
+      end
+```
+
+---
+
+I've made several important changes to properly handle the CRS transformation:
+
+1. Added `Proj.jl` for coordinate transformations
+2. Created a transformation from WGS84 (EPSG:4326) to the target projection
+3. Set `source=nothing` and `dest=nothing` in GeoAxis to prevent automatic transformation
+4. Explicitly transform all coordinates (both polygon vertices and label centroids) using Proj.jl
+5. Cleaned up the code style and removed redundant comments
+
+Now let's update the package dependencies to ensure Proj.jl is available:
+
+---
+
+```bash
+julia -e 'using Pkg; Pkg.add("Proj")'
+```
+
+```
+    Updating registry at `~/.julia/registries/General.toml`
+   Resolving package versions...
+    Updating `~/projects/census/Project.toml`
+  [c94c279d] + Proj v1.8.1
+  No Changes to `~/projects/census/Manifest.toml`
+Precompiling project...
+  1 dependency successfully precompiled in 16 seconds. 480 already precompiled.
+  1 dependency had output during precompilation:
+┌ Census [df14e3b5-dab4-49a2-a442-991725e94982]
+│  ┌ Warning: RCall.jl: Loading required package: classInt
+│  └ @ RCall ~/.julia/packages/RCall/gOwEW/src/io.jl:172
+│  [ Info: Looking for shapefile at: /Users/ro/projects/census/data/Colorado_Riv
+er_Basin_County_Boundaries/C
+olorado_River_Basin_County_Boundaries.shp
+                            └  
+
+```
+
+---
+
+Now you should be able to use the updated `map_poly_with_projection` function with proper projection handling. The function will:
+1. Take geometries in WGS84 coordinates (which is what we get from the database)
+2. Transform them to your desired projection using Proj.jl
+3. Plot them without any additional automatic transformations from GeoMakie
+
+Try running your script again - the Michigan counties should now be properly displayed without distortion.
+
+---
+
 
 
 ---

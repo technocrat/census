@@ -1,12 +1,16 @@
 # SPDX-License-Identifier: MIT
 using Census
 using DrWatson
+using CSV
+using DataFrames
 @quickactivate "Census"  
 
-# Defidf paths directly
-const SCRIPT_DIR   = projectdir("scripts")
-const OBJ_DIR      = projectdir("obj")
-const PARTIALS_DIR = projectdir("_layout/partials")
+# Define paths relative to project root
+const PROJECT_ROOT = dirname(dirname(@__FILE__))
+const SCRIPT_DIR = joinpath(PROJECT_ROOT, "scripts")
+const OBJ_DIR = joinpath(PROJECT_ROOT, "obj")
+const PARTIALS_DIR = joinpath(PROJECT_ROOT, "_layout", "partials")
+const DATA_DIR = joinpath(PROJECT_ROOT, "data")
 
 # Wrapper functions
 scriptdir()        = SCRIPT_DIR
@@ -63,7 +67,8 @@ for (i, nation_df) in enumerate(age_dfs)
 end
 sort!(nation_deps, :nation)
 
-educ = CSV.read(datadir()*"/educational_attainment.csv",DataFrame)
+# Read data
+educ = CSV.read(joinpath(DATA_DIR, "educational_attainment.csv"), DataFrame)
 include(srcdir()*"/process_education_by_nation.jl")
 educ_attainment = process_education_by_nation(educ, nations)
 

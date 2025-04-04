@@ -1,66 +1,64 @@
 # SPDX-License-Identifier: MIT
 using Census
 
-# Include files with absolute paths to avoid potential issues
-include(joinpath(SCRIPTS_DIR, "libr.jl"))
-include(joinpath(SCRIPTS_DIR, "dict.jl"))
-include(joinpath(SCRIPTS_DIR, "func.jl"))
-include(joinpath(SCRIPTS_DIR, "highlighters.jl"))
-include(joinpath(SCRIPTS_DIR, "stru.jl"))
-include(joinpath(SCRIPTS_DIR, "setup.jl"))
+using Census
 
-us = get_geo_pop(postals)
-
-rename!(us, [:geoid, :stusps, :county, :geom, :pop])
-setup_r_environment()
-breaks = rcopy(get_breaks(us, 5))
-us.pop_bins = customcut(us.pop, breaks[:kmeans][:brks])
-us.parsed_geoms = parse_geoms(us)
-western_geoids = get_western_geoids().geoid
-eastern_geoids = get_eastern_geoids().geoid
-const colorado_basin_geoids = get_colorado_basin_geoids()
-const slope_geoids = get_slope_geoids().geoid
-east_of_utah = get_east_of_utah_geoids().geoid
-necal = ["06015", "06093", "06049", "06023", "06105",
-    "06089", "06035"]
-az = subset(us, :stusps => ByRow(==("AZ")))
-az = subset(az, :geoid => ByRow(x -> x ∉ colorado_basin_geoids))
+us = init_census_data()
 
 nm = subset(us, :stusps => ByRow(==("NM")))
-nm = subset(nm, :geoid => ByRow(x -> x ∈ rio_basin_nm ||
-    x ∈ western_geoids))
+
+co = subset(us, :stusps => ByRow(==("CO")))
+co = subset(co, :geoid => ByRow(x -> x ∉ COLORADO_BASIN_GEOIDS))
+
 mt = subset(us, :stusps => ByRow(==("MT")))
-mt = subset(mt, :geoid => ByRow(x -> x ∉ missouri_river_basin ||
-    x ∈ east_of_utah))
+mt = subset(mt, :geoid => ByRow(x -> x ∉ MISSOURI_RIVER_BASIN_GEOIDS ||
+    x ∉  EAST_OF_UTAH_GEOIDS))
 
 id = subset(us, :stusps => ByRow(==("ID")))
 
 wy = subset(us, :stusps => ByRow(x -> x == "WY"))
-wy = subset(wy, :geoid => ByRow(x -> x ∉ missouri_river_basin))
+wy = subset(wy, :geoid => ByRow(x -> x ∉ MISSOURI_RIVER_BASIN_GEOIDS))
 
 nv = subset(us, :stusps => ByRow(==("NV")))
-
+nv = subset(nv, :geoid => ByRow(x -> x ∉ COLORADO_BASIN_GEOIDS))
+    
 ut = subset(us, :stusps => ByRow(==("UT")))
-ut = subset(ut, :geoid => ByRow(x -> x ∉ colorado_basin_geoids))
-
+ut = subset(ut, :geoid => ByRow(x -> x ∉ ["49019", "49037"]))
+    
 or = subset(us, :stusps => ByRow(==("OR")))
-or = subset(or, :geoid => ByRow(x -> x ∈ slope_geoids ||
-    x ∈ necal))
+or = subset(or, :geoid => ByRow(x -> x ∈ EAST_OF_CASCADE_GEOIDS))
+
 ca = subset(us, :stusps => ByRow(==("CA")))
-ca = subset(ca, :geoid => ByRow(x -> x ∉ necal))
-
+ca = subset(ca, :geoid => ByRow(x -> x ∈ EAST_OF_SIERRAS_GEOIDS &&
+                                x ∉ SOCAL_GEOIDS))
+    
 wa = subset(us, :stusps => ByRow(==("WA")))
-wa = subset(wa, :geoid => ByRow(x -> x ∈ slope_geoids))
+wa = subset(wa, :geoid => ByRow(x -> x ∈ EAST_OF_CASCADE_GEOIDS))
 
-df = vcat(az, id, nv, or, wa, ut, ca)
+df = vcat(id, nv, or, wa, ut, ca)
 
-df = subset(df, :stusps => ByRow(x -> x ∉ ["AK"]))
 
-dest = "+proj=aea +lat_0=40.8 +lon_0=-115.8 +lat_1=31.8 +lat_2=49 +datum=NAD83 +units=m +no_defs"
-# Create figure
-fig = Figure(size=(2400, 1600), fontsize=22)
+breaks = rcopy(get_breaks(us, 5))
+df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
 
-map_poly(df, "Adjusted Deseret", dest, fig)
-# Display the figure
+dest = CRS_STRINGS["powell"]
+map_title = "Deseret"
+fig = Figure(size=(3200, 2400), fontsize=24)
+map_poly(df, map_title, dest, fig)
+img_dir = abspath(joinpath(@__DIR__, "..", "Census", "img"))
+@info "Saving to directory: $img_dir"
+saved_path = save_plot(fig, map_title, directory=img_dir)
+@info "Plot saved to: $saved_path"
+
+# Verify file exists
+if isfile(saved_path)
+    @info "File successfully created at: $saved_path"
+else
+    @error "Failed to create file at: $saved_path"
+end
+
 
 display(fig)
+# Store the geoids for later use
+# set_nation_state_geoids(map_title, df.geoid)
+
