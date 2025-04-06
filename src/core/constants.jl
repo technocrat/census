@@ -83,13 +83,40 @@ const NATION_STATES = Dict(
 )
 
 # Geographic constants
-const WESTERN_BOUNDARY = -115.0
+const WESTERN_BOUNDARY = -100.0
 const EASTERN_BOUNDARY = -90.0
-const CONTINENTAL_DIVIDE = -109.5
-const SLOPE_WEST = -120.0
-const SLOPE_EAST = -115.0
-const UTAH_BORDER = -109.0
-const CENTRAL_MERIDIAN = -100.0
+const UTAH_EASTERN_BOUNDARY = -111.047
+const CASCADE_BOUNDARY = -121.0
+
+# GEOID constants for regions
+# Western region: Counties west of 100°W longitude and Oklahoma panhandle
+const WESTERN_GEOIDS = ["48357", "48359", "48111", "48205", "48233", "48295", "48421", "48341", "48195", "48115", "48117"]
+
+# Eastern region: Counties between 90°W and 100°W longitude, excluding Oklahoma panhandle
+const EASTERN_GEOIDS = ["48375", "48179", "48483", "48101", "48437", "48369", "48191", "48393", "48087", "48211"]
+
+# East of Utah: Counties east of Utah's eastern boundary
+const EAST_OF_UTAH_GEOIDS = ["08077", "08029", "08089", "08051", "08107", "08081", "08015", "08055", "08091", "08079"]
+
+# Cascade regions
+const WEST_OF_CASCADES_GEOIDS = ["53009", "53041", "53053", "53067", "53049", "53027", "53045", "53031", "53059"]
+const EAST_OF_CASCADES_GEOIDS = ["53037", "53047", "53021", "53017", "53039", "53001", "53023", "53007", "53013"]
+
+# Kansas regions
+const SOUTHERN_KANSAS_GEOIDS = ["20191", "20155", "20007", "20095", "20033", "20185", "20151", "20113"]
+const NORTHERN_KANSAS_GEOIDS = ["20039", "20157", "20201", "20085", "20183", "20105", "20041", "20197"]
+
+# Colorado River Basin
+const COLORADO_BASIN_GEOIDS = ["04015", "04012", "04005", "04007", "04025", "04017", "04001", "04027", "04019", "04021"]
+
+# Missouri regions
+const NE_MISSOURI_GEOIDS = ["29186", "29111", "29147", "29205", "29129", "29001", "29227", "29063"]
+const SOUTHERN_MISSOURI_GEOIDS = ["29153", "29067", "29215", "29149", "29091", "29169", "29225", "29119"]
+const NORTHERN_MISSOURI_GEOIDS = ["29025", "29049", "29013", "29175", "29117", "29081", "29003", "29057"]
+const MISSOURI_RIVER_BASIN_GEOIDS = ["29510", "29189", "29095", "29165", "29037", "29047", "29177", "29107"]
+
+# Slope region
+const SLOPE_GEOIDS = ["38087", "38033", "38041", "38009", "38089", "38051", "38039", "38023"]
 
 # Color definitions
 using Colors
@@ -341,4 +368,20 @@ const MISS_RIVER_BASIN_SD = [
     "46051",  # Grant County
     "46039"   # Deuel County
 ]
+
+# Nation definitions
+const CONCORD = ["CT","MA","ME","NH","RI","VT"]
+const METROPOLIS = ["DE", "MD","NY","NJ","VA","DC"]
+const FACTORIA = ["PA", "OH", "MI", "IN", "IL", "WI"]
+const LONESTAR = ["TX","OK","AR","LA"]
+const DIXIE = ["NC", "SC", "FL", "GA","MS","AL"]
+const CUMBER = ["WV","KY","TN"]
+const HEARTLAND = ["MN","IA","NE", "ND", "SD", "KS", "MO"]
+const DESERT = ["UT","MT","WY", "CO", "ID"]
+const PACIFIC = ["WA","OR","AK"]
+const SONORA = ["CA","AZ","NM","NV","HI"]
+
+const NATIONS = ["concord","metropolis","factoria","lonestar","dixie","cumber","heartland", "desert","pacific","sonora"]
+const NATION_LISTS = [CONCORD, METROPOLIS, FACTORIA, LONESTAR, DIXIE, CUMBER, HEARTLAND, DESERT, PACIFIC, SONORA]
+const TITLES = NATIONS  # For now, using the same names as titles
 

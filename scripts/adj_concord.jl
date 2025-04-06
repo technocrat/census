@@ -3,8 +3,8 @@
 # Clinton and Essex counties in New York, 
 # and ceding portions of northern Maine to Canada 
 # plus moving greater Bridgeport to Metropolis
-using Census
 
+using Census
 
 us = init_census_data()
 
@@ -29,7 +29,7 @@ ma          = vcat(ma,addns)
 ct          = subset(ct, :geoid => ByRow(x -> x ∉ take_from_concordia))
 df          = vcat(ct,me, ma,nh,ri,vt,ny)
 
-breaks      = rcopy(get_breaks(df))
+breaks      = rcopy(get_breaks(df.pop))
 df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
 
 map_title = "Concordia"

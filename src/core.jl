@@ -4,22 +4,32 @@
 
 using LibPQ
 
-"""
-    get_db_connection() -> LibPQ.Connection
+# Import get_db_connection from Census module
+using ..Census: get_db_connection, DB_HOST, DB_PORT, DB_NAME
 
-Creates a connection to the PostgreSQL database using default parameters.
+"""
+    valid_codes() -> Vector{String}
+
+Returns a sorted vector of all valid U.S. postal codes.
 
 # Returns
-- A `LibPQ.Connection` object representing an active database connection
+- A vector containing all valid two-letter postal codes for U.S. states and DC
 
-# Database Parameters
-- Host: $DB_HOST
-- Port: $DB_PORT
-- Database: $DB_NAME
+# Examples
+```julia
+julia> valid_codes()
+51-element Vector{String}:
+ "AK"
+ "AL"
+ "AR"
+ ⋮
+ "WI"
+ "WV"
+ "WY"
+```
 """
-function get_db_connection()
-    conn = LibPQ.Connection("host=$DB_HOST port=$DB_PORT dbname=$DB_NAME")
-    return conn
+function valid_codes()
+    return sort(collect(VALID_POSTAL_CODES))
 end
 
-# ... existing code ... 
+# ... existing code ...

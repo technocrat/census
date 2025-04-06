@@ -1,6 +1,22 @@
 # SPDX-License-Identifier: MIT
 
 """
+    Analysis
+
+A submodule of Census that provides statistical analysis functions for population,
+economic, and demographic data.
+"""
+module Analysis
+
+using DataFrames
+using LibPQ
+using Statistics
+using ..Census: get_db_connection, q
+
+# Import functions from parent module
+import ..Census: query_state_ages, query_nation_ages
+
+"""
     calculate_dependency_ratio(df::DataFrame)
 
 Calculate the dependency ratio (ratio of persons aged 65+ to those aged 16-64) from a DataFrame
@@ -152,4 +168,18 @@ export calculate_dependency_ratio,
        gini,
        collect_state_ages,
        query_all_nation_ages,
-       get_state_gdp 
+       get_state_gdp,
+       get_breaks,
+       ga,
+       get_childbearing_population,
+       get_dem_vote,
+       get_gop_vote,
+       get_nation_state,
+       get_state_pop,
+       make_nation_state_gdp_df,
+       make_nation_state_pop_df,
+       process,
+       collect_state_age_dataframes,
+       get_nation_title
+
+end # module Analysis 

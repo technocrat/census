@@ -8,6 +8,9 @@ using WellKnownGeometry
 using ArchGDAL
 using GeometryBasics: Point2f, Polygon
 using DataFrames: DataFrame, nrow
+using LibPQ
+using ..Census: get_db_connection
+using .CensusDB: execute
 
 # Import map_poly from map_poly.jl
 import ..Census: map_poly
@@ -15,51 +18,38 @@ import ..Census: map_poly
 """
     get_geo_pop(target_states::Vector{String}) -> DataFrame
 
-Retrieve geographic and population data for counties in specified states.
+Get population data for specified states with geographic information.
 
 # Arguments
-- `target_states::Vector{String}`: Vector of state postal codes (e.g., ["CA", "OR", "WA"])
+- `target_states::Vector{String}`: Vector of state postal codes
 
 # Returns
-- `DataFrame`: A DataFrame containing:
-  - `geoid::String`: Geographic identifier for each county
-  - `stusps::String`: State postal code
-  - `name::String`: County name
-  - `geom::String`: County geometry in WKT (Well-Known Text) format
-  - `total_population::Int`: Total population of the county
+- `DataFrame`: Population and geographic data for the specified states
 
-# Database Details
-- Connects to PostgreSQL database named "geocoder"
+# Data Processing
 - Queries the census.counties and census.variable_data tables
-- Uses PostGIS for geometry operations
+- Filters by specified state postal codes
+- Includes geographic information (geom) and population data
 
 # Example
 ```julia
-# Get geographic data for Pacific states
-states = ["WA", "OR", "CA"]
-df = get_geo_pop(states)
+df = get_geo_pop(["CA", "OR", "WA"])
 ```
-
-# Notes
-- Requires LibPQ for database connection
-- Returns WKT format geometries (use parse_geoms to convert to ArchGDAL geometries)
-- Closes database connection after query
 """
 function get_geo_pop(target_states::Vector{String})
     # Connect to database
-    conn = LibPQ.Connection("dbname=geocoder")
+    conn = get_db_connection()
     
-    # Prepare the query with parameter placeholder
     geo_query = """
-        SELECT q.geoid, q.stusps, q.name, ST_AsText(q.geom) as geom, vd.value as total_population
+        SELECT q.geoid, q.stusps, q.name, q.nation, ST_AsText(q.geom) as geom, vd.value as pop
         FROM census.counties q
         LEFT JOIN census.variable_data vd
             ON q.geoid = vd.geoid
             AND vd.variable_name = 'total_population'
         WHERE q.stusps = ANY(\$1)
+        ORDER BY q.geoid;
     """
     
-    # Execute the query with parameters
     result = execute(conn, geo_query, [target_states])
     
     # Process the result
@@ -216,8 +206,19 @@ function geo_plot(data::DataFrame;
     return fig
 end
 
+function get_geoids_by_query(query::String)
+    conn = get_db_connection()
+    try
+        result = execute(conn, query)
+        return DataFrame(result).geoid
+    finally
+        close(conn)
+    end
+end
+
 # Export all public functions
 export get_geo_pop,
        parse_geoms,
        convert_to_polygon,
-       geo_plot 
+       geo_plot,
+       get_geoids_by_query 

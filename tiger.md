@@ -282,6 +282,12 @@ wget https://raw.githubusercontent.com/postgis/postgis/master/extras/tiger_geoco
 
 This process will download many gigabytes of data and can take several hours to complete, but will give you a complete geocoding system.
 
+# Add a nations field to census.counties
+
+```
+psql -d geocoder -c "ALTER TABLE census.counties ADD COLUMN IF NOT EXISTS nation char;"
+```
+
 ## Troubleshooting Common Issues
 
 1. **Encoding problems**: TIGER files use Latin1 encoding. If you see character problems:

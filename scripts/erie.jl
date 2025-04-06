@@ -6,6 +6,7 @@ using Census.GreatLakes
 using RCall
 using LibPQ
 using DataFrames
+using .CensusDB: execute
 
 # Get base data
 us = get_geo_pop(Census.postals)
@@ -89,6 +90,60 @@ function get_ohio_basin_il_geoids()
 end
 
 const OHIO_BASIN_IL_GEOIDS = get_ohio_basin_il_geoids()
+
+"""
+    get_erie_geoids() -> Vector{String}
+
+Get GEOIDs for counties in the Lake Erie region.
+"""
+function get_erie_geoids()
+    exclude_query = """
+        SELECT geoid
+        FROM census.counties
+        WHERE stusps IN ('PA', 'OH', 'MI', 'IN', 'IL', 'WI')
+        AND ST_Y(ST_Centroid(geom)) < 41.5
+        ORDER BY geoid;
+    """
+    
+    exclude_from_erie = DataFrame(execute(conn, exclude_query)).geoid
+    
+    # Get all Great Lakes counties except those excluded
+    erie_counties = setdiff(
+        vcat(
+            GREAT_LAKES_PA_GEOIDS,
+            GREAT_LAKES_OH_GEOIDS,
+            GREAT_LAKES_IN_GEOIDS,
+            GREAT_LAKES_IL_GEOIDS,
+            GREAT_LAKES_WI_GEOIDS
+        ),
+        exclude_from_erie
+    )
+    
+    return erie_counties
+end
+
+"""
+    get_iroquois_geoids() -> Vector{String}
+
+Get GEOIDs for counties in the Iroquois region.
+"""
+function get_iroquois_geoids()
+    query = """
+        WITH Iroquois_lat AS (
+            SELECT geoid, ST_Y(ST_Centroid(geom)) as lat
+            FROM census.counties
+            WHERE stusps = 'NY'
+        )
+        SELECT c.geoid
+        FROM census.counties c, Iroquois_lat i
+        WHERE c.stusps = 'NY'
+        AND i.lat > 42.5
+        ORDER BY c.geoid;
+    """
+    
+    result = execute(conn, query)
+    return DataFrame(result).geoid
+end
 
 
 

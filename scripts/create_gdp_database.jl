@@ -26,6 +26,7 @@ using Census
 using CSV
 using DataFrames
 using LibPQ
+using .CensusDB: execute, with_connection
 
 """
     create_gdp_database()
@@ -113,29 +114,32 @@ function create_gdp_database()
     gdp = vcat(gdp, ct_gdp)
 
     # Create and populate database
-    conn = LibPQ.Connection("dbname=geocoder")
-    try
+    with_connection() do conn
         # Create table
         execute(conn, """
-            CREATE TABLE IF NOT EXISTS gdp (
-                county VARCHAR(100) NOT NULL,
-                gdp NUMERIC(20, 2) NOT NULL,
-                state VARCHAR(50) NOT NULL,
-                is_county BOOLEAN NOT NULL,
+            CREATE TABLE IF NOT EXISTS census.gdp (
+                county character varying(100),
+                gdp numeric,
+                state character varying(2),
+                is_county boolean,
+                created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
                 PRIMARY KEY (county, state)
             );
-            CREATE INDEX IF NOT EXISTS idx_gdp_state ON gdp(state);
+            CREATE INDEX IF NOT EXISTS idx_gdp_state ON census.gdp(state);
         """)
 
-        # Prepare statement for insertion
-        stmt = prepare(conn, "INSERT INTO gdp (county, gdp, state, is_county) VALUES (\$1, \$2, \$3, \$4)")
-        
-        # Insert data
+        # Insert or update data
         for row in eachrow(gdp)
-            execute(stmt, [row.county, row.gdp, row.state, row.is_county])
+            stmt = """
+            INSERT INTO census.gdp (county, gdp, state, is_county)
+            VALUES (\$1, \$2, \$3, \$4)
+            ON CONFLICT (county, state) 
+            DO UPDATE SET 
+                gdp = EXCLUDED.gdp,
+                is_county = EXCLUDED.is_county;
+            """
+            execute(conn, stmt, [row.county, row.gdp, row.state, row.is_county])
         end
-    finally
-        close(conn)
     end
     
     return gdp

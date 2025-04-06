@@ -1,30 +1,33 @@
 # SPDX-License-Identifier: MIT
 
 """
-    q(query::String) -> DataFrame
+Utility function for executing SQL queries.
+"""
 
-Execute a SQL query against a PostgreSQL database named 'geocoder' and return the results as a DataFrame.
+using DataFrames
+using .CensusDB: execute, with_connection
+
+"""
+    q(query::String, params::Vector{Any}=Any[]) -> DataFrame
+
+Execute a SQL query and return the results as a DataFrame.
 
 # Arguments
-- `query::String`: SQL query string to execute
+- `query::String`: SQL query to execute
+- `params::Vector{Any}`: Optional vector of parameters for the query
 
 # Returns
-- `DataFrame`: Results of the query converted to a DataFrame
-
-# Connection Details
-Connects to PostgreSQL database 'geocoder' with user 'geo'
-
-# Notes
-- Creates a new connection for each query
-- Connection is automatically closed after query execution due to DataFrame conversion
-- Requires LibPQ.jl and DataFrames.jl packages
+- `DataFrame`: Query results
 
 # Example
 ```julia
-results = q("SELECT * FROM addresses LIMIT 10")
+df = q("SELECT * FROM census.counties WHERE stusps = \$1", ["CA"])
+```
 """
-function q(query::String)
-    conn = LibPQ.Connection("dbname=geocoder")
-    return DataFrame(execute(conn, query))
-    close(conn)
+function q(query::String, params::Vector{Any}=Any[])
+    with_connection() do conn
+        return DataFrame(execute(conn, query, params))
+    end
 end
+
+export q

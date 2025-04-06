@@ -1,7 +1,28 @@
-using DataFrames, LibPQ
+# SPDX-License-Identifier: MIT
+
+using Census
+using LibPQ
+using DataFrames
+
+conn = Census.get_db_connection()
+try
+    query = """
+    SELECT DISTINCT variable_name
+    FROM census.variable_data
+    ORDER BY variable_name;
+    """
+    result = execute(conn, query)
+    df = DataFrame(result)
+    println("Available variables:")
+    for var in df.variable_name
+        println(var)
+    end
+finally
+    close(conn)
+end
 
 function find_county_variables(additional_codes::Vector{String}=String[]; include_base_codes::Bool=true)
-    conn = LibPQ.Connection("dbname=geocoder")
+    conn = Census.get_db_connection()
     
     # Base variable codes that can be optionally included
     base_codes = ["B01", "B19", "B25", "B23", "B15"]

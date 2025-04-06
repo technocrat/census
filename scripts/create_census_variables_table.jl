@@ -1,143 +1,61 @@
-using JSON
-using LibPQ
+# SPDX-License-Identifier: MIT
+
 using DataFrames
+using .CensusDB: execute, with_connection
 
 """
     create_census_variables_table()
 
-Create a PostgreSQL table for Census ACS 2023 variables.
+Create and populate the census.variables table with metadata about Census variables.
+
+# Side effects
+- Creates table census.variables if it doesn't exist
+- Populates the table with variable metadata
+
+# Example
+```julia
+create_census_variables_table()
+```
 """
 function create_census_variables_table()
-    # Read the JSON file
-    json_data = JSON.parsefile("data/census_acs_2023_variables.json")
-    
-    # Access the variables
-    variables_dict = json_data["variables"]
-    println("Found $(length(variables_dict)) variables")
-    
-    # Create DataFrame including attributes
-    variables_df = DataFrame(
-        variable_id = String[],
-        label = Union{String, Nothing}[],
-        concept = Union{String, Nothing}[],
-        group = Union{String, Nothing}[],
-        predicate_type = Union{String, Nothing}[],
-        limit = Union{String, Nothing, Number}[],
-        attributes = String[]
-    )
-    
-    # Add rows with proper attributes handling
-    for (var_id, var_info) in variables_dict
-        # Handle attributes - ensure it's properly quoted JSON
-        attributes_val = get(var_info, "attributes", nothing)
-        attributes_json = if attributes_val !== nothing
-            if isa(attributes_val, String)
-                # If it's already a string, make sure it's properly quoted for JSON
-                # Some attributes appear to be comma-separated variable IDs
-                if occursin(r"^[A-Z0-9_,]+$", attributes_val)
-                    # It's a comma-separated list - wrap in quotes to make valid JSON
-                    "\"$(attributes_val)\""
-                else
-                    # Already JSON formatted?
-                    attributes_val
-                end
-            else
-                # Try to convert to JSON
-                try
-                    JSON.json(attributes_val)
-                catch e
-                    println("Error converting attributes for $var_id: $e")
-                    "null"
-                end
-            end
-        else
-            "null"
-        end
+    with_connection() do conn
+        # Create the variables table if it doesn't exist
+        create_table_sql = """
+        CREATE TABLE IF NOT EXISTS census.variables (
+            variable_name character varying(100) PRIMARY KEY,
+            description text,
+            category character varying(100),
+            subcategory character varying(100),
+            source character varying(100),
+            year integer,
+            created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+        );
+        """
+        execute(conn, create_table_sql)
         
-        # Get limit value and ensure it can be converted to string
-        limit_val = get(var_info, "limit", nothing)
-        if isa(limit_val, Number)
-            limit_val = string(limit_val)
-        end
+        # Insert initial variables
+        variables = [
+            ("total_population", "Total population", "Demographics", "Population", "ACS", 2022),
+            ("median_age", "Median age", "Demographics", "Age", "ACS", 2022),
+            ("median_household_income", "Median household income", "Economics", "Income", "ACS", 2022),
+            ("poverty_rate", "Poverty rate", "Economics", "Poverty", "ACS", 2022),
+            ("unemployment_rate", "Unemployment rate", "Economics", "Employment", "ACS", 2022),
+            ("democratic", "Democratic votes in 2020 presidential election", "Politics", "Elections", "MIT Election Lab", 2020),
+            ("republican", "Republican votes in 2020 presidential election", "Politics", "Elections", "MIT Election Lab", 2020)
+        ]
         
-        push!(variables_df, [
-            var_id,
-            get(var_info, "label", nothing),
-            get(var_info, "concept", nothing),
-            get(var_info, "group", nothing),
-            get(var_info, "predicateType", nothing),
-            limit_val,
-            attributes_json
-        ])
+        for (name, desc, cat, subcat, src, yr) in variables
+            insert_sql = """
+            INSERT INTO census.variables 
+                (variable_name, description, category, subcategory, source, year)
+            VALUES (\$1, \$2, \$3, \$4, \$5, \$6)
+            ON CONFLICT (variable_name) DO NOTHING;
+            """
+            execute(conn, insert_sql, [name, desc, cat, subcat, src, yr])
+        end
     end
     
-    println("Added $(nrow(variables_df)) rows to DataFrame")
-    
-    # Connect to PostgreSQL
-    conn = LibPQ.Connection("dbname=geocoder host=localhost port=5432")
-    
-    # Create table with attributes column
-    execute(conn, """
-        DROP TABLE IF EXISTS acs_2023_variables;
-        
-        CREATE TABLE acs_2023_variables (
-            variable_id TEXT PRIMARY KEY,
-            label TEXT,
-            concept TEXT,
-            group_name TEXT,
-            predicate_type TEXT,
-            limit_value TEXT,
-            attributes TEXT
-        )
-    """)
-    
-    # Changed JSONB to TEXT for now to avoid JSON parsing issues
-    
-    # Process in batches
-    batch_size = 1000
-    total_processed = 0
-    errors = 0
-    
-    for batch_start in 1:batch_size:nrow(variables_df)
-        batch_end = min(batch_start + batch_size - 1, nrow(variables_df))
-        batch = variables_df[batch_start:batch_end, :]
-        
-        for row in eachrow(batch)
-            try
-                execute(conn, """
-                    INSERT INTO acs_2023_variables 
-                    (variable_id, label, concept, group_name, predicate_type, limit_value, attributes)
-                    VALUES (\$1, \$2, \$3, \$4, \$5, \$6, \$7)
-                """, [
-                    row.variable_id,
-                    row.label,
-                    row.concept,
-                    row.group,
-                    row.predicate_type,
-                    row.limit,
-                    row.attributes
-                ])
-                
-                total_processed += 1
-            catch e
-                errors += 1
-                if errors <= 5  # Only show first few errors
-                    println("Error inserting row with ID $(row.variable_id): $e")
-                    println("Attributes value: $(row.attributes)")
-                end
-            end
-        end
-        
-        println("Processed $total_processed rows (with $errors errors)")
-    end
-    
-    # Verify
-    result = execute(conn, "SELECT COUNT(*) FROM acs_2023_variables")
-    count_df = DataFrame(result)
-    println("Database count: $(count_df[1,1])")
-    
-    close(conn)
-    println("Done!")
+    return nothing
 end
 
 # Run the function

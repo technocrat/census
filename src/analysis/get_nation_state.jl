@@ -37,27 +37,11 @@ julia> get_nation_state("XX")
 - desert: UT, MT, WY, CO, ID
 """
 function get_nation_state(state_abbr)
-    if state_abbr in concord
-        return "concord"
-    elseif state_abbr in metropolis
-        return "metropolis"
-    elseif state_abbr in factoria
-        return "factoria"
-    elseif state_abbr in pacific
-        return "pacifica"
-    elseif state_abbr in lonestar
-        return "lonestar"
-    elseif state_abbr in dixie
-        return "dixie"
-    elseif state_abbr in cumber
-        return "cumber"
-    elseif state_abbr in heartland
-        return "heartland"
-    elseif state_abbr in sonora
-        return "sonora"
-    elseif state_abbr in desert
-        return "desert"
-    else
-        return "Unknown"
+    # Look up the state in each nation's list of states
+    for (nation, states) in NATION_STATES
+        if state_abbr in states
+            return nation
+        end
     end
+    return "Unknown"
 end

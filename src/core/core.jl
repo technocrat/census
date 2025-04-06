@@ -5,7 +5,7 @@
 using LibPQ
 
 # Import get_db_connection from Census module
-import Census: get_db_connection
+# Removed circular dependency
 
 """
     valid_codes() -> Vector{String}

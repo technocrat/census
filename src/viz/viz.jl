@@ -16,6 +16,11 @@ using CSV
 using Dates
 using Measures
 
+# Import required constants and functions
+using ..Census: DATA_DIR, CACHE_DIR
+using ..Census: VALID_POSTAL_CODES, VALID_STATE_NAMES
+using ..Census.Analysis: collect_state_age_dataframes, get_childbearing_population
+
 # Constants for visualization
 const DEFAULT_PLOT_SIZE = (1000, 600)
 const DEFAULT_MARGIN = 25mm  # Use mm directly as a unit, not as a function
@@ -24,6 +29,10 @@ const FEMALE_COLOR = ("#f8c8dc", 0.9)  # Light pink
 const TREND_COLOR = :red
 const THRESHOLD_COLOR = :green
 const REFERENCE_COLOR = :gray
+
+# Ensure plot output directory exists
+const PLOT_DIR = joinpath(CACHE_DIR, "plots")
+mkpath(PLOT_DIR)
 
 """
     cleveland_dot_plot(df::DataFrame, value_col::Symbol, label_col::Symbol; 
@@ -192,24 +201,24 @@ Returns a DataFrame containing:
 - Total fertility rates (TFR)
 
 # Notes
-- Uses data from "../data/births.csv"
+- Uses data from the data directory
 - Calculates childbearing population for each state
 - Handles state name variations (e.g., "lowa" → "Iowa")
 """
 function create_birth_table()
-    births = CSV.read("../data/births.csv", DataFrame)
+    births = CSV.read(joinpath(DATA_DIR, "births.csv"), DataFrame)
     state_age_dfs = collect_state_age_dataframes(nations)
     
     # Create a dictionary to store the results
     childbearing_pop = Dict{String, Float64}()
     
     # Iterate over the postal codes and apply the function
-    for state in postals
+    for state in VALID_POSTAL_CODES
         childbearing_pop[state] = get_childbearing_population(state_age_dfs[state])
     end
     
     # Create a mapping from full state names to postal codes
-    name_to_postal = Dict(fullname => code for (code, fullname) in state_names)
+    name_to_postal = Dict(fullname => code for (code, fullname) in VALID_STATE_NAMES)
     
     # Create an array to hold the birth rates
     birth_rates = Float64[]
@@ -244,7 +253,7 @@ function create_birth_table()
 end
 
 """
-    save_plot(plot, title::String; format::String="png", directory::String="img") -> String
+    save_plot(plot, title::String; format::String="png", directory::String=PLOT_DIR) -> String
 
 Save a plot to a specified directory with a given title and format.
 
@@ -252,7 +261,7 @@ Save a plot to a specified directory with a given title and format.
 - `plot`: A Plots.Plot or Makie.Figure object to save
 - `title::String`: Title to use in the filename
 - `format::String="png"`: Output format (default: "png")
-- `directory::String="img"`: Target directory (default: "img")
+- `directory::String=PLOT_DIR`: Target directory (default: PLOT_DIR)
 
 # Returns
 - `String`: Absolute path to the saved file
@@ -262,7 +271,7 @@ Save a plot to a specified directory with a given title and format.
 using CairoMakie
 fig = Figure()
 # ... create plot ...
-save_plot(fig, "My Plot")  # Saves to img/My_Plot_TIMESTAMP.png
+save_plot(fig, "My Plot")  # Saves to cache/plots/My_Plot_TIMESTAMP.png
 ```
 
 # Notes
@@ -272,7 +281,7 @@ save_plot(fig, "My Plot")  # Saves to img/My_Plot_TIMESTAMP.png
 - Supports both Plots.jl and Makie plots
 - Uses absolute paths for reliable file operations
 """
-function save_plot(plot, title::String; format::String="png", directory::String="img")
+function save_plot(plot, title::String; format::String="png", directory::String=PLOT_DIR)
     # Convert to absolute path if relative
     if !isabspath(directory)
         directory = abspath(directory)

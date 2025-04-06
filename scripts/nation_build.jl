@@ -1,5 +1,6 @@
 using CSV, DataFrames
 using Census
+using .CensusDB: execute, with_connection
 include(srcdir()*"/fill_state.jl")
 include("libr.jl")
 include("q.jl")
@@ -32,14 +33,13 @@ us.nation .= ifelse.(in.(us.stusps, Ref(sonora)), "sonora", us.nation)
 
 nations = ["concord","metropolis","factoria","lonestar","dixie","cumber","heartland", "desert","pacific","sonora"]
 """
-    update_census_counties_schema_and_write_data(df::DataFrame, variable_name::String, conn)
+    update_census_counties_schema_and_write_data(df::DataFrame, variable_name::String)
     
 Add a 'nation' column to the census.counties table and write census data to the variable_data table.
 
 # Arguments
 - `df::DataFrame`: DataFrame containing census data with geoid, name, and variable data columns
 - `variable_name::String`: Name of the variable being stored (e.g., "total_population")
-- `conn`: PostgreSQL database connection object
 
 # Returns
 - `nothing`
@@ -51,68 +51,71 @@ Add a 'nation' column to the census.counties table and write census data to the 
 
 # Example
 ```julia
-conn = LibPQ.Connection("postgresql://user:password@localhost/census_db")
-update_census_counties_schema_and_write_data(us, "nation", "geocoder")
+update_census_counties_schema_and_write_data(us, "nation")
+```
 """
-function update_census_counties_schema_and_write_data(df::DataFrame, variable_name::String, conn)
-    # First, add the nation column to the census.counties table if it doesn't exist
-    alter_table_sql = raw"""
-    DO $$
-    BEGIN
-        IF NOT EXISTS (
-            SELECT FROM information_schema.columns 
-            WHERE table_schema = 'census' 
-            AND table_name = 'counties' 
-            AND column_name = 'nation'
-        ) THEN
-            ALTER TABLE census.counties 
-            ADD COLUMN nation VARCHAR(100);
-        END IF;
-    END $$;
-    """
-    execute(conn, alter_table_sql)
-    
-    # Begin a transaction for all the operations
-    execute(conn, "BEGIN;")
-    
-    try
-        if variable_name == "nation"
-            # Special handling for nation: update census.counties directly
-            for row in eachrow(df)
-                if !ismissing(row.nation)
-                    update_nation_sql = """
-                    UPDATE census.counties 
-                    SET nation = \$1
-                    WHERE geoid = \$2;
+function update_census_counties_schema_and_write_data(df::DataFrame, variable_name::String)
+    with_connection() do conn
+        # First, add the nation column to the census.counties table if it doesn't exist
+        alter_table_sql = raw"""
+        DO $$
+        BEGIN
+            IF NOT EXISTS (
+                SELECT FROM information_schema.columns 
+                WHERE table_schema = 'census' 
+                AND table_name = 'counties' 
+                AND column_name = 'nation'
+            ) THEN
+                ALTER TABLE census.counties 
+                ADD COLUMN nation VARCHAR(100);
+            END IF;
+        END $$;
+        """
+        execute(conn, alter_table_sql)
+        
+        # Begin a transaction for all the operations
+        execute(conn, "BEGIN;")
+        
+        try
+            if variable_name == "nation"
+                # Special handling for nation: update census.counties directly
+                for row in eachrow(df)
+                    if !ismissing(row.nation)
+                        update_nation_sql = """
+                        UPDATE census.counties 
+                        SET nation = \$1
+                        WHERE geoid = \$2;
+                        """
+                        execute(conn, update_nation_sql, [row.nation, row.geoid])
+                    end
+                end
+            else
+                # For non-nation variables (expected to be numeric)
+                for row in eachrow(df)
+                    upsert_sql = """
+                    INSERT INTO census.variable_data (geoid, variable_name, value, name)
+                    VALUES (\$1, \$2, \$3, \$4)
+                    ON CONFLICT (geoid, variable_name) 
+                    DO UPDATE SET value = EXCLUDED.value, name = EXCLUDED.name;
                     """
-                    execute(conn, update_nation_sql, [row.nation, row.geoid])
+                    execute(conn, upsert_sql, [row.geoid, variable_name, row[variable_name], row.name])
                 end
             end
-        else
-            # For non-nation variables (expected to be numeric)
-            for row in eachrow(df)
-                upsert_sql = """
-                INSERT INTO census.variable_data (geoid, variable_name, value, name)
-                VALUES (\$1, \$2, \$3, \$4)
-                ON CONFLICT (geoid, variable_name) 
-                DO UPDATE SET value = EXCLUDED.value, name = EXCLUDED.name;
-                """
-                execute(conn, upsert_sql, [row.geoid, variable_name, row[variable_name], row.name])
-            end
+            
+            # Commit the transaction if everything succeeds
+            execute(conn, "COMMIT;")
+        catch e
+            # Rollback on error
+            execute(conn, "ROLLBACK;")
+            rethrow(e)
         end
-        
-        # Commit the transaction if everything succeeds
-        execute(conn, "COMMIT;")
-    catch e
-        # Rollback on error
-        execute(conn, "ROLLBACK;")
-        rethrow(e)
     end
     
     return nothing
 end
+
 # First, create a proper connection object
 conn = LibPQ.Connection("dbname=geocoder")
 
 # Then call your function with the connection object
-update_census_counties_schema_and_write_data(us, "nation", conn)
+update_census_counties_schema_and_write_data(us, "nation")

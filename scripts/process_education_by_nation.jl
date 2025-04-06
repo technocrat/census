@@ -13,28 +13,27 @@ function process_education_by_nation(educ, nations)
 	# Group by nation and calculate statistics
 	nation_stats = combine(groupby(edu_data, :Nation), 
 		:Population => sum,
-		:None => sum,
-		:High_School_Diploma => sum,
-		:GED => sum,
-		:Some_college => sum,
-		:AA => sum,
-		:BA => sum,
-		:MS => sum,
-		:PD => sum,
-		:PHD => sum
+		:Pop_w_BA => sum,
+		:Pop_w_GRAD => sum
 	)
 	
-	# Calculate percentages for each education level by nation
-	for col in [:None, :High_School_Diploma, :GED, :Some_college, :AA, :BA, :MS, :PD, :PHD]
-		nation_stats[!, Symbol(string(col) * "_pct")] = 
-			100 * nation_stats[!, Symbol(string(col) * "_sum")] ./ nation_stats.Population_sum
-	end
+	# Calculate percentages for college and graduate education
+	nation_stats.College_pct = 100 * (nation_stats.Pop_w_BA_sum .+ nation_stats.Pop_w_GRAD_sum) ./ nation_stats.Population_sum
+	nation_stats.Grad_pct = 100 * nation_stats.Pop_w_GRAD_sum ./ nation_stats.Population_sum
 	
 	# Add descriptive names for the nations
-	nation_names = ["New England", "Appalachia", "Mountain West", "Deep South", 
-					"Midwest", "Great Plains", "Gulf Coast", "Mid-Atlantic", 
-					"Pacific Northwest", "Southwest"]
+	nation_names = ["Concordia", "Cumberland", "Deseret", "New Dixie", "Factoria", 
+				   "Heartlandia", "The Lone Star Republic", "Metropolis", "Pacifica", "New Sonora"]
 	nation_stats.Nation_Name = nation_names[nation_stats.Nation]
+	
+	# Format the output
+	nation_stats.Pop_w_College_pct = string.(round.(nation_stats.College_pct, digits=2), "%")
+	nation_stats.Pop_w_GRAD_pct = string.(round.(nation_stats.Grad_pct, digits=2), "%")
+	
+	# Select and rename final columns
+	select!(nation_stats, [:Nation_Name, :Pop_w_College_pct, :Pop_w_GRAD_pct])
+	rename!(nation_stats, :Nation_Name => :Nation)
+	sort!(nation_stats, :Nation)
 	
 	return nation_stats
 end

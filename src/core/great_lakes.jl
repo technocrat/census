@@ -11,7 +11,7 @@ module GreatLakes
 using LibPQ
 using DataFrames
 using ArchGDAL
-using ..Census: DB_HOST, DB_PORT, DB_NAME
+using ..Census: DB_HOST, DB_PORT, DB_NAME, get_db_connection
 
 # Hardcoded GEOIDs for initialization
 const MICHIGAN_PENINSULA_GEOID_LIST = [
@@ -63,15 +63,6 @@ const OHIO_BASIN_IL_GEOID_LIST = [
     "17193",  # White County
     "17199"   # Williamson County
 ]
-
-"""
-    get_db_connection() -> LibPQ.Connection
-
-Returns a connection to the Census database.
-"""
-function get_db_connection()
-    return LibPQ.Connection("host=$DB_HOST port=$DB_PORT dbname=$DB_NAME")
-end
 
 """
     get_michigan_peninsula_geoids() -> Vector{String}
