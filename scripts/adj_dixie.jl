@@ -5,7 +5,6 @@ using Census
 # Initialize census data
 us = init_census_data()
 
-
 al = subset(us, :stusps => ByRow(==("AL")))
 al = subset(al, :geoid => ByRow(x -> x ∉ OHIO_BASIN_AL_GEOIDS))
 
@@ -16,7 +15,7 @@ ga = subset(us, :stusps => ByRow(==("GA")))
 ga = subset(ga, :geoid => ByRow(x -> x ∉ OHIO_BASIN_GA_GEOIDS))
 
 la = subset(us, :stusps => ByRow(==("LA")))
-la = subset(la, :geoid => ByRow(x -> x ∈ MS_EAST_LA_GEOIDS))
+la = subset(la, :geoid => ByRow(x -> x ∉ EXCLUDE_FROM_LA_GEOIDS))
 
 ms = subset(us, :stusps => ByRow(==("MS")))
 ms = subset(ms, :geoid => ByRow(x -> x ∉ OHIO_BASIN_MS_GEOIDS))
@@ -27,7 +26,7 @@ nc = subset(nc, :geoid => ByRow(x -> x ∉ OHIO_BASIN_NC_GEOIDS))
 sc = subset(us, :stusps => ByRow(==("SC")))
 
 va = subset(us, :stusps => ByRow(==("VA")))
-va = subset(va, :geoid => ByRow(x -> x ∉ EXCLUDE_FROM_VA))
+va = subset(va, :geoid => ByRow(x -> x ∉ EXCLUDE_FROM_VA && x ∉ OHIO_BASIN_VA_GEOIDS))
 
 
 df = vcat(al,fl,ga,la,ms,nc,sc,va)
@@ -58,4 +57,4 @@ end
 
 display(fig)
 # Store the geoids for later use
-# set_nation_state_geoids(map_title, df.geoid)
+#set_nation_state_geoids(map_title, df.geoid)

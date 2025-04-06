@@ -10,14 +10,16 @@ using ArchGDAL
 Returns GEOIDs for counties west of 100°W longitude and east of 115°W longitude
 to get the high plains counties with historically low rainfall
 (< 20 inches per year) requiring irrigation.
+Also includes the Oklahoma panhandle counties (Cimarron, Beaver, and Texas).
 """
 function get_western_geoids()
     conn = get_db_connection()
     query = """
-    SELECT geoid, name, stusps, ST_X(ST_Centroid(geom)) as lon
+    SELECT geoid
     FROM census.counties
     WHERE ST_X(ST_Centroid(geom)) < -100.0
-    ORDER BY lon;
+    OR geoid IN ('40025', '40007', '40139')  -- Cimarron, Beaver, Texas counties
+    ORDER BY geoid;
     """
     result = LibPQ.execute(conn, query)
     close(conn)
@@ -30,15 +32,17 @@ end
 Returns GEOIDs for counties between 90°W and 100°W longitude
 to get the eastern counties with historically high rainfall 
 (> 20 inches per year) not requiring irrigation.
+Excludes the Oklahoma panhandle counties (Cimarron, Beaver, and Texas).
 """
 function get_eastern_geoids()
     conn = get_db_connection()
     query = """
-    SELECT geoid, name, stusps, ST_X(ST_Centroid(geom)) as lon
+    SELECT geoid
     FROM census.counties
     WHERE ST_X(ST_Centroid(geom)) > -100
     AND ST_X(ST_Centroid(geom)) < -90
-    ORDER BY lon;
+    AND geoid NOT IN ('40025', '40007', '40139')  -- Exclude Cimarron, Beaver, Texas counties
+    ORDER BY geoid;
     """
     result = LibPQ.execute(conn, query)
     close(conn)
@@ -494,6 +498,93 @@ function get_exclude_from_va_geoids()
     return DataFrame(result).geoid
 end
 
+"""
+    get_non_miss_basin_la_geoids() -> Vector{String}
+
+Returns GEOIDs for Louisiana parishes not in the Mississippi Basin:
+Bossier, Caddo, Caldwell, East Carroll, Madison, Morehouse, Natchitoches,
+Ouachita, Red River, Richland, Union, and West Carroll.
+"""
+function get_non_miss_basin_la_geoids()
+    conn = get_db_connection()
+    query = """
+    SELECT geoid
+    FROM census.counties
+    WHERE stusps = 'LA'
+    AND name IN (
+        'Caddo',
+        'Bossier',
+        'Red River',
+        'Natchitoches',
+        'Union',
+        'Morehouse',
+        'West Carroll',
+        'East Carroll',
+        'Ouachita',
+        'Richland',
+        'Madison',
+        'Caldwell'
+    )
+    ORDER BY geoid;
+    """
+    result = LibPQ.execute(conn, query)
+    close(conn)
+    return DataFrame(result).geoid
+end
+
+"""
+    get_exclude_from_la_geoids() -> Vector{String}
+
+Returns GEOIDs for the following Louisiana parishes:
+Cameron, Choctaw, Beauregard, Vernon, Sabine, DeSoto, and Calcasieu.
+"""
+function get_exclude_from_la_geoids()
+    conn = get_db_connection()
+    query = """
+    SELECT geoid
+    FROM census.counties
+    WHERE stusps = 'LA'
+    AND name IN (
+        'Cameron',
+        'Choctaw',
+        'Beauregard',
+        'Vernon',
+        'Sabine',
+        'De Soto',
+        'Calcasieu'
+    )
+    ORDER BY geoid;
+    """
+    result = LibPQ.execute(conn, query)
+    close(conn)
+    return DataFrame(result).geoid
+end
+
+"""
+    get_ohio_basin_va_geoids() -> Vector{String}
+
+Returns GEOIDs for Virginia counties in the Ohio River Basin:
+Buchanan, Dickenson, Lee, and Scott counties.
+"""
+function get_ohio_basin_va_geoids()
+    conn = get_db_connection()
+    query = """
+    SELECT geoid
+    FROM census.counties
+    WHERE stusps = 'VA'
+    AND name IN (
+        'Buchanan',
+        'Dickenson',
+        'Lee',
+        'Scott'
+    )
+    ORDER BY geoid;
+    """
+    result = LibPQ.execute(conn, query)
+    close(conn)
+    return DataFrame(result).geoid
+end
+
 # Export all functions
 export get_western_geoids,
        get_eastern_geoids,
@@ -514,4 +605,7 @@ export get_western_geoids,
        get_socal_geoids,
        set_nation_state_geoids,
        get_east_of_sierras_geoids,
-       get_exclude_from_va_geoids 
+       get_exclude_from_va_geoids,
+       get_non_miss_basin_la_geoids,
+       get_exclude_from_la_geoids,
+       get_ohio_basin_va_geoids 

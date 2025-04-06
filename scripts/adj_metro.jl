@@ -1,19 +1,31 @@
 # SPDX-License-Identifier: MIT
 
 using Census
-using Census.GreatLakes
 
-rejig       = copy(Census.metropolis)
-regig       = push!(rejig,"CT","PA")
-df          = get_geo_pop(regig)
-rename!(df, [:geoid, :stusps, :county, :geom, :pop])
-setup_r_environment()
-breaks      = rcopy(get_breaks(df,5))
-df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
+# Initialize census data
+us = init_census_data()
+
+ny = subset(us, :stusps => ByRow(==("NY")))`
+ny = subset(ny, :county => ==("New York") || :county == "Kings")
+
+ct = subset(us, :stusps => ByRow(==("CT")))
+ct = subset(ct, :county => ==("Northwest Hills") || :county == "Western Connecticut")
+
+nj = subset(us, :stusps => ==("NJ"))
+
+pa = subset(us, :stusps => ==("PA"))
+
+md = subset(us, :state => ==("MD"))
+
+va = subset(us, :state => ==("VA"))
+
+de = subset(us, :state => ==("DE"))
+
+
 
 # Convert WKT strings to geometric objects
-df.parsed_geoms = parse_geoms(df)
-take_from_md   = ["24023","24001","24043"]
+
+
 metro_to_concordia = ["36019","36031"]
 concordia_to_metro = ["09160","09190"]
 keep_va     = ["51131","51103","51133","51099",
@@ -31,10 +43,32 @@ df          = filter(:geoid  => x -> x ∉ setdiff(get_geo_pop(["CT"]).geoid, co
 df          = filter(:geoid  => x -> x ∉ setdiff(get_geo_pop(["VA"]).geoid, keep_va), df)
 df          = filter(:geoid  => x -> x ∉ GreatLakes.GREAT_LAKES_PA_GEOID_LIST, df)
 
-dest = "+proj=aea +lat_0=39.95 +lon_0=-75.16 +lat_1=37 +lat_2=43 +datum=NAD83 +units=m +no_defs"
-# Create figure
-fig = Figure(size=(2400, 1600), fontsize=22)
 
-map_poly(df, "Metropolis", dest, fig)
-# Display the figure
+
+breaks          = rcopy(get_breaks(df.pop))  # Pass population vector directly
+df.pop_bins     = customcut(df.pop, breaks[:kmeans][:brks])
+
+# Define projection
+
+dest = CRS_STRINGS["metropolis"]
+
+map_title = "Metropolis"
+fig = Figure(size=(3200, 2400), fontsize=24)
+map_poly(df, map_title, dest, fig)
+# Save the figure with absolute path
+img_dir = abspath(joinpath(@__DIR__, "..", "Census", "img"))
+@info "Saving to directory: $img_dir"
+saved_path = save_plot(fig, map_title, directory=img_dir)
+@info "Plot saved to: $saved_path"
+
+# Verify file exists
+if isfile(saved_path)
+    @info "File successfully created at: $saved_path"
+else
+    @error "Failed to create file at: $saved_path"
+end
+
+
 display(fig)
+# Store the geoids for later use
+#set_nation_state_geoids(map_title, df.geoid)

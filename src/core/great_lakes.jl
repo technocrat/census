@@ -18,7 +18,7 @@ const MICHIGAN_PENINSULA_GEOID_LIST = [
     "26053", "26131", "26061", "26083", "26013", "26071", "26103",
     "26003", "26109", "26041", "26053", "26956", "26976", "26033",
     "26043", "26053", "26095", "26097", "20033", "26043", "26053",
-    "26153", "26069", "26001", "26007"
+    "26153"
 ]
 
 const METRO_TO_GREAT_LAKES_GEOID_LIST = [
@@ -44,10 +44,24 @@ const GREAT_LAKES_OH_GEOID_LIST = [
 ]
 
 const OHIO_BASIN_IL_GEOID_LIST = [
-    "17019", "17183", "17041", "17045", "17029", "17023", "17079",
-    "17033", "17159", "17101", "17047", "17165", "17193", "17059",
-    "17069", "17151", "17049", "17025", "17191", "17185", "17065",
-    "17035", "17075"
+    "17003",  # Alexander County
+    "17033",  # Crawford County
+    "17047",  # Edwards County
+    "17059",  # Gallatin County
+    "17065",  # Hamilton County
+    "17069",  # Hardin County
+    "17077",  # Jackson County
+    "17087",  # Johnson County
+    "17101",  # Lawrence County
+    "17127",  # Massac County
+    "17151",  # Pope County
+    "17153",  # Pulaski County
+    "17165",  # Saline County
+    "17181",  # Union County
+    "17185",  # Wabash County
+    "17191",  # Wayne County
+    "17193",  # White County
+    "17199"   # Williamson County
 ]
 
 """

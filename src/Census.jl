@@ -112,14 +112,17 @@ function get_db_connection()
 end
 
 # Include files in dependency order
-include("constants.jl")
+include("constants.jl")  # Basic constants first
 include("core/core.jl")
 include("core/acs.jl")
 include("core/RSetup.jl")
 include("core/geoids.jl")  # get_exclude_from_va_geoids is defined here
 include("core/crs.jl")  # Add CRS definitions
+include("geo/map_poly.jl")  # Load map_poly first
+include("geo/geo.jl")  # Load geo.jl which defines get_geo_pop
 include("core/great_lakes.jl")  # Add Great Lakes region constants
-include("analysis/get_breaks.jl")  # Move get_breaks.jl earlier
+include("core/basin_constants.jl")  # Load basin constants after geo.jl
+include("analysis/get_breaks.jl")  # Move get_breaks.jl later
 include("utils/add_labels.jl")
 include("utils/add_row_totals.jl")
 include("utils/customcut.jl")
@@ -128,8 +131,6 @@ include("utils/expand_state_codes.jl")
 include("utils/fill_state.jl")
 include("utils/make_postal_codes.jl")
 include("utils/q.jl")
-include("geo/map_poly.jl")  # Load map_poly first
-include("geo/geo.jl")
 include("geo/inspect_shapefile_structure.jl")
 include("analysis/analysis.jl")
 include("analysis/collect_state_age_dataframes.jl")
@@ -205,8 +206,9 @@ const NORTHERN_MISSOURI_GEOIDS = get_northern_missouri_geoids()
 const MISSOURI_RIVER_BASIN_GEOIDS = get_missouri_river_basin_geoids()
 const SLOPE_GEOIDS = get_slope_geoids()
 const FLORIDA_GEOIDS = get_florida_south_geoids()
-
 const EAST_OF_SIERRAS_GEOIDS = get_east_of_sierras_geoids()
+const NON_MISS_BASIN_LA = get_non_miss_basin_la_geoids()
+const EXCLUDE_FROM_LA_GEOIDS = get_exclude_from_la_geoids()
 
 # Initialize Great Lakes constants
 const MICHIGAN_PENINSULA_GEOID_LIST = GreatLakes.get_michigan_peninsula_geoids()
@@ -215,6 +217,9 @@ const GREAT_LAKES_PA_GEOID_LIST = GreatLakes.get_great_lakes_pa_geoids()
 const GREAT_LAKES_IN_GEOID_LIST = GreatLakes.get_great_lakes_in_geoids()
 const GREAT_LAKES_OH_GEOID_LIST = GreatLakes.get_great_lakes_oh_geoids()
 const OHIO_BASIN_IL_GEOID_LIST = GreatLakes.get_ohio_basin_il_geoids()
+
+# Initialize Illinois Ohio Basin GEOIDs after GreatLakes module is loaded
+const OHIO_BASIN_IL_GEOIDS = GreatLakes.get_ohio_basin_il_geoids()
 
 # Export all geoid constants
 export WESTERN_GEOIDS,
@@ -240,7 +245,25 @@ export WESTERN_GEOIDS,
        GREAT_LAKES_IN_GEOID_LIST,
        GREAT_LAKES_OH_GEOID_LIST,
        OHIO_BASIN_IL_GEOID_LIST,
-       EXCLUDE_FROM_VA
+       EXCLUDE_FROM_VA,
+       OHIO_BASIN_AL_GEOIDS,
+       OHIO_BASIN_MS_GEOIDS,
+       OHIO_BASIN_NC_GEOIDS,
+       OHIO_BASIN_VA_GEOIDS,
+       OHIO_BASIN_GA_GEOIDS,
+       MS_EAST_LA_GEOIDS,
+       OHIO_BASIN_MD_GEOIDS,
+       OHIO_BASIN_IL_GEOIDS,
+       OHIO_BASIN_PA_GEOIDS,
+       OHIO_BASIN_NY_GEOIDS,
+       MISS_BASIN_KY_GEOIDS,
+       OHIO_BASIN_KY_GEOIDS,
+       MISS_BASIN_TN_GEOIDS,
+       OHIO_BASIN_TN_GEOIDS,
+       HUDSON_BAY_DRAINAGE_GEOIDS,
+       MISS_RIVER_BASIN_SD,
+       NON_MISS_BASIN_LA,
+       EXCLUDE_FROM_LA_GEOIDS
 
 # Export everything from the module
 export PostalCode, CensusQuery
@@ -331,5 +354,56 @@ export get_db_connection,
        make_postal_codes,
        q,
        inspect_shapefile_structure
+
+# Export constants
+export SOCAL_GEOIDS,
+       WESTERN_GEOIDS,
+       EASTERN_GEOIDS,
+       EAST_OF_UTAH_GEOIDS,
+       EAST_OF_CASCADE_GEOIDS,
+       WEST_OF_CASCADES_GEOIDS,
+       EAST_OF_CASCADES_GEOIDS,
+       SOUTHERN_KANSAS_GEOIDS,
+       NORTHERN_KANSAS_GEOIDS,
+       COLORADO_BASIN_GEOIDS,
+       NE_MISSOURI_GEOIDS,
+       SOUTHERN_MISSOURI_GEOIDS,
+       NORTHERN_MISSOURI_GEOIDS,
+       MISSOURI_RIVER_BASIN_GEOIDS,
+       SLOPE_GEOIDS,
+       FLORIDA_GEOIDS,
+       SOCAL_GEOIDS,
+       EAST_OF_SIERRAS_GEOIDS,
+       MICHIGAN_PENINSULA_GEOID_LIST,
+       METRO_TO_GREAT_LAKES_GEOID_LIST,
+       GREAT_LAKES_PA_GEOID_LIST,
+       GREAT_LAKES_IN_GEOID_LIST,
+       GREAT_LAKES_OH_GEOID_LIST,
+       OHIO_BASIN_IL_GEOID_LIST,
+       EXCLUDE_FROM_VA,
+       OHIO_BASIN_AL_GEOIDS,
+       OHIO_BASIN_MS_GEOIDS,
+       OHIO_BASIN_NC_GEOIDS,
+       OHIO_BASIN_VA_GEOIDS,
+       OHIO_BASIN_GA_GEOIDS,
+       MS_EAST_LA_GEOIDS,
+       OHIO_BASIN_MD_GEOIDS,
+       OHIO_BASIN_IL_GEOIDS,
+       OHIO_BASIN_PA_GEOIDS,
+       OHIO_BASIN_NY_GEOIDS,
+       MISS_BASIN_KY_GEOIDS,
+       OHIO_BASIN_KY_GEOIDS,
+       MISS_BASIN_TN_GEOIDS,
+       OHIO_BASIN_TN_GEOIDS,
+       HUDSON_BAY_DRAINAGE_GEOIDS,
+       MISS_RIVER_BASIN_SD,
+       NON_MISS_BASIN_LA,
+       EXCLUDE_FROM_LA_GEOIDS
+
+# Add OHIO_BASIN_VA constant
+const OHIO_BASIN_VA = get_ohio_basin_va_geoids()
+
+# Export OHIO_BASIN_VA
+export OHIO_BASIN_VA
 
 end # module Census

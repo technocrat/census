@@ -4,6 +4,8 @@
 using Census
 using Census.GreatLakes
 using RCall
+using LibPQ
+using DataFrames
 
 # Get base data
 us = get_geo_pop(Census.postals)
@@ -24,8 +26,8 @@ df = vcat(ny, pa, oh, ind, mi)
 
 # Get counties west of Iroquois County, IL
 exclude_query = """
-    WITH Iroquois_lat AS (
-        SELECT ST_X(ST_Centroid(geom)) as lat 
+    WITH Iroquois_lon AS (
+        SELECT ST_X(ST_Centroid(geom)) as lon 
         FROM census.counties 
         WHERE name = 'Iroquois' AND stusps = 'IL'
     )
@@ -67,6 +69,26 @@ end
 
 # Store the geoids for later use
 # set_nation_state_geoids(map_title, df.geoid)
+
+function get_ohio_basin_il_geoids()
+    conn = get_db_connection()
+    query = """
+    WITH Iroquois_lon AS (
+        SELECT ST_X(ST_Centroid(geom)) as lon 
+        FROM census.counties 
+        WHERE name = 'Iroquois' AND stusps = 'IL'
+    )
+    SELECT geoid
+    FROM census.counties c, Iroquois_lon i
+    WHERE ST_X(ST_Centroid(c.geom)) >= i.lon AND c.stusps = 'IL'
+    ORDER BY geoid;
+    """
+    result = LibPQ.execute(conn, query)
+    close(conn)
+    return DataFrame(result).geoid
+end
+
+const OHIO_BASIN_IL_GEOIDS = get_ohio_basin_il_geoids()
 
 
 

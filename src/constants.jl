@@ -176,6 +176,23 @@ Base.:(==)(a::PostalCode, b::PostalCode) = a.code == b.code
 Base.hash(pc::PostalCode, h::UInt) = hash(pc.code, h)
 
 """
+    MS_EAST_LA_GEOIDS::Vector{String}
+
+GEOIDs for Louisiana parishes east of the Mississippi River.
+"""
+const MS_EAST_LA_GEOIDS = ["22125","22091","22058","22117","22033",
+                          "22063","22103","22093","22095","22029",
+                          "22051","22075","22087","22037","22105",
+                          "22071","22089"]
+
+"""
+    OHIO_BASIN_MD_GEOIDS::Vector{String}
+
+GEOIDs for Maryland counties in the Ohio River Basin: Washington, Allegany, and Garrett.
+"""
+const OHIO_BASIN_MD_GEOIDS = ["24043", "24001", "24023"]
+
+"""
     US_POSTALS
 
 Vector of all US state postal codes, including territories.
@@ -211,7 +228,7 @@ GEOIDs for North Carolina counties in the Ohio River Basin.
 """
 const OHIO_BASIN_NC_GEOIDS = ["37039","37043","37075","37113","37087","37099",
                              "37115","37021","37011","37009","37005","37173",
-                             "37189","37121","37199","37089","37089"]
+                             "37189","37121","37199","37089"]
 
 """
     OHIO_BASIN_VA_GEOIDS::Vector{String}
@@ -220,9 +237,8 @@ GEOIDs for Virginia counties in the Ohio River Basin.
 """
 const OHIO_BASIN_VA_GEOIDS = ["51105","51169","51195","51120","51051",
                              "51027","51167","51191","51070","51021",
-                             "51071","51155","51035","51195","51197",
-                             "51173","51077","51185","51750","51640",
-                             "51520","51720","51750","51640","51520",
+                             "51071","51155","51035","51197","51173",
+                             "51077","51185","51750","51640","51520",
                              "51720"]
 
 """
@@ -230,16 +246,99 @@ const OHIO_BASIN_VA_GEOIDS = ["51105","51169","51195","51120","51051",
 
 GEOIDs for Georgia counties in the Ohio River Basin.
 """
-const OHIO_BASIN_GA_GEOIDS = ["13295","13111","13291","13241",
-                             "13083","13111"]
+const OHIO_BASIN_GA_GEOIDS = ["13295","13111","13291","13241","13083"]
 
 """
-    MS_EAST_LA_GEOIDS::Vector{String}
+    OHIO_BASIN_PA_GEOIDS::Vector{String}
 
-GEOIDs for Louisiana parishes east of the Mississippi River.
+GEOIDs for Pennsylvania counties in the Ohio River Basin.
 """
-const MS_EAST_LA_GEOIDS = ["22125","22091","22058","22117",
-                          "22033","22063","22103","22093","22095",
-                          "22029","22051","22075","22087","22037",
-                          "22105","22051","22071","22089","22093"]
+const OHIO_BASIN_PA_GEOIDS = ["42039","42085","42073","42007","42125","42059",
+                             "42123","42083","42121","42053","42047","42033",
+                             "42021","42411","42065","42129","42051","42031",
+                             "42005","42003","42019","42063","42111"]
+
+"""
+    OHIO_BASIN_NY_GEOIDS::Vector{String}
+
+GEOIDs for New York counties in the Ohio River Basin.
+"""
+const OHIO_BASIN_NY_GEOIDS = ["36003", "36009", "36011", "36013", "36014", 
+                             "36015", "36019", "36029", "36031", "36033", 
+                             "36037", "36041", "36043", "36045", "36049", 
+                             "36051", "36055", "36063", "36065", "36067", 
+                             "36069", "36073", "36075", "36089", "36097", 
+                             "36099", "36101", "36107", "36109", "36117", 
+                             "36121", "36123"]
+
+"""
+    MISS_BASIN_KY_GEOIDS::Vector{String}
+
+GEOIDs for Kentucky counties in the Mississippi River Basin.
+"""
+const MISS_BASIN_KY_GEOIDS = ["21007","21145","21007"]
+
+"""
+    MISS_BASIN_TN_GEOIDS::Vector{String}
+
+GEOIDs for Tennessee counties in the Mississippi River Basin.
+"""
+const MISS_BASIN_TN_GEOIDS = ["47095","47131","47069","47079","47045","47053",
+                             "47017","47097","47033","47113","47077","47023",
+                             "47157","47047","47109","47183","47075","47166",
+                             "47167"]
+
+"""
+    HUDSON_BAY_DRAINAGE_GEOIDS::Vector{String}
+
+GEOIDs for North Dakota and Minnesota counties that drain into Hudson Bay via the Red River
+and its tributaries.
+"""
+const HUDSON_BAY_DRAINAGE_GEOIDS = [
+    # North Dakota counties
+    "38067",  # Pembina County
+    "38019",  # Cavalier County
+    "38099",  # Walsh County
+    "38071",  # Ramsey County
+    "38063",  # Nelson County
+    "38035",  # Grand Forks County
+    "38097",  # Traill County
+    "38091",  # Steele County
+    "38017",  # Cass County
+    "38077",  # Richland County
+    "38081",  # Sargent County
+    "38073",  # Ransom County
+    "38003",  # Barnes County
+    "38039",  # Griggs County
+    "38027",  # Eddy County
+    "38005",  # Benson County
+    "38095",  # Towner County
+    
+    # Minnesota counties
+    "27069",  # Kittson County
+    "27135",  # Roseau County
+    "27077",  # Lake of the Woods County
+    "27071",  # Koochiching County
+    "27089",  # Marshall County
+    "27113",  # Pennington County
+    "27125",  # Red Lake County
+    "27119",  # Polk County
+    "27107",  # Norman County
+    "27087",  # Mahnomen County
+    "27027",  # Clay County
+    "27029",  # Clearwater County
+    "27007",  # Beltrami County
+    "27167"   # Wilkin County
+]
+
+"""
+    MISS_RIVER_BASIN_SD::Vector{String}
+
+GEOIDs for South Dakota counties in the Mississippi River Basin.
+"""
+const MISS_RIVER_BASIN_SD = [
+    "46109",  # Roberts County
+    "46051",  # Grant County
+    "46039"   # Deuel County
+]
 
