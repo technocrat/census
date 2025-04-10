@@ -1,5 +1,17 @@
 # SPDX-License-Identifier: MIT
-# Create a heatmap visualization
+# SCRIPT
+
+# Set environment variables
+ENV["RCALL_ENABLE_REPL"] = "false"
+ENV["R_HOME"] = "/opt/homebrew/Cellar/r/4.4.3_1/lib/R"
+
+# Import Census module (exports all necessary functions but may have limitations)
+using Census
+
+# IMPORTANT: Due to Julia limitations with complex reexports, directly import
+# DataFrames and DataFramesMeta for more reliable operation in scripts
+using DataFrames, DataFramesMeta
+
 function plot_education_heatmap(df)
     # Get education percentage columns and nations
     edu_cols = [:None_pct, :High_School_Diploma_pct, :GED_pct, :Some_college_pct, 
@@ -112,9 +124,6 @@ poly1 = map_poly(df, ga1, "bachelors_or_higher")
 add_labels!(df, ga1, :geoid, fontsize=6)
 
 display(fig)
-# SPDX-License-Identifier: MIT
-
-# Create a mapping from state abbreviation to nation index
 function create_state_to_nation_map(nations::Vector{Vector{String}})
     state_to_nation = Dict{String, Int}()
     for (i, states) in enumerate(nations)

@@ -1,0 +1,1 @@
+using Census; using GeoIDs; println("Census.WESTERN_GEOIDS length: ", length(Census.WESTERN_GEOIDS)); append!(Census.WESTERN_GEOIDS, ["12345", "67890"]); println("After append: ", Census.WESTERN_GEOIDS)

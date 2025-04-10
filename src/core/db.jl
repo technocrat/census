@@ -22,7 +22,7 @@ function init_connection_pool()
     if !pool_initialized[]
         @sync for _ in 1:MAX_CONNECTIONS
             @async begin
-                conn = LibPQ.Connection("dbname=geocoder")
+                conn = LibPQ.Connection("dbname=tiger")
                 put!(connection_pool, conn)
             end
         end

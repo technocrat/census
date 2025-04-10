@@ -1,3 +1,17 @@
+# SPDX-License-Identifier: MIT
+# SCRIPT
+
+# Set environment variables
+ENV["RCALL_ENABLE_REPL"] = "false"
+ENV["R_HOME"] = "/opt/homebrew/Cellar/r/4.4.3_1/lib/R"
+
+# Import Census module (exports all necessary functions but may have limitations)
+using Census
+
+# IMPORTANT: Due to Julia limitations with complex reexports, directly import
+# DataFrames and DataFramesMeta for more reliable operation in scripts
+using DataFrames, DataFramesMeta
+
 Capital        = "Boston"
 Capital_Coords = "42° 21′ 37″ N, 71° 3′ 28″ W"
 Capital        = "New York"

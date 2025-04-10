@@ -192,4 +192,38 @@ function standardize_missing!(df::DataFrame; missing_values=[missing, "", "NA", 
         end
     end
     return df
-end 
+end
+
+"""
+    process(df::DataFrame)
+
+Main processing function that combines several data cleaning steps.
+
+# Arguments
+- `df::DataFrame`: Input DataFrame to process
+
+# Returns
+- The processed DataFrame
+
+# Notes
+- Combines multiple processing steps:
+  1. Converts decimals to Int64
+  2. Cleans column names
+  3. Removes empty columns
+  4. Standardizes missing values
+"""
+function process(df::DataFrame)
+    # Create a copy to avoid modifying the original
+    processed_df = copy(df)
+    
+    # Apply processing steps
+    convert_decimals_to_int64!(processed_df)
+    clean_column_names!(processed_df)
+    remove_empty_columns!(processed_df)
+    standardize_missing!(processed_df)
+    
+    return processed_df
+end
+
+# Export the process function
+export process 

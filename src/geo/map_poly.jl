@@ -93,7 +93,24 @@ function map_poly(df::DataFrame, title::String, dest::String, fig::Figure)
         n_polys = ArchGDAL.ngeom(multi_poly)
         
         # Get the bin number and ensure it's valid
-        bin_num = df[i, :pop_bins]
+        # Prefer bin_values when available (should be integers)
+        bin_num = if hasproperty(df, :bin_values)
+            df[i, :bin_values]
+        else
+            # Fall back to pop_bins
+            df[i, :pop_bins]
+        end
+        
+        # Ensure bin_num is an integer
+        if bin_num isa AbstractString
+            # Try to convert string to integer if possible
+            try
+                bin_num = parse(Int, bin_num)
+            catch
+                # If conversion fails, default to bin 1
+                bin_num = 1
+            end
+        end
         
         for p_idx in 0:(n_polys-1)
             poly = ArchGDAL.getgeom(multi_poly, p_idx)

@@ -1,13 +1,23 @@
 #!/usr/bin/env julia
-
 # SPDX-License-Identifier: MIT
+# SCRIPT
+
+# Set environment variables
+ENV["RCALL_ENABLE_REPL"] = "false"
+ENV["R_HOME"] = "/opt/homebrew/Cellar/r/4.4.3_1/lib/R"
+
+# Import Census module (exports all necessary functions but may have limitations)
+using Census
+
+# IMPORTANT: Due to Julia limitations with complex reexports, directly import
+# DataFrames and DataFramesMeta for more reliable operation in scripts
+using DataFrames, DataFramesMeta
 
 """
 This script is used to initialize the GEOID constants for the Census package.
 It should be run once to generate the constants, which are then stored in constants.jl.
 """
 
-using DataFrames
 using .CensusDB: execute, with_connection
 
 # Import the database connection function

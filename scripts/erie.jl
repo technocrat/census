@@ -1,11 +1,20 @@
 # SPDX-License-Identifier: MIT
-# SCRIPT 
+# SCRIPT
 
+# Set environment variables
+ENV["RCALL_ENABLE_REPL"] = "false"
+ENV["R_HOME"] = "/opt/homebrew/Cellar/r/4.4.3_1/lib/R"
+
+# Import Census module (exports all necessary functions but may have limitations)
 using Census
-using Census.GreatLakes
-using RCall
+
+# IMPORTANT: Due to Julia limitations with complex reexports, directly import
+# DataFrames and DataFramesMeta for more reliable operation in scripts
+using DataFrames, DataFramesMeta
+
+# Import only specific RCall functions to avoid REPL integration issues
+using RCall: reval, rcopy, rparse
 using LibPQ
-using DataFrames
 using .CensusDB: execute
 
 # Get base data

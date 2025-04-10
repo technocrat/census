@@ -14,7 +14,7 @@ PostgreSQL is a powerful, open-source relational database system. I'll walk you 
 2. **Install PostgreSQL**:
 ~~~<pre>bash
 
-   brew install postgresql@15
+   brew install postgresql@17
 </pre>~~~
 
 3. **Initialize the database**:
@@ -26,7 +26,7 @@ PostgreSQL is a powerful, open-source relational database system. I'll walk you 
 4. **Start PostgreSQL service**:
 ~~~<pre>bash
 
-   brew services start postgresql@15
+   brew services start postgresql@17
 </pre>~~~
 
 5. **Verify installation**:

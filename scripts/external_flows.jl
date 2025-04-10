@@ -1,17 +1,22 @@
+# SPDX-License-Identifier: MIT
+# SCRIPT
+
+# Set environment variables
+ENV["RCALL_ENABLE_REPL"] = "false"
+ENV["R_HOME"] = "/opt/homebrew/Cellar/r/4.4.3_1/lib/R"
+
+# Import Census module (exports all necessary functions but may have limitations)
+using Census
+
+# IMPORTANT: Due to Julia limitations with complex reexports, directly import
+# DataFrames and DataFramesMeta for more reliable operation in scripts
+using DataFrames, DataFramesMeta
+
 using CSV
 using Colors
-using DataFrames
 using Graphs
 using GraphPlot
 using PrettyTables
-using Census
-# https://www.census.gov/data/tables/time-series/demo/geographic-mobility/state-to-state-migration.html
-# https://wonder.cdc.gov/controller/datarequest/D176
-# deaths
-#"Suggested Citation: Centers for Disease Control and Prevention, National Center for Health Statistics. National Vital Statistics"
-#"System, Mortality 2018-2023 on CDC WONDER Online Database, released in 2024. Data are from the Multiple Cause of Death Files,"
-#"2018-2023, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative"
-# "Program. Accessed at http://wonder.cdc.gov/ucd-icd10-expanded.html on Feb 11, 2025 8:30:16 AM"
 include("cons.jl")
 postals = STATES
 ne_states = ["Connecticut", "Maine", "Massachusetts", "New Hampshire", "Rhode Island", "Vermont"]

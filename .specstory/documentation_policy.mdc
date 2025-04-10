@@ -1,1 +1,115 @@
- 
+---
+description: Documentation policy for all new Julia modules
+globs: *.jl
+alwaysApply: true
+---
+
+# Documentation Policy for Julia Modules
+
+## Requirements
+
+1. All new Julia modules MUST include Documenter.jl integration with the following components:
+   - A `docs/` directory with proper structure
+   - A `docs/make.jl` file for building documentation
+   - A GitHub workflow in `.github/workflows/docs.yml` for automatic building and deploying
+   - API documentation for all exported functions, types, and constants
+   - User guide documentation for key concepts and workflows
+
+2. Documentation MUST be updated before each push to the repository. This includes:
+   - Docstrings for all new or modified functions
+   - API reference documentation
+   - User guide updates for new features
+   - Example code that can be directly run by users
+
+3. All public functions, types, and constants MUST have docstrings that include:
+   - A short description of what the function/type/constant does
+   - Function signatures (including parameter types and return types)
+   - Parameter descriptions
+   - Return value descriptions
+   - At least one example with expected output
+   - Any relevant notes, warnings, or caveats
+
+4. Environment variables and configuration options MUST be documented:
+   - In the module's README
+   - In dedicated configuration documentation
+   - With default values and expected formats
+
+5. Documentation deployment via GitHub Pages MUST be configured for all public packages
+
+## Repository Configuration
+
+1. All repositories MUST use `main` as the default branch name, not `master`
+
+2. All repositories MUST have:
+   - A `.github/workflows/docs.yml` workflow for documentation
+   - A `.github/workflows/ci.yml` workflow for continuous integration
+   - Appropriate GitHub Pages configuration for hosting documentation
+
+3. The documentation deployment should reference the `main` branch in:
+   - The `docs/make.jl` file's `deploydocs` function
+   - The GitHub workflow configuration
+
+## Documentation Structure
+
+The documentation structure should follow this pattern:
+- Home/Index
+- Getting Started guide
+- User guides for main concepts
+- API Reference organized by module/component
+- Contributing guide
+
+## Examples
+
+Docstring example:
+```julia
+"""
+    get_geoid_set(set_name::String) -> Vector{String}
+
+Get the current version of a GEOID set.
+
+# Arguments
+- `set_name::String`: Name of the set to retrieve
+
+# Returns
+- `Vector{String}`: GEOIDs in the current version of the set
+
+# Example
+```julia
+florida_counties = get_geoid_set("florida_counties")
+```
+
+# Notes
+If the set doesn't exist, an error will be thrown.
+"""
+function get_geoid_set(set_name::String)
+    # Function implementation
+end
+```
+
+GitHub workflow example:
+```yaml
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+    tags: '*'
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: julia-actions/setup-julia@latest
+        with:
+          version: '1.6'
+      - name: Install dependencies
+        run: julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
+      - name: Build and deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
+        run: julia --project=docs/ docs/make.jl
+``` 

@@ -1,6 +1,16 @@
 # SPDX-License-Identifier: MIT
 # SCRIPT
+
+# Set environment variables
+ENV["RCALL_ENABLE_REPL"] = "false"
+ENV["R_HOME"] = "/opt/homebrew/Cellar/r/4.4.3_1/lib/R"
+
+# Import Census module (exports all necessary functions but may have limitations)
 using Census
+
+# IMPORTANT: Due to Julia limitations with complex reexports, directly import
+# DataFrames and DataFramesMeta for more reliable operation in scripts
+using DataFrames, DataFramesMeta
 
 """
     r_get_acs_data(; geography::String, variables::Dict{String, String}, state::String,
@@ -47,7 +57,6 @@ function r_get_acs_data(; geography::String,
                       year::Union{Integer, Nothing} = nothing,
                       survey::Union{String, Nothing} = nothing)
 
-    # Ensure R environment is set up using Census module's function
     try
         Census.RSetup.setup_r_environment()
     catch e

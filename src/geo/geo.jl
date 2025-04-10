@@ -9,11 +9,12 @@ using ArchGDAL
 using GeometryBasics: Point2f, Polygon
 using DataFrames: DataFrame, nrow
 using LibPQ
-using ..Census: get_db_connection
-using .CensusDB: execute
 
-# Import map_poly from map_poly.jl
-import ..Census: map_poly
+# Remove circular import
+# import ..Census: map_poly
+
+# Import CensusDB module correctly
+import ..Census.CensusDB: get_connection, return_connection, execute
 
 """
     get_geo_pop(target_states::Vector{String}) -> DataFrame
@@ -37,8 +38,8 @@ df = get_geo_pop(["CA", "OR", "WA"])
 ```
 """
 function get_geo_pop(target_states::Vector{String})
-    # Connect to database
-    conn = get_db_connection()
+    # Connect to database using CensusDB.get_connection()
+    conn = get_connection()
     
     geo_query = """
         SELECT q.geoid, q.stusps, q.name, q.nation, ST_AsText(q.geom) as geom, vd.value as pop
@@ -55,8 +56,8 @@ function get_geo_pop(target_states::Vector{String})
     # Process the result
     df = DataFrame(result)
     
-    # Close the connection
-    close(conn)
+    # Return the connection to the pool
+    return_connection(conn)
     
     return df
 end
@@ -207,12 +208,14 @@ function geo_plot(data::DataFrame;
 end
 
 function get_geoids_by_query(query::String)
-    conn = get_db_connection()
+    # Use get_connection() instead of get_db_connection()
+    conn = get_connection()
     try
         result = execute(conn, query)
         return DataFrame(result).geoid
     finally
-        close(conn)
+        # Return the connection to the pool
+        return_connection(conn)
     end
 end
 

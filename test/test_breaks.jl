@@ -1,10 +1,14 @@
 # SPDX-License-Identifier: MIT
 
+# Explicitly disable RCall REPL integration
+ENV["RCALL_ENABLE_REPL"] = "false"
+ENV["R_HOME"] = "/opt/homebrew/Cellar/r/4.4.3_1/lib/R"
+
 using Test
 using DataFrames
 using Census
 using Census.RSetup
-using RCall
+using RCall: reval, rcopy, rparse
 
 @testset "R Setup and Breaks Tests" begin
     # Test R environment setup
@@ -16,7 +20,7 @@ using RCall
         values = [1, 2, 3, 5, 8, 13, 21, 34, 55]  # Fibonacci-like sequence for clear breaks
     )
     
-    breaks = RCall.rcopy(get_breaks(df, 1))
+    breaks = rcopy(get_breaks(df, 1))
     @show typeof(breaks)
     @show keys(breaks)
     
