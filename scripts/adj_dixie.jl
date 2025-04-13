@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: MIT
 # SCRIPT
 
-# do  not change next line
-the_path = joinpath(@__DIR__, "scripts", "preamble.jl")
-include(the_path)
-us = init_census_data()
+# Load the comprehensive preamble that handles visualization
+include(joinpath(@__DIR__, "preamble.jl"))
+
+# Get geoid sets from GeoIDs
 
 florida_geoids = GeoIDs.get_geoid_set("florida")
 eastern_la = GeoIDs.get_geoid_set("eastern_la")

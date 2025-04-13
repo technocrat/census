@@ -35,7 +35,7 @@ bin_indices = Breakers.get_bin_indices(df.pop, 7)
 
 # For demonstration, use the equal method for mapping
 # You can change this to any method: "fisher", "kmeans", "quantile", "equal"
-selected_method = "kmeans"
+selected_method = "fisher"
 df.bin_values = bin_indices[selected_method]
 
 map_title = "Concordia"
@@ -63,5 +63,5 @@ end
 
 display(fig)
 # Store the geoids for later use
-set_nation_state_geoids(map_title, df.geoid)
+# set_nation_state_geoids(map_title, df.geoid)
 @info "Saved $(length(df.geoid)) county geoids to database under nation state '$(map_title)'"

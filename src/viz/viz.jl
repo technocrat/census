@@ -16,12 +16,7 @@ using CSV
 using Dates
 using Measures
 
-# Import required constants and functions
-using ..Census: DATA_DIR, CACHE_DIR
-using ..Census: VALID_POSTAL_CODES, VALID_STATE_NAMES
-using ..Census.Analysis: collect_state_age_dataframes, get_childbearing_population
-
-# Constants for visualization
+# Define constants for visualization
 const DEFAULT_PLOT_SIZE = (1000, 600)
 const DEFAULT_MARGIN = 25mm  # Use mm directly as a unit, not as a function
 const MALE_COLOR = ("#b0c1e3", 0.9)    # Light blue
@@ -31,7 +26,7 @@ const THRESHOLD_COLOR = :green
 const REFERENCE_COLOR = :gray
 
 # Ensure plot output directory exists
-const PLOT_DIR = joinpath(CACHE_DIR, "plots")
+const PLOT_DIR = joinpath(dirname(dirname(dirname(@__FILE__))), "cache", "plots")
 mkpath(PLOT_DIR)
 
 """
@@ -206,50 +201,55 @@ Returns a DataFrame containing:
 - Handles state name variations (e.g., "lowa" → "Iowa")
 """
 function create_birth_table()
-    births = CSV.read(joinpath(DATA_DIR, "births.csv"), DataFrame)
-    state_age_dfs = collect_state_age_dataframes(nations)
+    # This function requires Analysis module functions
+    # Temporarily commented out due to module structure refactoring
+    error("create_birth_table() is currently unavailable - module structure being refactored")
     
-    # Create a dictionary to store the results
-    childbearing_pop = Dict{String, Float64}()
-    
-    # Iterate over the postal codes and apply the function
-    for state in VALID_POSTAL_CODES
-        childbearing_pop[state] = get_childbearing_population(state_age_dfs[state])
-    end
-    
-    # Create a mapping from full state names to postal codes
-    name_to_postal = Dict(fullname => code for (code, fullname) in VALID_STATE_NAMES)
-    
-    # Create an array to hold the birth rates
-    birth_rates = Float64[]
-    
-    # For each state in the births dataframe
-    for row in eachrow(births)
-        state_name = row.State
-        
-        # Handle the misspelling of "Iowa" as "lowa" if needed
-        if state_name == "lowa"
-            state_name = "Iowa"
-        end
-        
-        # Get the postal code
-        postal = name_to_postal[state_name]
-        
-        # Get the childbearing population
-        population = childbearing_pop[postal]
-        
-        # Calculate births per thousand mothers
-        birth_rate = row.Births / population
-        
-        # Add to the array
-        push!(birth_rates, birth_rate)
-    end
-    
-    # Now add the columns to the dataframe
-    births[!, :Rate] = birth_rates
-    births[!, :TFR]  = births.Rate .* 30 ./ 1000
-    
-    return births
+    # Original implementation:
+    # births = CSV.read(joinpath(DATA_DIR, "births.csv"), DataFrame)
+    # state_age_dfs = collect_state_age_dataframes(nations)
+    # 
+    # # Create a dictionary to store the results
+    # childbearing_pop = Dict{String, Float64}()
+    # 
+    # # Iterate over the postal codes and apply the function
+    # for state in VALID_POSTAL_CODES
+    #     childbearing_pop[state] = get_childbearing_population(state_age_dfs[state])
+    # end
+    # 
+    # # Create a mapping from full state names to postal codes
+    # name_to_postal = Dict(fullname => code for (code, fullname) in VALID_STATE_NAMES)
+    # 
+    # # Create an array to hold the birth rates
+    # birth_rates = Float64[]
+    # 
+    # # For each state in the births dataframe
+    # for row in eachrow(births)
+    #     state_name = row.State
+    #     
+    #     # Handle the misspelling of "Iowa" as "lowa" if needed
+    #     if state_name == "lowa"
+    #         state_name = "Iowa"
+    #     end
+    #     
+    #     # Get the postal code
+    #     postal = name_to_postal[state_name]
+    #     
+    #     # Get the childbearing population
+    #     population = childbearing_pop[postal]
+    #     
+    #     # Calculate births per thousand mothers
+    #     birth_rate = row.Births / population
+    #     
+    #     # Add to the array
+    #     push!(birth_rates, birth_rate)
+    # end
+    # 
+    # # Now add the columns to the dataframe
+    # births[!, :Rate] = birth_rates
+    # births[!, :TFR]  = births.Rate .* 30 ./ 1000
+    # 
+    # return births
 end
 
 """

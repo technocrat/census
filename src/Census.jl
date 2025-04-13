@@ -40,6 +40,7 @@ import Breakers       # For data binning functionality
 using ArchGDAL
 using GeometryBasics: Point2f, Polygon, GeometryBasics
 using Dates
+using Plots
 
 # Include core functionality first
 include("core/core.jl")
@@ -50,9 +51,13 @@ include("core/ClassInt.jl")  # Our pure Julia implementation of ClassInt
 include("core/crs.jl")       # CRS strings for different regions
 include("core/geoids.jl")    # Nation state geoid management
 
+# Include analysis module
+include("analysis/Analysis.jl")
+
 # Include geographic functionality first to define key functions
 include("geo/geo.jl")
 include("geo/map_poly.jl")
+include("viz/viz.jl")  # Fixed path to viz.jl
 
 # Include other utility functions after geo functions to prevent overwrites
 include("core/util.jl")      # Utility functions for working with census data
@@ -182,9 +187,6 @@ end
 # Re-export functions from ClassInt module
 using .ClassInt: get_breaks, get_breaks_dict
 
-# Include analysis module
-include("analysis/Analysis.jl")
-
 # Re-export functions from Analysis module
 using .Analysis: get_us_ages,
                 make_growth_table,
@@ -220,10 +222,14 @@ export get_acs_moe,
 export Figure, save, display, GeoMakie, CairoMakie, GeoAxis, poly!, text!, DataAspect
 export GeometryBasics, Point2f, Polygon
 export ArchGDAL
-export Dates
+export Dates, Plots  # Add Plots export
+export GeoIDs
 
 # Export CRS functionality
-export CRS_STRINGS, get_crs
+export CRS_STRINGS, get_crs, show_crs
+
+# Export directory constants
+export DATA_DIR, CACHE_DIR, PLOT_DIR
 
 # Re-export Analysis module functions
 export get_us_ages,
@@ -284,20 +290,10 @@ export set_nation_state_geoids
 export CONCORD, METROPOLIS, FACTORIA, LONESTAR, DIXIE, CUMBER, HEARTLAND, DESERT, PACIFIC, SONORA
 export NATIONS, NATION_LISTS, TITLES, NATION_STATES, NATION_ABBREVIATIONS
 
-# Export geographic boundary constants
-export WESTERN_BOUNDARY, EASTERN_BOUNDARY, UTAH_EASTERN_BOUNDARY, CASCADE_BOUNDARY
+# Export visualization constants and functions
+export PLOT_DIR, save_plot
 
-# Export GEOID constants
-export WESTERN_GEOIDS, EASTERN_GEOIDS, EAST_OF_UTAH_GEOIDS
-export EAST_OF_CASCADES_GEOIDS
-export COLORADO_BASIN_GEOIDS, NE_MISSOURI_GEOIDS, SOUTHERN_MISSOURI_GEOIDS
-export NORTHERN_MISSOURI_GEOIDS, MISSOURI_RIVER_BASIN_GEOIDS
-export SOCAL_GEOIDS, OHIO_BASIN_MD_GEOIDS, MS_EAST_LA_GEOIDS
-export HUDSON_BAY_DRAINAGE_GEOIDS, MISS_RIVER_BASIN_SD
-export OHIO_BASIN_AL_GEOIDS, OHIO_BASIN_MS_GEOIDS, OHIO_BASIN_NC_GEOIDS
-export OHIO_BASIN_VA_GEOIDS, OHIO_BASIN_GA_GEOIDS, OHIO_BASIN_PA_GEOIDS
-export OHIO_BASIN_NY_GEOIDS, MISS_BASIN_KY_GEOIDS, MISS_BASIN_TN_GEOIDS
-export OHIO_BASIN_DIXIE_GEOIDS
-export NORTHERN_VA_GEOIDS
+# Export Dates.now function explicitly
+export now  # Explicitly export Dates.now
 
 end # module Census

@@ -10,6 +10,9 @@ const CRS_STRINGS = Dict{String,String}(
     # Pacific Coast (Seattle to Sacramento)
     "pacific_coast" => "+proj=aea +lat_0=43.1 +lon_0=-121.5 +lat_1=38.6 +lat_2=47.6 +datum=NAD83 +units=m +no_defs",
     
+    # Pacifica
+    "pacifica" => "+proj=aea +lat_0=32.8 +lon_0=-96.8 +lat_1=30 +lat_2=37 +datum=NAD83 +units=m +no_defs",
+    
     # Southern Florida including Keys
     "florida_south" => "+proj=aea +lat_1=24.33333333333333 +lat_2=26.66666666666667 +lat_0=24.0 +lon_0=-82 +x_0=400000 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs",
     
@@ -89,5 +92,31 @@ function get_crs(region::String)::String
     return CRS_STRINGS[region]
 end
 
+"""
+    show_crs()
+
+Display all available CRS strings in alphabetical order by region name.
+Prints each region name followed by its corresponding CRS string in a readable format.
+
+# Example
+```julia
+show_crs()
+```
+"""
+function show_crs()
+    println("CRS STRINGS:")
+    println("-----------")
+    
+    # Sort the regions alphabetically for better readability
+    regions = sort(collect(keys(CRS_STRINGS)))
+    
+    for region in regions
+        crs = CRS_STRINGS[region]
+        println("$region:")
+        println("  $crs")
+        println()
+    end
+end
+
 # Export the constants and functions
-export CRS_STRINGS, get_crs
+export CRS_STRINGS, get_crs, show_crs
