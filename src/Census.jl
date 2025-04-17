@@ -41,6 +41,7 @@ using ArchGDAL
 using GeometryBasics: Point2f, Polygon, GeometryBasics
 using Dates
 using Plots
+using GeoIDs: list_all_geoids  # Import only list_all_geoids from GeoIDs
 
 # Include core functionality first
 include("core/core.jl")
@@ -51,6 +52,9 @@ include("core/ClassInt.jl")  # Our pure Julia implementation of ClassInt
 include("core/crs.jl")       # CRS strings for different regions
 include("core/geoids.jl")    # Nation state geoid management
 
+# Import functions from Geoids submodule
+using .Geoids: set_nation_state_geoids, get_geoid_by_state_county, get_state_county_by_geoid, get_geoids_by_state
+
 # Include analysis module
 include("analysis/Analysis.jl")
 
@@ -58,10 +62,15 @@ include("analysis/Analysis.jl")
 include("geo/geo.jl")
 include("geo/map_poly.jl")
 include("viz/viz.jl")  # Fixed path to viz.jl
+# include("geo/display_nation_state_sets.jl") # Comment out this line to avoid duplicate definition
+
+# Import the save_plot function from viz.jl
+import .save_plot
 
 # Include other utility functions after geo functions to prevent overwrites
 include("core/util.jl")      # Utility functions for working with census data
 
+# const img_dir = joinpath("..","img")
 # Define the init_census_data function directly in the Census module
 """
     init_census_data() -> DataFrame
@@ -109,6 +118,27 @@ function init_census_data()
     rename!(df, :name => :county)
     
     return df
+end
+
+"""
+    display_nation_state_sets()
+
+Display all unique nation state sets in the database, sorted alphabetically.
+
+# Example
+```julia
+display_nation_state_sets()
+```
+
+# Notes
+- Queries the database for all unique set names
+- Prints each set name on a separate line with indentation
+"""
+function display_nation_state_sets()
+    println("\nNation state sets:")
+    for set_name in sort(unique(list_all_geoids().set_names))
+        println("  ", set_name)
+    end
 end
 
 """
@@ -224,12 +254,13 @@ export GeometryBasics, Point2f, Polygon
 export ArchGDAL
 export Dates, Plots  # Add Plots export
 export GeoIDs
+export Clustering
 
 # Export CRS functionality
 export CRS_STRINGS, get_crs, show_crs
 
 # Export directory constants
-export DATA_DIR, CACHE_DIR, PLOT_DIR
+export DATA_DIR, CACHE_DIR, PLOT_DIR, IMG_DIR
 
 # Re-export Analysis module functions
 export get_us_ages,
@@ -252,7 +283,7 @@ export get_breaks, get_breaks_dict
 export Breakers
 
 # Export utility functions
-export get_geo_pop, customcut, list_geoid_sets
+export get_geo_pop, customcut, list_geoid_sets, list_all_geoids,display_nation_state_sets
 
 # Export initialization functions
 export init_census_data
@@ -285,13 +316,19 @@ export DataFrame,
 
 # Export geoids management functions
 export set_nation_state_geoids
+export display_nation_state_sets
+
+# Export geographic functions
+export get_centroid_longitude_range_geoids, get_110w_to_115w_geoids
 
 # Export nation state constants
 export CONCORD, METROPOLIS, FACTORIA, LONESTAR, DIXIE, CUMBER, HEARTLAND, DESERT, PACIFIC, SONORA
 export NATIONS, NATION_LISTS, TITLES, NATION_STATES, NATION_ABBREVIATIONS
 
+# Define IMG_DIR using an absolute path from project root
+IMG_DIR = abspath(joinpath(dirname(@__DIR__), "img"))
 # Export visualization constants and functions
-export PLOT_DIR, save_plot
+export PLOT_DIR, save_plot, IMG_DIR, save_plot_to_img_dir
 
 # Export Dates.now function explicitly
 export now  # Explicitly export Dates.now

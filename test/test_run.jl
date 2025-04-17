@@ -1,0 +1,1 @@
+include("nation_template.jl")

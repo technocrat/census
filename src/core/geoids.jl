@@ -7,6 +7,12 @@ using ArchGDAL
 # Import CensusDB module and export from it
 import ..Census.CensusDB
 
+module Geoids
+
+using LibPQ
+using DataFrames
+import ...Census.CensusDB
+
 """
     set_nation_state_geoids(nation_state::String, geoids::Union{Vector{String}, Vector{Union{Missing, String}}})
 
@@ -82,15 +88,6 @@ function set_nation_state_geoids(nation_state::String, geoids::Union{Vector{Stri
     end
 end
 
-# Export only the set_nation_state_geoids function
-export set_nation_state_geoids
-
-module Geoids
-
-using LibPQ
-using DataFrames
-import ...Census.CensusDB
-
 """
     get_geoid_by_state_county(state::String, county::String)
 
@@ -139,5 +136,8 @@ function get_geoids_by_state(state::String)
         return df.geoid
     end
 end
+
+# Export the functions from the Geoids module
+export set_nation_state_geoids, get_geoid_by_state_county, get_state_county_by_geoid, get_geoids_by_state
 
 end # module Geoids

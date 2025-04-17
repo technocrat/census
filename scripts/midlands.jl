@@ -1,69 +1,56 @@
-# SPDX-License-Identifier: MIT
-# SCRIPT
+nation = "midlands" 
+midlands = (:ia, :il, :mi, :mn, :mo, :wi, :ks, :nd, :ne, :sd)
 
-# Set environment variables
-ENV["RCALL_ENABLE_REPL"] = "false"
-ENV["R_HOME"] = "/opt/homebrew/Cellar/r/4.4.3_1/lib/R"
+include(joinpath(@__DIR__, "scripts/forepart.jl"))
 
-# Import Census module (exports all necessary functions but may have limitations)
-using Census
+# Safely get geoid sets - will return empty arrays if sets don't exist
 
-# IMPORTANT: Due to Julia limitations with complex reexports, directly import
-# DataFrames and DataFramesMeta for more reliable operation in scripts
-using DataFrames, DataFramesMeta
+# BEGIN geoid set selections
+ohio_basin_il = GeoIDs.get_geoid_set("ohio_basin_il")
+west_of_100th = GeoIDs.get_geoid_set("west_of_100th")
+missouri_basin_ks = GeoIDs.get_geoid_set("missouri_basin_ks")
+ks_south = GeoIDs.get_geoid_set("ks_south")
+north_mo_mo = GeoIDs.get_geoid_set("north_mo_mo")
+michigan_peninsula = GeoIDs.get_geoid_set("michigan_upper_peninsula")
 
-us = init_census_data()
 
-mn = subset(us, :stusps => ByRow(==("MN")))
-mn = subset(mn, :geoid => ByRow(x -> x ∈ MISSOURI_BASIN_MN_GEOIDS))
-
-ia = subset(us, :stusps => ByRow(==("IA")))
-ia = subset(ia, :geoid => ByRow(x -> x ∈ MISSOURI_BASIN_IA_GEOIDS))
-
-mo = subset(us, :stusps => ByRow(==("MO")))
-mo = subset(mo, :geoid => ByRow(x -> x ∈ MISSOURI_RIVER_BASIN_GEOIDS))  
-
-ks = subset(us, :stusps => ByRow(==("KS")))
-ks = subset(ks, :geoid => ByRow(x -> x ∉ WESTERN_GEOIDS && x ∉ SOUTHERN_KANSAS_GEOIDS))
-
-ne = subset(us, :stusps => ByRow(==("NE")))
-ne = subset(ne, :geoid => ByRow(x -> x ∉ WESTERN_GEOIDS))
-
-nd = subset(us, :stusps => ByRow(==("ND")))
-nd = subset(nd, :geoid => ByRow(x -> x ∉ WESTERN_GEOIDS && x ∉ HUDSON_BAY_DRAINAGE_GEOIDS))
-
-sd = subset(us, :stusps => ByRow(==("SD")))
-sd = subset(sd, :geoid => ByRow(x -> x ∉ WESTERN_GEOIDS && x ∉ MISS_RIVER_BASIN_SD))
-
-df = vcat(ia,mo,ks,ne,nd,sd) 
-
-breaks      = rcopy(get_breaks(df.pop))
-df.pop_bins = customcut(df.pop, breaks[:kmeans][:brks])
-
-dest = CRS_STRINGS["prairie"]
-
-map_title = "Midlands"
-# Create figure
-fig = Figure(size=(2400, 1600), fontsize=22)
-
-map_poly(df, map_title, dest, fig)
-# Save the figure with absolute path
-img_dir = abspath(joinpath(@__DIR__, "..", "Census", "img"))
-@info "Saving to directory: $img_dir"
-saved_path = save_plot(fig, map_title, directory=img_dir)
-@info "Plot saved to: $saved_path"
-
-# Verify file exists
-if isfile(saved_path)
-    @info "File successfully created at: $saved_path"
-else
-    @error "Failed to create file at: $saved_path"
+# BEGIN subsetting 
+# Illinois - exclude Ohio Basin
+if !isempty(ohio_basin_il_geoids)
+    state_dfs[:il] = subset(state_dfs[:il], :geoid => ByRow(x -> x ∉ ohio_basin_il_geoids))
 end
-# Display the figure
 
-display(fig)
+# Michigan - only counties in the Upper Peninsula
+if !isempty(michigan_peninsula)
+    state_dfs[:mi] = subset(state_dfs[:mi], :geoid => ByRow(x -> x ∈ michigan_peninsula))
+end
 
+# Kansas - exclude southern
+if !isempty(ks_south)
+    state_dfs[:ks] = subset(state_dfs[:ks], :geoid => ByRow(x -> x ∉ ks_south))
+end
 
-# Store the geoids for later use
-set_nation_state_geoids(map_title, df.geoid)
+# Missouri - only northern counties
+if !isempty(north_mo_mo)
+    state_dfs[:mo] = subset(state_dfs[:mo], :geoid => ByRow(x -> x ∈ north_mo_mo))
+end
 
+# Nebraska - exclude west of 100th
+if !isempty(west_of_100th)
+    state_dfs[:ne] = subset(state_dfs[:ne], :geoid => ByRow(x -> x ∉ west_of_100th))
+end
+
+# North Dakota - exclude west of 100th
+if !isempty(west_of_100th)
+    state_dfs[:nd] = subset(state_dfs[:nd], :geoid => ByRow(x -> x ∉ west_of_100th))
+end
+
+# South Dakota - exclude west of 100th
+if !isempty(west_of_100th)
+    state_dfs[:sd] = subset(state_dfs[:sd], :geoid => ByRow(x -> x ∉ west_of_100th))
+end
+
+# Combine all filtered states using the nations tuple
+df = vcat([state_dfs[state] for state in nations]...)
+
+include(joinpath(@__DIR__, "scripts/aftpart.jl"))

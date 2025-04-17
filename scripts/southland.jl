@@ -13,25 +13,21 @@ include(the_path)
 using DataFrames
 using LibPQ
 
-# Get individual regions
-# Get Florida counties
-florida = GeoIDs.get_geoid_set("florida")
-df = subset(us, :stusps => ByRow(==("FL")))
-df = subset(df, :geoid => ByRow(x -> x ∈ florida))
+socal = GeoIDs.get_geoid_set("socal")
 
-# Stereographic projection centered on the Keys
+# Filter for California counties not in SoCal or east of Sierras
+df = subset(us, :stusps => ByRow(==("CA")))
+df = subset(df, :geoid => ByRow(x -> x ∈ socal))
 
 selected_method = "fisher"
 bin_indices = Breakers.get_bin_indices(df.pop, 7)
 df.bin_values = bin_indices[selected_method]
+# Define projection
 
-dest = Census.CRS_STRINGS["florida_south"]
-# Create figure with larger size for better visibility
+dest = Census.CRS_STRINGS["pacific_coast"]
+map_title = "Southland"
 fig = Figure(size=(3200, 2400), fontsize=24)
-
-map_title = "Elysia"
 Census.map_poly(df, map_title, dest, fig)
-
 # Save the figure with absolute path
 img_dir = abspath(joinpath(@__DIR__, "img"))
 @info "Saving to directory: $img_dir"
@@ -45,7 +41,7 @@ else
     @error "Failed to create file at: $saved_path"
 end
 
-# Store the geoids for later use
-Census.set_nation_state_geoids("Elysia", df.geoid)
 
 display(fig)
+# Store the geoids for later use
+Census.set_nation_state_geoids(map_title, df.geoid)

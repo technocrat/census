@@ -5,7 +5,7 @@
 # do  not change next line  NO MATTER WHERE THIS FILE IS LOCATED
 # in the project, @__DIR__ will be the directory of the project
 # unless explicitly overridden by the user
-the_path = joinpath(@__DIR__, "preamble.jl")
+the_path = joinpath(@__DIR__, "scripts", "preamble.jl")
 include(the_path)
 
 # DataFrames and LibPQ are likely already included in preamble
@@ -13,36 +13,33 @@ include(the_path)
 using DataFrames
 using LibPQ
 
-# Get individual regions
+ca          = subset(us, :stusps => ByRow(==("CA")))
+or          = subset(us, :stusps => ByRow(==("OR")))
+wa          = subset(us, :stusps => ByRow(==("WA")))
 
-great_lakes = GeoIDs.get_geoid_set("great_lakes")
-gl_oh = GeoIDs.get_geoid_set("gl_oh")
-michigan_peninsula = GeoIDs.get_geoid_set("michigan_peninsula")
+east_of_cascades = GeoIDs.get_geoid_set("east_of_cascades")
+northern_rural_california = GeoIDs.get_geoid_set("northern_rural_california")
+east_of_sierras = GeoIDs.get_geoid_set("east_of_sierras")
+socal = GeoIDs.get_geoid_set("socal")
 
-ny = subset(us, :stusps => ByRow(x -> x == "NY"))
-pa = subset(us, :stusps => ByRow(x -> x == "PA"))
-oh = subset(us, :stusps => ByRow(x -> x == "OH"))
-ind = subset(us, :stusps => ByRow(x -> x == "IN"))
-mi = subset(us, :stusps => ByRow(x -> x == "MI"))
+ca = subset(ca, :geoid => ByRow(x -> x ∈ northern_rural_california &&
+                                  x ∉ east_of_sierras &&
+                                  x ∉ socal))
+or = subset(or, :geoid => ByRow(x -> x ∉ east_of_cascades))
+wa = subset(wa, :geoid => ByRow(x -> x ∉ east_of_cascades))
 
-ny = subset(ny, :geoid => ByRow(x -> x ∈ great_lakes))
-pa = subset(pa, :geoid => ByRow(x -> x ∈ great_lakes))
-oh = subset(oh, :geoid => ByRow(x -> x ∈ gl_oh))
-ind = subset(ind, :geoid => ByRow(x -> x ∈ great_lakes))
-mi = subset(mi, :geoid => ByRow(x -> x ∉ michigan_peninsula))
 
-# Combine all regions
-df = vcat(ny, pa, oh, ind, mi)
+df          = vcat(ca,or,wa)
 
 
 selected_method = "fisher"
 bin_indices = Breakers.get_bin_indices(df.pop, 7)
 df.bin_values = bin_indices[selected_method]
                         
-dest = Census.CRS_STRINGS["erie"]
+dest = Census.CRS_STRINGS["pacifica"]
 
 
-map_title = "Erie"
+map_title = "Pacifica"
 fig = Figure(size=(2400, 1200), fontsize=24)
 
 Census.map_poly(df, map_title, dest, fig)

@@ -28,6 +28,9 @@ const REFERENCE_COLOR = :gray
 # Ensure plot output directory exists
 const PLOT_DIR = joinpath(dirname(dirname(dirname(@__FILE__))), "cache", "plots")
 mkpath(PLOT_DIR)
+# Ensure the image directory exists
+const img_dir = abspath(joinpath(dirname(dirname(dirname(@__FILE__))), "img"))
+mkpath(img_dir)
 
 """
     cleveland_dot_plot(df::DataFrame, value_col::Symbol, label_col::Symbol; 
@@ -281,7 +284,7 @@ save_plot(fig, "My Plot")  # Saves to cache/plots/My_Plot_TIMESTAMP.png
 - Supports both Plots.jl and Makie plots
 - Uses absolute paths for reliable file operations
 """
-function save_plot(plot, title::String; format::String="png", directory::String=PLOT_DIR)
+function save_plot(plot, title::String; format::String="png", directory::String=img_dir)
     # Convert to absolute path if relative
     if !isabspath(directory)
         directory = abspath(directory)
