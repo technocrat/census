@@ -16,13 +16,14 @@ using LibPQ
 using CSV
 using Dates
 
+Pkg.activate(joinpath(@__DIR__, ".."))
 # First include the Census module
-census_path = "/Users/technocrat/projects/Census.jl/src/Census.jl"
-@info "Census path: $census_path"
-include(census_path)
-
+# census_path = "/Users/technocrat/projects/Census.jl/src/Census.jl"
+# @info "Census path: $census_path"
+# include(census_path)
+using Census
 # After including, import Census to make its exports available
-import Main.Census
+#import Main.Census
 @info "Census module loaded"
 
 # Directly load visualization packages

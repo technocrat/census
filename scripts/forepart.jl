@@ -9,13 +9,13 @@ nations = (:concordia, :cumberland, :deseret, :dixie, :erie, :florida, :lonestar
 @info "Enter nation name: "
 #===============================================================================================
 =#
-nation = :concordia
+#nation = :concordia
 #===============================================================================================
 =#
 if isnothing(nation)
     @info "Nation name is required. Please run the script again and provide a valid name."
 else
-    @info "Nation name: $nation" selected
+    @info "Nation name: $nation selected"
 end
 
 
@@ -107,8 +107,7 @@ state_sets = Dict(
 	:pacifica => (
 		:wa,
 		:or,
-		:ca,
-		:ak
+		:ca
 	),
 	:powell => (
 		:az,
@@ -128,8 +127,7 @@ state_sets = Dict(
 		:ca
 	),
 	:southland => (
-		:ca,
-		:hi
+		:ca
 	)
 )
 
@@ -212,7 +210,7 @@ geoids_supersets = Dict(
 		socal = GeoIDs.get_geoid_set("socal")
 	)
 )
-great_lakes = geoids_supersets[:erie].great_lakes
+
 # Add diagnostic statements
 @info "Census is defined: ", isdefined(Main, :Census)
 @info "set_nation_state_geoids is defined in Census: ", isdefined(Census, :set_nation_state_geoids)
